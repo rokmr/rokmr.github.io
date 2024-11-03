@@ -162,66 +162,67 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Get all navigation links
             const navLinks = document.querySelectorAll('.sidebar-nav a');
+            const sections = document.querySelectorAll('section');
             
-            // Function to update active tab
-            function setActiveTab() {
-                // Remove active class from all links
-                navLinks.forEach(link => link.classList.remove('active'));
-                
-                // Get current hash or default to #about
-                const currentHash = window.location.hash || '#about';
-                
-                // Add active class to current tab
-                document.querySelector(`.sidebar-nav a[href="${currentHash}"]`).classList.add('active');
-            }
-            
-            // Set initial active tab
-            setActiveTab();
-            
-            // Update active tab when hash changes
-            window.addEventListener('hashchange', setActiveTab);
-            
-            // Handle click events
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    // Remove active class from all links
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    // Add active class to clicked link
-                    e.target.classList.add('active');
-                });
-            });
-        });
-
-        // Add this right before closing </body> tag
-        document.addEventListener('DOMContentLoaded', function() {
-            // Function to handle section visibility
-            function handleSectionVisibility() {
-                const hash = window.location.hash;
-                const sections = document.querySelectorAll('section');
-                
-                if (hash) {
-                    // Hide all sections
-                    sections.forEach(section => section.style.display = 'none');
-                    // Show only the targeted section
-                    const targetSection = document.querySelector(hash);
-                    if (targetSection) {
-                        targetSection.style.display = 'block';
+            // Function to switch sections with animation
+            function switchSection(targetId) {
+                // Remove active class from all sections first
+                sections.forEach(section => {
+                    if (section.id !== targetId.substring(1)) {
+                        section.classList.remove('active');
                     }
-                } else {
-                    // Show only About section when no hash
-                    sections.forEach(section => {
-                        section.style.display = section.id === 'about' ? 'block' : 'none';
-                    });
+                });
+                
+                // Add active class to target section
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
                 }
             }
 
-            // Handle initial load
-            handleSectionVisibility();
-            
-            // Handle hash changes
-            window.addEventListener('hashchange', handleSectionVisibility);
+            // Function to update active navigation link
+            function updateActiveLink(clickedLink) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                clickedLink.classList.add('active');
+            }
+
+            // Set initial active section (About)
+            if (!window.location.hash) {
+                const aboutSection = document.querySelector('#about');
+                if (aboutSection) {
+                    aboutSection.classList.add('active');
+                }
+                const aboutLink = document.querySelector('a[href="#about"]');
+                if (aboutLink) {
+                    aboutLink.classList.add('active');
+                }
+            } else {
+                // If there's a hash in the URL, activate that section
+                const initialSection = document.querySelector(window.location.hash);
+                if (initialSection) {
+                    initialSection.classList.add('active');
+                }
+                const initialLink = document.querySelector(`a[href="${window.location.hash}"]`);
+                if (initialLink) {
+                    initialLink.classList.add('active');
+                }
+            }
+
+            // Add click handlers to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    
+                    // Update URL hash without scrolling
+                    history.pushState(null, '', targetId);
+                    
+                    // Update active states
+                    updateActiveLink(link);
+                    switchSection(targetId);
+                });
+            });
         });
     </script>
 </body>
