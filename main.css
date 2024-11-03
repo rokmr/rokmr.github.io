@@ -2,43 +2,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
+/* Global color variables */
+:root {
+    --bg-primary: #010408;
+    --text-primary: #c2d0e6;
+    --text-accent: #7DF9FF;
+    --accent-glow: rgba(125, 249, 255, 0.2);
+    --border-accent: rgba(125, 249, 255, 0.15);
+}
+
 /* Update base typography */
 body {
     font-family: 'Rajdhani', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #030b1a; /* Darker background for better contrast */
-    color: #c2d0e6; /* Lighter base text color */
+    background: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 header {
-    background: linear-gradient(135deg, #0c1b3b 0%, #030b1a 100%);
-    color: #7DF9FF; /* Bright cyan accent color */
-    padding: 20px 20px 0 20px;
-    min-height: 180px;
-    border-bottom: 2px solid rgba(125, 249, 255, 0.2);
-    box-shadow: 0 4px 20px rgba(125, 249, 255, 0.1);
+    background: var(--bg-primary);
+    color: var(--text-accent);
+    padding: 15px 15px 0 15px;
+    min-height: 140px;
+    border-bottom: none;
+    box-shadow: none;
+    margin-bottom: 10px;
 }
 
 .profile-container {
     display: flex;
     align-items: flex-start;
-    gap: 30px;
+    gap: 25px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px 40px;
+    padding: 5px 30px;
 }
 
 .profile-image {
-    width: 180px;
-    height: 180px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid #7DF9FF;
     box-shadow: 0 0 20px rgba(125, 249, 255, 0.3);
     background-color: #fff;
     flex-shrink: 0;
-    margin-top: -10px;
+    margin-top: -5px;
 }
 
 .profile-image img {
@@ -53,9 +63,9 @@ header {
 
 .name {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2.4em;
+    font-size: 2em;
     font-weight: 600;
-    margin: 0 0 8px 0;
+    margin: 0 0 5px 0;
     color: #7DF9FF;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -63,15 +73,15 @@ header {
 }
 
 .position {
-    font-size: 1.3em;
-    margin: 0 0 15px 0;
-    color: #E4F1FF; /* Much lighter color for better visibility */
+    font-size: 1.1em;
+    margin: 0 0 10px 0;
+    color: #E4F1FF;
     font-weight: 500;
 }
 
 .email, .work-email {
-    font-size: 1.1em;
-    margin: 5px 0;
+    font-size: 1em;
+    margin: 3px 0;
     color: #E4F1FF;
     display: flex;
     align-items: center;
@@ -86,7 +96,7 @@ header {
 .main-container {
     margin: 0 auto;
     max-width: 1200px;
-    padding: 20px;
+    padding: 0 20px;
     margin-bottom: 60px;
 }
 
@@ -95,18 +105,18 @@ header {
     width: 100%;
     background-color: transparent;
     padding: 0;
-    margin: 20px auto 0;
+    margin: 0 auto;
     max-width: 1200px;
 }
 
 .sidebar-nav {
     list-style: none;
-    padding: 0;
+    padding: 15px 25px 0 25px;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--bg-primary);
 }
 
 .sidebar-nav li {
@@ -115,53 +125,59 @@ header {
 
 .sidebar-nav a {
     display: block;
-    padding: 12px 20px;
-    color: #c2d0e6;
+    padding: 8px 15px;
+    color: var(--text-accent);
     text-decoration: none;
     border-radius: 5px 5px 0 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap;
     margin-bottom: -1px;
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.9em;
+    font-size: 0.85em;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 500;
+    background: transparent;
 }
 
 .sidebar-nav a:hover {
-    background-color: rgba(125, 249, 255, 0.1);
-    color: #7DF9FF;
+    background: var(--accent-glow);
+    color: var(--text-accent);
     text-shadow: 0 0 8px rgba(125, 249, 255, 0.4);
 }
 
 .sidebar-nav a.active {
-    background-color: #0c1b3b; /* Slightly lighter blue for active tab */
-    color: #7DF9FF;
-    border-top: 2px solid #7DF9FF;
-    box-shadow: 0 -2px 10px rgba(125, 249, 255, 0.2);
+    background: var(--bg-primary);
+    color: var(--text-accent);
+    border-top: 2px solid var(--text-accent);
+    box-shadow: 0 0 10px rgba(125, 249, 255, 0.2);
+    position: relative;
+    z-index: 1;
 }
 
 /* Modified main content styles */
 .main-content {
-    background-color: #0c1b3b;
-    padding: 25px;
+    background: var(--bg-primary);
+    margin-top: -1px;
+    padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    color: #E4F1FF;
-    border: 1px solid rgba(125, 249, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-accent);
+    position: relative;
+    z-index: 1;
 }
 
-/* Section display rules */
+/* Section display and transition rules */
 section {
     display: block;
     opacity: 0;
     height: 0;
     overflow: hidden;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     position: absolute;
     width: 100%;
-    background: linear-gradient(160deg, rgba(12, 27, 59, 0.8) 0%, rgba(3, 11, 26, 0.8) 100%);
+    transform: translateY(20px);
+    pointer-events: none;
 }
 
 section.active {
@@ -169,6 +185,8 @@ section.active {
     height: auto;
     overflow: visible;
     position: relative;
+    transform: translateY(0);
+    pointer-events: all;
 }
 
 /* Section Content Styles */
@@ -199,17 +217,30 @@ section.active {
 }
 
 .skill-category {
-    background-color: #0f2147;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid rgba(125, 249, 255, 0.2);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 240, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+    border-color: rgba(0, 240, 255, 0.4);
+    background: rgba(0, 240, 255, 0.08);
 }
 
 .skill-category h3 {
     color: #7DF9FF;
     font-family: 'Orbitron', sans-serif;
     letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.skill-category:hover h3 {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(125, 249, 255, 0.5);
 }
 
 .skill-category ul {
@@ -230,44 +261,334 @@ html {
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #030b1a;
-    color: #c2d0e6;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     position: fixed;
     width: 100%;
     bottom: 0;
-    border-top: 2px solid rgba(125, 249, 255, 0.2);
+    border-top: 2px solid var(--border-accent);
 }
 
 .social-links {
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
-    gap: 15px;
+    gap: 12px;
 }
 
 .social-links a {
-    color: #c2d0e6;
-    font-size: 1.5em;
+    color: var(--text-primary);
+    font-size: 1.2em;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .social-links a:hover {
-    color: #7DF9FF;
+    color: var(--text-accent);
     transform: translateY(-2px);
 }
 
 /* Add these animation classes */
 .fade-out {
     opacity: 0;
-    transition: opacity 0.3s ease-out;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .fade-in {
     opacity: 1;
-    transition: opacity 0.3s ease-in;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
 }
 
 /* Add hover effects to clickable elements */
 a:hover, button:hover {
     text-shadow: 0 0 8px rgba(125, 249, 255, 0.4);
+}
+
+/* Remove the generic "Education" heading */
+.education-section h2 {
+    display: none;
+}
+
+/* Style the degree titles */
+.degree-title {
+    /* font-family: 'Orbitron', sans-serif; */
+    /* font-size: 1.8em; */
+    color: #00F0FF;
+    margin: 30px 0 15px 0;
+    /* text-transform: uppercase; */
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+/* Style the institution and year */
+.institution {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.2em;
+    color: #E0E5FF;
+    margin: 10px 0;
+}
+
+/* Style the specialization */
+.specialization {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1em;
+    color: #7DF9FF;
+    margin: 5px 0 25px 0;
+    opacity: 0.9;
+}
+
+/* Add separator between education entries */
+.education-item {
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.education-item:last-child {
+    border-bottom: none;
+}
+
+/* Research section styles */
+.research-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.research-list li {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.4em;
+    color: #00F0FF;
+    margin: 15px 0;
+    padding: 15px 25px;
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid #00F0FF;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+.research-list li:hover {
+    transform: translateX(10px);
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+/* Remove the Research heading if needed */
+#research > h2 {
+    display: none;
+}
+
+/* General section heading removal */
+section > h2,
+.education-section h2,
+.experience-section h2,
+.research-section h2,
+.projects-section h2,
+.publications-section h2,
+.skills-section h2,
+.contact-section h2 {
+    display: none;
+}
+
+/* Education section styles */
+.education-item {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 15, 25, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid #7DF9FF;
+}
+
+.degree-title {
+    /* font-family: 'Orbitron', sans-serif; */
+    /* font-size: 1.8em; */
+    color: #7DF9FF;
+    margin: 0 0 15px 0;
+    /* text-transform: uppercase; */
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
+}
+
+.institution {
+    /* font-family: 'Orbitron', sans-serif; */
+    font-size: 1.2em;
+    color: #7DF9FF;
+    margin: 10px 0;
+    opacity: 0.8;
+}
+
+.specialization {
+    color: #E4F1FF;
+    font-size: 1.1em;
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+/* Style for dates and CGPA */
+.education-item p {
+    color: #E4F1FF;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+/* Remove any previous education-specific styles that might conflict */
+.education-item {
+    border-bottom: none;
+    padding: 20px;
+}
+
+.education-item:last-child {
+    border-bottom: none;
+}
+
+/* Experience section styles */
+.experience-item {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 240, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid #00F0FF;
+}
+
+/* Research section styles */
+.research-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.research-list li {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.4em;
+    color: #00F0FF;
+    margin: 15px 0;
+    padding: 15px 25px;
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid #00F0FF;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Projects section styles */
+.project-item {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 240, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+/* Publications section styles */
+.publication-item {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(12, 27, 59, 0.2);
+    border-left: 2px solid #7DF9FF;
+    border-radius: 4px;
+}
+
+.publication-item h3 {
+    color: #7DF9FF;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Skills section styles */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.skill-category {
+    background: rgba(0, 240, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+/* Contact section styles */
+.contact-info {
+    margin-top: 20px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+/* Hover effects for interactive elements */
+.experience-item:hover,
+.project-item:hover,
+.publication-item:hover,
+.research-list li:hover {
+    transform: translateX(10px);
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Section transitions */
+section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Add pulse animation for active tab */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 240, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 240, 255, 0);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+/* 
+/* Add these styles for skill item animations */
+
+.education-item {
+    background: rgba(0, 240, 255, 0.02);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 3px solid rgba(0, 240, 255, 0.2);
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+}
+
+.education-item:hover {
+    transform: translateX(10px);
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid rgba(0, 240, 255, 0.6);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.education-item .degree-title {
+    color: #7DF9FF;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.education-item:hover .degree-title {
+    color: #fff;
+    text-shadow: 0 0 15px rgba(125, 249, 255, 0.6);
+}
+
+.education-item .institution {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.education-item:hover .institution {
+    color: #7DF9FF;
 }
