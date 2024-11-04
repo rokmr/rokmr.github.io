@@ -444,52 +444,164 @@ section > h2,
 
 /* Experience section styles */
 .experience-item {
-    margin: 30px 0;
+    background: rgba(0, 240, 255, 0.02);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 3px solid rgba(0, 240, 255, 0.2);
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+}
+
+.experience-item:hover {
+    transform: translateX(10px);
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid rgba(0, 240, 255, 0.6);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.experience-item h3 {
+    color: #7DF9FF;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
+}
+
+.experience-item .company {
+    font-size: 1.2em;
+    color: #7DF9FF;
+    margin: 10px 0;
+    opacity: 0.8;
+}
+
+.experience-item .duration {
+    color: #E4F1FF;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.experience-item .description {
+    color: #E4F1FF;
+    font-size: 1.1em;
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+/* Remove any previous experience-specific styles that might conflict */
+.experience-item {
+    border-bottom: none;
     padding: 20px;
-    background: rgba(0, 240, 255, 0.05);
-    border-radius: 8px;
-    border-left: 3px solid #00F0FF;
 }
 
-/* Research section styles */
-.research-list {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
+.experience-item:last-child {
+    border-bottom: none;
 }
 
-.research-list li {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 1.4em;
-    color: #00F0FF;
-    margin: 15px 0;
-    padding: 15px 25px;
-    background: rgba(0, 240, 255, 0.05);
-    border-left: 3px solid #00F0FF;
-    border-radius: 0 8px 8px 0;
-}
-
-/* Projects section styles */
+/* Projects section styles - matching education & experience */
 .project-item {
-    margin: 30px 0;
-    padding: 20px;
-    background: rgba(0, 240, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid rgba(0, 240, 255, 0.2);
+    background: rgba(0, 240, 255, 0.02);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 3px solid rgba(0, 240, 255, 0.2);
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
 }
 
-/* Publications section styles */
-.publication-item {
-    margin: 20px 0;
+.project-item:hover {
+    transform: translateX(10px);
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid rgba(0, 240, 255, 0.6);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.project-item h3 {
+    color: #7DF9FF;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
+}
+
+.project-item .project-title {
+    font-size: 1.2em;
+    color: #7DF9FF;
+    margin: 10px 0;
+    opacity: 0.8;
+}
+
+.project-item .project-duration {
+    color: #E4F1FF;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.project-item .project-description {
+    color: #E4F1FF;
+    font-size: 1.1em;
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+/* Remove any previous project-specific styles that might conflict */
+.project-item {
+    border-bottom: none;
     padding: 20px;
-    background: rgba(12, 27, 59, 0.2);
-    border-left: 2px solid #7DF9FF;
-    border-radius: 4px;
+}
+
+.project-item:last-child {
+    border-bottom: none;
+}
+
+/* Publications section styles - matching education, experience & projects */
+.publication-item {
+    background: rgba(0, 240, 255, 0.02);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 3px solid rgba(0, 240, 255, 0.2);
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+}
+
+.publication-item:hover {
+    transform: translateX(10px);
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid rgba(0, 240, 255, 0.6);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
 }
 
 .publication-item h3 {
     color: #7DF9FF;
-    font-family: 'Orbitron', sans-serif;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
+}
+
+.publication-item .publication-title {
+    font-size: 1.2em;
+    color: #7DF9FF;
+    margin: 10px 0;
+    opacity: 0.8;
+}
+
+.publication-item .publication-date {
+    color: #E4F1FF;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.publication-item .publication-description {
+    color: #E4F1FF;
+    font-size: 1.1em;
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+/* Remove any previous publication-specific styles that might conflict */
+.publication-item {
+    border-bottom: none;
+    padding: 20px;
+}
+
+.publication-item:last-child {
+    border-bottom: none;
 }
 
 /* Skills section styles */
@@ -590,5 +702,86 @@ section.active {
 }
 
 .education-item:hover .institution {
+    color: #7DF9FF;
+}
+
+/* Add these styles for author highlighting */
+.publication-authors {
+    color: #E4F1FF;
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.author-self {
+    color: #7DF9FF;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(125, 249, 255, 0.3);
+}
+
+.publication-conference {
+    color: #E4F1FF;
+    font-style: italic;
+    opacity: 0.8;
+    margin: 5px 0;
+}
+
+.publication-links {
+    margin-top: 15px;
+    display: flex;
+    gap: 25px;
+}
+
+.pub-link {
+    color: #E4F1FF;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    padding: 0 5px;
+    text-decoration: none;
+}
+
+.pub-link:hover {
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.pdf-link:hover {
+    color: #ff4444;
+}
+
+/* Smoother GitHub hover transition */
+.github-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.github-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 2em;
+    height: 2em;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.github-link:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.github-link i {
+    transition: color 0.3s ease;
+}
+
+.github-link:hover i {
+    color: #000000;
+}
+
+.website-link:hover {
     color: #7DF9FF;
 }
