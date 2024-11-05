@@ -444,12 +444,36 @@ section > h2,
 
 /* Experience section styles */
 .experience-item {
-    background: rgba(0, 240, 255, 0.02);
-    padding: 25px;
-    border-radius: 12px;
-    border-left: 3px solid rgba(0, 240, 255, 0.2);
-    margin-bottom: 20px;
-    transition: all 0.4s ease;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.experience-logo {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    padding: 8px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.experience-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.experience-details {
+    flex: 1;
 }
 
 .experience-item:hover {
@@ -550,7 +574,7 @@ section > h2,
     border-bottom: none;
 }
 
-/* Publications section styles - matching education, experience & projects */
+/* Publications section styles */
 .publication-item {
     background: rgba(0, 240, 255, 0.02);
     padding: 25px;
@@ -558,6 +582,30 @@ section > h2,
     border-left: 3px solid rgba(0, 240, 255, 0.2);
     margin-bottom: 20px;
     transition: all 0.4s ease;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.publication-content {
+    flex: 1;
+}
+
+.conference-thumbnail {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    padding: 8px;
+    background: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.conference-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .publication-item:hover {
@@ -567,18 +615,24 @@ section > h2,
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
 }
 
-.publication-item h3 {
-    color: #7DF9FF;
-    margin: 0 0 15px 0;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
+.publication-item:hover .conference-thumbnail {
+    border-color: rgba(125, 249, 255, 0.4);
+    box-shadow: 0 0 15px rgba(125, 249, 255, 0.3);
+    transform: scale(1.05);
 }
 
-.publication-item .publication-title {
+.publication-title {
     font-size: 1.2em;
     color: #7DF9FF;
-    margin: 10px 0;
-    opacity: 0.8;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.publication-item:hover .publication-title {
+    color: #7DF9FF;
+    text-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
 }
 
 .publication-item .publication-date {
@@ -784,4 +838,457 @@ section.active {
 
 .website-link:hover {
     color: #7DF9FF;
+}
+
+/* Achievement Section Styles */
+.achievement-category {
+    margin-bottom: 30px;
+    background: rgba(0, 240, 255, 0.02);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(125, 249, 255, 0.15);
+}
+
+.achievement-category h3 {
+    color: #7DF9FF;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
+    font-size: 1.5em;
+}
+
+.achievement-item {
+    background: rgba(0, 15, 25, 0.3);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(125, 249, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.achievement-item:hover {
+    transform: translateX(10px);
+    background: rgba(0, 240, 255, 0.05);
+    border-left: 3px solid rgba(0, 240, 255, 0.6);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.achievement-item h4 {
+    color: #7DF9FF;
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.achievement-item p {
+    color: #E4F1FF;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.achievement-date {
+    color: #7DF9FF;
+    font-size: 0.9em;
+    opacity: 0.7;
+}
+
+/* Certificate Dropdown Styles */
+.certificate-dropdown {
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.certificate-header {
+    background: rgba(0, 240, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid rgba(125, 249, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.certificate-thumbnail {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.thumbnail-image {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(125, 249, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.certificate-header:hover {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: rgba(125, 249, 255, 0.3);
+    transform: translateX(5px);
+}
+
+.certificate-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 15, 25, 0.3);
+    border-radius: 0 0 8px 8px;
+    margin-top: 5px;
+}
+
+.certificate-dropdown.active .certificate-content {
+    max-height: 800px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 15px;
+    border: 1px solid rgba(125, 249, 255, 0.15);
+}
+
+.certificate-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    transform: scale(0.95) translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 15px rgba(125, 249, 255, 0.2);
+}
+
+.certificate-dropdown.active .certificate-image {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+/* Add hover effect for the thumbnail */
+.certificate-header:hover .thumbnail-image {
+    border-color: rgba(125, 249, 255, 0.6);
+    box-shadow: 0 0 10px rgba(125, 249, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.conference-logo {
+    position: fixed;
+    right: calc((100% - 1200px) / 2 + 40px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 8px;
+    background: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.conference-logo:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 15px rgba(125, 249, 255, 0.3);
+    border-color: rgba(125, 249, 255, 0.4);
+}
+
+/* Container for publication items */
+.publications-container {
+    padding-right: 120px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Add this to your existing publication link styles */
+.arxiv-link:hover {
+    color: #B31B1B; /* arXiv's red color */
+}
+
+.publication-links {
+    margin-top: 15px;
+    display: flex;
+    gap: 25px;
+}
+
+.pub-link {
+    color: #E4F1FF;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    padding: 0 5px;
+    text-decoration: none;
+}
+
+.pub-link:hover {
+    transform: translateY(-2px);
+    color: #7DF9FF;
+}
+
+/* Specific hover colors for each link type */
+.pdf-link:hover {
+    color: #ff4444; /* Red color for PDF */
+    transform: translateY(-2px);
+}
+
+.arxiv-link:hover {
+    color: #B31B1B; /* arXiv red */
+    transform: translateY(-2px);
+}
+
+.github-link:hover {
+    color: #ffffff; /* White for GitHub */
+    transform: translateY(-2px);
+}
+
+.website-link:hover {
+    color: #7DF9FF; /* Cyan for website */
+    transform: translateY(-2px);
+}
+
+.education-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.education-details {
+    flex: 1;
+}
+
+/* Global thumbnail styles */
+.thumbnail-container {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.thumbnail-container:hover {
+    border-color: rgba(125, 249, 255, 0.4);
+    box-shadow: 0 0 15px rgba(125, 249, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Update existing thumbnail classes to use these styles */
+.experience-logo,
+.conference-thumbnail,
+.institution-logo,
+.certificate-thumbnail {
+    composes: thumbnail-container;
+}
+
+.achievement-content {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(125, 249, 255, 0.2);
+}
+
+.pdf-view-btn {
+    background-color: rgba(125, 249, 255, 0.1);
+    color: rgb(125, 249, 255);
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.pdf-view-btn:hover {
+    background-color: rgba(125, 249, 255, 0.2);
+    border-color: rgba(125, 249, 255, 0.4);
+}
+
+.pdf-container {
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pdf-frame {
+    background: white;
+}
+
+.view-certificate-btn {
+    background: rgba(125, 249, 255, 0.1);
+    color: rgb(125, 249, 255);
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.view-certificate-btn:hover {
+    background: rgba(125, 249, 255, 0.2);
+    border-color: rgba(125, 249, 255, 0.4);
+}
+
+.view-certificate-btn i {
+    font-size: 16px;
+}
+
+.pdf-container {
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(125, 249, 255, 0.2);
+}
+
+.achievement-content {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(125, 249, 255, 0.2);
+}
+
+.certificate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(125, 249, 255, 0.05);
+    color: rgb(125, 249, 255);
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.certificate-btn:hover {
+    background: rgba(125, 249, 255, 0.1);
+    border-color: rgba(125, 249, 255, 0.4);
+    box-shadow: 0 0 15px rgba(125, 249, 255, 0.2);
+}
+
+.certificate-btn i {
+    font-size: 1em;
+}
+
+.pdf-container {
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.pdf-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin: 2% auto;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(125, 249, 255, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    padding-top: 50px;
+}
+
+.modal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(125, 249, 255, 0.2);
+}
+
+.close-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: rgb(125, 249, 255);
+    border: 1px solid rgba(125, 249, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(125, 249, 255, 0.2);
+    border-color: rgba(125, 249, 255, 0.6);
+    box-shadow: 0 0 20px rgba(125, 249, 255, 0.4);
+}
+
+.close-btn i {
+    font-size: 1.1em;
+}
+
+#pdf-iframe {
+    width: 100%;
+    height: calc(100% - 50px);
+    background: white;
+}
+
+/* Add animation classes */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }

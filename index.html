@@ -6,6 +6,7 @@
     <title>My Profile</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 </head>
 <body>
     <header>
@@ -54,6 +55,7 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -68,41 +70,86 @@
             <section id="education">
                 <h2>Education</h2>
                 <div class="education-item">
-                    <h3 class="degree-title">M.Tech in Artificial Intelligence</h3>
-                    <p class="institution">Indian Institute of Science (IISc), Bangalore</p>
-                    <p class="specialization">Department of Computational and Data Sciences</p>
-                    <p>2020 - 2022</p>
-                    <p>CGPA: 8.5/10.0</p>
+                    <div class="thumbnail-container">
+                        <img src="assets/institution-logos/IISc.png" alt="IISc Logo">
+                    </div>
+                    <div class="education-details">
+                        <h3 class="degree-title">M.Tech in Artificial Intelligence</h3>
+                        <p class="institution">Indian Institute of Science (IISc), Bangalore</p>
+                        <p class="specialization">Department of Computational and Data Sciences</p>
+                        <p>2020 - 2022</p>
+                        <p>CGPA: 8.5/10.0</p>
+                    </div>
                 </div>
                 
                 <div class="education-item">
-                    <h3 class="degree-title">B.Tech in Computer Science and Engineering</h3>
-                    <p class="institution">Birla Institute of Technology, Mesra</p>
-                    <p>2016 - 2020</p>
-                    <p>CGPA: 8.9/10.0</p>
+                    <div class="thumbnail-container">
+                        <img src="assets/institution-logos/BCE.png" alt="BIT Mesra Logo">
+                    </div>
+                    <div class="education-details">
+                        <h3 class="degree-title">B.Tech in Computer Science and Engineering</h3>
+                        <p class="institution">Birla Institute of Technology, Mesra</p>
+                        <p>2016 - 2020</p>
+                        <p>CGPA: 8.9/10.0</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="thumbnail-container">
+                        <img src="assets/institution-logos/GPM.png" alt="Government Polytechnic Patna Logo">
+                    </div>
+                    <div class="education-details">
+                        <h3 class="degree-title">Diploma in Electrical Engineering</h3>
+                        <p class="institution">Government Polytechnic Patna</p>
+                        <p>2013 - 2016</p>
+                        <p>Percentage: 78.5%</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="thumbnail-container">
+                        <img src="assets/institution-logos/BSEB.jpg" alt="BSEB Logo">
+                    </div>
+                    <div class="education-details">
+                        <h3 class="degree-title">Secondary School (10th)</h3>
+                        <p class="institution">Bihar School Examination Board</p>
+                        <p class="school-name">Jawahar Navodaya Vidyalaya, Bettiah</p>
+                        <p>2013</p>
+                        <p>Percentage: 82.8%</p>
+                    </div>
                 </div>
             </section>
 
             <section id="experience">
                 <h2>Experience</h2>
                 <div class="experience-item">
-                    <h3>Research Engineer-1 - Avataar.ai</h3>
-                    <p>July 2024 - Present</p>
-                    <ul>
-                        <li>Working on 3D reconstruction and novel view synthesis</li>
-                        <li>Developing solutions for AR/VR applications</li>
-                        <li>Research in computer vision and deep learning</li>
-                    </ul>
+                    <div class="experience-logo">
+                        <img src="assets/experience-logos/avataar.png" alt="Avataar.ai Logo">
+                    </div>
+                    <div class="experience-details">
+                        <h3>Research Engineer-1 - Avataar.ai</h3>
+                        <p>July 2024 - Present</p>
+                        <ul>
+                            <li>Working on 3D reconstruction and novel view synthesis</li>
+                            <li>Developing solutions for AR/VR applications</li>
+                            <li>Research in computer vision and deep learning</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="experience-item">
-                    <h3>Research Assistant - IISc Bangalore</h3>
-                    <p>Aug 2020 - June 2022</p>
-                    <ul>
-                        <li>Worked on deep learning models for medical image analysis</li>
-                        <li>Published research papers in top conferences</li>
-                        <li>Developed novel architectures for image segmentation</li>
-                    </ul>
+                    <div class="experience-logo">
+                        <img src="assets/experience-logos/iisc.png" alt="IISc Logo">
+                    </div>
+                    <div class="experience-details">
+                        <h3>Research Assistant - IISc Bangalore</h3>
+                        <p>Aug 2020 - June 2022</p>
+                        <ul>
+                            <li>Worked on deep learning models for medical image analysis</li>
+                            <li>Published research papers in top conferences</li>
+                            <li>Developed novel architectures for image segmentation</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
@@ -142,23 +189,31 @@
             <section id="publications">
                 <h2>Publications</h2>
                 <div class="publication-item">
-                    <h3 class="publication-title">TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning</h3>
-                    <div class="publication-authors">
-                        <span class="author-self">Rohit Kumar</span>, 
-                        Jayateja Kalla, 
-                        Soma Biswas
+                    <div class="conference-thumbnail">
+                        <img src="assets/conference-logos/WACV-2025.png" alt="WACV Logo">
                     </div>
-                    <div class="publication-conference">WACV 2025</div>
-                    <div class="publication-links">
-                        <a href="https://arxiv.org/pdf/2407.08041" target="_blank" rel="noopener noreferrer" class="pub-link pdf-link" title="PDF">
-                            <i class="fas fa-file-pdf"></i>
-                        </a>
-                        <a href="https://github.com/Anonymous-repo-4-submission/TACLE" target="_blank" rel="noopener noreferrer" class="pub-link github-link" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://github.com/Anonymous-repo-4-submission/TACLE" target="_blank" rel="noopener noreferrer" class="pub-link website-link" title="Project Website">
-                            <i class="fas fa-globe"></i>
-                        </a>
+                    <div class="publication-content">
+                        <h3 class="publication-title">TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning</h3>
+                        <div class="publication-authors">
+                            <span class="author-self">Rohit Kumar</span>, 
+                            Jayateja Kalla, 
+                            Soma Biswas
+                        </div>
+                        <div class="publication-conference">WACV 2025</div>
+                        <div class="publication-links">
+                            <a href="https://arxiv.org/pdf/2407.08041" target="_blank" rel="noopener noreferrer" class="pub-link pdf-link" title="PDF">
+                                <i class="fas fa-file-pdf"></i>
+                            </a>
+                            <a href="https://arxiv.org/abs/2407.08041" target="_blank" rel="noopener noreferrer" class="pub-link arxiv-link" title="arXiv">
+                                <i class="ai ai-arxiv"></i>
+                            </a>
+                            <a href="https://github.com/Anonymous-repo-4-submission/TACLE" target="_blank" rel="noopener noreferrer" class="pub-link github-link" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="pub-link website-link" title="Project Website">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -198,6 +253,68 @@
                 </div>
             </section>
 
+            <section id="achievements">
+                <h2>Achievements</h2>
+                
+                <!-- Entrance Exams -->
+                <div class="achievement-category">
+                    <h3>Entrance Exams</h3>
+                    <div class="achievement-item">
+                        <h4>GATE CSE</h4>
+                        <p>All India Rank: XXX</p>
+                        <p class="achievement-date">2020</p>
+                        <a href="#" class="certificate-btn" onclick="openPdfViewer('assets/certificates/IEEE_Certificate.pdf'); return false;">
+                            <i class="fas fa-file-pdf"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Volunteering -->
+                <div class="achievement-category">
+                    <h3>Volunteering</h3>
+                    <div class="achievement-item">
+                        <h4>Technical Coordinator</h4>
+                        <p>IEEE Student Branch</p>
+                        <p class="achievement-date">2019-2020</p>
+                        <a href="#" class="certificate-btn" onclick="openPdfViewer('assets/certificates/IEEE_Certificate.pdf'); return false;">
+                            <i class="fas fa-file-pdf"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="achievement-category">
+                    <h3>Certifications</h3>
+                    <div class="achievement-item">
+                        <div class="certificate-dropdown">
+                            <div class="certificate-header">
+                                <div class="certificate-thumbnail">
+                                    <img src="assets/certificates/EESS2023.jpeg" alt="EE Summer School Certificate" class="thumbnail-image">
+                                    <h4>EE Summer School Certificate</h4>
+                                </div>
+                            </div>
+                            <div class="certificate-content">
+                                <img src="assets/certificates/EESS2023.jpeg" alt="EE Summer School Certificate" class="certificate-image">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <div class="certificate-dropdown">
+                            <div class="certificate-header">
+                                <div class="certificate-thumbnail">
+                                    <img src="assets/certificates/PowerSystem_2020.png" alt="Power System Certificate" class="thumbnail-image">
+                                    <h4>Power System Certificate</h4>
+                                </div>
+                            </div>
+                            <div class="certificate-content">
+                                <img src="assets/certificates/PowerSystem_2020.png" alt="Power System Certificate" class="certificate-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section id="contact">
                 <h2>Contact</h2>
                 <p>Email: sahil15rohit88@gmail.com</p>
@@ -209,9 +326,7 @@
             </section>
         </main>
     </div>
-    <!-- <footer>
-        <p>Contact: myemail@example.com</p>
-    </footer> -->
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -277,6 +392,37 @@
                 });
             });
         });
+
+        function initializeCertificateDropdowns() {
+            const dropdowns = document.querySelectorAll('.certificate-dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const header = dropdown.querySelector('.certificate-header');
+                
+                header.addEventListener('click', () => {
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
+                });
+            });
+        }
+
+        // Initialize dropdowns when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeCertificateDropdowns);
     </script>
+
+    <!-- Add this modal container at the end of your body tag -->
+    <div id="pdf-modal" class="pdf-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closePdfViewer()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+            <iframe id="pdf-iframe" src="" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <!-- Add this before closing body tag -->
+    <script src="script.js"></script>
 </body>
 </html>
