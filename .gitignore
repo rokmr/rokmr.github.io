@@ -1,0 +1,48 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+build/
+out/
+
+# Cache and temporary files
+.cache/
+.tmp/
+*.log
+.env
+
+# Compiled CSS
+*.css.map
+*.min.css
+
+# Compiled JavaScript
+*.js.map
+*.min.js
+
+# Media and assets
+*.mp4
+*.mov
+*.avi
+*.wmv
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+*.pdf
+
+# Backup files
+*.bak
+*~
+*.backup
