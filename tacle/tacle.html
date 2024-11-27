@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper - WACV 2025</title>
+    <link rel="stylesheet" href="tacle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="assets/WACV-2025-Logo.png" alt="Research Logo">
+            </div>
+            <div class="logo">
+                <img src="assets/IIsc.png" alt="College Logo">
+            </div>
+        </div>
+        <div class="title">TACLE: Task and Class-aware Exemplar-freeSemi-supervised Class Incremental Learning
+        </div>
+        <div class="authors">Jayateja Kalla, Rohit Kumar, and Soma Biswas</div>
+        <div class="affiliation">Indian Institute of Science, Bangalore, India.</div>
+        <div class="conference">WACV 2025</div>
+        
+        <div class="links">
+            <a href="https://arxiv.org/pdf/2407.08041" target="_blank" rel="noopener noreferrer" class="button arxiv">
+                <i class="ai ai-arxiv"></i> arXiv
+            </a>
+            <a href="https://github.com/rokmr/TACLE" target="_blank" rel="noopener noreferrer" class="button github">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="#" class="button dataset">
+                <i class="fas fa-database"></i> Dataset
+            </a>
+        </div>
+        
+    </div>
+
+    <div class="section">
+        <div class="section-title">Abstract</div>
+        <p>
+            We propose a novel TACLE (TAsk and CLass-awarE) framework to address the relatively unexplored and challenging problem of 
+            exemplar-free semi-supervised class incremental learning. In this scenario, at each new task, the model has to learn new 
+            classes from both (few) labeled and unlabeled data without access to exemplars from previous classes. In addition to leveraging 
+            the capabilities of pre-trained models, TACLE proposes a novel task-adaptive threshold, thereby maximizing the utilization 
+            of the available unlabeled data as incremental learning progresses. Additionally, to enhance the performance of the
+            under-represented classes within each task, we propose a class-aware weighted cross-entropy loss. We also exploit the 
+            unlabeled data for classifier alignment, which further enhances the model performance. Extensive experiments on benchmark 
+            datasets, namely CIFAR10, CIFAR100, and ImageNet-Subset100 demonstrate the effectiveness of the proposed TACLE framework. 
+            We further showcase its effectiveness when the unlabeled data is imbalanced and also for the extreme case of one labeled
+            example per class.
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Introduction</div>
+        <img src="assets/intro.png" alt="Method Overview">
+        <p class="caption">Difference between Class Incremental Learning (CIL), Semi-Supervised CIL (SS-CIL), and Exemplar-Free Semi-Supervised CIL (EFSS-CIL) settings.</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Methodology</div>
+        <p>Two stages of training are used in TACLE. In the first stage, the model is trained on both the labeled data and high-confidence unlabeled data (selected using task-adaptive thresholding) of the current task using a class-aware weighted cross-entropy loss. In the second stage, the model is fine-tuned on the unlabeled data of the current task using a task-adaptive thresholding strategy.</p>
+        
+        <img src="assets/stage1.png" alt="Stage 1">
+        <p class="caption"><i>Stage 1: Training on labeled and high-confidence unlabeled data using class-aware weighted cross-entropy loss</i></p>
+        
+        <img src="assets/stage2.png" alt="Stage 2">
+        <p class="caption"><i>Stage 2: Fine-tuning on unlabeled data using task-adaptive thresholding</i></p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Citation</div>
+        <pre>
+@inproceedings{yourpaper2025,
+    title={Your Paper Title},
+    author={Author1, Author2, Author3},
+    booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    year={2025}
+}
+        </pre>
+    </div>
+</body>
+</html>
