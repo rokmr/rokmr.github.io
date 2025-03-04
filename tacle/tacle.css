@@ -106,15 +106,55 @@ body {
 /* Additional styles for the overview image */
 .section img {
     max-width: 100%;
-    margin: 20px 0 10px 0;
+    height: auto;
+    margin: 20px auto 10px auto;
+    display: block;
 }
 
+/* Add specific styles for CIFAR results */
+img[alt="CIFARResults"] {
+    width: 90%;  /* Match the width of stage images */
+}
+
+/* Add styles for the results grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.results-column img {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Ensure captions don't overflow */
 .caption {
     margin-top: 5px;
     margin-bottom: 20px;
     color: #666;
     font-size: 0.95em;
     text-align: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Add responsive design */
+@media (max-width: 600px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-column img,
+    img[alt="CIFARResults"] {
+        width: 100%;
+    }
+    
+    .caption {
+        width: 100%;
+    }
 }
 
 .logo-container {

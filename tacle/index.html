@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="tacle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="header">
@@ -83,12 +85,12 @@
         <div class="results-grid">
             <div class="results-column">
                 <img src="assets/ImageNet100_Results.png" alt="ImageNet-100 Results">
-                <p class="caption"><i>Comparison of average incremental accuracy on ImageNet-Subset100 after 20 tasks for SS-CIL. The number in brackets: buffer size; $\star$: models trained from scratch and $\dag$: model initialized with MoCo v3 pretrained weights.</i></p>
+                <p class="caption"><i>Comparison of average incremental accuracy on ImageNet-Subset100 after 20 tasks for SS-CIL. The number in brackets: buffer size; \(\star\): models trained from scratch and \(\dag\): model initialized with MoCo v3 pretrained weights.</i></p>
             </div>
             
             <div class="results-column">
                 <img src="assets/Ablation_Results.png" alt="Ablation Study Results">
-                <p class="caption"><i>Ablation study on CIFAR100 dataset with ${0.8\%}$ labeled data. The average incremental accuracy is reported at the end of 10 tasks. The proposed components are denoted as C1: task-wise dynamic threshold, C2: class-aware CE loss, C3: exploiting unlabeled data in stage 2.</i></p>
+                <p class="caption"><i>Ablation study on CIFAR100 dataset with \(0.8\%\) labeled data. The average incremental accuracy is reported at the end of 10 tasks. The proposed components are denoted as C1: task-wise dynamic threshold, C2: class-aware CE loss, C3: exploiting unlabeled data in stage 2.</i></p>
             </div>
         </div>
 
