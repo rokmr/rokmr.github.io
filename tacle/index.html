@@ -35,7 +35,7 @@
                 <i class="fab fa-github"></i> GitHub
             </a>
             <a href="assets/wacv25-0789.pdf" class="button poster">
-                <i class="fas fa-file-pdf"></i> Poster
+                <i class="fas fa-file-pdf" style="color: #b31b1b;"></i> Poster
             </a>
         </div>
         
@@ -78,27 +78,28 @@
         <div class="section-title">Results</div>
         <div class="results-container">
             <div class="result-item">
+                <h3>CIFAR Results</h3>
                 <img src="assets/CIFAR_Results.png" alt="CIFARResults">
                 <p class="caption"><i>Average incremental accuracy on CIFAR10 after 5 tasks and CIFAR100 after 10 tasks for SS-CIL. The number in brackets
-                    indicates the number of exemplars; our approach does not use any exemplars. Here, ⋆: models trained from scratch, †: models initialized
+                    indicates the number of exemplars; our approach does not use any exemplars. Here, \(\star\): models trained from scratch, †: models initialized
                     with MoCo v3 pretrained weights, and ‡: models initialized with ImageNet pretrained weights; RN18: ResNet18 architecture, FT: fixed
                     threshold, i.e. FixMatch.</i></p>
             </div>
+        </div>
 
-            <div class="results-grid">
-                <div class="results-column">
-                    <img src="assets/ImageNet100_Results.png" alt="ImageNet-100 Results">
-                    <p class="caption"><i>Comparison of average incremental accuracy on ImageNet-Subset100 after 20 tasks for SS-CIL. The number in brackets: buffer size; \(\star\): models trained from scratch and \(\dag\): model initialized with MoCo v3 pretrained weights.</i></p>
-                </div>
-                
-                <div class="results-column">
-                    <img src="assets/Ablation_Results.png" alt="Ablation Study Results">
-                    <p class="caption"><i>Ablation study on CIFAR100 dataset with \(0.8\%\) labeled data. The average incremental accuracy is reported at the end of 10 tasks. The proposed components are denoted as C1: task-wise dynamic threshold, C2: class-aware CE loss, C3: exploiting unlabeled data in stage 2.</i></p>
-                </div>
-            </div>
-
+        <div class="results-container">
             <div class="result-item">
-                <img src="assets/CIFAR100.png" alt="Results">
+                <h3>ImageNet-100 Results</h3>
+                <img src="assets/ImageNet100_Results.png" alt="ImageNet-100 Results">
+                <p class="caption"><i>Comparison of average incremental accuracy on ImageNet-Subset100 after 20 tasks for SS-CIL. The number in brackets: buffer size; \(\star\): models trained from scratch and †: model initialized with MoCo v3 pretrained weights.</i></p>
+            </div>
+        </div>
+            
+        <div class="results-container">
+            <div class="result-item">
+                <h3>Ablation Study</h3>
+                <img src="assets/Ablation_Results.png" alt="Ablation Study Results">
+                <p class="caption"><i>Ablation study on CIFAR100 dataset with \(0.8\%\) labeled data. The average incremental accuracy is reported at the end of 10 tasks. The proposed components are denoted as C1: task-wise dynamic threshold, C2: class-aware CE loss, C3: exploiting unlabeled data in stage 2.</i></p>
             </div>
         </div>
     </div>
