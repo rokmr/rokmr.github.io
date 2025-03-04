@@ -46,3 +46,4 @@ out/
 *.bak
 *~
 *.backup
+*.DS_Store
