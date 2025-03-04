@@ -40,10 +40,11 @@ out/
 *.gif
 *.ico
 *.svg
-*.pdf
+.pdf
 
 # Backup files
 *.bak
 *~
 *.backup
+DS_Store
 *.DS_Store
