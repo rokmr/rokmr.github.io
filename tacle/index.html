@@ -32,9 +32,6 @@
             <a href="https://github.com/rokmr/TACLE" target="_blank" rel="noopener noreferrer" class="button github">
                 <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="#" class="button dataset">
-                <i class="fas fa-database"></i> Dataset
-            </a>
             <a href="assets/wacv25-0789.pdf" class="button poster">
                 <i class="fas fa-file-pdf"></i> Poster
             </a>
@@ -73,6 +70,17 @@
         
         <img src="assets/stage2.png" alt="Stage 2">
         <p class="caption"><i>Stage 2: Fine-tuning on unlabeled data using task-adaptive thresholding</i></p>
+    </div>
+
+    <div class="section"></div>
+        <div class="section-title">Results</div>
+        <img src="assets/CIFAR10.png" alt="Results">
+        <p class="caption"><i>Average incremental accuracy on CIFAR10 after 5 tasks and CIFAR100 after 10 tasks for SS-CIL. The number in brackets
+            indicates the number of exemplars; our approach does not use any exemplars. Here, ⋆: models trained from scratch, †: models initialized
+            with MoCo v3 pretrained weights, and ‡: models initialized with ImageNet pretrained weights; RN18: ResNet18 architecture, FT: fixed
+            threshold, i.e. FixMatch.</i></p>
+
+        <img src="assets/CIFAR100.png" alt="Results">
     </div>
 
     <div class="section">
