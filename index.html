@@ -35,6 +35,9 @@
                     <a href="https://github.com/rokmr" target="_blank" title="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
+                    <a href="https://huggingface.co/rohitronie" target="_blank" title="Hugging Face">
+                        <i class="fab fa-hugging"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -139,9 +142,15 @@
                         <h3>Research Engineer-1 - Avataar.ai</h3>
                         <p>July 2024 - Present</p>
                         <ul>
-                            <li>Leading development of state-of-the-art Generative AI architectures for high-fidelity image synthesis and manipulation</li>
-                            <li>Spearheading research in 3D reconstruction and novel view synthesis for immersive visualization applications</li>
-                            <li>Conducting advanced research in computer vision and deep learning, with focus on real-world commercial applications</li>
+                            <li>Built an end-to-end pipeline that automatically creates lifestyle images using Flux Model and ControlNets, making
+                                products look better and more realistic for customers.</li>
+                            <li>Modified the diffusion model’s sampling procedure to improve object reconstruction, followed by intrinsic decomposition
+                                for realistic product relighting.</li>
+                            <li>Built classification systems for low-data scenarios using pre-trained models, boosting accuracy for product categorization.</li>
+                            <li>Enhanced segmentation accuracy by implementing BiRefNet models while also integrating SAM with YOLO-world for
+                                complex scenes.</li>
+                            <li>Improved object detection by benchmarking various frameworks including YOLO-world, Florence, and other
+                                mechanisms.</li>
                         </ul>
                     </div>
                 </div>
@@ -155,8 +164,9 @@
                         <p>Subject: Signal Processing in Practice </p>
                         <p>Jan 2024 - Apr 2024</p>
                         <ul>
-                            <li>Led hands-on sessions on self-supervised learning techniques like contrastive learning and masked autoencoders</li>
-                            <li>Guided implementation of semi-supervised approaches combining labeled and unlabeled data for improved model performance</li>
+                            <li>Integrated continual learning frameworks (L2P, DualPrompt) to mitigate catastrophic forgetting in neural networks.</li>
+                            <li>Built self-supervised models using MoCo and SimCLR for robust visual representation learning.</li>
+                            <li>Developed adaptive prompt-based learning with dynamic token expansion and attention mechanisms.</li>
                         </ul>
                     </div>
                 </div>
@@ -170,9 +180,9 @@
                         <p>Subject: Digital Image Processing</p>
                         <p>Aug 2023 - Dec 2023</p>
                         <ul>
-                            <li>Assisted students with classical image processing techniques including Otsu binarization, CLAHE histogram equalization, and various spatial/frequency domain filtering methods</li>
-                            <li>Guided implementation of edge detection algorithms (Canny), Hough transform, and Fourier domain analysis for image enhancement and feature extraction</li>
-                            <li>Introduced deep learning concepts like CNNs and helped students apply them to practical image processing tasks</li>
+                            <li>Developed DFT-based frequency domain filtering for advanced image denoising and enhancement.</li>
+                            <li>Implemented SIFT and Normalized Cut for precise feature detection and image segmentation.</li>
+                            <li>Optimized deep learning models using EfficientNet-B0 with custom classifiers for efficient convergence.</li>
                         </ul>
                     </div>
                 </div>
@@ -180,56 +190,38 @@
 
             <section id="projects">
                 <h2>Projects</h2>
-                <!-- <div class="project-item">
-                    <h3>AI-Powered Image Enhancement</h3>
-                    <p>Developed a deep learning model for real-time image enhancement using GANs. Achieved 40% improvement in image quality metrics while maintaining processing speed under 100ms per frame.</p>
-                    <div class="project-tech">
-                        <span>PyTorch</span>
-                        <span>CUDA</span>
-                        <span>Python</span>
-                    </div>
-                </div> -->
-                
-                <!-- <div class="project-item">
-                    <h3>3D Scene Understanding</h3>
-                    <p>Created a computer vision system for real-time 3D scene understanding and object detection. Implemented depth estimation and semantic segmentation with 95% accuracy.</p>
-                    <div class="project-tech">
-                        <span>TensorFlow</span>
-                        <span>OpenCV</span>
-                        <span>C++</span>
-                    </div>
-                </div> -->
-                
-                <!-- <div class="project-item">
-                    <h3>Multi-Modal AR Experience</h3>
-                    <p>Built an augmented reality system combining visual and audio inputs for immersive user experiences. Reduced latency by 60% using optimized processing pipeline.</p>
-                    <div class="project-tech">
-                        <span>Unity3D</span>
-                        <span>ARKit</span>
-                        <span>C#</span>
-                    </div>
-                </div> -->
-
                 <div class="project-item">
                     <div class="project-header">
-                        <h3>Advanced Image Processing Suite</h3>
-                        <a href="https://github.com/rokmr/Image-Processing" class="github-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
+                        <h3>Cricket-Shot Predictor</h3>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="https://github.com/rokmr/Computer-Vision/tree/main/Video-Processing/VideoClassification" class="github-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> View on GitHub
+                            </a>
+                            <a href="https://huggingface.co/spaces/rohitronie/Cricket-Shot-Predictor" class="github-link" target="_blank" rel="noopener noreferrer">
+                                <i class="hf-icon"></i> View on Hugging Face
+                            </a>
+                        </div>
                     </div>
-                    <p>Developed a comprehensive image processing toolkit implementing multiple computer vision algorithms:</p>
+                    <p>Developed an LSTM-based video classification model utilizing pre-trained image embeddings from CLIP and SigLIP,
+                        along with fine-tuned VideoMAE for end-to-end classification.</p>
                     <ul>
-                        <li>Built classification models for robust image categorization</li>
-                        <li>Implemented advanced segmentation techniques for precise object detection</li>
-                        <li>Created denoising algorithms to enhance image quality</li>
+                        <li>Trained LSTM using visual features extracted with CLIP and SigLIP, achieving 52% and 53% test accuracy,
+                             respectively, and saving the checkpoint with the highest validation accuracy.</li>
+                        <li>Fine-tuned VideoMAE on the cricket shots dataset, achieving 66.05% test accuracy, while saving model checkpoints
+                            after each epoch and monitoring validation performance.</li>
+                        <li>Prepared the video dataset by extracting frames, computing embeddings, and assigning labels, while implementing
+                            detailed logging and leveraging Hugging Face Hub for model sharing.</li>
                     </ul>
                     <div class="tech-stack">
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Jupyter Notebook</span>
-                        <span class="tech-tag">OpenCV</span>
-                        <span class="tech-tag">scikit-image</span>
+                        <span class="tech-tag">CLIP</span>
+                        <span class="tech-tag">SigLIP</span>
+                        <span class="tech-tag">LSTM</span>
+                        <span class="tech-tag">VideoMAE</span>
+                        <span class="tech-tag">Hugging Face</span>
                     </div>
                 </div>
+
             </section>
 
             <section id="publications">
