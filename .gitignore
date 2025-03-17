@@ -35,8 +35,8 @@ out/
 *.avi
 *.wmv
 *.jpg
-*.jpeg
-.png
+# *.jpeg
+# .png
 *.gif
 *.ico
 *.svg
