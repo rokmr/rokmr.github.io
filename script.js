@@ -129,10 +129,37 @@ function typeWriter() {
 // Start typewriter after a delay
 setTimeout(typeWriter, 1000);
 
+// Track cursor activity
+let lastMouseMove = Date.now();
+
 document.addEventListener('mousemove', (e) => {
     targetT = e.clientX / W;
     targetT = Math.max(0, Math.min(1, targetT));
+    lastMouseMove = Date.now();
 });
+
+// Auto-denoising when idle: slow, one step per second (like real inference)
+let pauseUntil = 0;  // Timestamp to pause until after completing
+
+setInterval(() => {
+    const idleTime = Date.now() - lastMouseMove;
+    const now = Date.now();
+
+    // Skip if in pause period (showing completed pattern)
+    if (now < pauseUntil) return;
+
+    if (idleTime > 3000) {  // 3 seconds of no cursor movement
+        // One denoising step (slow, natural pace)
+        targetT += 0.02;  // 2% per second = ~50 steps to complete
+
+        // When fully denoised, pause for 5 seconds then reset
+        if (targetT >= 1) {
+            targetT = 1;  // Clamp to 1
+            pauseUntil = now + 5000;  // Pause 5 seconds
+            setTimeout(() => { targetT = 0; }, 5000);  // Reset after pause
+        }
+    }
+}, 1000);  // One step per second - natural inference pace
 
 function animate() {
     t += (targetT - t) * 0.04;
