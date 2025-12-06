@@ -1,3 +1,5 @@
+// ============================================
+
 // Canvas Animation - Chess Pattern Particle System
 const canvas = document.getElementById('flow-canvas');
 const ctx = canvas.getContext('2d');
@@ -184,7 +186,7 @@ function animate() {
 
             ctx.beginPath();
             ctx.arc(x, y, 0.55, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${gray},${gray},${gray},${alpha})`;
+            ctx.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${alpha})`;
             ctx.fill();
         }
 
@@ -194,7 +196,7 @@ function animate() {
     // Update Flow Matching HUD
     const sigma = (1 - t).toFixed(2); // σ = 1-t (noise level as decimal)
     const steps = Math.floor(t * 50);
-    document.getElementById('time-display').innerText = `t=${t.toFixed(2)}`;
+    document.getElementById('time-display').innerText = `t = ${t.toFixed(2)} `;
     document.getElementById('step-count').innerText = `${steps}/50`;
     document.getElementById('noise-level').innerText = sigma;
     document.getElementById('progress-fill').style.width = `${t * 100}%`;

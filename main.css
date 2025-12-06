@@ -117,6 +117,27 @@ nav a:hover {
     animation: pulse 2s infinite;
 }
 
+/* Greyed-out "Currently Employed" state - creates FOMO for recruiters */
+/* Greyed-out "Currently Employed" state - creates FOMO for recruiters */
+.status-badge.status-unavailable {
+    border-color: var(--dim) !important;
+    color: var(--dim) !important;
+    opacity: 0.7;
+}
+
+.status-badge.status-unavailable .status-dot {
+    background: var(--dim) !important;
+    animation: none;
+    box-shadow: none !important;
+}
+
+.status-badge.status-unavailable:hover {
+    background: rgba(102, 102, 102, 0.1) !important;
+    opacity: 1;
+    border-color: var(--text-secondary) !important;
+    color: var(--text-secondary) !important;
+}
+
 .collab-btn {
     display: flex;
     align-items: center;
