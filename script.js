@@ -15,7 +15,45 @@ function resizeCanvas() {
 }
 resizeCanvas();
 
-// Chess pattern
+// Lorenz Butterfly pattern
+function generateButterfly() {
+    const points = [];
+
+    const sigma = 10, rho = 28, beta = 8 / 3;
+    const dt = 0.004;
+    let x = 0.1, y = 0, z = 0;
+
+    // Settle to attractor
+    for (let i = 0; i < 2500; i++) {
+        const dx = sigma * (y - x);
+        const dy = x * (rho - z) - y;
+        const dz = x * y - beta * z;
+        x += dx * dt; y += dy * dt; z += dz * dt;
+    }
+
+    const lorenzScale = 0.035;
+    const butterflyOffsetY = 0;
+
+    // Sample butterfly trajectory (denser - 30000 points)
+    for (let i = 0; i < 30000; i++) {
+        const dx = sigma * (y - x);
+        const dy = x * (rho - z) - y;
+        const dz = x * y - beta * z;
+        x += dx * dt; y += dy * dt; z += dz * dt;
+
+        const nx = x * lorenzScale;
+        const ny = butterflyOffsetY - (z - 25) * lorenzScale;
+
+        if (nx >= -0.85 && nx <= 0.85 && ny >= -0.85 && ny <= 0.85) {
+            points.push({ x: nx, y: ny, b: 0.8 });
+        }
+    }
+
+    return points;
+}
+
+// Chess pattern (commented out)
+/*
 function generateChessPattern() {
     const points = [];
     const gridSize = 8;
@@ -56,9 +94,10 @@ function generateChessPattern() {
     }
     return points;
 }
+*/
 
 const particleCount = 16000;
-const targetPoints = generateChessPattern();
+const targetPoints = generateButterfly();  // Using butterfly instead of chess
 const particles = [];
 
 for (let i = 0; i < particleCount; i++) {
@@ -182,11 +221,16 @@ function animate() {
             const noiseBrightness = 0.28 + Math.random() * 0.18;
             const brightness = (1 - t) * noiseBrightness + t * p.b;
             const alpha = 0.35 + t * 0.55;
-            const gray = Math.floor(brightness * 255);
+
+            // Subtle green tint that increases as pattern forms
+            const baseGray = Math.floor(brightness * 255);
+            const r = Math.floor(baseGray * (1 - t * 0.15));
+            const g = baseGray;
+            const b = Math.floor(baseGray * (1 - t * 0.2));
 
             ctx.beginPath();
             ctx.arc(x, y, 0.55, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${alpha})`;
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
             ctx.fill();
         }
 
