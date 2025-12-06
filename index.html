@@ -1,600 +1,852 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohit Kumar</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Rohit Kumar | AI Engineer & Researcher</title>
+    <meta name="description"
+        content="AI Engineer building agentic systems and generative AI. IISc Bangalore M.Tech. GATE AIR 221.">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
-    <header>
-        <div class="profile-container">
-            <div class="profile-image">
-                <img src="https://avatars.githubusercontent.com/u/104412006?v=4" alt="Rohit Kumar">
+
+    <canvas id="flow-canvas"></canvas>
+
+    <div class="content">
+        <header>
+            <a href="#home" class="logo">ROHIT KUMAR</a>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header-cta">
+                <a href="#contact" class="status-badge">
+                    <span class="status-dot"></span>
+                    Open to Work
+                </a>
+                <a href="mailto:sahil15rohit88@gmail.com?subject=Collaboration" class="collab-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    Collaborate
+                </a>
             </div>
-            <div class="contact-info">
-                <h1 class="name">Rohit Kumar</h1>
-                <p class="position">Research Engineer-1 @ Avataar.ai</p>
-                <p class="email">
-                    <i class="fas fa-envelope"></i>
-                    sahil15rohit88@gmail.com
-                </p>
-                <p class="work-email">
-                    <i class="fas fa-briefcase"></i>
-                    rohit.kumar@avataar.ai
-                </p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/rohitronie/" target="_blank" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://scholar.google.com/citations?user=7N8THZgAAAAJ" target="_blank" title="Google Scholar">
-                        <i class="fas fa-graduation-cap"></i>
-                    </a>
-                    <a href="https://github.com/rokmr" target="_blank" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://huggingface.co/rokmr" target="_blank" title="Hugging Face">
-                        <i class="hf-icon"></i>
-                    </a>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero" id="home">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-eyebrow">AI Engineer @ Armada</div>
+                    <h1>Building Intelligent Systems That Learn & Adapt</h1>
+                    <p class="hero-story">
+                        From cracking <strong>GATE with AIR 221</strong> to shipping production AI at scale -
+                        I transform research into real-world systems. Currently architecting
+                        <strong>Agentic AI pipelines</strong> at Armada, previously built generative systems at
+                        <strong>Avataar.ai</strong>. <strong>IISc Bangalore</strong> alumnus.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-value">221</div>
+                            <div class="stat-label">GATE AIR</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">2+</div>
+                            <div class="stat-label">Years ML</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">IISc</div>
+                            <div class="stat-label">M.Tech AI</div>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="mailto:sahil15rohit88@gmail.com" class="btn btn-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="M22 7l-10 6L2 7" />
+                            </svg>
+                            Get in Touch
+                        </a>
+                        <a href="https://github.com/rokmr" target="_blank" class="btn btn-secondary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/rohitronie" target="_blank" class="btn btn-secondary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=7N8THZgAAAAJ&hl=en" target="_blank"
+                            class="btn btn-secondary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                            </svg>
+                            Scholar
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <nav class="sidebar">
-            <ul class="sidebar-nav">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#achievements">Achievements</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="main-container">
-        <main class="main-content">
-            <section id="home">
-                <h2>About Me</h2>
-                <p>I am a Research Engineer passionate about machine learning and computer vision. Currently working on cutting-edge AI solutions at Avataar.ai.</p>
-                
-                <div class="life-updates">
-                    <h3>Life Updates</h3>
-                    <div class="updates-container">
-                        <div class="update-item">
-                            <span class="update-date">October 2024</span>
-                            <p>Our paper "TACLE" has been accepted at WACV 2025! 🎉</p>
-                        </div>
-                        <div class="update-item">
-                            <span class="update-date">July 2024</span>
-                            <p>Started new role as Research Engineer-1 at Avataar.ai 🚀</p>
-                        </div>
-                        <div class="update-item">
-                            <span class="update-date">June 2024</span>
-                            <p>Graduated from IISc Bangalore with M.Tech in AI 🎓</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        </section>
 
-            <section id="education">
-                <h2>Education</h2>
-                <div class="education-item">
-                    <div class="thumbnail-container">
-                        <img src="assets/institution-logos/IISc.png" alt="IISc Logo">
-                    </div>
-                    <div class="education-details">
-                        <h3 class="degree-title">M.Tech in Artificial Intelligence</h3>
-                        <p class="institution">Indian Institute of Science (IISc), Bangalore</p>
-                        <!-- <p class="specialization">Department of Computational and Data Sciences</p> -->
-                        <p>2022 - 2024</p>
-                        <p>CGPA: 8.0/10.0</p>
-                    </div>
+        <!-- About -->
+        <section id="about">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <span class="section-title">About</span>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="profile-photo">
+                    <img src="https://avatars.githubusercontent.com/u/104412006?v=4" alt="Rohit Kumar">
                 </div>
-                
-                <div class="education-item">
-                    <div class="thumbnail-container">
-                        <img src="assets/institution-logos/BCE.png" alt="BIT Mesra Logo">
-                    </div>
-                    <div class="education-details">
-                        <h3 class="degree-title">B.Tech in Electrical Engineering</h3>
-                        <p class="institution">Bhagalpur College of Engineering, Bhagalpur</p>
-                        <p>2018 - 2021</p>
-                        <p>CGPA: 8.75/10.0</p>
-                    </div>
-                </div>
-
-                <div class="education-item">
-                    <div class="thumbnail-container">
-                        <img src="assets/institution-logos/GPM.png" alt="Government Polytechnic Muzzafarpur Logo">
-                    </div>
-                    <div class="education-details">
-                        <h3 class="degree-title">Diploma in Electrical Engineering</h3>
-                        <p class="institution">Government Polytechnic Muzzafarpur, Muzaffarpur</p>
-                        <p>2015 - 2018</p>
-                        <p>Percentage: 77.73%</p>
-                    </div>
-                </div>
-
-                <div class="education-item">
-                    <div class="thumbnail-container">
-                        <img src="assets/institution-logos/BSEB.jpg" alt="BSEB Logo">
-                    </div>
-                    <div class="education-details">
-                        <h3 class="degree-title">Secondary School (10th)</h3>
-                        <p class="institution">Bihar School Examination Board</p>
-                        <p class="school-name">Utkramit M S Parmanandpur Shraniganj</p>
-                        <p>2015</p>
-                        <p>Percentage: 60%</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="experience">
-                <h2>Experience</h2>
-                <div class="experience-item">
-                    <div class="experience-logo">
-                        <img src="assets/experience-logos/avataar.png" alt="Avataar.ai Logo">
-                    </div>
-                    <div class="experience-details">
-                        <h3>Research Engineer-1 - Avataar.ai</h3>
-                        <p>July 2024 - Present</p>
-                        <ul>
-                            <li>Built an end-to-end pipeline that automatically creates lifestyle images using Flux Model and ControlNets, making
-                                products look better and more realistic for customers.</li>
-                            <li>Modified the diffusion model’s sampling procedure to improve object reconstruction, followed by intrinsic decomposition
-                                for realistic product relighting.</li>
-                            <li>Built classification systems for low-data scenarios using pre-trained models such as CLIP, BLIP2 and Qwen2.5,
-                                enhancing accuracy in product categorization.</li>
-                            <li>Enhanced segmentation accuracy by implementing BiRefNet models while also integrating SAM with YOLO-world for
-                                complex scenes.</li>
-                            <li>Improved object detection by benchmarking various frameworks including YOLO-world, Florence, and other
-                                mechanisms.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-logo">
-                        <img src="assets/experience-logos/IISc.png" alt="IISc Logo">
-                    </div>
-                    <div class="experience-details">
-                        <h3>Teaching Assistant - IISc Bangalore</h3>
-                        <p>Subject: Signal Processing in Practice </p>
-                        <p>Jan 2024 - Apr 2024</p>
-                        <ul>
-                            <li>Integrated continual learning frameworks (L2P, DualPrompt) to mitigate catastrophic forgetting in neural networks.</li>
-                            <li>Built self-supervised models using MoCo and SimCLR for robust visual representation learning.</li>
-                            <li>Developed adaptive prompt-based learning with dynamic token expansion and attention mechanisms.</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="experience-item">
-                    <div class="experience-logo">
-                        <img src="assets/experience-logos/IISc.png" alt="IISc Logo">
-                    </div>
-                    <div class="experience-details">
-                        <h3>Teaching Assistant - IISc Bangalore</h3>
-                        <p>Subject: Digital Image Processing</p>
-                        <p>Aug 2023 - Dec 2023</p>
-                        <ul>
-                            <li>Developed DFT-based frequency domain filtering for advanced image denoising and enhancement.</li>
-                            <li>Implemented SIFT and Normalized Cut for precise feature detection and image segmentation.</li>
-                            <li>Optimized deep learning models using EfficientNet-B0 with custom classifiers for efficient convergence.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projects">
-                <h2>Projects</h2>
-                <div class="project-item">
-                    <div class="project-header">
-                        <h3>Cricket-Shot Predictor</h3>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://github.com/rokmr/Computer-Vision/tree/main/Video-Processing/VideoClassification" class="github-link" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </a>
-                            <a href="https://huggingface.co/spaces/rokmr/cricketshot" class="github-link" target="_blank" rel="noopener noreferrer">
-                                <i class="hf-icon"></i> View on Hugging Face
-                            </a>
-                        </div>
-                    </div>
-                    <p>Developed an LSTM-based video classification model utilizing pre-trained image embeddings from CLIP and SigLIP,
-                        along with fine-tuned VideoMAE for end-to-end classification.</p>
-                    <ul>
-                        <li>Trained LSTM using visual features extracted with CLIP and SigLIP, achieving 52% and 53% test accuracy,
-                             respectively, and saving the checkpoint with the highest validation accuracy.</li>
-                        <li>Fine-tuned VideoMAE on the cricket shots dataset, achieving 66.05% test accuracy, while saving model checkpoints
-                            after each epoch and monitoring validation performance.</li>
-                        <li>Prepared the video dataset by extracting frames, computing embeddings, and assigning labels, while implementing
-                            detailed logging and leveraging Hugging Face Hub for model sharing.</li>
-                    </ul>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">CLIP</span>
-                        <span class="tech-tag">SigLIP</span>
-                        <span class="tech-tag">LSTM</span>
-                        <span class="tech-tag">VideoMAE</span>
-                        <span class="tech-tag">Hugging Face</span>
-                    </div>
-                </div>
-
-                <div class="project-item">
-                    <div class="project-header">
-                        <h3>Virtual Try-On</h3>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="assets/report/vton.pdf" class="github-link" target="_blank" rel="noopener noreferrer">
-                                <i class="fas fa-file-pdf"></i> View Report
-                            </a>
-                        </div>
-                    </div>
-                    <p>Developed a deep learning-based Virtual Try-On pipeline integrating segmentation, garment transformation, and try-on synthesis for realistic virtual clothing visualization.</p>
-                    <ul>
-                        <li>Built an AI-powered Virtual Try-On pipeline combining Florence2 and IDM-VTON models for automated garment transfer and visualization.</li>
-                        <li>Enhanced system performance by implementing a 3-stage framework with CAT-TryOff model for improved color and pattern consistency.</li>
-                        <li>Optimized system latency by developing a single-stage solution using Any2Any-Tryon and FLUX-based architectures.</li>
-                        <li>Conducted iterative improvements through failure analysis, addressing key challenges in garment fitting and pattern preservation.</li>
-                    </ul>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
+                <div class="about-text">
+                    <h2>Turning Research into Production</h2>
+                    <p>
+                        I'm an AI engineer who thrives at the intersection of <strong>cutting-edge research</strong>
+                        and <strong>production systems</strong>. My journey from electrical engineering to AI
+                        wasn't conventional - it was driven by curiosity and a relentless pursuit of understanding
+                        how machines can learn to see and reason.
+                    </p>
+                    <p>
+                        At <strong>Armada</strong>, I'm building agentic systems that leverage LangGraph and RAG
+                        architectures. Previously at <strong>Avataar.ai</strong>, I shipped diffusion-based
+                        pipelines that generate photorealistic product imagery. My research at <strong>IISc</strong>
+                        focused on continual learning - teaching neural networks to learn without forgetting.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Diffusion Models</span>
+                        <span class="tech-tag">LangGraph</span>
+                        <span class="tech-tag">RAG Systems</span>
                         <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">Florence2</span>
-                        <span class="tech-tag">IDM-VTON</span>
-                        <span class="tech-tag">CAT-TryOff</span>
-                        <span class="tech-tag">Any2Any-Tryon</span>
-                        <!-- <span class="tech-tag">Computer Vision</span>
-                        <span class="tech-tag">Deep Learning</span>
-                        <span class="tech-tag">Generative AI</span> -->
-                        <span class="tech-tag">Hugging Face</span>
-                    </div>
-
-            </section>
-
-            <section id="publications">
-                <h2>Publications</h2>
-                <div class="publication-item">
-                    <div class="conference-thumbnail">
-                        <img src="assets/conference-logos/WACV-2025.png" alt="WACV Logo">
-                    </div>
-                    <div class="publication-content">
-                        <h3 class="publication-title">TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning</h3>
-                        <div class="publication-authors">
-                            Jayateja Kalla*, 
-                            <a href="https://scholar.google.com/citations?user=7N8THZgAAAAJ&hl=en" class="author-self">Rohit Kumar*</a>, 
-                            Soma Biswas
-                        </div>
-                        <div class="publication-conference">WACV 2025</div>
-                        <div class="publication-links">
-                            <a href="https://openaccess.thecvf.com/content/WACV2025/papers/Kalla_TACLE_Task_and_Class-Aware_Exemplar-Free_Semi-Supervised_Class_Incremental_Learning_WACV_2025_paper.pdf" class="pub-link paper-link" target="_blank" rel="noopener noreferrer" title="Paper">
-                                <i class="fas fa-file-pdf"></i>
-                            </a>
-                            <a href="https://openaccess.thecvf.com/content/WACV2025/supplemental/Kalla_TACLE_Task_and_WACV_2025_supplemental.pdf" class="pub-link paper-link" target="_blank" rel="noopener noreferrer" title="Supplementary Material">
-                                <i class="fas fa-file-alt"></i>
-                            </a>
-                            <a href="https://rokmr.github.io/tacle/#" class="pub-link website-link" title="Project Website">
-                                <i class="fas fa-globe"></i>
-                            </a>
-                            <a href="https://github.com/rokmr/TACLE" target="_blank" rel="noopener noreferrer" class="pub-link github-link" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://arxiv.org/abs/2407.08041" target="_blank" rel="noopener noreferrer" class="pub-link arxiv-link" title="arXiv">
-                                <i class="ai ai-arxiv"></i>
-                            </a>
-                            <a href="tacle/assets/wacv25-0789.pdf" class="pub-link poster-link" title="Poster">
-                                <i class="fas fa-file-image"></i>
-                            </a>
-                        </div>
+                        <span class="tech-tag">Computer Vision</span>
+                        <span class="tech-tag">LLMs</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Docker</span>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="skills">
-                <h2>Skills</h2>
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h3>Research Interests</h3>
-                        <ul>
-                            <li>Image Processing & Computer Vision</li>
-                            <li>Large Language Models (LLMs)</li>
-                            <li>Natural Language Processing (NLP)</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <ul>
-                            <li>Python</li>
-                            <li>SQL</li>
-                            <li>MATLAB</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3>Deep Learning Frameworks</h3>
-                        <ul>
-                            <li>PyTorch</li>
-                            <li>TensorFlow</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3>Tools</h3>
-                        <ul>
-                            <li>SLURM</li>
-                            <li>AWS</li>
-                            <li>GitHub</li>
-                            <li>ComfyUI</li>
-                        </ul>
-                    </div>
+        <!-- Experience -->
+        <section id="experience">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <span class="section-title">Work Experience</span>
+                <div class="section-line"></div>
+            </div>
 
-                    <div class="skill-category">
-                        <h3>Relevant Coursework</h3>
-                        <ul>
-                            <li>Digital Image Processing</li>
-                            <li>Advanced Image Processing</li>
-                            <li>Computer Vision</li>
-                            <li>Introduction to NLP</li>
-                            <li>LLMs for Practical NLP</li>
-                            <li>Deep Learning for NLP</li>
-                            <li>Digital Video Perception and Algorithms</li>
-                            <li>Linear Algebra</li>
-                            <li>Stochastic Models and Applications</li>
-                            <li>Pattern Recognition and Neural Networks</li>
-                            <li>Game Theory</li>
-                            <li>Computational Methods of Optimization</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section id="achievements">
-                <h2>Achievements</h2>
-                
-                <!-- Entrance Exams -->
-                <div class="achievement-category">
-                    <h3>Entrance Exams</h3>
-                    <div class="achievement-item">
-                        <h4>GATE EE</h4>
-                        <p>All India Rank: 221 | Score: 803 | Marks: 73.00</p>
-                        <p class="achievement-date">2022</p>
-                        <a href="#" class="certificate-btn" onclick="openPdfViewer('assets/certificates/GATE_EE_2022.pdf'); return false;">
-                            <i class="fas fa-file-pdf"></i> View Certificate
-                        </a>
-                    </div>
-
-                    <div class="achievement-item">
-                        <h4>GATE IN</h4>
-                        <p>All India Rank: 227 | Score: 670 | Marks: 67.33</p>
-                        <p class="achievement-date">2022</p>
-                        <a href="#" class="certificate-btn" onclick="openPdfViewer('assets/certificates/GATE_IN_2022.pdf'); return false;">
-                            <i class="fas fa-file-pdf"></i> View Certificate
-                        </a>
-                    </div>
-
-                    <div class="achievement-item">
-                        <h4>GATE EE</h4>
-                        <p>All India Rank: 1683 | Score: 634 | Marks: 55.33</p>
-                        <p class="achievement-date">2021</p>
-                        <a href="#" class="certificate-btn" onclick="openPdfViewer('assets/certificates/GATE_EE_2021.pdf'); return false;">
-                            <i class="fas fa-file-pdf"></i> View Certificate
-                        </a>
-                    </div>
-
-                    <div class="achievement-item">
-                        <h4>BCECE [LE]</h4>
-                        <p> Rank: 1 </p>
-                        <p class="achievement-date">2018</p>
-                        <!-- <a href="#" class="certificate-btn" onclick="openPdfViewer('assets/certificates/GATE_EE_2021.pdf'); return false;">
-                            <i class="fas fa-file-pdf"></i> View Certificate
-                        </a> -->
-                    </div>
-
-                </div>
-
-
-                <!-- Certifications -->
-                <div class="achievement-category">
-                    <h3>Certifications</h3>
-
-                    <div class="achievement-item">
-                        <div class="certificate-dropdown">
-                            <div class="certificate-header">
-                                <div class="certificate-thumbnail">
-                                    <img src="assets/certificates/HF_Agents_Course.jpeg" alt="Agents Course" class="thumbnail-image">
-                                    <h4>Agents Course</h4>
-                                </div>
-                            </div>
-                            <div class="certificate-content">
-                                <img src="assets/certificates/HF_Agents_Course.jpeg" alt="Agents Course" class="certificate-image">
-                            </div>
+            <div class="timeline">
+                <div class="timeline-item current">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">AI Engineer</h3>
+                            <div class="exp-company">Armada</div>
+                        </div>
+                        <div class="exp-date">
+                            Jun 2025 - Present
+                            <div class="exp-location">Trivandrum, India</div>
                         </div>
                     </div>
-
-                    <div class="achievement-item">
-                        <div class="certificate-dropdown">
-                            <div class="certificate-header">
-                                <div class="certificate-thumbnail">
-                                    <img src="assets/certificates/GenAI-Hackathon-2023.jpg" alt="GenAI Hackathon" class="thumbnail-image">
-                                    <h4>GenAI Hackathon</h4>
-                                </div>
-                            </div>
-                            <div class="certificate-content">
-                                <img src="assets/certificates/GenAI-Hackathon-2023.jpg" alt="GenAI Hackathon" class="certificate-image">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="achievement-item">
-                        <div class="certificate-dropdown">
-                            <div class="certificate-header">
-                                <div class="certificate-thumbnail">
-                                    <img src="assets/certificates/MATLAB.png" alt="Programming in MATLAB" class="thumbnail-image">
-                                    <h4>Programming in MATLAB</h4>
-                                </div>
-                            </div>
-                            <div class="certificate-content">
-                                <img src="assets/certificates/MATLAB.png" alt="Programming in MATLAB" class="certificate-image">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="achievement-item">
-                        <div class="certificate-dropdown">
-                            <div class="certificate-header">
-                                <div class="certificate-thumbnail">
-                                    <img src="assets/certificates/PowerSystem_2020.png" alt="Power System Certificate" class="thumbnail-image">
-                                    <h4>Power System Certificate</h4>
-                                </div>
-                            </div>
-                            <div class="certificate-content">
-                                <img src="assets/certificates/PowerSystem_2020.png" alt="Power System Certificate" class="certificate-image">
-                            </div>
-                        </div>
+                    <ul class="exp-description">
+                        <li>Architecting end-to-end agentic systems using LangGraph for multi-step reasoning</li>
+                        <li>Building RAG pipelines with Qdrant vector database for semantic retrieval</li>
+                        <li>Developing production APIs with FastAPI and Chainlit interfaces</li>
+                        <li>Containerizing ML workflows with Docker and PostgreSQL backends</li>
+                    </ul>
+                    <div class="exp-tech">
+                        <span>LangGraph</span>
+                        <span>FastAPI</span>
+                        <span>Chainlit</span>
+                        <span>Qdrant</span>
+                        <span>Docker</span>
+                        <span>PostgreSQL</span>
+                        <span>RAG</span>
                     </div>
                 </div>
 
-                <!-- Volunteering -->
-                <div class="achievement-category">
-                    <h3>Volunteering</h3>
-                    <div class="achievement-item">
-                        <h4>Organizing Committee Member</h4>
-                        <p>EE Summer School 2023</p>
-                        <p class="achievement-date">July 2023 - July 2023</p>
-                        <a href="#" class="certificate-btn" onclick="openPdfViewer('assets/certificates/EESS2023.pdf'); return false;">
-                            <i class="fas fa-file-pdf"></i> View Certificate
-                        </a>
+                <div class="timeline-item">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">Research Engineer</h3>
+                            <div class="exp-company">Avataar.ai</div>
+                        </div>
+                        <div class="exp-date">
+                            Jul 2024 - Apr 2025
+                            <div class="exp-location">Bangalore, India</div>
+                        </div>
+                    </div>
+                    <ul class="exp-description">
+                        <li>Built end-to-end lifestyle image generation pipeline using Flux Model and ControlNets</li>
+                        <li>Modified diffusion sampling for improved object reconstruction with intrinsic decomposition
+                        </li>
+                        <li>Developed classification systems using CLIP, BLIP2, and Qwen2.5 for low-data scenarios</li>
+                        <li>Enhanced segmentation accuracy with BiRefNet and SAM + YOLO-world integration</li>
+                    </ul>
+                    <div class="exp-tech">
+                        <span>Flux</span>
+                        <span>ControlNet</span>
+                        <span>Diffusion</span>
+                        <span>CLIP</span>
+                        <span>SAM</span>
+                        <span>YOLO</span>
                     </div>
                 </div>
-            </section>
 
-            <section id="contact">
-                <h2>Contact</h2>
-                <div class="contact-details">
-                    <div class="email-info">
-                        <p><i class="fas fa-envelope"></i> sahil15rohit88@gmail.com</p>
-                        <p><i class="fas fa-briefcase"></i> rohit.kumar@avataar.ai</p>
+                <div class="timeline-item">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">Teaching Assistant</h3>
+                            <div class="exp-company">IISc Bangalore - Signal Processing</div>
+                        </div>
+                        <div class="exp-date">
+                            Jan 2024 - Apr 2024
+                            <div class="exp-location">Bangalore, India</div>
+                        </div>
                     </div>
-                    <div class="social-links-contact">
-                        <p>Connect with me:</p>
-                        <div class="social-icons">
-                            <div class="social-links">
-                                <a href="https://www.instagram.com/rohit.ronie/" target="_blank" title="Instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="https://www.facebook.com/smiling.learner/" target="_blank" title="Facebook">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                                <a href="https://x.com/rohitronie" target="_blank" title="X (formerly Twitter)">
-                                    <i class="fa-brands fa-x-twitter"></i>
+                    <ul class="exp-description">
+                        <li>Integrated continual learning frameworks (L2P, DualPrompt) to mitigate catastrophic
+                            forgetting</li>
+                        <li>Built self-supervised models using MoCo and SimCLR for visual representation learning</li>
+                        <li>Developed adaptive prompt-based learning with dynamic token expansion</li>
+                    </ul>
+                    <div class="exp-tech">
+                        <span>L2P</span>
+                        <span>DualPrompt</span>
+                        <span>MoCo</span>
+                        <span>SimCLR</span>
+                        <span>PyTorch</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-title">Teaching Assistant</h3>
+                            <div class="exp-company">IISc Bangalore - Digital Image Processing</div>
+                        </div>
+                        <div class="exp-date">
+                            Aug 2023 - Dec 2023
+                            <div class="exp-location">Bangalore, India</div>
+                        </div>
+                    </div>
+                    <ul class="exp-description">
+                        <li>Developed DFT-based frequency domain filtering for image denoising and enhancement</li>
+                        <li>Implemented SIFT and Normalized Cut for feature detection and segmentation</li>
+                        <li>Optimized deep learning models using EfficientNet-B0 with custom classifiers</li>
+                    </ul>
+                    <div class="exp-tech">
+                        <span>DFT</span>
+                        <span>SIFT</span>
+                        <span>EfficientNet</span>
+                        <span>OpenCV</span>
+                        <span>NumPy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <span class="section-title">Projects</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-preview">
+                        <!-- TODO: Add project preview image -->
+                        [ Preview Image ]
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Virtual Try-On</h3>
+                            <div class="project-links">
+                                <a href="assets/report/vton.pdf" target="_blank" title="Report">
+                                    <i class="fas fa-file-pdf"></i>
                                 </a>
                             </div>
                         </div>
+                        <p class="project-description">
+                            Deep learning Virtual Try-On pipeline with 3-stage framework combining
+                            Florence2 and IDM-VTON models for automated garment transfer.
+                        </p>
+                        <div class="project-tech">
+                            <span>Florence2</span>
+                            <span>IDM-VTON</span>
+                            <span>FLUX</span>
+                            <span>Diffusion</span>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
+
+                <div class="project-card">
+                    <div class="project-preview">
+                        <!-- TODO: Add project preview image -->
+                        [ Preview Image ]
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Cricket-Shot Predictor</h3>
+                            <div class="project-links">
+                                <a href="https://github.com/rokmr/Computer-Vision/tree/main/Video-Processing/VideoClassification"
+                                    target="_blank" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://huggingface.co/spaces/rokmr/cricketshot" target="_blank" title="Demo">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            LSTM-based video classification using CLIP embeddings. Fine-tuned VideoMAE
+                            achieving 66% accuracy on cricket shots.
+                        </p>
+                        <div class="project-tech">
+                            <span>LSTM</span>
+                            <span>CLIP</span>
+                            <span>VideoMAE</span>
+                            <span>HuggingFace</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section id="achievements">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <span class="section-title">Achievements</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">AIR 221</div>
+                    <div class="achievement-title">GATE EE 2022</div>
+                    <div class="achievement-subtitle">Score: 803 | Marks: 73/100</div>
+                    <a href="assets/certificates/GATE_EE_2022.pdf" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">AIR 227</div>
+                    <div class="achievement-title">GATE IN 2022</div>
+                    <div class="achievement-subtitle">Score: 670 | Marks: 67.33/100</div>
+                    <a href="assets/certificates/GATE_IN_2022.pdf" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">AIR 1683</div>
+                    <div class="achievement-title">GATE EE 2021</div>
+                    <div class="achievement-subtitle">Score: 634 | Marks: 55.33/100</div>
+                    <a href="assets/certificates/GATE_EE_2021.pdf" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="6" />
+                            <path d="M9 18L12 22L15 18" />
+                            <path d="M9 14V18" />
+                            <path d="M15 14V18" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">Rank 1</div>
+                    <div class="achievement-title">BCECE LE 2018</div>
+                    <div class="achievement-subtitle">State Lateral Entry Exam</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <span class="section-title">Certifications</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2" />
+                            <path d="M9 12L11 14L15 10" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">Agents Course</div>
+                    <div class="achievement-title">HuggingFace</div>
+                    <div class="achievement-subtitle">AI Agents Development</div>
+                    <a href="assets/certificates/HF_Agents_Course.jpeg" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2" />
+                            <path d="M9 12L11 14L15 10" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">GenAI Hackathon</div>
+                    <div class="achievement-title">Participant</div>
+                    <div class="achievement-subtitle">Generative AI</div>
+                    <a href="assets/certificates/GenAI-Hackathon-2023.jpg" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2" />
+                            <path d="M9 12L11 14L15 10" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">miniCON AI Infra</div>
+                    <div class="achievement-title">Marktechpost</div>
+                    <div class="achievement-subtitle">AI Infrastructure</div>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2" />
+                            <path d="M9 12L11 14L15 10" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">OpenCV Bootcamp</div>
+                    <div class="achievement-title">OpenCV University</div>
+                    <div class="achievement-subtitle">Computer Vision</div>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2" />
+                            <path d="M9 12L11 14L15 10" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">MATLAB Programming</div>
+                    <div class="achievement-title">MathWorks</div>
+                    <div class="achievement-subtitle">Technical Computing</div>
+                    <a href="assets/certificates/MATLAB.png" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2" />
+                            <path d="M9 12L11 14L15 10" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">Power System</div>
+                    <div class="achievement-title">NPTEL</div>
+                    <div class="achievement-subtitle">2020</div>
+                    <a href="assets/certificates/PowerSystem_2020.png" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section id="publications">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <span class="section-title">Publications</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="pub-title">TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental
+                    Learning</h3>
+                <p class="pub-authors">Jayateja Kalla*, <strong>Rohit Kumar</strong>*, Soma Biswas</p>
+                <p class="pub-venue">WACV 2025</p>
+                <div class="pub-links">
+                    <a href="https://openaccess.thecvf.com/content/WACV2025/html/Kalla_TACLE_Task_and_Class-aware_Exemplar-free_Semi-supervised_Class_Incremental_Learning_WACV_2025_paper.html"
+                        target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <path d="M14 2v6h6" />
+                        </svg>
+                        Paper
+                    </a>
+                    <a href="https://arxiv.org/abs/2407.03407" target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <path d="M14 2v6h6" />
+                        </svg>
+                        arXiv
+                    </a>
+                    <a href="https://github.com/rokmr/TACLE" target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                        Code
+                    </a>
+                    <a href="https://openaccess.thecvf.com/content/WACV2025/supplemental/Kalla_TACLE_Task_and_WACV_2025_supplemental.pdf"
+                        target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <path d="M14 2v6h6" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                        </svg>
+                        Supplementary
+                    </a>
+                    <a href="tacle/assets/tacle.pdf" target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M8 7h8M8 12h8M8 17h4" />
+                        </svg>
+                        Poster
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=7N8THZgAAAAJ&hl=en" target="_blank">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </svg>
+                        Scholar
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section id="education">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <span class="section-title">Education</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3 class="edu-degree">M.Tech in Artificial Intelligence</h3>
+                    <p class="edu-school">Indian Institute of Science (IISc), Bangalore</p>
+                    <p class="edu-details">2022 - 2024 · CGPA: 8.0/10.0</p>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="edu-degree">B.Tech in Electrical Engineering</h3>
+                    <p class="edu-school">Bhagalpur College of Engineering, Bhagalpur</p>
+                    <p class="edu-details">2018 - 2021 · CGPA: 8.75/10.0</p>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="edu-degree">Diploma in Electrical Engineering</h3>
+                    <p class="edu-school">Government Polytechnic Muzzafarpur, Muzaffarpur</p>
+                    <p class="edu-details">2015 - 2018 · 77.73%</p>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="edu-degree">Secondary School (10th)</h3>
+                    <p class="edu-school">Bihar School Examination Board · Utkramit M S Parmanandpur</p>
+                    <p class="edu-details">2015 · 60%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <span class="section-title">Skills</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Research Interests</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Image Processing & Computer Vision</span>
+                        <span class="skill-item">Large Language Models (LLMs)</span>
+                        <span class="skill-item">Natural Language Processing</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>AI/ML</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Computer Vision</span>
+                        <span class="skill-item">Diffusion Models</span>
+                        <span class="skill-item">LLMs</span>
+                        <span class="skill-item">NLP</span>
+                        <span class="skill-item">RAG</span>
+                        <span class="skill-item">Agentic AI</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">PyTorch</span>
+                        <span class="skill-item">TensorFlow</span>
+                        <span class="skill-item">LangGraph</span>
+                        <span class="skill-item">LangChain</span>
+                        <span class="skill-item">HuggingFace</span>
+                        <span class="skill-item">FastAPI</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">Azure</span>
+                        <span class="skill-item">SLURM</span>
+                        <span class="skill-item">Postman</span>
+                        <span class="skill-item">Conda</span>
+                        <span class="skill-item">UV</span>
+                        <span class="skill-item">GitHub</span>
+                        <span class="skill-item">ComfyUI</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">Qdrant</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">AsyncIO</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">MATLAB</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Relevant Coursework</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Digital Image Processing</span>
+                        <span class="skill-item">Advanced Image Processing</span>
+                        <span class="skill-item">Computer Vision</span>
+                        <span class="skill-item">Introduction to NLP</span>
+                        <span class="skill-item">LLMs for Practical NLP</span>
+                        <span class="skill-item">Deep Learning for NLP</span>
+                        <span class="skill-item">Digital Video Perception</span>
+                        <span class="skill-item">Linear Algebra</span>
+                        <span class="skill-item">Pattern Recognition</span>
+                        <span class="skill-item">Game Theory</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Volunteering -->
+        <section id="volunteering">
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <span class="section-title">Volunteering</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div class="achievement-value">Organizing Committee</div>
+                    <div class="achievement-title">EE Summer School 2023</div>
+                    <div class="achievement-subtitle">IISc Bangalore · July 2023</div>
+                    <a href="assets/certificates/EESS2023.pdf" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Certificate
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <span class="section-title">Contact</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Let's Build Something Together</h2>
+                    <p>
+                        Looking for collaboration on AI/ML projects, research opportunities,
+                        or just want to chat about generative models and agentic systems.
+                    </p>
+                    <a href="mailto:sahil15rohit88@gmail.com" class="contact-email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2" />
+                            <path d="M22 7l-10 6L2 7" />
+                        </svg>
+                        sahil15rohit88@gmail.com
+                    </a>
+                </div>
+
+                <div class="social-grid">
+                    <a href="https://linkedin.com/in/rohitronie" target="_blank" class="social-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/rokmr" target="_blank" class="social-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://x.com/rokmr" target="_blank" class="social-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768" />
+                        </svg>
+                        <span>X</span>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=7N8THZgAAAAJ&hl=en" target="_blank"
+                        class="social-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </svg>
+                        <span>Google Scholar</span>
+                    </a>
+                    <a href="https://huggingface.co/rokmr" target="_blank" class="social-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                            <line x1="9" y1="9" x2="9.01" y2="9" />
+                            <line x1="15" y1="9" x2="15.01" y2="9" />
+                        </svg>
+                        <span>HuggingFace</span>
+                    </a>
+                    <a href="https://rokmr.github.io" target="_blank" class="social-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        <span>Website</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Rohit Kumar · Built with curiosity</p>
+        </footer>
     </div>
 
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.sidebar-nav a');
-            const sections = document.querySelectorAll('section');
-            
-            // Function to switch sections with animation
-            function switchSection(targetId) {
-                // Remove active class from all sections first
-                sections.forEach(section => {
-                    if (section.id !== targetId.substring(1)) {
-                        section.classList.remove('active');
-                    }
-                });
-                
-                // Add active class to target section
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                }
-            }
-
-            // Function to update active navigation link
-            function updateActiveLink(clickedLink) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                clickedLink.classList.add('active');
-            }
-
-            // Set initial active section (Home)
-            if (!window.location.hash) {
-                const homeSection = document.querySelector('#home');
-                if (homeSection) {
-                    homeSection.classList.add('active');
-                }
-                const homeLink = document.querySelector('a[href="#home"]');
-                if (homeLink) {
-                    homeLink.classList.add('active');
-                }
-            } else {
-                // If there's a hash in the URL, activate that section
-                const initialSection = document.querySelector(window.location.hash);
-                if (initialSection) {
-                    initialSection.classList.add('active');
-                }
-                const initialLink = document.querySelector(`a[href="${window.location.hash}"]`);
-                if (initialLink) {
-                    initialLink.classList.add('active');
-                }
-            }
-
-            // Add click handlers to navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    
-                    // Update URL hash without scrolling
-                    history.pushState(null, '', targetId);
-                    
-                    // Update active states
-                    updateActiveLink(link);
-                    switchSection(targetId);
-                });
-            });
-        });
-
-        function initializeCertificateDropdowns() {
-            const dropdowns = document.querySelectorAll('.certificate-dropdown');
-            
-            dropdowns.forEach(dropdown => {
-                const header = dropdown.querySelector('.certificate-header');
-                
-                header.addEventListener('click', () => {
-                    // Toggle current dropdown
-                    dropdown.classList.toggle('active');
-                });
-            });
-        }
-
-        // Initialize dropdowns when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initializeCertificateDropdowns);
-    </script>
-
-    <!-- Add this modal container at the end of your body tag -->
-    <div id="pdf-modal" class="pdf-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close-btn" onclick="closePdfViewer()">
-                    <i class="fas fa-times"></i> Close
-                </button>
-            </div>
-            <iframe id="pdf-iframe" src="" width="100%" height="100%" frameborder="0"></iframe>
+    <!-- Minimal HUD -->
+    <div class="control-panel">
+        <div class="control-group">
+            <div class="control-label">STEP</div>
+            <div class="control-value" id="step-count">0/50</div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="timestep" id="time-display">t=0.00</div>
+        <div class="control-group">
+            <div class="control-label">NOISE</div>
+            <div class="control-value" id="noise-level">1.00</div>
         </div>
     </div>
 
-    <!-- Add this before closing body tag -->
+    <!-- Terminal -->
+    <div class="terminal-init" id="terminal-init">
+        <span class="terminal-text" id="terminal-text"></span>
+        <span class="terminal-cursor">▋</span>
+    </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
