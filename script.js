@@ -190,8 +190,8 @@ setInterval(() => {
     if (now < pauseUntil) return;
 
     if (idleTime > 3000) {  // 3 seconds of no cursor movement
-        // One denoising step (slow, natural pace)
-        targetT += 0.02;  // 2% per second = ~50 steps to complete
+        // One denoising step (doubled speed)
+        targetT += 0.04;  // 4% per second = ~25 steps to complete
 
         // When fully denoised, pause for 5 seconds then reset
         if (targetT >= 1) {
@@ -239,7 +239,7 @@ function animate() {
 
     // Update Flow Matching HUD
     const sigma = (1 - t).toFixed(2); // σ = 1-t (noise level as decimal)
-    const steps = Math.floor(t * 50);
+    const steps = Math.floor(t * 49) + 1; // Steps from 1 to 50
     document.getElementById('time-display').innerText = `t = ${t.toFixed(2)} `;
     document.getElementById('step-count').innerText = `${steps}/50`;
     document.getElementById('noise-level').innerText = sigma;
