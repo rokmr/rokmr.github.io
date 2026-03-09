@@ -1,0 +1,84 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#accent)"/>
+
+  <!-- Left content area -->
+  <!-- Eyebrow -->
+  <text x="80" y="180" font-family="monospace" font-size="16" fill="#4ade80" letter-spacing="3">AI ENGINEER @ ARMADA AI</text>
+
+  <!-- Name -->
+  <text x="80" y="260" font-family="sans-serif" font-size="72" font-weight="700" fill="#e8e8e8">Rohit Kumar</text>
+
+  <!-- Tagline -->
+  <text x="80" y="320" font-family="sans-serif" font-size="26" fill="#999999">Computer Vision · LLMs · Agentic AI · Diffusion Models</text>
+
+  <!-- Divider -->
+  <rect x="80" y="355" width="120" height="2" fill="#4ade80"/>
+
+  <!-- Stats row -->
+  <text x="80" y="410" font-family="monospace" font-size="32" font-weight="600" fill="#ffffff">221</text>
+  <text x="80" y="435" font-family="monospace" font-size="12" fill="#666666" letter-spacing="1">GATE AIR</text>
+
+  <text x="230" y="410" font-family="monospace" font-size="32" font-weight="600" fill="#ffffff">IISc</text>
+  <text x="230" y="435" font-family="monospace" font-size="12" fill="#666666" letter-spacing="1">M.TECH AI</text>
+
+  <text x="380" y="410" font-family="monospace" font-size="32" font-weight="600" fill="#ffffff">WACV</text>
+  <text x="380" y="435" font-family="monospace" font-size="12" fill="#666666" letter-spacing="1">PUBLISHED</text>
+
+  <!-- CTA -->
+  <rect x="80" y="505" width="220" height="40" rx="3" fill="none" stroke="#4ade80" stroke-width="1" opacity="0.6"/>
+  <text x="120" y="531" font-family="monospace" font-size="16" font-weight="500" fill="#4ade80" opacity="0.9">rohit.vision  &#8594;</text>
+
+  <!-- Right side: decorative Lorenz-like curves -->
+  <g transform="translate(900, 315)" opacity="0.15">
+    <!-- Simplified butterfly attractor shape -->
+    <path d="M0,-80 C40,-100 80,-60 60,-20 C40,20 80,80 40,100 C0,80 -40,100 -60,60 C-80,20 -40,-20 -60,-60 C-80,-100 -40,-80 0,-80" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+    <path d="M0,-60 C30,-75 60,-45 45,-15 C30,15 60,60 30,75 C0,60 -30,75 -45,45 C-60,15 -30,-15 -45,-45 C-60,-75 -30,-60 0,-60" fill="none" stroke="#4ade80" stroke-width="1"/>
+    <path d="M0,-40 C20,-50 40,-30 30,-10 C20,10 40,40 20,50 C0,40 -20,50 -30,30 C-40,10 -20,-10 -30,-30 C-40,-50 -20,-40 0,-40" fill="none" stroke="#4ade80" stroke-width="0.7"/>
+  </g>
+
+  <!-- Scattered dots (particle hint) -->
+  <g opacity="0.3">
+    <circle cx="750" cy="200" r="1.5" fill="#4ade80"/>
+    <circle cx="780" cy="180" r="1" fill="#4ade80"/>
+    <circle cx="820" cy="210" r="1.5" fill="#4ade80"/>
+    <circle cx="860" cy="190" r="1" fill="#4ade80"/>
+    <circle cx="900" cy="220" r="1.5" fill="#4ade80"/>
+    <circle cx="940" cy="200" r="1" fill="#4ade80"/>
+    <circle cx="980" cy="230" r="1.5" fill="#4ade80"/>
+    <circle cx="1020" cy="210" r="1" fill="#4ade80"/>
+    <circle cx="1060" cy="240" r="1.5" fill="#4ade80"/>
+    <circle cx="1100" cy="220" r="1" fill="#4ade80"/>
+    <circle cx="770" cy="400" r="1" fill="#4ade80"/>
+    <circle cx="810" cy="420" r="1.5" fill="#4ade80"/>
+    <circle cx="850" cy="390" r="1" fill="#4ade80"/>
+    <circle cx="890" cy="410" r="1.5" fill="#4ade80"/>
+    <circle cx="930" cy="430" r="1" fill="#4ade80"/>
+    <circle cx="970" cy="400" r="1.5" fill="#4ade80"/>
+    <circle cx="1010" cy="420" r="1" fill="#4ade80"/>
+    <circle cx="1050" cy="440" r="1.5" fill="#4ade80"/>
+    <circle cx="1090" cy="410" r="1" fill="#4ade80"/>
+  </g>
+
+  <!-- Bottom border -->
+  <rect x="0" y="627" width="1200" height="3" fill="url(#accent)"/>
+</svg>

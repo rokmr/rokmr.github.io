@@ -1,6 +1,6 @@
 // ============================================
-
-// Canvas Animation - Chess Pattern Particle System
+// Canvas Animation - Lorenz Attractor Particle System
+// ============================================
 const canvas = document.getElementById('flow-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -51,50 +51,6 @@ function generateButterfly() {
 
     return points;
 }
-
-// Chess pattern (commented out)
-/*
-function generateChessPattern() {
-    const points = [];
-    const gridSize = 8;
-    const cellSize = 1.6 / gridSize;
-    const startX = -0.8;
-    const startY = -0.8;
-
-    for (let row = 0; row < gridSize; row++) {
-        for (let col = 0; col < gridSize; col++) {
-            const isWhite = (row + col) % 2 === 0;
-            const brightness = isWhite ? 0.9 : 0.1;
-            const cellCenterX = startX + col * cellSize + cellSize / 2;
-            const cellCenterY = startY + row * cellSize + cellSize / 2;
-            const count = isWhite ? 280 : 200;
-
-            for (let i = 0; i < count; i++) {
-                points.push({
-                    x: cellCenterX + (Math.random() - 0.5) * cellSize * 0.88,
-                    y: cellCenterY + (Math.random() - 0.5) * cellSize * 0.88,
-                    b: brightness
-                });
-            }
-        }
-    }
-
-    for (let i = 0; i < 180; i++) {
-        const t = i / 180;
-        const side = Math.floor(t * 4);
-        const pos = (t * 4) % 1;
-        let x, y;
-        switch (side) {
-            case 0: x = -0.82 + pos * 1.64; y = -0.82; break;
-            case 1: x = 0.82; y = -0.82 + pos * 1.64; break;
-            case 2: x = 0.82 - pos * 1.64; y = 0.82; break;
-            case 3: x = -0.82; y = 0.82 - pos * 1.64; break;
-        }
-        points.push({ x, y, b: 0.5 });
-    }
-    return points;
-}
-*/
 
 const particleCount = 16000;
 const targetPoints = generateButterfly();
@@ -393,9 +349,9 @@ function animate() {
     }
 
     // Update Flow Matching HUD (cached DOM refs outside loop)
-    hudTime.innerText = `t = ${t.toFixed(2)} `;
-    hudStep.innerText = `${Math.round(t * 49) + 1}/50`;
-    hudNoise.innerText = (1 - t).toFixed(2);
+    hudTime.textContent = `t = ${t.toFixed(2)} `;
+    hudStep.textContent = `${Math.round(t * 49) + 1}/50`;
+    hudNoise.textContent = (1 - t).toFixed(2);
     hudProgress.style.width = `${t * 100}%`;
 
     if (hudTerminal) hudTerminal.style.opacity = opacity;
@@ -463,3 +419,68 @@ document.addEventListener('keydown', (e) => {
         closeMobileMenu();
     }
 });
+
+// ============================================
+// Section Reveal on Scroll (IntersectionObserver)
+// ============================================
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!prefersReducedMotion) {
+    document.querySelectorAll('main section').forEach(el => {
+        el.classList.add('section-reveal');
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.section-reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+}
+
+// ============================================
+// Footer Year (replaces document.write)
+// ============================================
+const footerYear = document.getElementById('footer-year');
+if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+// ============================================
+// Back to Top Button
+// ============================================
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > window.innerHeight) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ============================================
+// Auto-fetch Citation Count (Semantic Scholar API)
+// ============================================
+fetch('https://api.semanticscholar.org/graph/v1/paper/arXiv:2407.08041?fields=citationCount')
+    .then(r => r.json())
+    .then(data => {
+        const count = data.citationCount;
+        const link = document.getElementById('tacle-cite-link');
+        if (link) {
+            const fallback = parseInt(link.dataset.fallback, 10) || 0;
+            if (count > fallback) {
+                link.textContent = `Cited by ${count}`;
+            }
+        }
+    })
+    .catch(() => {});  // silent fail — keeps fallback count

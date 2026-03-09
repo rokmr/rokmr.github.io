@@ -1,0 +1,110 @@
+<svg width="1024" height="576" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+    </pattern>
+    <clipPath id="imgClip">
+      <rect x="0" y="0" width="180" height="180" rx="4"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1024" height="576" fill="url(#bg)"/>
+  <rect width="1024" height="576" fill="url(#grid)"/>
+
+  <!-- Title area top-left -->
+  <text x="100" y="140" font-family="monospace" font-size="11" fill="#444" letter-spacing="2">DIFFUSION PIPELINE</text>
+  <text x="100" y="175" font-family="sans-serif" font-size="28" fill="#e8e8e8" font-weight="600">Lifestyle Image Generation</text>
+  <rect x="100" y="190" width="60" height="1.5" fill="#4ade80" opacity="0.5"/>
+
+  <!-- Pipeline stages: Input → Segment → Condition → Denoise → Output -->
+
+  <!-- Stage 1: Input Product -->
+  <rect x="80" y="250" width="140" height="100" rx="4" fill="none" stroke="#333" stroke-width="1"/>
+  <!-- Product icon -->
+  <rect x="115" y="270" width="70" height="50" rx="2" fill="none" stroke="#444" stroke-width="0.8"/>
+  <line x1="125" y1="285" x2="175" y2="285" stroke="#333" stroke-width="0.5"/>
+  <line x1="125" y1="295" x2="155" y2="295" stroke="#333" stroke-width="0.5"/>
+  <line x1="125" y1="305" x2="165" y2="305" stroke="#333" stroke-width="0.5"/>
+  <text x="150" y="370" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">Input</text>
+
+  <!-- Arrow -->
+  <line x1="220" y1="300" x2="270" y2="300" stroke="#333" stroke-width="1"/>
+  <polygon points="270,296 280,300 270,304" fill="#333"/>
+
+  <!-- Stage 2: Segmentation -->
+  <rect x="280" y="250" width="140" height="100" rx="4" fill="none" stroke="#4ade80" stroke-width="1" opacity="0.6"/>
+  <!-- SAM mask icon -->
+  <circle cx="350" cy="285" r="20" fill="none" stroke="#4ade80" stroke-width="0.8" opacity="0.4"/>
+  <path d="M340,290 Q350,270 360,290 Q350,310 340,290" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="0.6"/>
+  <text x="350" y="322" font-family="monospace" font-size="9" fill="#4ade80" text-anchor="middle" opacity="0.7">SAM + YOLO</text>
+  <text x="350" y="370" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">Segment</text>
+
+  <!-- Arrow -->
+  <line x1="420" y1="300" x2="470" y2="300" stroke="#333" stroke-width="1"/>
+  <polygon points="470,296 480,300 470,304" fill="#333"/>
+
+  <!-- Stage 3: ControlNet Conditioning -->
+  <rect x="480" y="250" width="140" height="100" rx="4" fill="rgba(74,222,128,0.05)" stroke="#4ade80" stroke-width="1.2"/>
+  <!-- Conditioning grid -->
+  <g transform="translate(520, 270)">
+    <rect x="0" y="0" width="60" height="40" rx="2" fill="none" stroke="#4ade80" stroke-width="0.6" opacity="0.5"/>
+    <line x1="0" y1="10" x2="60" y2="10" stroke="#4ade80" stroke-width="0.3" opacity="0.3"/>
+    <line x1="0" y1="20" x2="60" y2="20" stroke="#4ade80" stroke-width="0.3" opacity="0.3"/>
+    <line x1="0" y1="30" x2="60" y2="30" stroke="#4ade80" stroke-width="0.3" opacity="0.3"/>
+    <line x1="15" y1="0" x2="15" y2="40" stroke="#4ade80" stroke-width="0.3" opacity="0.3"/>
+    <line x1="30" y1="0" x2="30" y2="40" stroke="#4ade80" stroke-width="0.3" opacity="0.3"/>
+    <line x1="45" y1="0" x2="45" y2="40" stroke="#4ade80" stroke-width="0.3" opacity="0.3"/>
+  </g>
+  <text x="550" y="322" font-family="monospace" font-size="9" fill="#4ade80" text-anchor="middle" opacity="0.8">ControlNet</text>
+  <text x="550" y="370" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">Condition</text>
+
+  <!-- Arrow -->
+  <line x1="620" y1="300" x2="670" y2="300" stroke="#333" stroke-width="1"/>
+  <polygon points="670,296 680,300 670,304" fill="#333"/>
+
+  <!-- Stage 4: Flux Denoise -->
+  <rect x="680" y="250" width="140" height="100" rx="4" fill="none" stroke="#60a5fa" stroke-width="1.2" opacity="0.8"/>
+  <!-- Noise → clean visualization -->
+  <g transform="translate(710, 270)">
+    <!-- Noisy dots on left -->
+    <circle cx="10" cy="10" r="1.5" fill="#60a5fa" opacity="0.3"/>
+    <circle cx="25" cy="5" r="1" fill="#60a5fa" opacity="0.4"/>
+    <circle cx="5" cy="25" r="1" fill="#60a5fa" opacity="0.2"/>
+    <circle cx="20" cy="20" r="1.5" fill="#60a5fa" opacity="0.35"/>
+    <circle cx="15" cy="30" r="1" fill="#60a5fa" opacity="0.25"/>
+    <circle cx="30" cy="15" r="1" fill="#60a5fa" opacity="0.3"/>
+    <!-- Arrow -->
+    <line x1="35" y1="20" x2="50" y2="20" stroke="#444" stroke-width="0.6"/>
+    <polygon points="50,18 54,20 50,22" fill="#444"/>
+    <!-- Clean shape on right -->
+    <rect x="58" y="8" width="24" height="24" rx="2" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" stroke-width="0.8"/>
+  </g>
+  <text x="750" y="322" font-family="monospace" font-size="9" fill="#60a5fa" text-anchor="middle" opacity="0.8">Flux Model</text>
+  <text x="750" y="370" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">Denoise</text>
+
+  <!-- Arrow -->
+  <line x1="820" y1="300" x2="870" y2="300" stroke="#333" stroke-width="1"/>
+  <polygon points="870,296 880,300 870,304" fill="#333"/>
+
+  <!-- Stage 5: Output -->
+  <rect x="880" y="250" width="100" height="100" rx="4" fill="none" stroke="url(#accent)" stroke-width="1.2"/>
+  <!-- Stylized photo icon -->
+  <rect x="900" y="268" width="60" height="45" rx="2" fill="rgba(74,222,128,0.08)"/>
+  <circle cx="918" cy="281" r="5" fill="none" stroke="#4ade80" stroke-width="0.6" opacity="0.6"/>
+  <path d="M900,305 L920,285 L940,295 L950,288 L960,305" fill="none" stroke="#4ade80" stroke-width="0.8" opacity="0.5"/>
+  <text x="930" y="370" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">Output</text>
+
+  <!-- Intrinsic decomposition annotation -->
+  <text x="550" y="430" font-family="monospace" font-size="9" fill="#333" text-anchor="middle" letter-spacing="1">INTRINSIC DECOMPOSITION  ·  MODIFIED SAMPLING  ·  OBJECT RECONSTRUCTION</text>
+
+  <!-- Tech tags bottom -->
+  <text x="100" y="510" font-family="monospace" font-size="10" fill="#333" letter-spacing="1">Flux · ControlNet · Diffusion · SAM · CLIP · BiRefNet · YOLO</text>
+</svg>

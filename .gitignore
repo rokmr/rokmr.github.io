@@ -1,50 +1,28 @@
-# IDE and Editor files
+# OS files
+.DS_Store
+
+# IDE / Editor
 .vscode/
 .idea/
 *.swp
 *.swo
-.DS_Store
 
 # Dependencies
 node_modules/
-package-lock.json
-yarn.lock
 
 # Build output
 dist/
 build/
-out/
 
-# Cache and temporary files
-.cache/
-.tmp/
-*.log
+# Env / secrets
 .env
 
-# Compiled CSS
+# Source maps
 *.css.map
-*.min.css
-
-# Compiled JavaScript
 *.js.map
-*.min.js
 
-# Media and assets
+# Video (too large for repo)
 *.mp4
 *.mov
 *.avi
 *.wmv
-*.jpg
-# *.jpeg
-# .png
-*.gif
-*.ico
-*.svg
-.pdf
-
-# Backup files
-*.bak
-*~
-*.backup
-DS_Store
-*.DS_Store
