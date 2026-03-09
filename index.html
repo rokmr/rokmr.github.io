@@ -24,20 +24,20 @@
         content="AI Engineer specializing in Computer Vision, LLMs, Agentic AI & Diffusion Models. IISc Bangalore M.Tech, GATE AIR 221. Building production ML systems.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rohit.vision/">
-    <meta property="og:image" content="https://avatars.githubusercontent.com/u/104412006?v=4">
-    <meta property="og:image:width" content="400">
-    <meta property="og:image:height" content="400">
+    <meta property="og:image" content="https://rohit.vision/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Rohit Kumar Portfolio">
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@rohitronie">
     <meta name="twitter:creator" content="@rohitronie">
     <meta name="twitter:title" content="Rohit Kumar | AI Engineer">
     <meta name="twitter:description"
         content="AI Engineer specializing in Computer Vision, LLMs, Agentic AI & Diffusion Models. IISc Bangalore M.Tech, GATE AIR 221.">
-    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/104412006?v=4">
+    <meta name="twitter:image" content="https://rohit.vision/assets/og-image.png">
 
     <!-- Structured Data for Rich Snippets -->
     <script type="application/ld+json">
@@ -216,12 +216,20 @@
                 <a href="#education">Education</a>
                 <a href="#skills">Skills</a>
                 <a href="#contact">Contact</a>
-                <a href="/blogs/" class="nav-blog">Blog</a>
             </nav>
+            <button class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="header-cta">
-                <a href="#contact" class="status-badge status-unavailable">
-                    <span class="status-dot"></span>
-                    Employed
+                <a href="/blogs/" class="cv-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                    Blog
                 </a>
                 <a href="mailto:contact@rohit.vision?subject=Collaboration" class="collab-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -235,6 +243,38 @@
                 </a>
             </div>
         </header>
+
+        <!-- Mobile Navigation Drawer -->
+        <div class="mobile-nav-overlay" aria-hidden="true"></div>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <div class="mobile-nav-inner">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#publications">Publications</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+                <div class="mobile-nav-cta">
+                    <a href="/blogs/" class="mobile-blog-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                        Blog
+                    </a>
+                    <a href="mailto:contact@rohit.vision?subject=Collaboration" class="mobile-collab-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        Collaborate
+                    </a>
+                </div>
+            </div>
+        </nav>
 
         <!-- Hero -->
         <section class="hero" id="home">
@@ -467,7 +507,7 @@
                         <div class="project-header">
                             <h3 class="project-title">Virtual Try-On</h3>
                             <div class="project-links">
-                                <a href="assets/report/vton.pdf" target="_blank" title="Report">
+                                <a href="assets/report/vton.pdf" target="_blank" rel="noopener noreferrer" title="Report">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
                             </div>
@@ -494,10 +534,10 @@
                             <h3 class="project-title">Cricket-Shot Predictor</h3>
                             <div class="project-links">
                                 <a href="https://github.com/rokmr/Computer-Vision/tree/main/Video-Processing/VideoClassification"
-                                    target="_blank" title="GitHub">
+                                    target="_blank" rel="noopener noreferrer" title="GitHub">
                                     <i class="fab fa-github"></i>
                                 </a>
-                                <a href="https://huggingface.co/spaces/rokmr/cricketshot" target="_blank" title="Demo">
+                                <a href="https://huggingface.co/spaces/rokmr/cricketshot" target="_blank" rel="noopener noreferrer" title="Demo">
                                     <i class="fas fa-play"></i>
                                 </a>
                             </div>
@@ -537,7 +577,7 @@
                     <div class="achievement-value">AIR 221</div>
                     <div class="achievement-title">GATE EE 2022</div>
                     <div class="achievement-subtitle">Score: 803 | Marks: 73/100</div>
-                    <a href="assets/certificates/GATE_EE_2022.pdf" target="_blank" class="achievement-link">
+                    <a href="assets/certificates/GATE_EE_2022.pdf" target="_blank" rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -553,7 +593,7 @@
                     <div class="achievement-value">AIR 227</div>
                     <div class="achievement-title">GATE IN 2022</div>
                     <div class="achievement-subtitle">Score: 670 | Marks: 67.33/100</div>
-                    <a href="assets/certificates/GATE_IN_2022.pdf" target="_blank" class="achievement-link">
+                    <a href="assets/certificates/GATE_IN_2022.pdf" target="_blank" rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -569,7 +609,7 @@
                     <div class="achievement-value">AIR 1683</div>
                     <div class="achievement-title">GATE EE 2021</div>
                     <div class="achievement-subtitle">Score: 634 | Marks: 55.33/100</div>
-                    <a href="assets/certificates/GATE_EE_2021.pdf" target="_blank" class="achievement-link">
+                    <a href="assets/certificates/GATE_EE_2021.pdf" target="_blank" rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -611,7 +651,7 @@
                     <div class="achievement-value">Agents Course</div>
                     <div class="achievement-title">HuggingFace</div>
                     <div class="achievement-subtitle">AI Agents Development</div>
-                    <a href="assets/certificates/HF_Agents_Course.jpeg" target="_blank" class="achievement-link">
+                    <a href="assets/certificates/HF_Agents_Course.jpeg" target="_blank" rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -627,7 +667,7 @@
                     <div class="achievement-value">GenAI Hackathon</div>
                     <div class="achievement-title">Participant</div>
                     <div class="achievement-subtitle">Generative AI</div>
-                    <a href="assets/certificates/GenAI-Hackathon-2023.jpg" target="_blank" class="achievement-link">
+                    <a href="assets/certificates/GenAI-Hackathon-2023.jpg" target="_blank" rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -644,7 +684,7 @@
                     <div class="achievement-title">Marktechpost</div>
                     <div class="achievement-subtitle">AI Infrastructure</div>
                     <a href="https://credsverse.com/credentials/6adc8979-a5be-4dd7-ad48-b5549379960a" target="_blank"
-                        class="achievement-link">
+                        rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -661,7 +701,7 @@
                     <div class="achievement-title">OpenCV University</div>
                     <div class="achievement-subtitle">Computer Vision</div>
                     <a href="https://courses.opencv.org/certificates/96b14b2e0a6e4ea390aebb15125cd218" target="_blank"
-                        class="achievement-link">
+                        rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -684,7 +724,7 @@
                 <p class="pub-venue">WACV 2025</p>
                 <div class="pub-links">
                     <a href="https://openaccess.thecvf.com/content/WACV2025/papers/Kalla_TACLE_Task_and_Class-Aware_Exemplar-Free_Semi-Supervised_Class_Incremental_Learning_WACV_2025_paper.pdf"
-                        target="_blank">
+                        target="_blank" rel="noopener noreferrer">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.5">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -692,7 +732,7 @@
                         </svg>
                         Paper
                     </a>
-                    <a href="https://arxiv.org/pdf/2407.08041" target="_blank">
+                    <a href="https://arxiv.org/pdf/2407.08041" target="_blank" rel="noopener noreferrer">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.5">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -700,7 +740,7 @@
                         </svg>
                         arXiv
                     </a>
-                    <a href="https://github.com/rokmr/TACLE" target="_blank">
+                    <a href="https://github.com/rokmr/TACLE" target="_blank" rel="noopener noreferrer">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.5">
                             <path
@@ -708,7 +748,7 @@
                         </svg>
                         Code
                     </a>
-                    <a href="https://rohit.vision/tacle/" target="_blank">
+                    <a href="https://rohit.vision/tacle/" target="_blank" rel="noopener noreferrer">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.5">
                             <circle cx="12" cy="12" r="10" />
@@ -718,7 +758,7 @@
                         </svg>
                         Website
                     </a>
-                    <a href="https://rohit.vision/tacle/assets/wacv25-0789.pdf" target="_blank">
+                    <a href="https://rohit.vision/tacle/assets/wacv25-0789.pdf" target="_blank" rel="noopener noreferrer">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.5">
                             <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -727,7 +767,7 @@
                         Poster
                     </a>
                     <a href="https://openaccess.thecvf.com/content/WACV2025/supplemental/Kalla_TACLE_Task_and_WACV_2025_supplemental.pdf"
-                        target="_blank">
+                        target="_blank" rel="noopener noreferrer">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.5">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -891,7 +931,7 @@
                     <div class="achievement-value">Organizing Committee</div>
                     <div class="achievement-title">EE Summer School 2023</div>
                     <div class="achievement-subtitle">IISc Bangalore · July 2023</div>
-                    <a href="assets/certificates/EESS2023.pdf" target="_blank" class="achievement-link">
+                    <a href="assets/certificates/EESS2023.pdf" target="_blank" rel="noopener noreferrer" class="achievement-link">
                         <i class="fas fa-external-link-alt"></i> View Certificate
                     </a>
                 </div>
@@ -1016,7 +1056,7 @@
         <span class="terminal-cursor">▋</span>
     </div>
 
-    <script src="script.js?v=4.0"></script>
+    <script src="script.js?v=5.0"></script>
 </body>
 
 </html>
