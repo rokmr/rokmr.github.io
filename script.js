@@ -124,8 +124,8 @@ for (let i = 0; i < particleCount; i++) {
     });
 }
 
-let t = 0;
-let targetT = 0;
+let t = 0.8;
+let targetT = 0.8;
 
 // Typewriter effect for terminal
 const terminalMessages = [
@@ -191,7 +191,7 @@ setInterval(() => {
 
     if (idleTime > 3000) {  // 3 seconds of no cursor movement
         // One denoising step (doubled speed)
-        targetT += 0.04;  // 4% per second = ~25 steps to complete
+        targetT += 0.08;  // 8% per second = ~12 steps to complete
 
         // When fully denoised, pause for 5 seconds then reset
         if (targetT >= 1) {
@@ -203,7 +203,7 @@ setInterval(() => {
 }, 1000);  // One step per second - natural inference pace
 
 function animate() {
-    t += (targetT - t) * 0.04;
+    t += (targetT - t) * 0.08;
 
     ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, W, H);

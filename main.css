@@ -86,6 +86,19 @@ nav a:hover {
     color: #fff;
 }
 
+nav a.nav-blog {
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+nav a.nav-blog:hover {
+    background: rgba(74, 222, 128, 0.1);
+    color: #fff;
+}
+
 .header-cta {
     display: flex;
     gap: 0.75rem;

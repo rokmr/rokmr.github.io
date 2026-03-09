@@ -1,11 +1,12 @@
-# robots.txt for rokmr.github.io
+# robots.txt for rohit.vision
 # Rohit Kumar - AI Engineer Portfolio
 
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://rokmr.github.io/sitemap.xml
+# Sitemap locations
+Sitemap: https://rohit.vision/sitemap.xml
+Sitemap: https://rohit.vision/blogs/sitemap.xml
 
 # Allow all search engine crawlers
 User-agent: Googlebot
