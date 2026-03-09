@@ -179,31 +179,30 @@ document.addEventListener('mousemove', (e) => {
     lastMouseMove = Date.now();
 });
 
-// Auto-denoising when idle: slow, one step per second (like real inference)
-let pauseUntil = 0;  // Timestamp to pause until after completing
-
-setInterval(() => {
-    const idleTime = Date.now() - lastMouseMove;
-    const now = Date.now();
-
-    // Skip if in pause period (showing completed pattern)
-    if (now < pauseUntil) return;
-
-    if (idleTime > 3000) {  // 3 seconds of no cursor movement
-        // One denoising step (doubled speed)
-        targetT += 0.08;  // 8% per second = ~12 steps to complete
-
-        // When fully denoised, pause for 5 seconds then reset
-        if (targetT >= 1) {
-            targetT = 1;  // Clamp to 1
-            pauseUntil = now + 5000;  // Pause 5 seconds
-            setTimeout(() => { targetT = 0; }, 5000);  // Reset after pause
-        }
-    }
-}, 1000);  // One step per second - natural inference pace
+// Auto-denoising: smooth continuous movement in animate loop
+let pauseUntil = 0;
+let lastFrameTime = performance.now();
+let autoPlay = true;  // start immediately on load
 
 function animate() {
-    t += (targetT - t) * 0.08;
+    const now = performance.now();
+    const dt = (now - lastFrameTime) / 1000;  // delta in seconds
+    lastFrameTime = now;
+
+    // Smooth auto-denoise
+    const idleTime = Date.now() - lastMouseMove;
+    if ((autoPlay || idleTime > 3000) && Date.now() >= pauseUntil) {
+        targetT += dt * 0.04;  // 4% per second — 0.8→1.0 takes ~5 seconds
+
+        if (targetT >= 1) {
+            targetT = 1;
+            autoPlay = false;
+            pauseUntil = Date.now() + 5000;
+            setTimeout(() => { targetT = 0.8; }, 5000);  // loop back
+        }
+    }
+
+    t += (targetT - t) * 0.06;
 
     ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, W, H);
