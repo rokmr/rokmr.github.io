@@ -3,6 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Redirect rokmr.github.io → rohit.vision (fixes Google canonical issue) -->
+    <script>
+    if (location.hostname === 'rokmr.github.io') {
+        location.replace('https://rohit.vision' + location.pathname + location.search + location.hash);
+    }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 — Page Not Found | Rohit Kumar</title>
     <meta name="robots" content="noindex">

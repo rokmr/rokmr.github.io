@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Redirect rokmr.github.io → rohit.vision (fixes Google canonical issue) -->
+    <script>
+    if (location.hostname === 'rokmr.github.io') {
+        location.replace('https://rohit.vision' + location.pathname + location.search + location.hash);
+    }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning | WACV 2025</title>
     <meta name="description" content="TACLE proposes a novel task-adaptive threshold framework for exemplar-free semi-supervised class incremental learning. Published at WACV 2025 by Jayateja Kalla, Rohit Kumar, and Soma Biswas from IISc Bangalore.">
