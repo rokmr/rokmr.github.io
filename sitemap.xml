@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://rohit.vision/</loc>
-    <lastmod>2025-07-12</lastmod>
+    <lastmod>2025-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://rohit.vision/assets/images/profile.webp</image:loc>
+      <image:title>Rohit Kumar - AI Engineer</image:title>
+      <image:caption>Rohit Kumar, AI Engineer and Researcher specializing in Computer Vision, LLMs, and Agentic AI</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://rohit.vision/assets/og-image.png</image:loc>
+      <image:title>Rohit Kumar Portfolio - Open Graph</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://rohit.vision/tacle/</loc>
-    <lastmod>2025-07-12</lastmod>
+    <lastmod>2025-07-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://rohit.vision/assets/images/tacle_intro.webp</image:loc>
+      <image:title>TACLE: Exemplar-free Semi-supervised Class Incremental Learning</image:title>
+      <image:caption>TACLE overview: comparison of CIL, SS-CIL, and EFSS-CIL learning settings - WACV 2025</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://rohit.vision/blogs/</loc>
-    <lastmod>2025-07-12</lastmod>
+    <lastmod>2025-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

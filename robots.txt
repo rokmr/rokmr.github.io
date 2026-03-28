@@ -1,16 +1,24 @@
 # robots.txt for rohit.vision
 # Rohit Kumar - AI Engineer Portfolio
+# Last updated: 2025-07-18
 
 User-agent: *
 Allow: /
+Disallow: /assets/certificates/
 
 # Sitemap locations
 Sitemap: https://rohit.vision/sitemap.xml
 Sitemap: https://rohit.vision/blogs/sitemap.xml
 
-# Allow all search engine crawlers
+# ==========================================
+# Search Engine Crawlers
+# ==========================================
 User-agent: Googlebot
 Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /assets/og-image.png
 
 User-agent: Bingbot
 Allow: /
@@ -21,14 +29,31 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# Allow AI Agent crawlers
+User-agent: Applebot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# ==========================================
+# AI Agent & LLM Crawlers
+# ==========================================
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: Anthropic-AI
@@ -44,4 +69,19 @@ User-agent: Cohere-AI
 Allow: /
 
 User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookExternalHit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
 Allow: /
