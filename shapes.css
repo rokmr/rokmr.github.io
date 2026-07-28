@@ -1,0 +1,966 @@
+/* ============================================================================
+   rohit.vision — SHAPES
+   A diagram vocabulary. Pure CSS + HTML: no build step, no framework.
+
+   USED BY TWO CONSUMERS, ONE DEFINITION:
+   * Slides — thin Vue wrappers in slides/components/ render these classes.
+   * Blog   — the same classes in a Jekyll include or raw HTML in a post.
+
+   A block has FOUR independent axes. Compose them; don't add new classes.
+     TREATMENT  how it's rendered   outline · panel · solid · soft · ghost
+     GEOMETRY   its silhouette      rect · round · pill · cyl · hex · diamond
+                                    · para · note · circle
+     ROLE       what it does        data · compute · attn · mem · loss · out
+                                    · ctrl · env · stop
+     SIZE       how big             xs · sm · md · lg · xl  (+ width spans)
+
+   Depends on tokens.css. Sizes are rem-based so a diagram scales with its
+   container — Slidev scales slides by root font-size, the blog renders at
+   reading size, and neither needs an override.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------------
+   ROLE TINTS
+   A module's colour encodes WHAT IT DOES, not which slide it's on. Reuse the
+   same role for the same job and the vocabulary reads without a legend.
+   ------------------------------------------------------------------------ */
+:root {
+  --role-data:    var(--series-2);   /* datasets, inputs, tensors            */
+  --role-compute: var(--series-1);   /* layers, ops, the forward pass        */
+  --role-attn:    var(--series-7);   /* attention specifically               */
+  --role-mem:     var(--series-4);   /* caches, buffers, HBM, storage        */
+  --role-loss:    var(--series-3);   /* objectives, loss, gradients          */
+  --role-out:     var(--series-5);   /* outputs, predictions, logits         */
+  --role-ctrl:    var(--series-6);   /* optimizers, schedulers, control flow */
+  --role-env:     var(--ink-muted);  /* environment, external systems        */
+  --role-stop:    var(--series-8);   /* frozen, deprecated, failure          */
+
+  /* Diagram metrics — one place to retune the whole vocabulary. */
+  --shp-stroke:  1.5px;
+  --shp-radius:  var(--radius);
+  --shp-pad-y:   var(--space-3);
+  --shp-pad-x:   var(--space-4);
+  --shp-min:     6.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+   BASE BLOCK
+   The fill is a vertical two-stop wash over an OPAQUE card surface, plus a
+   hairline top highlight. That reads as a solid object with a light source
+   rather than an outlined region — the difference between a diagram and a
+   flowchart. It stays flat in the design-system sense: no drop shadow, depth
+   comes from surface lightness.
+   ------------------------------------------------------------------------ */
+.shp {
+  --sh: var(--role-compute);
+  --sh-fill-a: color-mix(in srgb, var(--sh) 22%, transparent);
+  --sh-fill-b: color-mix(in srgb, var(--sh) 9%, transparent);
+
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+
+  min-width: var(--shp-min);
+  padding: var(--shp-pad-y) var(--shp-pad-x);
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(180deg, var(--sh-fill-a), var(--sh-fill-b)),
+    var(--surface-card);
+  border: var(--shp-stroke) solid var(--sh);
+  border-radius: var(--shp-radius);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--sh) 40%, transparent);
+
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--ink);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Role modifiers */
+.shp--data    { --sh: var(--role-data); }
+.shp--compute { --sh: var(--role-compute); }
+.shp--attn    { --sh: var(--role-attn); }
+.shp--mem     { --sh: var(--role-mem); }
+.shp--loss    { --sh: var(--role-loss); }
+.shp--out     { --sh: var(--role-out); }
+.shp--ctrl    { --sh: var(--role-ctrl); }
+.shp--env     { --sh: var(--role-env); }
+.shp--stop    { --sh: var(--role-stop); }
+
+/* ---------------------------------------------------------------------------
+   CONTENT SLOTS
+   ------------------------------------------------------------------------ */
+.shp__label { font-weight: var(--weight-medium); letter-spacing: 0.01em; }
+.shp__sub   { font-size: var(--text-xs); color: var(--ink-secondary); }
+.shp__meta  {
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.shp__tag {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--sh);
+}
+/* A glyph slot — a character, a symbol, an inline SVG. Sits above the label,
+   or beside it when the block is a --row. */
+.shp__glyph {
+  font-size: 1.15em;
+  line-height: 1;
+  color: var(--sh);
+  margin-bottom: 0.1rem;
+}
+
+/* Horizontal arrangement: glyph beside the text rather than above it. Reads
+   denser, which is what you want in a long chain. */
+.shp--row {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: left;
+}
+.shp--row .shp__glyph { margin: 0; }
+.shp--row .shp__stack { display: flex; flex-direction: column; align-items: flex-start; }
+
+/* ---------------------------------------------------------------------------
+   TREATMENT — panel
+   A tinted header band carrying the name, an unfilled body carrying the
+   detail. This is the single biggest upgrade over a plain outlined box: it
+   gives every block internal structure and a clear reading order, the way a
+   UML class or an infrastructure resource card does.
+   ------------------------------------------------------------------------ */
+.shp--panel {
+  padding: 0;
+  overflow: hidden;
+  align-items: stretch;
+  gap: 0;
+  background: var(--surface-card);
+}
+/* A header band needs a flat top edge. A pill, a circle and a cylinder don't
+   have one, so panel degrades them: pill and circle fall back to `round`, and a
+   cylinder keeps its silhouette but drops the band (see Mod.vue — a straight
+   band inside a curved vessel also produced a doubled bottom edge, because
+   panel's `overflow: hidden` clipped the square-cornered body against the
+   elliptical radius).
+
+   Note the explicit `padding: 0`: .shp--pill sets padding-inline further down
+   the file, and without resetting it here the band ends up inset inside a
+   padded capsule — a dark rectangle floating mid-pill. Higher specificity, not
+   order, is what makes this win. */
+.shp--panel.shp--pill,
+.shp--panel.shp--circle {
+  --shp-radius: 12px;
+  padding: 0;
+  width: auto;
+  height: auto;
+}
+.shp--panel.shp--cyl { overflow: visible; }
+
+.shp--panel .shp__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.3rem var(--shp-pad-x);
+  border-radius: calc(var(--shp-radius) - var(--shp-stroke))
+                 calc(var(--shp-radius) - var(--shp-stroke)) 0 0;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--sh) 34%, transparent),
+    color-mix(in srgb, var(--sh) 20%, transparent));
+  border-bottom: var(--shp-stroke) solid color-mix(in srgb, var(--sh) 55%, transparent);
+  font-weight: var(--weight-medium);
+}
+.shp--panel .shp__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: var(--space-2) var(--shp-pad-x) var(--space-3);
+}
+.shp--panel .shp__glyph { margin: 0; }
+
+/* ---------------------------------------------------------------------------
+   TREATMENT — solid · soft · ghost
+   ------------------------------------------------------------------------ */
+/* Filled. Legible ink on every role EXCEPT ctrl (#a16207 measures 4.02:1
+   against both black and white — it sits on the perceptual crossover). The
+   .shp--solid rule below flips ink to inverse; for ctrl, prefer soft. */
+.shp--solid {
+  background: var(--sh);
+  border-color: var(--sh);
+  color: var(--ink-inverse);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.shp--solid .shp__sub,
+.shp--solid .shp__meta,
+.shp--solid .shp__tag,
+.shp--solid .shp__glyph { color: var(--ink-inverse); opacity: 0.78; }
+
+/* Borderless, tint only — for context blocks that shouldn't compete. */
+.shp--soft {
+  border-color: transparent;
+  box-shadow: none;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--sh) 20%, transparent),
+      color-mix(in srgb, var(--sh) 11%, transparent)),
+    var(--surface-card);
+}
+
+/* Planned, optional, or not-yet-built. */
+.shp--ghost {
+  border-style: dashed;
+  background: var(--surface-card);
+  box-shadow: none;
+  color: var(--ink-secondary);
+}
+
+/* Frozen weights — dashed AND desaturated, because "no gradients" is a
+   different statement from "optional". */
+.shp--frozen {
+  border-style: dashed;
+  background: var(--surface-card);
+  box-shadow: none;
+  filter: saturate(0.55);
+}
+
+/* Emphasis, for the one block a slide is actually about.
+   A GLOW, not a ring. `outline` traces the border BOX: on an elliptical radius
+   (a cylinder) it draws a rounded rectangle around the shape, and on a
+   clip-path shape it gets clipped away entirely — either way you get a second,
+   mismatched border. drop-shadow follows the actual painted alpha, so it hugs
+   whatever silhouette the block happens to have. */
+.shp--focus {
+  filter:
+    drop-shadow(0 0 1px color-mix(in srgb, var(--sh) 90%, transparent))
+    drop-shadow(0 0 7px color-mix(in srgb, var(--sh) 50%, transparent));
+}
+
+/* ---------------------------------------------------------------------------
+   GEOMETRY
+   The silhouette carries meaning, so a diagram survives grayscale and CVD.
+     round    a coarse-grained stage
+     pill     a cheap elementwise op (activation, norm, dropout)
+     cyl      storage — anything read back later
+     hex      hardware or a kernel
+     diamond  a branch or a decision
+     para     a data transform (skewed = "something changed shape")
+     note     an annotation or a config blob (folded corner)
+     circle   a scalar, a node, a junction
+   ------------------------------------------------------------------------ */
+.shp--round { --shp-radius: 12px; }
+.shp--pill  { --shp-radius: var(--radius-pill); padding-inline: var(--space-5); }
+
+/* Cylinder: elliptical top and bottom edges plus a FILLED top face. An outline
+   arc alone reads as a lid seam; a lighter filled ellipse reads as the top of a
+   can, which is the whole point of the silhouette. Content clears the face. */
+.shp--cyl {
+  --cyl-rim: 18px;
+  border-radius: 50% / var(--cyl-rim) var(--cyl-rim) 14px 14px;
+  padding-top: calc(var(--shp-pad-y) + var(--cyl-rim) * 0.55);
+  padding-bottom: calc(var(--shp-pad-y) + 0.2rem);
+}
+.shp--cyl > * { position: relative; z-index: 1; }
+.shp--cyl::after {
+  content: '';
+  position: absolute;
+  left: var(--shp-stroke);
+  right: var(--shp-stroke);
+  top: var(--shp-stroke);
+  height: calc(var(--cyl-rim) * 2);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sh) 30%, var(--surface-card));
+  border-bottom: var(--shp-stroke) solid color-mix(in srgb, var(--sh) 70%, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+.shp--cyl.shp--sm { --cyl-rim: 13px; }
+.shp--cyl.shp--xs { --cyl-rim: 10px; }
+.shp--cyl.shp--lg { --cyl-rim: 22px; }
+
+/* clip-path removes the border box, so hex/diamond/para can't take a border
+   directly. The rim is the element's own background; a clipped ::before inset
+   by the stroke width paints the interior back over it, leaving a ring.
+   Children sit above that layer so text keeps the normal interior contrast —
+   filling these solid instead would make ctrl-yellow unreadable. */
+.shp--hex,
+.shp--diamond,
+.shp--para {
+  border: none;
+  box-shadow: none;
+  background: var(--sh);
+}
+.shp--hex > *,
+.shp--diamond > *,
+.shp--para > * { position: relative; z-index: 1; }
+
+/* The inner face is SCALED, not inset. A uniform `inset` measures the same
+   number of pixels horizontally and vertically, which on an angled edge leaves
+   a rim that is thick at the shallow points and thin at the steep ones — very
+   visible at a hex's left and right apexes. Scaling insets proportionally along
+   every edge, so the rim reads even. Sharper shapes need a deeper scale. */
+.shp--hex::before,
+.shp--diamond::before,
+.shp--para::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  clip-path: inherit;
+  transform: scale(var(--face, 0.965));
+  transform-origin: center;
+  background:
+    linear-gradient(180deg, var(--sh-fill-a), var(--sh-fill-b)),
+    var(--surface-card);
+}
+.shp--diamond { --face: 0.93; }
+.shp--para    { --face: 0.955; }
+
+.shp--hex     { clip-path: polygon(14% 0, 86% 0, 100% 50%, 86% 100%, 14% 100%, 0 50%);
+                padding-inline: var(--space-6); }
+.shp--diamond { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+                padding: var(--space-5) var(--space-6); min-width: 7.5rem; }
+.shp--para    { clip-path: polygon(9% 0, 100% 0, 91% 100%, 0 100%);
+                padding-inline: var(--space-5); }
+
+/* Note: a folded top-right corner, drawn with the clip + a small triangle. */
+.shp--note {
+  --fold: 0.85rem;
+  clip-path: polygon(0 0, calc(100% - var(--fold)) 0, 100% var(--fold), 100% 100%, 0 100%);
+  border: none;
+  box-shadow: none;
+  background: var(--sh);
+}
+.shp--note > * { position: relative; z-index: 1; }
+.shp--note::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  clip-path: inherit;
+  transform: scale(0.97);
+  transform-origin: center;
+  background:
+    linear-gradient(180deg, var(--sh-fill-a), var(--sh-fill-b)),
+    var(--surface-card);
+}
+
+/* Circle: GROWS with its content instead of clipping it. A fixed 3.25rem box
+   made any label longer than about four characters hang out of both sides.
+   aspect-ratio keeps it round at whatever width the text needs. */
+.shp--circle {
+  border-radius: var(--radius-round);
+  min-width: 3.5rem;
+  aspect-ratio: 1;
+  padding: var(--space-3);
+  line-height: 1.1;
+}
+
+/* TRIANGLES & TRAPEZOIDS
+   trap      narrowing downward — a downsample / pooling stage
+   trap-up   widening upward — an upsample / decoder stage
+   tri       aggregation, a reduction, a priority apex
+   tri-down  a funnel, a narrowing selection
+   chevron   a stage in a directed process
+   Trapezoids in particular are how CNN encoder/decoder stages are drawn in the
+   literature, so they belong in the vocabulary. */
+.shp--trap,
+.shp--trap-up,
+.shp--tri,
+.shp--tri-down,
+.shp--chevron {
+  border: none;
+  box-shadow: none;
+  background: var(--sh);
+}
+.shp--trap > *, .shp--trap-up > *, .shp--tri > *,
+.shp--tri-down > *, .shp--chevron > * { position: relative; z-index: 1; }
+
+/* Scaled inner face, for the same reason as hex/diamond — see above. */
+.shp--trap::before, .shp--trap-up::before, .shp--tri::before,
+.shp--tri-down::before, .shp--chevron::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  clip-path: inherit;
+  transform: scale(var(--face, 0.96));
+  transform-origin: center;
+  background:
+    linear-gradient(180deg, var(--sh-fill-a), var(--sh-fill-b)),
+    var(--surface-card);
+}
+/* A triangle's apex is the sharpest corner in the set. */
+.shp--tri, .shp--tri-down { --face: 0.9; }
+.shp--chevron { --face: 0.955; }
+
+.shp--trap    { clip-path: polygon(0 0, 100% 0, 84% 100%, 16% 100%);
+                padding-inline: var(--space-6); }
+.shp--trap-up { clip-path: polygon(16% 0, 84% 0, 100% 100%, 0 100%);
+                padding-inline: var(--space-6); }
+/* A triangle has almost no usable area at its apex, so the label sits in the
+   lower half and the block needs real height. */
+.shp--tri {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  min-width: 8rem;
+  padding: var(--space-6) var(--space-4) var(--space-3);
+  justify-content: flex-end;
+}
+.shp--tri-down {
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  min-width: 8rem;
+  padding: var(--space-3) var(--space-4) var(--space-6);
+  justify-content: flex-start;
+}
+.shp--chevron { clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%, 12% 50%);
+                padding-inline: var(--space-6); }
+
+/* Stack: two ghost copies behind the block. Offsets go DOWN-right and the
+   copies are dimmed, so the front block stays dominant — full-strength borders
+   offset upward read as three overlapping boxes rather than one repeated one. */
+.shp--stacked {
+  --stk: color-mix(in srgb, var(--sh) 50%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--sh) 40%, transparent),
+     4px 4px 0 0 var(--surface), 4px 4px 0 var(--shp-stroke) var(--stk),
+     8px 8px 0 0 var(--surface), 8px 8px 0 var(--shp-stroke) var(--stk);
+  margin: 0 8px 8px 0;
+}
+/* Badge at the TOP-right, clear of the stack offset below it. */
+.shp__mult {
+  position: absolute;
+  right: -0.5rem;
+  top: -0.6rem;
+  background: var(--surface);
+  border: var(--shp-stroke) solid var(--sh);
+  border-radius: var(--radius-pill);
+  padding: 0 0.45em;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--sh);
+  z-index: 3;
+}
+
+/* ---------------------------------------------------------------------------
+   PORTS — small anchor dots where connectors attach. Optional, but they are
+   most of what separates an engineered diagram from a drawn one.
+   ------------------------------------------------------------------------ */
+.shp--ports::before,
+.shp--ports::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  translate: 0 -50%;
+  background: var(--surface);
+  border: var(--shp-stroke) solid var(--sh);
+  border-radius: var(--radius-round);
+  z-index: 2;
+}
+.shp--ports::before { left: calc(-3px - var(--shp-stroke)); }
+.shp--ports::after  { right: calc(-3px - var(--shp-stroke)); }
+.shp--ports-in::after  { display: none; }
+.shp--ports-out::before { display: none; }
+
+/* ---------------------------------------------------------------------------
+   SIZE — five steps, then width control independent of them.
+   ------------------------------------------------------------------------ */
+.shp--xs { --shp-pad-y: 0.15rem; --shp-pad-x: var(--space-2); --shp-min: 3.25rem;
+           font-size: var(--text-xs); }
+.shp--sm { --shp-pad-y: var(--space-2); --shp-pad-x: var(--space-3); --shp-min: 5rem;
+           font-size: var(--text-xs); }
+.shp--lg { --shp-pad-y: var(--space-4); --shp-pad-x: var(--space-5); --shp-min: 9rem;
+           font-size: var(--text-base); }
+.shp--xl { --shp-pad-y: var(--space-5); --shp-pad-x: var(--space-6); --shp-min: 12rem;
+           font-size: var(--text-md); }
+
+/* Width, in units of the base min-width — for aligning ragged chains. */
+.shp--w1 { min-width: 6.5rem; }
+.shp--w2 { min-width: 10rem; }
+.shp--w3 { min-width: 14rem; }
+.shp--w4 { min-width: 18rem; }
+.shp--fill { width: 100%; }
+.shp--tall { min-height: 7rem; }
+
+/* ---------------------------------------------------------------------------
+   FLOW — blocks plus the connectors between them.
+   ------------------------------------------------------------------------ */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.flow--col     { flex-direction: column; align-items: center; }
+.flow--start   { justify-content: flex-start; }
+.flow--nowrap  { flex-wrap: nowrap; }
+.flow--tight   { gap: var(--space-1); }
+.flow--loose   { gap: var(--space-5); }
+.flow--even > * { flex: 1; }
+/* Align a row of panels by their header band rather than their centres. */
+.flow--top { align-items: flex-start; }
+
+/* ---------------------------------------------------------------------------
+   CONNECTORS
+   2.5px shaft, a real triangular head, and an optional junction dot at the
+   tail. Thin hairlines with 5px heads read as clip art at slide scale.
+   ------------------------------------------------------------------------ */
+.arw {
+  --arw-c: var(--ink-muted);
+  --arw-w: 2.5px;
+  position: relative;
+  flex: none;
+  align-self: center;
+  width: var(--space-6);
+  height: var(--arw-w);
+  background: var(--arw-c);
+  border-radius: 1px;
+}
+.arw::after {
+  content: '';
+  position: absolute;
+  right: calc(-1 * var(--space-2));
+  top: 50%;
+  translate: 0 -50%;
+  width: 0; height: 0;
+  border-left: var(--space-2) solid var(--arw-c);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.arw--long  { width: var(--space-8); }
+.arw--short { width: var(--space-4); }
+
+/* Dashed shaft — a repeating gradient, since there's no border to dash now. */
+.arw--dashed {
+  background: repeating-linear-gradient(90deg,
+    var(--arw-c) 0 6px, transparent 6px 11px);
+}
+
+/* Bidirectional */
+.arw--bi::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-2));
+  top: 50%;
+  translate: 0 -50%;
+  width: 0; height: 0;
+  border-right: var(--space-2) solid var(--arw-c);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* A junction dot at the tail — reads as "this branches from here". */
+.arw--from::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 7px; height: 7px;
+  background: var(--arw-c);
+  border-radius: var(--radius-round);
+}
+
+/* Vertical */
+.arw--down {
+  width: var(--arw-w);
+  height: var(--space-6);
+}
+.arw--down::after {
+  right: auto; top: auto;
+  left: 50%; bottom: calc(-1 * var(--space-2));
+  translate: -50% 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: var(--space-2) solid var(--arw-c);
+  border-bottom: 0;
+}
+.arw--down.arw--dashed {
+  background: repeating-linear-gradient(180deg,
+    var(--arw-c) 0 6px, transparent 6px 11px);
+}
+
+/* Elbow: an L-shaped connector, for a return path that shouldn't cross the
+   row. Drawn with two borders on a sized box. */
+.arw--elbow {
+  width: var(--space-8);
+  height: var(--space-6);
+  background: none;
+  border-left: var(--arw-w) solid var(--arw-c);
+  border-bottom: var(--arw-w) solid var(--arw-c);
+  border-bottom-left-radius: 6px;
+}
+.arw--elbow::after {
+  right: calc(-1 * var(--space-2));
+  top: auto;
+  bottom: calc(-1 * var(--arw-w) / 2);
+  translate: 0 50%;
+}
+
+/* Semantic tints: gradients are loss-coloured, data paths data-coloured. */
+.arw--grad { --arw-c: var(--role-loss); }
+.arw--data { --arw-c: var(--role-data); }
+.arw--mem  { --arw-c: var(--role-mem); }
+.arw--weak { --arw-c: var(--border-control); --arw-w: 2px; }
+
+/* A LABELLED connector is a column: label above, shaft below. The label must
+   participate in layout — absolutely positioning it over a short shaft makes
+   any real label spill across the neighbouring block and clip its text. */
+.arw-l {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  min-width: 5rem;
+  padding-inline: var(--space-2);
+}
+.arw-l > .arw { width: 100%; }
+.arw-l--down {
+  flex-direction: row;
+  align-items: center;
+  min-width: 0;
+  min-height: var(--space-7);
+  padding-inline: 0;
+  gap: var(--space-2);
+}
+.arw-l--down > .arw { width: var(--arw-w); height: 100%; }
+
+.arw__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--ink-secondary);
+  white-space: nowrap;
+  text-align: center;
+}
+/* A chip-style label, when the connector crosses busy artwork. */
+.arw__label--chip {
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.05rem 0.5rem;
+  color: var(--ink-secondary);
+}
+
+/* ---------------------------------------------------------------------------
+   GROUP — a labelled region that actually CONTAINS blocks, with its title
+   notched into the border. Replaces the floating brace, which read as an
+   unfinished bracket hanging above the row.
+   ------------------------------------------------------------------------ */
+.grp {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  border: var(--border-width) dashed var(--g, var(--border-control));
+  border-radius: var(--radius-lg);
+}
+.grp--solid { border-style: solid; }
+.grp--col   { flex-direction: column; }
+.grp__title {
+  position: absolute;
+  top: 0;
+  left: var(--space-4);
+  translate: 0 -50%;
+  /* The colour of whatever this sits ON, not the page. A group inside a figure
+     card was painting #0a0a0a over #111111, which reads as a dark rectangle
+     behind the text. Containers set --label-bg; the page is the default. */
+  background: var(--label-bg, var(--surface));
+  /* Enough breathing room that the dashed border is cleanly interrupted rather
+     than butting against the first and last letter. */
+  padding-inline: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--g, var(--ink-muted));
+}
+/* Tint a group by role, e.g. a "runs on GPU 0" region. */
+.grp--data { --g: var(--role-data); }
+.grp--mem  { --g: var(--role-mem); }
+.grp--ctrl { --g: var(--role-ctrl); }
+.grp--attn { --g: var(--role-attn); }
+.grp--stop { --g: var(--role-stop); }
+
+/* ---------------------------------------------------------------------------
+   SKIP — the arc that goes over a block.
+   ------------------------------------------------------------------------ */
+.skip { position: relative; display: flex; align-items: center; padding-top: var(--space-6); }
+.skip::before {
+  content: '';
+  position: absolute;
+  inset: var(--space-2) 1.75rem auto;
+  height: var(--space-4);
+  border: 2px solid var(--role-mem);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.skip__label {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% -0.15rem;
+  background: var(--label-bg, var(--surface));
+  padding-inline: 0.35em;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--role-mem);
+}
+
+/* ---------------------------------------------------------------------------
+   CYCLE — the agent/environment loop.
+   ------------------------------------------------------------------------ */
+.cycle {
+  display: grid;
+  grid-template-columns: auto minmax(6rem, 1fr) auto;
+  align-items: center;
+  justify-items: center;
+  gap: var(--space-3);
+}
+.cycle__leg { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; width: 100%; }
+.cycle__leg .arw { width: 100%; }
+.cycle__leg--back .arw { --arw-c: var(--role-loss); }
+.cycle__leg--back .arw::after {
+  right: auto;
+  left: calc(-1 * var(--space-2));
+  border-left: 0;
+  border-right: var(--space-2) solid var(--arw-c);
+}
+.cycle__label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--ink-muted); }
+
+/* ---------------------------------------------------------------------------
+   ATTENTION — HEAD LAYOUT
+   The canonical MHA / GQA / MQA figure: query heads on top, key-value heads
+   below, joined by a bracket per group. One column per KV head, so the whole
+   family is the same markup with a different grouping:
+     MHA  h groups × 1 query head       MQA  1 group × h query heads
+     GQA  g groups × h/g query heads    MLA  1 group, latent KV
+   ------------------------------------------------------------------------ */
+.attn { display: flex; align-items: flex-end; justify-content: center; gap: var(--space-4); }
+.attn__grp { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.attn__qs { display: flex; gap: 3px; }
+
+.attn__q,
+.attn__kv {
+  width: 1.15rem;
+  height: 1.6rem;
+  border-radius: 2px;
+  border: var(--shp-stroke) solid var(--role-attn);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--role-attn) 34%, transparent),
+      color-mix(in srgb, var(--role-attn) 14%, transparent)),
+    var(--surface-card);
+}
+/* KV heads are the scarce resource in GQA/MQA — tint them as memory, because
+   that is exactly what they cost. */
+.attn__kv {
+  border-color: var(--role-mem);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--role-mem) 40%, transparent),
+      color-mix(in srgb, var(--role-mem) 16%, transparent)),
+    var(--surface-card);
+}
+.attn__kv--latent { width: 2.4rem; border-style: dashed; }
+
+/* The bracket joining a group of query heads down to its KV head. */
+.attn__tie {
+  width: 70%;
+  height: var(--space-3);
+  margin-block: 4px;
+  border: var(--shp-stroke) solid var(--border-control);
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+}
+.attn__grp--single .attn__tie { width: var(--shp-stroke); border-radius: 0; }
+
+.attn__cap {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+  margin-top: var(--space-2);
+}
+.attn-legend { display: flex; gap: var(--space-4); justify-content: center; }
+
+/* ---------------------------------------------------------------------------
+   ATTENTION — MASK PATTERN
+   An n × n grid where a cell is filled if position i may attend to j. The
+   pattern comes from a PREDICATE, so causal, sliding-window, dilated, block
+   and global+local are all the same component with a different condition.
+   ------------------------------------------------------------------------ */
+.mask {
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-card);
+}
+.mask__c {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 1px;
+  background: var(--surface-inset);
+}
+.mask__c--on {
+  background: color-mix(in srgb, var(--role-attn) 78%, transparent);
+}
+/* A second emphasis level, for "global" rows in a Longformer-style pattern. */
+.mask__c--strong { background: var(--role-attn); }
+.mask__c--diag  { outline: 1px solid color-mix(in srgb, var(--ink) 35%, transparent); }
+
+.mask-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+.mask-wrap__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-secondary);
+}
+.mask-wrap__meta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--ink-muted); }
+
+/* ---------------------------------------------------------------------------
+   PYRAMID — memory hierarchy. Rows narrow toward the top.
+   ------------------------------------------------------------------------ */
+.pyr { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 100%; }
+.pyr__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--sh, var(--role-mem)) 24%, transparent),
+      color-mix(in srgb, var(--sh, var(--role-mem)) 10%, transparent)),
+    var(--surface-card);
+  border: var(--shp-stroke) solid var(--sh, var(--role-mem));
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--sh, var(--role-mem)) 40%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+.pyr__row--1 { width: 42%; }
+.pyr__row--2 { width: 56%; }
+.pyr__row--3 { width: 70%; }
+.pyr__row--4 { width: 85%; }
+.pyr__row--5 { width: 100%; }
+.pyr__meta { font-size: var(--text-xs); color: var(--ink-muted); }
+
+/* ---------------------------------------------------------------------------
+   TENSOR — a shape annotation, [B, C, H, W].
+   ------------------------------------------------------------------------ */
+.tsr {
+  display: inline-flex;
+  align-items: stretch;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  border: var(--border-width) solid var(--border-control);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tsr__dim { padding: 0.2em 0.6em; color: var(--ink); background: var(--surface-card); }
+.tsr__dim + .tsr__dim { border-left: var(--border-width) solid var(--border); }
+.tsr__dim > small {
+  display: block;
+  font-size: 0.7em;
+  color: var(--ink-muted);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+/* Feature-map cube — three offset faces. */
+.cube {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  flex: none;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--sh, var(--role-data)) 26%, transparent),
+      color-mix(in srgb, var(--sh, var(--role-data)) 12%, transparent)),
+    var(--surface-card);
+  border: var(--shp-stroke) solid var(--sh, var(--role-data));
+  border-radius: var(--radius);
+  box-shadow:
+     4px -4px 0 0 var(--surface), 4px -4px 0 var(--shp-stroke) var(--sh, var(--role-data)),
+     8px -8px 0 0 var(--surface), 8px -8px 0 var(--shp-stroke) var(--sh, var(--role-data));
+  margin: 8px 8px 0 0;
+}
+
+/* ---------------------------------------------------------------------------
+   U-NET — one grid row per level so blocks and rungs align by construction.
+   ------------------------------------------------------------------------ */
+.unet {
+  display: grid;
+  grid-template-columns: auto minmax(4rem, 9rem) auto;
+  gap: var(--space-3);
+  align-items: center;
+}
+.unet__enc { justify-self: end;   margin-right: calc(var(--lvl, 0) * 1.1rem); }
+.unet__dec { justify-self: start; margin-left:  calc(var(--lvl, 0) * 1.1rem); }
+.unet__rung { position: relative; width: 100%; border-top: 2px dashed var(--role-mem); }
+.unet__rung--labelled::after {
+  content: 'skip';
+  position: absolute;
+  left: 50%;
+  top: -0.95em;
+  translate: -50% 0;
+  background: var(--label-bg, var(--surface));
+  padding-inline: 0.3em;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--role-mem);
+}
+.unet__bottom { grid-column: 1 / -1; display: flex; justify-content: center; }
+
+/* ---------------------------------------------------------------------------
+   ANNOTATION
+   ------------------------------------------------------------------------ */
+.anno {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--ink-muted);
+  max-width: 16rem;
+}
+.anno--accent { color: var(--ink-accent); }
+
+/* A legend for role tints — once per deck, not once per slide. */
+.roles { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
+.roles__item {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-mono); font-size: var(--text-xs); color: var(--ink-secondary);
+}
+.roles__chip {
+  width: 0.7rem; height: 0.7rem; border-radius: var(--radius-tight);
+  border: var(--shp-stroke) solid var(--r);
+  background: color-mix(in srgb, var(--r) 32%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   PRINT / EXPORT — the PDF path into the blog's slide viewer.
+   ------------------------------------------------------------------------ */
+@media print {
+  .shp, .pyr__row, .cube, .tsr, .grp { break-inside: avoid; }
+  .arw__label, .skip__label, .unet__rung--labelled::after, .grp__title {
+    background: var(--label-bg, var(--surface));
+  }
+}
+
+@media (forced-colors: active) {
+  .shp, .grp { border-color: CanvasText; }
+  .arw { background: CanvasText; }
+}

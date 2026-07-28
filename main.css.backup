@@ -14,10 +14,10 @@ html {
     top: -100%;
     left: 1rem;
     padding: 0.75rem 1.5rem;
-    background: var(--ink-accent);
+    background: var(--accent);
     color: #000;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
+    font-size: 0.75rem;
     font-weight: 600;
     text-decoration: none;
     border-radius: 0 0 4px 4px;
@@ -30,8 +30,8 @@ html {
 }
 
 body {
-    background: var(--surface);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
 }
@@ -70,7 +70,7 @@ header {
 
 .logo {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-base);
+    font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 2px;
     color: #fff;
@@ -83,8 +83,8 @@ nav {
 
 nav a {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
+    font-size: 0.65rem;
+    color: var(--dim);
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -105,7 +105,7 @@ nav a:hover {
     align-items: center;
     gap: 0.5rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
+    font-size: 0.6rem;
     padding: 0.5rem 1rem;
     background: #fff;
     color: #000;
@@ -125,18 +125,18 @@ nav a:hover {
     align-items: center;
     gap: 0.4rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
+    font-size: 0.6rem;
     padding: 0.5rem 0.8rem;
     border: 1px solid var(--border);
     border-radius: 2px;
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .cv-btn:hover {
-    border-color: var(--ink);
-    color: var(--ink);
+    border-color: var(--text);
+    color: var(--text);
 }
 
 @keyframes pulse {
@@ -175,8 +175,8 @@ nav a:hover {
 
 .hero-eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-accent);
+    font-size: 0.7rem;
+    color: var(--accent);
     margin-bottom: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -191,14 +191,14 @@ nav a:hover {
 }
 
 .hero-story {
-    font-size: var(--text-md);
-    color: var(--ink-secondary);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
     margin-bottom: 1.75rem;
     line-height: 1.7;
 }
 
 .hero-story strong {
-    color: var(--ink);
+    color: var(--text);
 }
 
 .hero-stats {
@@ -216,14 +216,14 @@ nav a:hover {
 
 .stat-value {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-2xl);
+    font-size: 1.5rem;
     font-weight: 600;
     color: #fff;
 }
 
 .stat-label {
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.7rem;
+    color: var(--dim);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -239,7 +239,7 @@ nav a:hover {
     align-items: center;
     gap: 0.5rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
+    font-size: 0.75rem;
     padding: 0.8rem 1.5rem;
     border-radius: 2px;
     text-decoration: none;
@@ -279,7 +279,7 @@ nav a:hover {
 
 .btn-secondary {
     background: transparent;
-    color: var(--ink);
+    color: var(--text);
     border: 1px solid var(--border);
 }
 
@@ -319,18 +319,18 @@ nav a:hover {
 }
 
 .control-label {
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
+    font-size: 0.45rem;
+    color: var(--dim);
     letter-spacing: 1px;
 }
 
 .control-value {
-    font-size: var(--text-xs);
-    color: var(--ink-secondary);
+    font-size: 0.6rem;
+    color: var(--text-secondary);
 }
 
 .timestep {
-    font-size: var(--text-md);
+    font-size: 1rem;
     color: #fff;
     min-width: 60px;
     text-align: center;
@@ -347,7 +347,7 @@ nav a:hover {
 
 .progress-fill {
     height: 100%;
-    background: var(--ink-accent);
+    background: var(--accent);
     width: 0%;
     transition: width 0.1s;
 }
@@ -358,8 +358,8 @@ nav a:hover {
     bottom: 2rem;
     left: 2rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
+    font-size: 0.65rem;
+    color: var(--dim);
     z-index: 50;
     pointer-events: none;
     opacity: 0;
@@ -367,7 +367,7 @@ nav a:hover {
 }
 
 .terminal-cursor {
-    color: var(--ink-accent);
+    color: var(--accent);
     animation: blink 1s step-end infinite;
 }
 
@@ -400,14 +400,14 @@ section {
 
 .section-number {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-accent);
+    font-size: 0.7rem;
+    color: var(--accent);
 }
 
 .section-title {
-    font-size: var(--text-sm);
+    font-size: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
-    color: var(--ink-muted);
+    color: var(--dim);
     text-transform: uppercase;
     letter-spacing: 3px;
 }
@@ -429,15 +429,15 @@ section {
 .profile-photo {
     width: 220px;
     height: 220px;
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--ink-muted);
+    color: var(--dim);
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
+    font-size: 0.7rem;
     position: relative;
     overflow: hidden;
 }
@@ -455,33 +455,33 @@ section {
 }
 
 .about-text h2 {
-    font-size: var(--text-2xl);
+    font-size: 1.5rem;
     margin-bottom: 1.25rem;
 }
 
 .about-text p {
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
     margin-bottom: 1.25rem;
-    font-size: var(--text-md);
+    font-size: 0.9rem;
     line-height: 1.7;
 }
 
 .about-text strong {
-    color: var(--ink);
+    color: var(--text);
 }
 
 .about-currently {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.75rem;
+    color: var(--dim);
     padding: 0.75rem 1rem;
-    border-left: 2px solid var(--ink-accent);
-    background: var(--surface-card);
+    border-left: 2px solid var(--accent);
+    background: var(--bg-card);
     border-radius: 0 4px 4px 0;
 }
 
 .about-currently strong {
-    color: var(--ink-accent);
+    color: var(--accent);
 }
 
 /* Experience Timeline */
@@ -504,14 +504,14 @@ section {
     position: relative;
     padding: 2rem;
     margin-bottom: 1.5rem;
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 4px;
     transition: all 0.3s;
 }
 
 .timeline-item:hover {
-    border-color: var(--border-strong);
+    border-color: var(--border-hover);
     transform: translateX(5px);
 }
 
@@ -522,13 +522,13 @@ section {
     top: 2.5rem;
     width: 10px;
     height: 10px;
-    background: var(--surface);
-    border: 2px solid var(--ink-accent);
+    background: var(--bg);
+    border: 2px solid var(--accent);
     border-radius: 50%;
 }
 
 .timeline-item.current::before {
-    background: var(--ink-accent);
+    background: var(--accent);
 }
 
 .exp-header {
@@ -539,30 +539,30 @@ section {
 }
 
 .exp-title {
-    font-size: var(--text-xl);
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
 .exp-company {
-    font-size: var(--text-md);
-    color: var(--ink-secondary);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
 }
 
 .exp-date {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.7rem;
+    color: var(--dim);
     text-align: right;
 }
 
 .exp-location {
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.7rem;
+    color: var(--dim);
 }
 
 .exp-description {
-    color: var(--ink-secondary);
-    font-size: var(--text-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
     margin-top: 1rem;
 }
 
@@ -580,18 +580,18 @@ section {
 
 .exp-tech span {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
+    font-size: 0.55rem;
     padding: 0.25rem 0.5rem;
-    background: var(--surface-raised);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: 2px;
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
     transition: all 0.3s;
 }
 
 .exp-tech span:hover {
-    border-color: var(--border-strong);
-    color: var(--ink);
+    border-color: var(--border-hover);
+    color: var(--text);
 }
 
 /* Projects */
@@ -602,7 +602,7 @@ section {
 }
 
 .project-card {
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 4px;
     overflow: hidden;
@@ -610,20 +610,20 @@ section {
 }
 
 .project-card:hover {
-    border-color: var(--border-strong);
+    border-color: var(--border-hover);
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .project-preview {
     aspect-ratio: 16 / 9;
-    background: var(--surface-raised);
+    background: var(--bg-elevated);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--ink-muted);
+    color: var(--dim);
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
+    font-size: 0.7rem;
     border-bottom: 1px solid var(--border);
     overflow: hidden;
 }
@@ -633,7 +633,7 @@ section {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    background: var(--surface-raised);
+    background: var(--bg-elevated);
     filter: grayscale(100%) sepia(20%) hue-rotate(80deg) brightness(0.9);
     transition: filter 0.4s ease;
 }
@@ -644,12 +644,12 @@ section {
 
 .project-badge {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
+    font-size: 0.55rem;
     padding: 0.2rem 0.5rem;
-    background: var(--surface-raised);
+    background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: 2px;
-    color: var(--ink-accent);
+    color: var(--accent);
     white-space: nowrap;
 }
 
@@ -665,7 +665,7 @@ section {
 }
 
 .project-title {
-    font-size: var(--text-lg);
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
@@ -675,8 +675,8 @@ section {
 }
 
 .project-links a {
-    color: var(--ink-muted);
-    font-size: var(--text-md);
+    color: var(--dim);
+    font-size: 1rem;
     transition: color 0.3s;
     display: inline-flex;
     align-items: center;
@@ -687,8 +687,8 @@ section {
 }
 
 .project-description {
-    color: var(--ink-secondary);
-    font-size: var(--text-base);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
     margin-bottom: 1rem;
     line-height: 1.6;
 }
@@ -701,11 +701,11 @@ section {
 
 .project-tech span {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
+    font-size: 0.55rem;
     padding: 0.25rem 0.5rem;
-    background: var(--surface-raised);
+    background: var(--bg-elevated);
     border-radius: 2px;
-    color: var(--ink-muted);
+    color: var(--dim);
 }
 
 /* Achievements */
@@ -716,7 +716,7 @@ section {
 }
 
 .achievement-card {
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 1.5rem;
@@ -724,32 +724,32 @@ section {
 }
 
 .achievement-card:hover {
-    border-color: var(--border-strong);
+    border-color: var(--border-hover);
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .achievement-icon {
-    font-size: var(--text-3xl);
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
 .achievement-value {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-2xl);
+    font-size: 1.5rem;
     font-weight: 600;
     color: #fff;
 }
 
 .achievement-title {
-    font-size: var(--text-md);
-    color: var(--ink-secondary);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     margin-bottom: 0.25rem;
 }
 
 .achievement-subtitle {
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.75rem;
+    color: var(--dim);
 }
 
 .achievement-link {
@@ -757,8 +757,8 @@ section {
     align-items: center;
     gap: 0.25rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    color: var(--ink-accent);
+    font-size: 0.65rem;
+    color: var(--accent);
     text-decoration: none;
     margin-top: 0.5rem;
     transition: opacity 0.3s;
@@ -772,7 +772,7 @@ section {
 .publication-card {
     position: relative;
     padding: 2rem;
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 4px;
     margin-bottom: 1rem;
@@ -784,10 +784,10 @@ section {
     top: 1rem;
     right: 1rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
+    font-size: 0.55rem;
     font-weight: 600;
     padding: 0.2rem 0.6rem;
-    background: var(--ink-accent);
+    background: var(--accent);
     color: #000;
     border-radius: 2px;
     letter-spacing: 1px;
@@ -796,27 +796,27 @@ section {
 }
 
 .publication-card:hover {
-    border-color: var(--border-strong);
+    border-color: var(--border-hover);
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .pub-title {
-    font-size: var(--text-lg);
+    font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
 .pub-authors {
-    font-size: var(--text-base);
-    color: var(--ink-secondary);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
     margin-bottom: 0.5rem;
 }
 
 .pub-venue {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-accent);
+    font-size: 0.75rem;
+    color: var(--accent);
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -827,22 +827,22 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
+    font-size: 0.65rem;
+    color: var(--dim);
 }
 
 .pub-citations svg {
-    stroke: var(--ink-muted);
+    stroke: var(--dim);
 }
 
 .pub-citations a {
-    color: var(--ink-muted);
+    color: var(--dim);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .pub-citations a:hover {
-    color: var(--ink);
+    color: var(--text);
 }
 
 .pub-links {
@@ -853,8 +853,8 @@ section {
 
 .pub-links a {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-secondary);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border: 1px solid var(--border);
@@ -874,7 +874,7 @@ section {
 
 .pub-links a.pub-link-disabled:hover {
     border-color: var(--border);
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
 }
 
 /* Education */
@@ -886,47 +886,47 @@ section {
 
 .education-card {
     padding: 1.5rem;
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 4px;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .education-card:hover {
-    border-color: var(--border-strong);
+    border-color: var(--border-hover);
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .edu-degree {
-    font-size: var(--text-md);
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
 
 .edu-school {
-    font-size: var(--text-base);
-    color: var(--ink-secondary);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
     margin-bottom: 0.5rem;
 }
 
 .edu-details {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.7rem;
+    color: var(--dim);
 }
 
 .edu-courses {
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
+    font-size: 0.65rem;
+    color: var(--dim);
     font-style: italic;
     margin-top: 0.5rem;
 }
 
 .edu-subsection-title {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.75rem;
+    color: var(--dim);
     text-transform: uppercase;
     letter-spacing: 3px;
     margin-top: 3rem;
@@ -943,9 +943,9 @@ section {
 }
 
 .skill-category h3 {
-    font-size: var(--text-sm);
+    font-size: 0.7rem;
     font-family: 'JetBrains Mono', monospace;
-    color: var(--ink-accent);
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 1rem;
@@ -960,19 +960,19 @@ section {
 
 .skill-item {
     display: inline-block;
-    font-size: var(--text-sm);
+    font-size: 0.75rem;
     padding: 0.35rem 0.7rem;
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 2px;
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
     transition: all 0.3s;
     white-space: nowrap;
 }
 
 .skill-item:hover {
-    border-color: var(--border-strong);
-    color: var(--ink);
+    border-color: var(--border-hover);
+    color: var(--text);
 }
 
 /* Academic Service - Compact */
@@ -1002,21 +1002,21 @@ section {
 
 .service-role {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink);
+    font-size: 0.75rem;
+    color: var(--text);
     font-weight: 500;
     min-width: 180px;
 }
 
 .service-separator {
-    color: var(--ink-muted);
-    font-size: var(--text-sm);
+    color: var(--dim);
+    font-size: 0.7rem;
 }
 
 .service-venue {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-base);
-    color: var(--ink-accent);
+    font-size: 0.8rem;
+    color: var(--accent);
     text-decoration: none;
     font-weight: 600;
     transition: opacity 0.3s;
@@ -1027,8 +1027,8 @@ section {
 }
 
 .service-desc {
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
+    font-size: 0.75rem;
+    color: var(--dim);
 }
 
 @media (max-width: 900px) {
@@ -1054,12 +1054,12 @@ section {
 }
 
 .contact-info h2 {
-    font-size: var(--text-3xl);
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
 .contact-info p {
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
     margin-bottom: 2rem;
     max-width: 400px;
 }
@@ -1069,8 +1069,8 @@ section {
     align-items: center;
     gap: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-md);
-    color: var(--ink);
+    font-size: 1rem;
+    color: var(--text);
     text-decoration: none;
     padding: 1rem 1.5rem;
     border: 1px solid var(--border);
@@ -1094,18 +1094,18 @@ section {
     align-items: center;
     gap: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
+    font-size: 0.75rem;
     padding: 1rem;
-    background: var(--surface-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 2px;
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-link:hover {
-    border-color: var(--border-strong);
+    border-color: var(--border-hover);
     color: #fff;
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -1116,12 +1116,12 @@ section {
 }
 
 .social-link i {
-    font-size: var(--text-xl);
+    font-size: 1.2rem;
     width: 24px;
 }
 
 .social-link span {
-    font-size: var(--text-base);
+    font-size: 0.85rem;
 }
 
 /* Footer */
@@ -1135,15 +1135,15 @@ footer {
 
 footer p {
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
+    font-size: 0.65rem;
+    color: var(--dim);
 }
 
 .ai-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    background: linear-gradient(90deg, var(--ink-accent), #60a5fa);
+    background: linear-gradient(90deg, var(--accent), #60a5fa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1151,7 +1151,7 @@ footer p {
 }
 
 .ai-badge svg {
-    stroke: var(--ink-accent);
+    stroke: var(--accent);
 }
 
 /* ========================================
@@ -1176,7 +1176,7 @@ footer p {
     display: block;
     width: 100%;
     height: 1.5px;
-    background: var(--ink);
+    background: var(--text);
     border-radius: 1px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center;
@@ -1247,8 +1247,8 @@ footer p {
     align-items: center;
     gap: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-base);
-    color: var(--ink-secondary);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -1282,7 +1282,7 @@ footer p {
     justify-content: center;
     gap: 0.5rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
+    font-size: 0.75rem;
     padding: 0.8rem 1rem;
     border-radius: 2px;
     text-decoration: none;
@@ -1296,14 +1296,14 @@ footer p {
 
 .mobile-nav-cta .mobile-blog-btn {
     border: 1px solid var(--border);
-    color: var(--ink-secondary);
+    color: var(--text-secondary);
     text-transform: none;
     letter-spacing: 0;
 }
 
 .mobile-nav-cta .mobile-blog-btn:hover {
-    border-color: var(--ink);
-    color: var(--ink);
+    border-color: var(--text);
+    color: var(--text);
 }
 
 .mobile-nav-cta .mobile-collab-btn {
@@ -1351,7 +1351,7 @@ body.menu-open {
     }
 
     .control-panel .timestep {
-        font-size: var(--text-sm);
+        font-size: 0.75rem;
         min-width: auto;
     }
 
@@ -1379,11 +1379,11 @@ body.menu-open {
 
     /* Mobile hero adjustments */
     .hero h1 {
-        font-size: var(--text-2xl);
+        font-size: 1.6rem;
     }
 
     .hero-story {
-        font-size: var(--text-base);
+        font-size: 0.85rem;
     }
 
     .hero-stats {
@@ -1391,7 +1391,7 @@ body.menu-open {
     }
 
     .stat-value {
-        font-size: var(--text-xl);
+        font-size: 1.2rem;
     }
 
     .hero-actions {
@@ -1399,7 +1399,7 @@ body.menu-open {
     }
 
     .btn {
-        font-size: var(--text-xs);
+        font-size: 0.65rem;
         padding: 0.6rem 1rem;
     }
 
@@ -1424,7 +1424,7 @@ body.menu-open {
     }
 
     .pub-links a {
-        font-size: var(--text-xs);
+        font-size: 0.6rem;
         padding: 0.4rem 0.6rem;
     }
 
@@ -1462,7 +1462,7 @@ body.menu-open {
     backdrop-filter: blur(20px);
     border: 1px solid var(--border);
     border-radius: 2px;
-    color: var(--ink-muted);
+    color: var(--dim);
     cursor: pointer;
     z-index: 90;
     opacity: 0;
@@ -1477,7 +1477,7 @@ body.menu-open {
 
 .back-to-top:hover {
     color: #fff;
-    border-color: var(--border-strong);
+    border-color: var(--border-hover);
 }
 
 /* Reduced motion */
