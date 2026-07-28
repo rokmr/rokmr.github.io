@@ -1,0 +1,501 @@
+/* ============================================================================
+   rohit.vision — DESIGN TOKENS
+   Single source of truth for rohit.vision, blogs.rohit.vision, and slides.
+
+   RULES
+   1. This file is the ONLY place a raw hex, px size, or duration is declared.
+      Every other stylesheet references these tokens. No exceptions.
+   2. Layer 1 (primitives) is the raw ramp. Layer 2 (semantic) is what you
+      actually use in components. Never reference a primitive from a component.
+   3. Dark is the canonical mode. Light exists for print, PDF export, and
+      projected slides — it is a selected set of steps, not an inverted flip.
+   4. The chart palette is machine-validated. Do not add or reorder hues
+      without re-running the validator (see README § Charts).
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------------
+   LAYER 1 — PRIMITIVES
+   The ramp both sites already use: Tailwind-derived hues on near-black.
+   Named by hue + step so a semantic token can be re-pointed without a
+   find-and-replace across component CSS.
+   ------------------------------------------------------------------------ */
+:root {
+  /* Neutrals — the spine of the system */
+  --n-0:    #ffffff;
+  --n-50:   #f5f5f5;
+  --n-100:  #e8e8e8;
+  --n-200:  #cccccc;
+  --n-300:  #999999;
+  --n-400:  #888888;
+  --n-500:  #666666;
+  --n-600:  #444444;
+  --n-700:  #222222;
+  --n-800:  #161616;
+  --n-850:  #111111;
+  --n-900:  #0d0d0d;
+  --n-950:  #0a0a0a;
+  --n-1000: #000000;
+
+  /* Hues — 400 level (UI/ink use) and 600/700 level (mark use) */
+  --green-300:  #86efac;
+  --green-400:  #4ade80;   /* the brand accent */
+  --green-500:  #22c55e;
+  --green-600:  #16a34a;
+  --green-700:  #15803d;
+  --green-800:  #166534;
+  --green-900:  #14532d;
+
+  --blue-400:   #60a5fa;
+  --blue-500:   #3b82f6;
+  --blue-600:   #2563eb;
+  --blue-700:   #1d4ed8;
+
+  --cyan-600:   #0891b2;
+
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+  --orange-700: #c2410c;
+
+  --yellow-500: #eab308;
+  --yellow-600: #ca8a04;
+  --yellow-700: #a16207;
+
+  --pink-400:   #f472b6;
+  --pink-500:   #ec4899;
+
+  --violet-400: #a78bfa;
+  --violet-500: #8b5cf6;
+  --purple-500: #a855f7;
+
+  --red-400:    #f87171;
+  --red-500:    #ef4444;
+  --red-600:    #dc2626;
+  --red-700:    #b91c1c;
+}
+
+/* ---------------------------------------------------------------------------
+   LAYER 2 — SEMANTIC: SURFACE
+   Four planes only. Elevation is a lightness step, never a drop shadow.
+   ------------------------------------------------------------------------ */
+:root {
+  --surface:          var(--n-950);   /* page plane                        */
+  --surface-card:     var(--n-850);   /* cards, diagram + chart wrappers   */
+  --surface-raised:   var(--n-800);   /* popovers, hovered card, active nav*/
+  --surface-inset:    var(--n-900);   /* code blocks, equations, wells     */
+  --surface-hover:    rgba(255, 255, 255, 0.04);
+  --surface-active:   rgba(255, 255, 255, 0.08);
+  --surface-accent:   rgba(74, 222, 128, 0.10);  /* accent wash            */
+  --scrim:            rgba(10, 10, 10, 0.90);    /* header + overlay blur  */
+}
+
+/* ---------------------------------------------------------------------------
+   LAYER 2 — SEMANTIC: INK
+   Three levels, all AA or better on --surface. Measured, not guessed:
+     --ink            16.16:1   AAA
+     --ink-secondary   6.95:1   AA
+     --ink-muted       5.58:1   AA
+   There is no fourth, dimmer level. #666666 was removed from text duty —
+   it measured 3.45:1 and failed AA. It now serves as --border-control.
+   ------------------------------------------------------------------------ */
+:root {
+  --ink:            var(--n-100);
+  --ink-secondary:  var(--n-300);
+  --ink-muted:      var(--n-400);
+  --ink-inverse:    var(--n-950);
+  --ink-accent:     var(--green-400);   /* 11.36:1 — links, focus, signal  */
+  --ink-on-accent:  var(--n-950);       /* text on a filled accent block   */
+}
+
+/* ---------------------------------------------------------------------------
+   LAYER 2 — SEMANTIC: BORDER
+   Three weights by JOB, not by lightness. The control step is the only one
+   that clears WCAG 1.4.11 (3:1 non-text) — inputs and focusable controls
+   must use it, or they have no perceivable boundary.
+   ------------------------------------------------------------------------ */
+:root {
+  --border:          var(--n-700);   /* 1.24:1 — hairline, decorative only */
+  --border-strong:   var(--n-600);   /* 2.03:1 — card outline, hover       */
+  --border-control:  var(--n-500);   /* 3.45:1 — inputs, checkbox, radio   */
+  --border-accent:   var(--green-400);
+  --border-width:    1px;
+}
+
+/* ---------------------------------------------------------------------------
+   LAYER 2 — SEMANTIC: STATUS  (reserved — never reused as a chart series)
+   Ships with an icon + label ALWAYS. Colour never carries state alone.
+   Light steps are darker because the 400/500 level measures 1.9–2.8:1 on
+   white and would wash out in print / on a projector.
+   ------------------------------------------------------------------------ */
+:root {
+  --status-good:      var(--green-500);
+  --status-info:      var(--blue-500);
+  --status-warning:   var(--yellow-500);
+  --status-serious:   var(--orange-500);
+  --status-critical:  var(--red-500);
+  --status-neutral:   var(--n-400);
+
+  /* Tinted backgrounds for callouts / banners — 10% is the system constant */
+  --status-good-bg:      rgba( 34, 197,  94, 0.10);
+  --status-info-bg:      rgba( 59, 130, 246, 0.10);
+  --status-warning-bg:   rgba(234, 179,   8, 0.10);
+  --status-serious-bg:   rgba(249, 115,  22, 0.10);
+  --status-critical-bg:  rgba(239,  68,  68, 0.10);
+  --status-note-bg:      rgba(168,  85, 247, 0.10);
+  --status-note:         var(--purple-500);
+}
+
+/* ---------------------------------------------------------------------------
+   LAYER 2 — DATA VISUALISATION
+   Categorical order is MACHINE-VALIDATED and passes every hard gate in BOTH
+   modes against #111111 (dark) and #ffffff (light) — the same eight hexes
+   serve both, so there is no second palette to maintain.
+
+     worst adjacent CVD ΔE        8.1  (protan)   target >= 8
+     worst adjacent normal ΔE    23.3             floor  >= 15
+     lightness band              all 8 in L 0.48–0.67 dark / 0.43–0.77 light
+     contrast vs surface         all 8 >= 3:1 in both modes
+
+   CONSTRAINTS — these are load-bearing, not stylistic:
+   * Assign slots in FIXED ORDER, 1..8. Never cycle, never skip, never sort
+     by rank. A 9th series folds into "Other", facets, or small multiples.
+   * Slot 1 green = the main signal (train loss, primary metric).
+     Slot 2 blue  = the reference (val loss, baseline). This mirrors the
+     convention already in use across the blog's plots.
+   * SCATTER / BUBBLE / SMALL-MULTIPLES cap at THREE series. With all pairs
+     simultaneously on screen the 4th slot breaks the CVD floor. Facet instead.
+   * Slot 6 yellow and slot 8 red must never end up adjacent — they measure
+     ΔE 4.9 and are indistinguishable. Slot 7 violet keeps them apart; that
+     is why the order is what it is.
+   ------------------------------------------------------------------------ */
+:root {
+  --series-1: var(--green-600);    /* main signal / train                  */
+  --series-2: var(--blue-500);     /* reference / val                      */
+  --series-3: var(--orange-600);
+  --series-4: var(--cyan-600);
+  --series-5: var(--pink-500);
+  --series-6: var(--yellow-700);
+  --series-7: var(--violet-500);
+  --series-8: var(--red-500);
+  --series-other: var(--n-400);    /* the "Other" bucket — never a hue     */
+
+  /* Sequential — ONE hue, light->dark. Heatmaps, attention maps, density.
+     Continuous encoding may use the full range (step 900 recedes to the
+     surface = "near zero"). For ORDINAL marks (discrete tiers) start no
+     darker than --seq-6: below that the step stops clearing the surface. */
+  --seq-1: var(--green-300);
+  --seq-2: var(--green-400);
+  --seq-3: var(--green-500);
+  --seq-4: var(--green-600);
+  --seq-5: var(--green-700);
+  --seq-6: var(--green-800);
+  --seq-7: var(--green-900);
+
+  /* Diverging — two poles that read as opposite + a NEUTRAL GRAY midpoint.
+     Signed quantities: weight deltas, attribution, correlation, logit diff.
+     Never a hue at the midpoint; never a rainbow. */
+  --div-neg-2: var(--blue-700);
+  --div-neg-1: var(--blue-500);
+  --div-mid:   var(--n-600);
+  --div-pos-1: var(--red-500);
+  --div-pos-2: var(--red-700);
+
+  /* Chart chrome — recessive by construction */
+  --viz-surface:   var(--surface-card);
+  --viz-grid:      #181818;   /* hairline gridline                         */
+  --viz-axis:      #2a2a2a;   /* baseline / axis rule                      */
+  --viz-label:     var(--ink-muted);
+  --viz-fill:      rgba(74, 222, 128, 0.08);  /* area fill under series 1  */
+  --viz-gap:       2px;       /* surface gap between stacked segments      */
+  --viz-mark:      2px;       /* line weight                              */
+  --viz-dot:       8px;       /* minimum marker diameter                  */
+  --viz-radius:    4px;       /* rounded data-end on bars                 */
+}
+
+/* ---------------------------------------------------------------------------
+   LAYER 2 — AI DIAGRAM PRIMITIVES
+   Network layers, equation syntax, annotations. Node fills are hue-TINTED
+   near-blacks so a diagram reads as one plane with the page.
+   ------------------------------------------------------------------------ */
+:root {
+  --node-input:   #0d1a0d;   /* green-tinted — input layer                 */
+  --node-hidden:  #0d0d1a;   /* blue-tinted  — hidden layers               */
+  --node-output:  #1a0d0d;   /* warm-tinted  — output layer                */
+  --node-border:  #2a2a2a;
+
+  --eq-var:   var(--blue-400);     /* variables                            */
+  --eq-op:    var(--pink-400);     /* operators                            */
+  --eq-num:   var(--orange-400);   /* numbers                              */
+  --eq-func:  var(--violet-400);   /* functions                            */
+  --eq-glow:  rgba(74, 222, 128, 0.06);
+
+  --annotation:       rgba(74, 222, 128, 0.70);
+  --highlight-bg:     rgba( 96, 165, 250, 0.10);
+  --highlight-border: rgba( 96, 165, 250, 0.30);
+}
+
+/* ---------------------------------------------------------------------------
+   TYPE
+   Two families. Mono is not decoration — it is the system's voice for
+   anything machine-authored: labels, nav, IDs, timestamps, metrics, code.
+   Sans carries prose only.
+
+   SCALE — 10 steps, floor raised to 12px. The old 0.45/0.55/0.60/0.65/0.70rem
+   sizes (down to 7.2px) are gone; nothing in the system renders below 12px.
+   ------------------------------------------------------------------------ */
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs:    0.75rem;    /* 12px — floor. badges, tags, axis ticks      */
+  --text-sm:    0.8125rem;  /* 13px — nav, eyebrows, table headers, meta   */
+  --text-base:  0.875rem;   /* 14px — UI labels, buttons, dense rows       */
+  --text-md:    1rem;       /* 16px — default body                         */
+  --text-read:  1.0625rem;  /* 17px — long-form prose ONLY (posts, notes)  */
+  --text-lg:    1.125rem;   /* 18px — card titles, lead-in                 */
+  --text-xl:    1.25rem;    /* 20px — h3                                   */
+  --text-2xl:   1.5rem;     /* 24px — h2                                   */
+  --text-3xl:   2rem;       /* 32px — page title                           */
+  --text-4xl:   2.25rem;    /* 36px — post hero                            */
+  --text-5xl:   2.5rem;     /* 40px — display                              */
+  --text-code:  0.9375em;   /* relative to parent — inline code            */
+
+  /* Leading — by job. Prose gets the loose one. */
+  --leading-none:   1;
+  --leading-tight:  1.25;   /* display + h1/h2                             */
+  --leading-snug:   1.4;    /* card titles, multi-line UI                  */
+  --leading-normal: 1.6;    /* default                                     */
+  --leading-read:   1.75;   /* long-form prose                             */
+
+  --weight-light:     300;
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+
+  /* Tracking — mono labels are the only thing that gets letter-spacing */
+  --tracking-label: 0.08em;   /* uppercase mono eyebrows + nav             */
+  --tracking-title: 0.12em;   /* the site wordmark                        */
+  --tracking-tight: -0.02em;  /* display sizes only                       */
+
+  /* MEASURE — the readability lever.
+     Reading columns are capped by CHARACTER COUNT, not pixels. 68ch at 17px
+     is ~640px. The old fixed 900px ran to ~105 characters per line, well
+     past the 45–75 comfortable range. Raise this token to widen prose. */
+  --measure:      68ch;
+  --measure-wide: 80ch;   /* tables, code, figures may exceed prose width  */
+}
+
+/* ---------------------------------------------------------------------------
+   SPACE — one 4px-grid scale. No parallel families.
+   The previous set (--section-margin-top, --section-padding-top,
+   --card-padding, --card-gap, --card-margin-bottom, --paragraph-margin,
+   --content-element-margin, --heading-margin-top, --footer-margin-top)
+   collapsed into this scale plus the four semantic aliases below.
+   ------------------------------------------------------------------------ */
+:root {
+  --space-1:  0.25rem;   /*   4px */
+  --space-2:  0.5rem;    /*   8px */
+  --space-3:  0.75rem;   /*  12px */
+  --space-4:  1rem;      /*  16px */
+  --space-5:  1.5rem;    /*  24px */
+  --space-6:  2rem;      /*  32px */
+  --space-7:  3rem;      /*  48px */
+  --space-8:  4rem;      /*  64px */
+  --space-9:  6rem;      /*  96px */
+  --space-10: 8rem;      /* 128px */
+
+  --flow:        var(--space-5);   /* gap between sibling blocks in prose   */
+  --card-pad:    var(--space-5);   /* interior padding of any card          */
+  --section-gap: var(--space-8);   /* gap between page sections             */
+  --gutter:      var(--space-9);   /* page side padding (responsive below)  */
+}
+
+/* ---------------------------------------------------------------------------
+   RADII — sharp. 4px is the default; 2px is the tight step. Nothing is
+   softer than 6px except a pill, which is reserved for badges and avatars.
+   ------------------------------------------------------------------------ */
+:root {
+  --radius-tight: 2px;
+  --radius:       4px;
+  --radius-lg:    6px;
+  --radius-pill:  9999px;
+  --radius-round: 50%;
+}
+
+/* ---------------------------------------------------------------------------
+   ELEVATION — the system is flat. Depth is a surface step. These four
+   shadows are the complete set; anything else is a mistake.
+   ------------------------------------------------------------------------ */
+:root {
+  --shadow-popover: 0 4px 12px rgba(0, 0, 0, 0.30);
+  --shadow-overlay: 0 8px 32px rgba(0, 0, 0, 0.50);
+  --glow-accent:    0 0 0 1px rgba(74, 222, 128, 0.40),
+                    0 4px 20px rgba(74, 222, 128, 0.12);
+  --ring-focus:     0 0 0 2px var(--surface), 0 0 0 4px var(--ink-accent);
+}
+
+/* ---------------------------------------------------------------------------
+   MOTION — short, linear-ish, no spring. Three durations, one easing.
+   ------------------------------------------------------------------------ */
+:root {
+  --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:   120ms;   /* colour, opacity                                */
+  --dur:        200ms;   /* the default                                    */
+  --dur-slow:   320ms;   /* entrances, layout                              */
+  --transition: var(--dur) var(--ease);
+}
+
+/* ---------------------------------------------------------------------------
+   LAYOUT
+   ------------------------------------------------------------------------ */
+:root {
+  --header-h:     54px;
+  --max-ultra:    1800px;   /* graph, search                               */
+  --max-wide:     1600px;   /* index grids, home                           */
+  --max-content:  900px;    /* the shell a prose column sits inside        */
+  --sidebar-w:    clamp(240px, 18vw, 320px);
+  --blur:         12px;     /* the only backdrop-filter in the system      */
+
+  --z-base:    0;
+  --z-raised:  10;
+  --z-sticky:  100;
+  --z-overlay: 1000;
+  --z-toast:   1100;
+}
+
+/* ---------------------------------------------------------------------------
+   RESPONSIVE — the gutter is the single lever. Nothing else re-declares
+   horizontal padding.
+   ------------------------------------------------------------------------ */
+@media (max-width: 1200px) { :root { --gutter: var(--space-7); } }
+@media (max-width: 768px)  { :root { --gutter: var(--space-5); --text-4xl: 1.75rem; --text-3xl: 1.5rem; } }
+@media (max-width: 480px)  { :root { --gutter: var(--space-4); } }
+
+/* ---------------------------------------------------------------------------
+   LIGHT MODE — print, PDF export, and projected slides.
+   A SELECTED set of steps, not an inversion. The categorical series hexes
+   are deliberately unchanged: they were validated against #ffffff as well
+   as #111111, so identity survives the mode switch.
+   Status colours DO change — the 500 level measures 1.9–2.8:1 on white.
+   ------------------------------------------------------------------------ */
+@media print {
+  :root {
+    --surface:         #ffffff;
+    --surface-card:    #ffffff;
+    --surface-raised:  #f5f5f5;
+    --surface-inset:   #f5f5f5;
+
+    --ink:             #141414;   /* 18.42:1 */
+    --ink-secondary:   #525252;   /*  7.81:1 */
+    --ink-muted:       #6b6b6b;   /*  5.33:1 */
+    --ink-accent:      #15803d;   /*  5.02:1 */
+
+    --border:          #e5e5e5;
+    --border-strong:   #a3a3a3;
+    --border-control:  #767676;
+
+    --status-good:     var(--green-700);
+    --status-info:     var(--blue-700);
+    --status-warning:  var(--yellow-700);
+    --status-serious:  var(--orange-700);
+    --status-critical: var(--red-700);
+
+    --viz-surface:     #ffffff;
+    --viz-grid:        #ececec;
+    --viz-axis:        #cfcfcf;
+    --viz-fill:        rgba(22, 163, 74, 0.10);
+  }
+}
+
+/* Explicit opt-in for on-screen light (Slidev light theme, embedded figures).
+   Same values as print — declared once, referenced twice. */
+:root[data-theme='light'] {
+  --surface:         #ffffff;
+  --surface-card:    #ffffff;
+  --surface-raised:  #f5f5f5;
+  --surface-inset:   #f5f5f5;
+
+  --ink:             #141414;
+  --ink-secondary:   #525252;
+  --ink-muted:       #6b6b6b;
+  --ink-accent:      #15803d;
+
+  --border:          #e5e5e5;
+  --border-strong:   #a3a3a3;
+  --border-control:  #767676;
+
+  --status-good:     var(--green-700);
+  --status-info:     var(--blue-700);
+  --status-warning:  var(--yellow-700);
+  --status-serious:  var(--orange-700);
+  --status-critical: var(--red-700);
+
+  --viz-surface:     #ffffff;
+  --viz-grid:        #ececec;
+  --viz-axis:        #cfcfcf;
+  --viz-fill:        rgba(22, 163, 74, 0.10);
+}
+
+/* ---------------------------------------------------------------------------
+   BACK-COMPAT ALIASES
+   Existing component CSS in both repos keeps working unchanged. Delete this
+   block once main.css in each repo has been migrated (see MIGRATION.md).
+   ------------------------------------------------------------------------ */
+:root {
+  --bg:              var(--surface);
+  --bg-card:         var(--surface-card);
+  --bg-elevated:     var(--surface-raised);
+  --text:            var(--ink);
+  --text-secondary:  var(--ink-secondary);
+  --dim:             var(--ink-muted);      /* was #666 on blog / #888 on
+                                               portfolio — resolved to #888,
+                                               the only AA-passing value     */
+  --border-hover:    var(--border-strong);
+  --accent:          var(--ink-accent);
+
+  --font-size-base:  var(--text-md);
+  --line-height:     var(--leading-normal);
+
+  --tip-bg:          var(--status-good-bg);
+  --tip-border:      var(--status-good);
+  --note-bg:         var(--status-info-bg);
+  --note-border:     var(--status-info);
+  --warning-bg:      var(--status-warning-bg);
+  --warning-border:  var(--status-warning);
+  --danger-bg:       var(--status-critical-bg);
+  --danger-border:   var(--status-critical);
+  --question-bg:     var(--status-note-bg);
+  --question-border: var(--status-note);
+
+  --graph-grid:      var(--viz-grid);
+  --graph-axis:      var(--viz-axis);
+  --graph-line-1:    var(--series-1);
+  --graph-line-2:    var(--series-2);
+  --graph-line-3:    var(--series-5);   /* was pink — now slot 5            */
+  --graph-line-4:    var(--series-3);   /* was orange — now slot 3          */
+  --graph-fill:      var(--viz-fill);
+
+  --eq-bg:           var(--surface-inset);
+  --eq-border:       var(--border);
+
+  --spacing-horizontal:      var(--gutter);
+  --spacing-vertical-top:    calc(var(--header-h) + var(--space-8));
+  --spacing-vertical-bottom: var(--space-8);
+  --header-height:           var(--header-h);
+  --max-width-ultra:         var(--max-ultra);
+  --max-width-wide:          var(--max-wide);
+  --max-width-content:       var(--max-content);
+  --max-width-default:       1400px;
+  --sidebar-width:           var(--sidebar-w);
+  --card-padding:            var(--card-pad);
+  --card-gap:                var(--card-pad);
+  --card-margin-bottom:      var(--card-pad);
+  --paragraph-margin:        var(--flow);
+  --content-element-margin:  var(--space-6);
+  --heading-margin-top:      var(--space-7);
+  --heading-margin-bottom:   var(--flow);
+  --section-margin-top:      var(--section-gap);
+  --section-margin-bottom:   var(--space-7);
+  --footer-margin-top:       var(--space-9);
+}
