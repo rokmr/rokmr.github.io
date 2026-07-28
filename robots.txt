@@ -8,7 +8,7 @@ Disallow: /assets/certificates/
 
 # Sitemap locations
 Sitemap: https://rohit.vision/sitemap.xml
-Sitemap: https://rohit.vision/blogs/sitemap.xml
+Sitemap: https://blogs.rohit.vision/sitemap.xml
 
 # ==========================================
 # Search Engine Crawlers
