@@ -1425,7 +1425,7 @@ body.menu-open {
 
     .pub-links a {
         font-size: var(--text-xs);
-        padding: 0.4rem 0.6rem;
+        padding: 0.55rem 0.6rem;
     }
 
     /* Profile photo centered */
@@ -1433,6 +1433,18 @@ body.menu-open {
         width: 160px;
         height: 160px;
         margin: 0 auto;
+    }
+
+    /* Less dead space per section when scrolling on a phone */
+    section {
+        padding: 3.5rem 5%;
+    }
+
+    /* Card grids: never force a track wider than the viewport itself */
+    .achievements-grid,
+    .education-grid,
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     }
 }
 

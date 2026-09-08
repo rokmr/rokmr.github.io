@@ -52,7 +52,8 @@ function generateButterfly() {
     return points;
 }
 
-const particleCount = 16000;
+// Fewer particles on phones: same visual (soft cloud), lighter per-frame cost.
+const particleCount = window.innerWidth < 768 ? 8000 : 16000;
 const targetPoints = generateButterfly();
 
 // Flat typed arrays — cache-friendly, no GC, no object overhead

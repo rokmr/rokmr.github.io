@@ -15,6 +15,9 @@ html {
   scroll-padding-top: calc(var(--header-h) + var(--space-5));
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Mobile safety net: a single stray wide element should never be able to
+     create silent horizontal scroll on narrow viewports. */
+  overflow-x: hidden;
 }
 
 body {
@@ -28,6 +31,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
