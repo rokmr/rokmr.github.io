@@ -138,6 +138,10 @@
                     {
                         "@type": "EducationalOccupationalCredential",
                         "name": "GATE EE 2022 - AIR 221"
+                    },
+                    {
+                        "@type": "EducationalOccupationalCredential",
+                        "name": "GATE IN 2022 - AIR 227"
                     }
                 ],
                 "memberOf": [
@@ -375,22 +379,27 @@
                     <p class="hero-story">
                         I've trained CNNs to see and transformers to reason. Now I build systems where
                         both work together - from <strong>diffusion pipelines</strong> shipping photorealistic
-                        product imagery at Avataar AI, to <strong>agentic AI pipelines</strong> at Armada AI.
-                        <strong>IISc Bangalore</strong> alumnus, <strong>GATE AIR 221</strong>.
+                        product imagery at Avataar AI, to <strong>agentic AI pipelines</strong> at Armada AI,
+                        owning retrieval, evals, and observability end-to-end.
+                        <strong>IISc Bangalore</strong> alumnus, <strong>GATE AIR 221 (EE) & 227 (IN)</strong>.
                     </p>
                     <div class="hero-stats">
-                        <div class="stat">
+                        <a href="#education" class="stat">
                             <div class="stat-value">221</div>
-                            <div class="stat-label">GATE AIR</div>
-                        </div>
-                        <div class="stat">
+                            <div class="stat-label">GATE AIR (EE)</div>
+                        </a>
+                        <a href="#education" class="stat">
+                            <div class="stat-value">227</div>
+                            <div class="stat-label">GATE AIR (IN)</div>
+                        </a>
+                        <a href="#experience" class="stat">
                             <div class="stat-value">2+</div>
                             <div class="stat-label">Years ML</div>
-                        </div>
-                        <div class="stat">
+                        </a>
+                        <a href="#education" class="stat">
                             <div class="stat-value">IISc</div>
                             <div class="stat-label">M.Tech AI</div>
-                        </div>
+                        </a>
                     </div>
                     <div class="hero-actions">
                         <a href="mailto:contact@rohit.vision" class="btn btn-primary">
@@ -419,15 +428,6 @@
                             </svg>
                             LinkedIn
                         </a>
-                        <a href="https://scholar.google.com/citations?user=7N8THZgAAAAJ&hl=en" target="_blank"
-                            rel="noopener noreferrer" class="btn btn-secondary">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.5" aria-hidden="true">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                                <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                            </svg>
-                            Scholar
-                        </a>
                     </div>
                 </div>
             </div>
@@ -450,16 +450,17 @@
                 <div class="about-text">
                     <h2>From Signals to Neural Networks</h2>
                     <p>
-                        My path to AI started in electrical engineering - clearing <strong>GATE (AIR 221)</strong>
+                        My path to AI started in electrical engineering - clearing <strong>GATE (AIR 221 EE, AIR 227 IN)</strong>
                         and <strong>BARC</strong>, then choosing research over a government job. That decision led me
                         to <strong>IISc</strong>, where I published on continual learning (<strong>WACV 2025</strong>)
                         and discovered my calling: building systems where vision and language work together.
                     </p>
                     <p>
-                        Today, I ship AI that matters - diffusion pipelines at <strong>Avataar AI</strong>,
-                        agentic systems at <strong>Armada AI</strong>, and review research as an invited reviewer for
+                        Since then I've shipped production systems at <strong>Avataar AI</strong> and
+                        <strong>Armada AI</strong>, published at <strong>CVPR 2026 Workshop</strong> on
+                        diffusion-based visual storytelling (<strong>AttriStory</strong>), and review research for
                         <strong>NeurIPS, CVPR & ECCV 2026</strong>. The boundary between what machines see
-                        and what they understand is blurring. I build at that edge.
+                        and what they understand keeps blurring - I build at that edge.
                     </p>
                     <p class="about-currently">
                         Currently reading: <strong>Reinforcement Learning</strong> — exploring how agents learn to act optimally through interaction.
@@ -489,20 +490,23 @@
                         </div>
                     </div>
                     <ul class="exp-description">
-                        <li>Architecting multi-agent RAG system with LangGraph orchestrating planner, router, retrieval, evaluation, and generation stages</li>
-                        <li>Built hybrid search combining dense embeddings, BM25 sparse vectors, and Reciprocal Rank Fusion over Qdrant with Jina reranking</li>
-                        <li>Developed ingestion pipeline: Playwright web scraping, Docling PDF extraction, and structure-aware chunking into Qdrant</li>
-                        <li>Shipping production stack with FastAPI, Chainlit UI, Langfuse observability, Docker Compose, and PostgreSQL</li>
+                        <li>Designed a modified CRAG + controllable ReAct agent as the shared base architecture across all knowledge-base agents, then cut pipeline cost to ~1/3 of baseline by deduplicating reformulation/embedding calls into a shared graph node</li>
+                        <li>Built a two-tier eval framework - retrieval-confidence + CRAG-score gating pre-generation, RAGAS groundedness scoring post-generation - and hand-curated ground truth after LLM-generated references proved unreliable</li>
+                        <li>Built a custom online-learning BM25 index (incremental update/unlearn) to close organizational-vocabulary gaps in dense retrieval, after CPU constraints ruled out reranking and self-hosted embeddings</li>
+                        <li>Replaced single-pass image captioning, which failed on flowcharts and screenshots, with a two-stage classify-then-caption pipeline after OCR and multi-vector (ColPali-style) embeddings proved unreliable or too resource-heavy</li>
+                        <li>Replaced per-file-format ingestion pipelines with a normalized-markdown intermediate layer, cutting new-format onboarding effort by ~50%</li>
+                        <li>Migrated authentication from password login, which was being brute-forced, to SSO via existing console sessions, and enforced write/delete protection in application code where the source API exposed no granular permissions</li>
+                        <li>Built a self-healing sync mechanism keeping the file system, vector store, and dashboard consistent under concurrent updates from multiple external sources, with automatic recovery after partial failures</li>
                     </ul>
                     <div class="exp-tech">
                         <span>LangGraph</span>
-                        <span>RAG</span>
+                        <span>CRAG</span>
+                        <span>BM25</span>
+                        <span>RAGAS</span>
                         <span>Qdrant</span>
-                        <span>FastAPI</span>
-                        <span>Hybrid Search</span>
-                        <span>Playwright</span>
-                        <span>Docker</span>
                         <span>Langfuse</span>
+                        <span>SSO/RBAC</span>
+                        <span>Docker</span>
                     </div>
                 </div>
 
@@ -875,11 +879,14 @@
                     <div class="skill-list">
                         <span class="skill-item">LLMs</span>
                         <span class="skill-item">RAG</span>
+                        <span class="skill-item">CRAG</span>
                         <span class="skill-item">Agentic AI</span>
                         <span class="skill-item">Computer Vision</span>
                         <span class="skill-item">Diffusion Models</span>
                         <span class="skill-item">NLP</span>
                         <span class="skill-item">Hybrid Search</span>
+                        <span class="skill-item">BM25</span>
+                        <span class="skill-item">Evals (RAGAS)</span>
                     </div>
                 </div>
 
@@ -894,6 +901,7 @@
                         <span class="skill-item">FastAPI</span>
                         <span class="skill-item">Chainlit</span>
                         <span class="skill-item">Playwright</span>
+                        <span class="skill-item">Docling</span>
                     </div>
                 </div>
 
@@ -906,6 +914,7 @@
                         <span class="skill-item">PostgreSQL</span>
                         <span class="skill-item">Qdrant</span>
                         <span class="skill-item">Langfuse</span>
+                        <span class="skill-item">SSO/RBAC</span>
                     </div>
                 </div>
             </div>
