@@ -1,4 +1,4 @@
-.PHONY: help install dev build serve typecheck clean
+.PHONY: help install dev build serve typecheck test clean
 
 help:
 	@echo "Available commands:"
@@ -7,6 +7,7 @@ help:
 	@echo "  make build      - Build and prerender the site into dist/"
 	@echo "  make serve      - Build, then serve dist/ on port 8000 (production check)"
 	@echo "  make typecheck  - Run TypeScript with no emit"
+	@echo "  make test       - Run the unit tests"
 	@echo "  make clean      - Remove build output and .DS_Store files"
 
 install:
@@ -24,6 +25,9 @@ serve:
 
 typecheck:
 	@npm run typecheck
+
+test:
+	@npm test
 
 clean:
 	@rm -rf dist dist-ssr
