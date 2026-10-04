@@ -58,7 +58,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    padding: 1rem 5%;
+    padding: 1rem max(var(--gutter), calc((100% - var(--content-max)) / 2 + var(--gutter)));
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -156,8 +156,10 @@ nav a:hover {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 0 5%;
-    padding-top: 80px;
+    /* .hero is a <section>, so it already inherits the content cap and auto
+       margins — it needs the plain gutter, not the full-width offset that the
+       header and footer use. */
+    padding: 80px var(--gutter) 0;
 }
 
 .hero-grid {
@@ -409,8 +411,10 @@ nav a:hover {
 
 /* Sections */
 section {
-    padding: 6rem 5%;
-    max-width: 1400px;
+    /* Half the gap on each side, so two adjacent sections produce exactly
+       --section-gap between them. */
+    padding: calc(var(--section-gap) / 2) var(--gutter);
+    max-width: var(--content-max);
     margin: 0 auto;
 }
 
@@ -511,6 +515,9 @@ section {
 .timeline {
     position: relative;
     padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .timeline::before {
@@ -526,7 +533,6 @@ section {
 .timeline-item {
     position: relative;
     padding: 2rem;
-    margin-bottom: 1.5rem;
     background: var(--surface-card);
     border: 1px solid var(--border);
     border-radius: 4px;
@@ -792,13 +798,18 @@ section {
 }
 
 /* Publications */
+.publication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .publication-card {
     position: relative;
     padding: 2rem;
     background: var(--surface-card);
     border: 1px solid var(--border);
     border-radius: 4px;
-    margin-bottom: 1rem;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -1002,11 +1013,6 @@ section {
 }
 
 /* Academic Service - Compact */
-.service-section {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-}
-
 .service-list {
     display: flex;
     flex-direction: column;
@@ -1154,7 +1160,7 @@ section {
 footer {
     position: relative;
     z-index: 10;
-    padding: 2rem 5%;
+    padding: 2rem max(var(--gutter), calc((100% - var(--content-max)) / 2 + var(--gutter)));
     text-align: center;
     border-top: 1px solid var(--border);
 }
@@ -1468,11 +1474,6 @@ body.menu-open {
         width: 160px;
         height: 160px;
         margin: 0 auto;
-    }
-
-    /* Less dead space per section when scrolling on a phone */
-    section {
-        padding: 3.5rem 5%;
     }
 
     /* Card grids: never force a track wider than the viewport itself */

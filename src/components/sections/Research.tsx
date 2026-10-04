@@ -67,30 +67,32 @@ export function Research() {
 
       <SectionHeader id="research" />
 
-      {publications.map((pub) => (
-        <article className="publication-card" key={pub.title}>
-          {pub.isNew && <div className="pub-new-badge">New</div>}
-          <h3 className="pub-title">{pub.title}</h3>
-          <p className="pub-authors">{renderAuthors(pub.authors)}</p>
-          <p className="pub-venue">
-            {pub.venue}
-            {pub.citations && (
-              <>
-                {' '}
-                <Citations {...pub.citations} />
-              </>
-            )}
-          </p>
-          <div className="pub-links">
-            {pub.links.map((link) => (
-              <ExternalLink key={link.href} href={link.href} aria-label={link.ariaLabel}>
-                <Icon name={link.icon} size={14} round={false} />
-                {link.label}
-              </ExternalLink>
-            ))}
-          </div>
-        </article>
-      ))}
+      <div className="publication-list">
+        {publications.map((pub) => (
+          <article className="publication-card" key={pub.title}>
+            {pub.isNew && <div className="pub-new-badge">New</div>}
+            <h3 className="pub-title">{pub.title}</h3>
+            <p className="pub-authors">{renderAuthors(pub.authors)}</p>
+            <p className="pub-venue">
+              {pub.venue}
+              {pub.citations && (
+                <>
+                  {' '}
+                  <Citations {...pub.citations} />
+                </>
+              )}
+            </p>
+            <div className="pub-links">
+              {pub.links.map((link) => (
+                <ExternalLink key={link.href} href={link.href} aria-label={link.ariaLabel}>
+                  <Icon name={link.icon} size={14} round={false} />
+                  {link.label}
+                </ExternalLink>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
 
       <h3 className="subsection-title" id="service">
         Academic Service

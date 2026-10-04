@@ -307,7 +307,15 @@
 
   --flow:        var(--space-5);   /* gap between sibling blocks in prose   */
   --card-pad:    var(--space-5);   /* interior padding of any card          */
-  --section-gap: var(--space-8);   /* gap between page sections             */
+  /* Visible gap between two page sections. Fluid so it scales with the
+     viewport instead of jumping at a breakpoint; sections apply half of it as
+     padding on each side, so this value is the gap a reader actually sees.
+     80px on a phone, 144px on a wide desktop. */
+  --section-gap: clamp(5rem, 9vw, 9rem);
+
+  /* Width of the centred content column. Sections cap at this; the full-width
+     header and footer use it to line their contents up with the sections. */
+  --content-max: 1400px;
   --gutter:      var(--space-9);   /* page side padding (responsive below)  */
 }
 

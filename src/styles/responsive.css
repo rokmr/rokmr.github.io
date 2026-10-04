@@ -61,29 +61,6 @@ table {
 }
 
 /* ---------------------------------------------
-   Page gutters
-   ---------------------------------------------
-   main.css pairs `max-width: 1400px` with `padding: 6rem 5%`. Because the
-   padding is a percentage of the viewport but the box is capped, the inner
-   content gets NARROWER as the screen gets wider past ~1500px:
-
-       viewport   section padding   usable width
-       1280px     64px              1152px
-       1512px     76px              1249px
-       1920px     96px              1208px   <- shrinking
-       2560px     128px             1144px   <- shrinking
-
-   Swapping the percentage for the --gutter token (which already has its own
-   responsive steps) makes the usable width grow monotonically and stop at the
-   1400px cap. */
-header,
-footer,
-.hero,
-main > section {
-    padding-inline: var(--gutter);
-}
-
-/* ---------------------------------------------
    Large desktop / ultrawide (>=1601px)
    --------------------------------------------- */
 @media (min-width: 1601px) {
