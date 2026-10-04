@@ -7,7 +7,7 @@ export function Education() {
   return (
     <section id="education" aria-label="Education and Achievements">
       <SectionHeader id="education" />
-      <div className="education-grid">
+      <div className="card-grid">
         {education.map((entry) => (
           <div className="education-card" key={entry.degree}>
             <h3 className="edu-degree">{entry.degree}</h3>
@@ -19,7 +19,7 @@ export function Education() {
       </div>
 
       <h3 className="edu-subsection-title">Achievements &amp; Certifications</h3>
-      <div className="achievements-grid">
+      <div className="card-grid">
         {achievements.map((item) => (
           <div className="achievement-card" key={`${item.title}-${item.value}`}>
             <div className="achievement-icon">

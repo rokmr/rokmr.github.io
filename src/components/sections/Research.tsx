@@ -1,7 +1,7 @@
 import { SectionHeader } from '../SectionHeader';
 import { Icon } from '../Icon';
 import { ExternalLink } from '../ExternalLink';
-import { publications } from '../../data/publications';
+import { publications, venueDetail } from '../../data/publications';
 import { service } from '../../data/service';
 import { useCitationCount } from '../../hooks/useCitationCount';
 
@@ -35,19 +35,16 @@ function renderAuthors(authors: (typeof publications)[number]['authors']) {
   return out;
 }
 
-function Citations({
+function CitationCount({
   arxivId,
   fallback,
   scholarUrl,
 }: NonNullable<(typeof publications)[number]['citations']>) {
   const count = useCitationCount(arxivId, fallback);
   return (
-    <span className="pub-citations">
-      <Icon name="barChart" size={12} round={false} />{' '}
-      <ExternalLink href={scholarUrl} aria-label="TACLE citation count on Google Scholar">
-        Cited by {count}
-      </ExternalLink>
-    </span>
+    <ExternalLink href={scholarUrl} aria-label={`Cited by ${count} on Google Scholar`}>
+      {count} on Scholar
+    </ExternalLink>
   );
 }
 
@@ -67,32 +64,51 @@ export function Research() {
 
       <SectionHeader id="research" />
 
-      <div className="publication-list">
+      {/* Each paper is a page-grid row: title, authors and links in the main
+          column; venue and citations in the margin column. */}
+      <ol className="pub-list">
         {publications.map((pub) => (
-          <article className="publication-card" key={pub.title}>
-            {pub.isNew && <div className="pub-new-badge">New</div>}
-            <h3 className="pub-title">{pub.title}</h3>
-            <p className="pub-authors">{renderAuthors(pub.authors)}</p>
-            <p className="pub-venue">
-              {pub.venue}
-              {pub.citations && (
-                <>
-                  {' '}
-                  <Citations {...pub.citations} />
-                </>
-              )}
-            </p>
-            <div className="pub-links">
-              {pub.links.map((link) => (
-                <ExternalLink key={link.href} href={link.href} aria-label={link.ariaLabel}>
-                  <Icon name={link.icon} size={14} round={false} />
-                  {link.label}
-                </ExternalLink>
-              ))}
+          <li className="pub l-margin" key={pub.title}>
+            <div>
+              <h3 className="pub-title">
+                {pub.title}
+                {pub.isNew && <span className="tag pub-new">New</span>}
+              </h3>
+              <p className="pub-authors">{renderAuthors(pub.authors)}</p>
+              <div className="pill-row pub-links">
+                {pub.links.map((link) => (
+                  <ExternalLink
+                    key={link.href}
+                    href={link.href}
+                    className="pill"
+                    aria-label={link.ariaLabel}
+                  >
+                    <Icon name={link.icon} size={14} round={false} />
+                    {link.label}
+                  </ExternalLink>
+                ))}
+              </div>
             </div>
-          </article>
+            <dl className="meta">
+              <div className="meta__row">
+                <dt className="meta__label">Venue</dt>
+                <dd className="meta__value">
+                  {pub.venueShort}
+                  {venueDetail(pub) && <span className="meta__sub">{venueDetail(pub)}</span>}
+                </dd>
+              </div>
+              {pub.citations && (
+                <div className="meta__row">
+                  <dt className="meta__label">Cited by</dt>
+                  <dd className="meta__value">
+                    <CitationCount {...pub.citations} />
+                  </dd>
+                </div>
+              )}
+            </dl>
+          </li>
         ))}
-      </div>
+      </ol>
 
       <h3 className="subsection-title" id="service">
         Academic Service

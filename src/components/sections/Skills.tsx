@@ -9,9 +9,9 @@ export function Skills() {
         {skills.map((category) => (
           <div className="skill-category" key={category.name}>
             <h3>{category.name}</h3>
-            <div className="skill-list">
+            <div className="tag-row">
               {category.items.map((item) => (
-                <span className="skill-item" key={item}>
+                <span className="tag" key={item}>
                   {item}
                 </span>
               ))}

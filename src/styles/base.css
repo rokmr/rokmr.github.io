@@ -306,6 +306,34 @@ button { background: none; border: none; cursor: pointer; }
 .wrap--ultra { max-width: var(--max-ultra); }
 .wrap--read  { max-width: var(--max-content); }
 
+/* Main column + margin column. Children go in order: main, then margin.
+   Below 1024px the margin column would squeeze the main one, so its content
+   drops underneath instead. */
+.l-margin {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--margin-col);
+  gap: var(--space-4) var(--col-gap);
+}
+
+@media (max-width: 1024px) {
+  .l-margin { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Card gallery that never leaves a hole. Cards wrap at --card-min and grow
+   to fill their row, so a short last row stretches instead of ending in
+   empty slots — whatever the number of cards, at every width. */
+.card-grid {
+  --card-min: 18rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.card-grid > * {
+  flex: 1 1 var(--card-min);
+  min-width: 0;
+}
+
 .stack > * + * { margin-top: var(--flow); }
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;

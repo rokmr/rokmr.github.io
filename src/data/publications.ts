@@ -8,6 +8,8 @@ export type Publication = {
    */
   authors: { name: string; self?: boolean; suffix?: string }[];
   venue: string;
+  /** Compact venue for bylines and sidenotes, e.g. "WACV 2025". */
+  venueShort: string;
   isNew?: boolean;
   /**
    * Live citation count, refreshed client-side from Semantic Scholar.
@@ -27,6 +29,7 @@ export const publications: Publication[] = [
       { name: 'Soma Biswas' },
     ],
     venue: 'CVPR 2026 Workshop on Generative AI for Storytelling (AISTORY)',
+    venueShort: 'CVPR 2026 Workshop',
     isNew: true,
     links: [
       {
@@ -64,6 +67,7 @@ export const publications: Publication[] = [
       { name: 'Soma Biswas' },
     ],
     venue: 'WACV 2025',
+    venueShort: 'WACV 2025',
     citations: {
       arxivId: '2407.08041',
       fallback: 1,
@@ -110,3 +114,26 @@ export const publications: Publication[] = [
     ],
   },
 ];
+
+/** The name a paper goes by: its title up to the colon ("TACLE", "AttriStory"). */
+export function paperName(pub: Publication): string {
+  return pub.title.split(':')[0]!.trim();
+}
+
+/**
+ * The part of the full venue that the short form leaves out, e.g.
+ * "Generative AI for Storytelling (AISTORY)" for the CVPR workshop; empty
+ * when the short form says it all.
+ */
+export function venueDetail(pub: Publication): string {
+  if (pub.venue === pub.venueShort) return '';
+  if (!pub.venue.startsWith(pub.venueShort)) return pub.venue;
+  return pub.venue
+    .slice(pub.venueShort.length)
+    .replace(/^\s*(on|:|-|—)?\s*/, '')
+    .trim();
+}
+
+/** Newest first, as listed. */
+export const latestPublication = publications[0]!;
+export const firstPublication = publications[publications.length - 1]!;

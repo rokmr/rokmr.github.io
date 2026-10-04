@@ -8,7 +8,7 @@ export function Projects() {
   return (
     <section id="projects" aria-label="AI and ML Projects">
       <SectionHeader id="projects" />
-      <div className="projects-grid">
+      <div className="card-grid">
         {projects.map((project) => (
           <article className="project-card" key={project.title}>
             <div className="project-preview">
@@ -32,9 +32,11 @@ export function Projects() {
                 </div>
               </div>
               <p className="project-description">{project.description}</p>
-              <div className="project-tech">
+              <div className="tag-row">
                 {project.tech.map((tech) => (
-                  <span key={tech}>{tech}</span>
+                  <span className="tag" key={tech}>
+                    {tech}
+                  </span>
                 ))}
               </div>
             </div>

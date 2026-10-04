@@ -1,5 +1,4 @@
 import { Header } from '../components/Header';
-import { HeroCanvas } from '../components/HeroCanvas';
 import { Footer } from '../components/Footer';
 import { BackToTop } from '../components/BackToTop';
 import { NoscriptProfile } from '../components/NoscriptProfile';
@@ -25,7 +24,6 @@ export function Home({ buildYear }: { buildYear: number }) {
       </a>
 
       <NoscriptProfile />
-      <HeroCanvas />
 
       <main className="content">
         <Header nav={nav} />

@@ -36,17 +36,6 @@ body {
     line-height: 1.6;
 }
 
-/* Canvas */
-#flow-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-    pointer-events: none;
-}
-
 .content {
     position: relative;
     z-index: 10;
@@ -151,264 +140,6 @@ nav a:hover {
     }
 }
 
-/* Hero */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    /* .hero is a <section>, so it already inherits the content cap and auto
-       margins — it needs the plain gutter, not the full-width offset that the
-       header and footer use. */
-    padding: 80px var(--gutter) 0;
-}
-
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4rem;
-    align-items: center;
-    width: 100%;
-    max-width: 1400px;
-}
-
-.hero-content {
-    max-width: 600px;
-}
-
-.hero-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-accent);
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.hero h1 {
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
-    letter-spacing: -0.02em;
-}
-
-.hero-story {
-    font-size: var(--text-md);
-    color: var(--ink-secondary);
-    margin-bottom: 1.75rem;
-    line-height: 1.7;
-}
-
-.hero-story strong {
-    color: var(--ink);
-}
-
-.hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-    padding: 1.5rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.stat {
-    display: block;
-    flex: 1 1 110px;
-    text-align: left;
-    text-decoration: none;
-    color: inherit;
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 0.65rem 0.75rem;
-    transition: all 0.15s ease;
-}
-
-.stat:hover {
-    border-color: var(--border-strong);
-    background: var(--surface-raised);
-}
-
-.stat-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xl);
-    font-weight: 600;
-    color: #fff;
-    white-space: nowrap;
-    transition: color 0.15s ease;
-}
-
-.stat:hover .stat-value {
-    color: var(--ink-accent);
-}
-
-.stat-label {
-    /* was 0.6875rem (11px) — below the 12px floor set in tokens.css */
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    padding: 0.8rem 1.5rem;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.btn:hover::before {
-    left: 100%;
-}
-
-.btn-primary {
-    background: #fff;
-    color: #000;
-    border: 1px solid #fff;
-}
-
-.btn-primary:hover {
-    background: transparent;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-    border-color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
-/* Control Panel - GPU Training Stats */
-.control-panel {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(15, 15, 15, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    padding: 0.6rem 1.2rem;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    z-index: 100;
-    font-family: 'JetBrains Mono', monospace;
-    transition: opacity 0.3s ease;
-}
-
-.control-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-}
-
-.control-label {
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
-    letter-spacing: 1px;
-}
-
-.control-value {
-    font-size: var(--text-xs);
-    color: var(--ink-secondary);
-}
-
-.timestep {
-    font-size: var(--text-md);
-    color: #fff;
-    min-width: 60px;
-    text-align: center;
-    padding: 0 0.5rem;
-}
-
-.progress-bar {
-    width: 80px;
-    height: 2px;
-    background: var(--border);
-    border-radius: 1px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: var(--ink-accent);
-    width: 0%;
-    transition: width 0.1s;
-}
-
-/* Terminal - subtle, bottom-left */
-.terminal-init {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
-    z-index: 50;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.terminal-cursor {
-    color: var(--ink-accent);
-    animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-
-    0%,
-    50% {
-        opacity: 1;
-    }
-
-    51%,
-    100% {
-        opacity: 0;
-    }
-}
-
 /* Sections */
 section {
     /* Half the gap on each side, so two adjacent sections produce exactly
@@ -445,190 +176,7 @@ section {
     background: var(--border);
 }
 
-/* About */
-.about-grid {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 4rem;
-    align-items: start;
-}
-
-.profile-photo {
-    width: 220px;
-    height: 220px;
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink-muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    position: relative;
-    overflow: hidden;
-}
-
-.profile-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) sepia(20%) hue-rotate(80deg) brightness(0.9);
-    transition: filter 0.4s ease;
-}
-
-.profile-photo:hover img {
-    filter: grayscale(0%) sepia(0%) hue-rotate(0deg) brightness(1);
-}
-
-.about-text h2 {
-    font-size: var(--text-2xl);
-    margin-bottom: 1.25rem;
-}
-
-.about-text p {
-    color: var(--ink-secondary);
-    margin-bottom: 1.25rem;
-    font-size: var(--text-md);
-    line-height: 1.7;
-}
-
-.about-text strong {
-    color: var(--ink);
-}
-
-.about-currently {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
-    padding: 0.75rem 1rem;
-    border-left: 2px solid var(--ink-accent);
-    background: var(--surface-card);
-    border-radius: 0 4px 4px 0;
-}
-
-.about-currently strong {
-    color: var(--ink-accent);
-}
-
-/* Experience Timeline */
-.timeline {
-    position: relative;
-    padding-left: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: var(--border);
-}
-
-.timeline-item {
-    position: relative;
-    padding: 2rem;
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    transition: all 0.3s;
-}
-
-.timeline-item:hover {
-    border-color: var(--border-strong);
-    transform: translateX(5px);
-}
-
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -2.5rem;
-    top: 2.5rem;
-    width: 10px;
-    height: 10px;
-    background: var(--surface);
-    border: 2px solid var(--ink-accent);
-    border-radius: 50%;
-}
-
-.timeline-item.current::before {
-    background: var(--ink-accent);
-}
-
-.exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
-.exp-title {
-    font-size: var(--text-xl);
-    font-weight: 600;
-}
-
-.exp-company {
-    font-size: var(--text-md);
-    color: var(--ink-secondary);
-}
-
-.exp-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
-    text-align: right;
-}
-
-.exp-location {
-    font-size: var(--text-sm);
-    color: var(--ink-muted);
-}
-
-.exp-description {
-    color: var(--ink-secondary);
-    font-size: var(--text-md);
-    margin-top: 1rem;
-}
-
-.exp-description li {
-    margin-bottom: 0.5rem;
-    margin-left: 1rem;
-}
-
-.exp-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 1rem;
-}
-
-.exp-tech span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    padding: 0.25rem 0.5rem;
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--ink-secondary);
-    transition: all 0.3s;
-}
-
-.exp-tech span:hover {
-    border-color: var(--border-strong);
-    color: var(--ink);
-}
-
 /* Projects */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 1.5rem;
-}
 
 .project-card {
     background: var(--surface-card);
@@ -644,8 +192,11 @@ section {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* Fixed height, not an aspect ratio: .card-grid widens cards in a short last
+   row, and every preview in the gallery should still line up. `contain`
+   keeps diagram labels whole at any card width. */
 .project-preview {
-    aspect-ratio: 16 / 9;
+    height: 13.5rem;
     background: var(--surface-raised);
     display: flex;
     align-items: center;
@@ -657,10 +208,16 @@ section {
     overflow: hidden;
 }
 
+.project-preview picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .project-preview img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     background: var(--surface-raised);
     filter: grayscale(100%) sepia(20%) hue-rotate(80deg) brightness(0.9);
@@ -722,27 +279,7 @@ section {
     line-height: 1.6;
 }
 
-.project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.project-tech span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    padding: 0.25rem 0.5rem;
-    background: var(--surface-raised);
-    border-radius: 2px;
-    color: var(--ink-muted);
-}
-
-/* Achievements */
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
+/* Achievements — cards in a .card-grid (base.css). */
 
 .achievement-card {
     background: var(--surface-card);
@@ -797,126 +334,7 @@ section {
     opacity: 0.8;
 }
 
-/* Publications */
-.publication-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.publication-card {
-    position: relative;
-    padding: 2rem;
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.pub-new-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    font-weight: 600;
-    padding: 0.2rem 0.6rem;
-    background: var(--ink-accent);
-    color: #000;
-    border-radius: 2px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.publication-card:hover {
-    border-color: var(--border-strong);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.pub-title {
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.pub-authors {
-    font-size: var(--text-base);
-    color: var(--ink-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.pub-venue {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-accent);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.pub-citations {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: var(--text-xs);
-    color: var(--ink-muted);
-}
-
-.pub-citations svg {
-    stroke: var(--ink-muted);
-}
-
-.pub-citations a {
-    color: var(--ink-muted);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.pub-citations a:hover {
-    color: var(--ink);
-}
-
-.pub-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.pub-links a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    color: var(--ink-secondary);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    transition: all 0.3s;
-}
-
-.pub-links a:hover {
-    border-color: #fff;
-    color: #fff;
-}
-
-.pub-links a.pub-link-disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.pub-links a.pub-link-disabled:hover {
-    border-color: var(--border);
-    color: var(--ink-secondary);
-}
-
-/* Education */
-.education-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
+/* Education — cards in a .card-grid (base.css). */
 
 .education-card {
     padding: 1.5rem;
@@ -975,7 +393,8 @@ section {
 /* Skills */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* min() keeps a track from ever being wider than a phone's column. */
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
     gap: 2rem;
 }
 
@@ -986,30 +405,6 @@ section {
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 1rem;
-}
-
-.skill-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: flex-start;
-}
-
-.skill-item {
-    display: inline-block;
-    font-size: var(--text-sm);
-    padding: 0.35rem 0.7rem;
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--ink-secondary);
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-
-.skill-item:hover {
-    border-color: var(--border-strong);
-    color: var(--ink);
 }
 
 /* Academic Service - Compact */
@@ -1076,84 +471,6 @@ section {
     .service-separator {
         display: none;
     }
-}
-
-/* Contact */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-}
-
-.contact-info h2 {
-    font-size: var(--text-3xl);
-    margin-bottom: 1rem;
-}
-
-.contact-info p {
-    color: var(--ink-secondary);
-    margin-bottom: 2rem;
-    max-width: 400px;
-}
-
-.contact-email {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-md);
-    color: var(--ink);
-    text-decoration: none;
-    padding: 1rem 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    transition: all 0.3s;
-    margin-bottom: 2rem;
-}
-
-.contact-email:hover {
-    border-color: #fff;
-}
-
-.social-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
-.social-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    padding: 1rem;
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--ink-secondary);
-    text-decoration: none;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.social-link:hover {
-    border-color: var(--border-strong);
-    color: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.social-link:active {
-    transform: translateY(-1px);
-}
-
-.social-link i {
-    font-size: var(--text-xl);
-    width: 24px;
-}
-
-.social-link span {
-    font-size: var(--text-base);
 }
 
 /* Footer */
@@ -1365,41 +682,6 @@ body.menu-open {
 
 /* Responsive */
 @media (max-width: 900px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .control-panel {
-        padding: 0.4rem 0.8rem;
-        gap: 0.6rem;
-        bottom: 1rem;
-    }
-
-    .control-panel .control-group {
-        display: none;
-    }
-
-    .control-panel .progress-bar {
-        width: 50px;
-    }
-
-    .control-panel .timestep {
-        font-size: var(--text-sm);
-        min-width: auto;
-    }
-
-    .terminal-init {
-        display: none;
-    }
-
     /* Hide desktop nav, show hamburger */
     nav {
         display: none;
@@ -1416,71 +698,6 @@ body.menu-open {
     .mobile-nav,
     .mobile-nav-overlay {
         display: block;
-    }
-
-    /* Mobile hero adjustments */
-    .hero h1 {
-        font-size: var(--text-2xl);
-    }
-
-    .hero-story {
-        font-size: var(--text-base);
-    }
-
-    .hero-stats {
-        gap: 1.5rem;
-    }
-
-    .stat-value {
-        font-size: var(--text-xl);
-    }
-
-    .hero-actions {
-        gap: 0.5rem;
-    }
-
-    .btn {
-        font-size: var(--text-xs);
-        padding: 0.6rem 1rem;
-    }
-
-    /* Timeline mobile */
-    .exp-header {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .exp-date {
-        text-align: left;
-    }
-
-    /* Projects mobile */
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Pub links wrap */
-    .pub-links {
-        gap: 0.5rem;
-    }
-
-    .pub-links a {
-        font-size: var(--text-xs);
-        padding: 0.55rem 0.6rem;
-    }
-
-    /* Profile photo centered */
-    .profile-photo {
-        width: 160px;
-        height: 160px;
-        margin: 0 auto;
-    }
-
-    /* Card grids: never force a track wider than the viewport itself */
-    .achievements-grid,
-    .education-grid,
-    .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     }
 }
 
@@ -1532,15 +749,6 @@ body.menu-open {
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
-    }
-
-    #flow-canvas {
-        display: none;
-    }
-
-    .control-panel,
-    .terminal-init {
-        display: none;
     }
 
     .section-reveal {

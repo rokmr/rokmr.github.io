@@ -1,0 +1,23 @@
+/* ============================================================================
+   TAG — a non-interactive label for a technology or topic: experience stack,
+   project stack, skills. A row of them is `.tag-row`.
+   ========================================================================= */
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  color: var(--ink-secondary);
+  white-space: nowrap;
+  background: var(--surface-raised);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-tight);
+}

@@ -1,0 +1,66 @@
+/* ============================================================================
+   META — label/value rows behind a hairline, for the margin column: the
+   hero byline and the abstract's sidenotes. Markup:
+
+     <dl class="meta">
+       <div class="meta__row">
+         <dt class="meta__label">Label</dt>
+         <dd class="meta__value">Value <span class="meta__sub">detail</span></dd>
+       </div>
+     </dl>
+   ========================================================================= */
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: var(--border-width) solid var(--border);
+}
+
+/* Label and value share a line, so a block of notes stays compact. */
+.meta__row {
+  display: grid;
+  grid-template-columns: 11ch minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.meta__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.meta__value {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--ink);
+}
+
+.meta__sub {
+  display: block;
+  color: var(--ink-muted);
+}
+
+.meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.meta a:hover {
+  color: var(--ink-accent);
+  text-decoration-color: var(--ink-accent);
+}
+
+.meta a:focus-visible {
+  outline: 2px solid var(--ink-accent);
+  outline-offset: 2px;
+}

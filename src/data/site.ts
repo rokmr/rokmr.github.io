@@ -5,7 +5,6 @@ export const site = {
   email: 'contact@rohit.vision',
   blogUrl: 'https://blogs.rohit.vision/',
   name: 'Rohit Kumar',
-  role: 'AI Engineer @ Armada AI',
   themeColor: '#0a0a0a',
   twitterHandle: '@rohitronie',
 } as const;
@@ -25,7 +24,7 @@ export const socialUrls = {
  * everything instead of leaving the prefixes to drift out of sync by hand.
  */
 export const sections = [
-  { id: 'about', title: 'About', nav: 'About' },
+  { id: 'about', title: 'Abstract', nav: 'About' },
   { id: 'experience', title: 'Work Experience', nav: 'Experience' },
   { id: 'research', title: 'Research', nav: 'Research' },
   { id: 'projects', title: 'Projects', nav: 'Projects' },
@@ -45,29 +44,12 @@ export function sectionMeta(id: SectionId) {
 
 export const navLinks = sections.map((s) => ({ href: `#${s.id}`, label: s.nav }));
 
-export const heroStats = [
-  { value: '221', label: 'GATE AIR (EE)', href: '#education' },
-  // Replaced the second GATE rank: the two ranks signalled the same thing,
-  // and screen zero had nothing about published research.
-  { value: '2', label: 'Publications', href: '#research' },
-  { value: '2+', label: 'Years ML', href: '#experience' },
-  { value: 'IISc', label: 'M.Tech AI', href: '#education' },
-] as const;
 
 export const socialLinks = [
   { key: 'linkedin', url: socialUrls.linkedin, label: 'LinkedIn', icon: 'linkedin', me: true },
   { key: 'github', url: socialUrls.github, label: 'GitHub', icon: 'github', me: true },
   { key: 'x', url: socialUrls.x, label: 'X', icon: 'x', me: true },
   { key: 'scholar', url: socialUrls.scholar, label: 'Google Scholar', icon: 'scholar', me: true },
-  { key: 'huggingface', url: socialUrls.huggingface, label: 'HuggingFace', icon: 'huggingface', me: true },
+  { key: 'huggingface', url: socialUrls.huggingface, label: 'Hugging Face', icon: 'huggingface', me: true },
   { key: 'blog', url: site.blogUrl, label: 'Blog', icon: 'blog', me: false },
-] as const;
-
-// Terminal typewriter lines for the hero HUD.
-export const terminalMessages = [
-  'rohit@iisc:~$ python inference.py',
-  'torch.cuda.is_available() → True',
-  'Loading checkpoint: best_model.pt',
-  'Model loaded. 847M params',
-  'Ready.',
 ] as const;

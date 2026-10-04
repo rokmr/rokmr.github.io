@@ -51,3 +51,7 @@ export const experience: Experience[] = [
     tech: ['L2P', 'DualPrompt', 'MoCo', 'SimCLR', 'PyTorch', 'OpenCV'],
   },
 ];
+
+/** The role marked `current`, and the most recent one before it. */
+export const currentRole = experience.find((e) => e.current) ?? experience[0]!;
+export const previousRole = experience.find((e) => e !== currentRole && !e.current)!;

@@ -1,0 +1,26 @@
+/* ============================================================================
+   CONTACT — an .l-margin row: invitation and links (.pill-row) in the main
+   column, address and location (.meta) in the margin column.
+   ========================================================================= */
+
+.contact {
+  align-items: end;
+}
+
+.contact-title {
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.contact-text {
+  max-width: var(--measure);
+  margin-top: var(--space-4);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--ink-secondary);
+}
+
+.contact-links {
+  margin-top: var(--space-6);
+}

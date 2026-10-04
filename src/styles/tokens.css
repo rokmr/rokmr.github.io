@@ -317,6 +317,13 @@
      header and footer use it to line their contents up with the sections. */
   --content-max: 1400px;
   --gutter:      var(--space-9);   /* page side padding (responsive below)  */
+
+  /* Margin column — the Distill/Tufte side column beside the main column,
+     for metadata that annotates it (bylines, sidenotes). Every block laid
+     out with .l-margin (base.css) shares these, so margin columns line up
+     down the page. It drops under the main column below 1024px. */
+  --margin-col: 20rem;             /* 320px */
+  --col-gap:    var(--space-7);
 }
 
 /* ---------------------------------------------------------------------------

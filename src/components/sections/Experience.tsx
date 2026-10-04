@@ -1,39 +1,54 @@
 import { SectionHeader } from '../SectionHeader';
 import { experience } from '../../data/experience';
 
+/**
+ * Work history on the page grid: what was done in the main column, when,
+ * where and with what in the margin column — the same column that carries
+ * the hero byline and the abstract's sidenotes. The timeline rail sits in the
+ * page gutter so the text keeps the page's left edge.
+ */
 export function Experience() {
   return (
     <section id="experience" aria-label="Work Experience">
       <SectionHeader id="experience" />
-      <div className="timeline">
+      <ol className="timeline">
         {experience.map((job) => (
-          <div
+          <li
             key={`${job.company}-${job.title}-${job.date}`}
-            className={`timeline-item${job.current ? ' current' : ''}`}
+            className={`timeline-item l-margin${job.current ? ' current' : ''}`}
           >
-            <div className="exp-header">
-              <div>
-                <h3 className="exp-title">{job.title}</h3>
-                <div className="exp-company">{job.company}</div>
-              </div>
-              <div className="exp-date">
-                {job.date}
-                <div className="exp-location">{job.location}</div>
-              </div>
+            <div>
+              <h3 className="exp-title">{job.title}</h3>
+              <p className="exp-company">{job.company}</p>
+              <ul className="exp-points">
+                {job.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
             </div>
-            <ul className="exp-description">
-              {job.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-            <div className="exp-tech">
-              {job.tech.map((tech) => (
-                <span key={tech}>{tech}</span>
-              ))}
-            </div>
-          </div>
+            <dl className="meta">
+              <div className="meta__row">
+                <dt className="meta__label">When</dt>
+                <dd className="meta__value">{job.date}</dd>
+              </div>
+              <div className="meta__row">
+                <dt className="meta__label">Where</dt>
+                <dd className="meta__value">{job.location}</dd>
+              </div>
+              <div className="meta__row">
+                <dt className="meta__label">Stack</dt>
+                <dd className="meta__value tag-row">
+                  {job.tech.map((tech) => (
+                    <span className="tag" key={tech}>
+                      {tech}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            </dl>
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
   );
 }
