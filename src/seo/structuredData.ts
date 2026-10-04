@@ -185,8 +185,8 @@ export const homeStructuredData = [
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Publications',
-        item: `${site.origin}/#publications`,
+        name: 'Research',
+        item: `${site.origin}/#research`,
       },
       { '@type': 'ListItem', position: 3, name: 'Projects', item: `${site.origin}/#projects` },
       { '@type': 'ListItem', position: 4, name: 'Blog', item: site.blogUrl },

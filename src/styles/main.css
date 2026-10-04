@@ -946,6 +946,9 @@ section {
     margin-top: 0.5rem;
 }
 
+/* Divider + label for a group nested inside a section (Academic Service inside
+   Research, Achievements inside Education). */
+.subsection-title,
 .edu-subsection-title {
     font-family: 'JetBrains Mono', monospace;
     font-size: var(--text-sm);

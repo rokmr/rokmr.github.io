@@ -4,7 +4,7 @@ import { skills } from '../../data/skills';
 export function Skills() {
   return (
     <section id="skills" aria-label="Technical Skills">
-      <SectionHeader number="05" title="Skills" />
+      <SectionHeader id="skills" />
       <div className="skills-grid">
         {skills.map((category) => (
           <div className="skill-category" key={category.name}>

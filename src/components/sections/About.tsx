@@ -3,7 +3,7 @@ import { SectionHeader } from '../SectionHeader';
 export function About() {
   return (
     <section id="about" aria-label="About Rohit Kumar">
-      <SectionHeader number="01" title="About" />
+      <SectionHeader id="about" />
       <div className="about-grid">
         <div className="profile-photo">
           <picture>

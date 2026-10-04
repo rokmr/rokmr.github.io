@@ -6,7 +6,7 @@ import { site, socialLinks } from '../../data/site';
 export function Contact() {
   return (
     <section id="contact" aria-label="Contact Information">
-      <SectionHeader number="08" title="Contact" />
+      <SectionHeader id="contact" />
       <div className="contact-grid">
         <div className="contact-info">
           <h2>Let's Build Something Together</h2>

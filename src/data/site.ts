@@ -18,19 +18,38 @@ export const socialUrls = {
   huggingface: 'https://huggingface.co/rokmr',
 } as const;
 
-export const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#publications', label: 'Publications' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#education', label: 'Education' },
-  { href: '#contact', label: 'Contact' },
+/**
+ * The page's sections, in render order. This is the single source of truth for
+ * the nav, for the `01`/`02` prefixes in each section header, and for the order
+ * in which Home composes them — so reordering a section here renumbers
+ * everything instead of leaving the prefixes to drift out of sync by hand.
+ */
+export const sections = [
+  { id: 'about', title: 'About', nav: 'About' },
+  { id: 'experience', title: 'Work Experience', nav: 'Experience' },
+  { id: 'research', title: 'Research', nav: 'Research' },
+  { id: 'projects', title: 'Projects', nav: 'Projects' },
+  { id: 'skills', title: 'Skills', nav: 'Skills' },
+  { id: 'education', title: 'Education', nav: 'Education' },
+  { id: 'contact', title: 'Contact', nav: 'Contact' },
 ] as const;
+
+export type SectionId = (typeof sections)[number]['id'];
+
+export function sectionMeta(id: SectionId) {
+  const index = sections.findIndex((s) => s.id === id);
+  const section = sections[index];
+  if (!section) throw new Error(`unknown section: ${id}`);
+  return { ...section, number: String(index + 1).padStart(2, '0') };
+}
+
+export const navLinks = sections.map((s) => ({ href: `#${s.id}`, label: s.nav }));
 
 export const heroStats = [
   { value: '221', label: 'GATE AIR (EE)', href: '#education' },
-  { value: '227', label: 'GATE AIR (IN)', href: '#education' },
+  // Replaced the second GATE rank: the two ranks signalled the same thing,
+  // and screen zero had nothing about published research.
+  { value: '2', label: 'Publications', href: '#research' },
   { value: '2+', label: 'Years ML', href: '#experience' },
   { value: 'IISc', label: 'M.Tech AI', href: '#education' },
 ] as const;

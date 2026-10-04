@@ -7,7 +7,7 @@ import { projects } from '../../data/projects';
 export function Projects() {
   return (
     <section id="projects" aria-label="AI and ML Projects">
-      <SectionHeader number="03" title="Projects" />
+      <SectionHeader id="projects" />
       <div className="projects-grid">
         {projects.map((project) => (
           <article className="project-card" key={project.title}>

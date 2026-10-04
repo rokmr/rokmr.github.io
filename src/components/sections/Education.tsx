@@ -6,7 +6,7 @@ import { achievements, education } from '../../data/education';
 export function Education() {
   return (
     <section id="education" aria-label="Education and Achievements">
-      <SectionHeader number="06" title="Education" />
+      <SectionHeader id="education" />
       <div className="education-grid">
         {education.map((entry) => (
           <div className="education-card" key={entry.degree}>

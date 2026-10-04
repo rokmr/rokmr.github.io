@@ -4,7 +4,7 @@ import { experience } from '../../data/experience';
 export function Experience() {
   return (
     <section id="experience" aria-label="Work Experience">
-      <SectionHeader number="02" title="Work Experience" />
+      <SectionHeader id="experience" />
       <div className="timeline">
         {experience.map((job) => (
           <div
