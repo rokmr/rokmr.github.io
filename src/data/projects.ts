@@ -77,7 +77,7 @@ export const projects: Project[] = [
     },
     badge: 'Avataar AI',
     description:
-      'End-to-end product image generation pipeline using Flux + ControlNets. Modified diffusion sampling with intrinsic decomposition for photorealistic object reconstruction.',
+      'Product image generation pipeline on Flux + ControlNets. Modified diffusion sampling with intrinsic decomposition for photorealistic object reconstruction.',
     tech: ['Flux', 'ControlNet', 'Diffusion', 'SAM', 'CLIP'],
   },
   {
@@ -98,7 +98,7 @@ export const projects: Project[] = [
       },
     ],
     description:
-      'Deep learning Virtual Try-On pipeline with 3-stage framework combining Florence2 and IDM-VTON models for automated garment transfer.',
+      'Three-stage Virtual Try-On pipeline combining Florence2 and IDM-VTON for automated garment transfer.',
     tech: ['Florence2', 'IDM-VTON', 'FLUX', 'Diffusion'],
   },
   {
