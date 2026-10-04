@@ -243,7 +243,8 @@ nav a:hover {
 }
 
 .stat-label {
-    font-size: 0.6875rem;
+    /* was 0.6875rem (11px) — below the 12px floor set in tokens.css */
+    font-size: var(--text-xs);
     color: var(--ink-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1190,6 +1191,9 @@ footer p {
     border: none;
     cursor: pointer;
     padding: 4px;
+    /* z-index only applies to positioned elements; without this the button
+       stayed in the header's stacking context, below the overlay. */
+    position: relative;
     z-index: 200;
     -webkit-tap-highlight-color: transparent;
 }
@@ -1228,10 +1232,16 @@ footer p {
     z-index: 149;
     opacity: 0;
     transition: opacity 0.3s ease;
+    /* At <=900px this element is display:block with opacity:0, which still
+       captures pointer events — it covered the whole page and swallowed every
+       tap (hamburger, hero buttons, links) while the menu was CLOSED.
+       It must only be interactive once it is actually shown. */
+    pointer-events: none;
 }
 
 .mobile-nav-overlay.active {
     opacity: 1;
+    pointer-events: auto;
 }
 
 /* Mobile nav drawer */

@@ -1,0 +1,374 @@
+/* ============================================
+   Responsive layer
+   ============================================
+   Loaded last so it wins over main.css.
+
+   main.css had a single real breakpoint at 900px, which meant tablets got the
+   phone layout: one-column project/skill/education grids on an 834px iPad,
+   and no step between "full desktop" and "narrow phone". This file adds the
+   missing rungs. Two ladders are deliberately kept separate:
+
+     NAVIGATION  switches to the hamburger drawer at <=900px (unchanged).
+     CONTENT     has its own rungs, so a tablet keeps two-column grids while
+                 still using the drawer.
+
+   Rungs
+     <=380px   small phone   (iPhone SE)
+     <=600px   phone
+     601-900   tablet portrait
+     901-1200  tablet landscape / small laptop
+     1201-1600 desktop (main.css base)
+     >=1601px  large desktop / ultrawide
+   plus short-landscape, touch-input and high-density refinements.
+*/
+
+/* ---------------------------------------------
+   Universal guards
+   --------------------------------------------- */
+
+/* Decorative overlays: visible, never interactive. */
+.control-panel,
+.terminal-init {
+    pointer-events: none;
+}
+
+/* No layout may introduce a horizontal scrollbar at any width. */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Media and embeds stay inside their column. */
+img,
+picture,
+svg,
+video,
+canvas:not(#flow-canvas),
+pre,
+table {
+    max-width: 100%;
+}
+
+/* Long URLs and identifiers must wrap rather than widen the page. */
+.exp-description li,
+.project-description,
+.pub-title,
+.pub-authors,
+.edu-courses,
+.service-desc {
+    overflow-wrap: break-word;
+}
+
+/* ---------------------------------------------
+   Page gutters
+   ---------------------------------------------
+   main.css pairs `max-width: 1400px` with `padding: 6rem 5%`. Because the
+   padding is a percentage of the viewport but the box is capped, the inner
+   content gets NARROWER as the screen gets wider past ~1500px:
+
+       viewport   section padding   usable width
+       1280px     64px              1152px
+       1512px     76px              1249px
+       1920px     96px              1208px   <- shrinking
+       2560px     128px             1144px   <- shrinking
+
+   Swapping the percentage for the --gutter token (which already has its own
+   responsive steps) makes the usable width grow monotonically and stop at the
+   1400px cap. */
+header,
+footer,
+.hero,
+main > section {
+    padding-inline: var(--gutter);
+}
+
+/* ---------------------------------------------
+   Large desktop / ultrawide (>=1601px)
+   --------------------------------------------- */
+@media (min-width: 1601px) {
+    /* Grid column counts are left to auto-fit so they only ever increase with
+       available width. The hero's prose column can afford to be a little
+       wider here without the line length becoming uncomfortable. */
+    .hero-content {
+        max-width: 680px;
+    }
+}
+
+/* ---------------------------------------------
+   Tablet landscape / small laptop (901-1200px)
+   --------------------------------------------- */
+@media (min-width: 901px) and (max-width: 1200px) {
+    /* Seven nav links plus two CTA buttons are tight at this width. */
+    header nav {
+        gap: 1rem;
+    }
+
+    header nav a {
+        font-size: var(--text-sm);
+    }
+
+    /* Keep both CTA labels readable; reclaim the width from padding instead
+       of hiding the text, which would leave two unlabelled icons. */
+    .header-cta {
+        gap: 0.5rem;
+    }
+
+    .header-cta .cv-btn,
+    .header-cta .collab-btn {
+        padding-inline: 0.7rem;
+        font-size: var(--text-xs);
+    }
+
+    /* The 220px photo column plus prose is cramped; narrow the photo. */
+    .about-grid {
+        grid-template-columns: 180px 1fr;
+        gap: 2rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skills-grid,
+    .education-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ---------------------------------------------
+   Tablet portrait (601-900px)
+   --------------------------------------------- */
+@media (min-width: 601px) and (max-width: 900px) {
+    /* main.css collapses every grid to one column at <=900px. On a tablet
+       that wastes half the width — restore two columns. */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skills-grid,
+    .education-grid,
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .social-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Keep the photo beside the prose rather than stacking it. */
+    .about-grid {
+        grid-template-columns: 170px 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    .profile-photo {
+        width: 170px;
+        height: 170px;
+        margin: 0;
+    }
+
+    /* The hero has room for the full type scale here. */
+    .hero h1 {
+        font-size: var(--text-3xl);
+    }
+
+    .hero-story {
+        font-size: var(--text-md);
+    }
+
+    /* Date back on the same row as the title — there is width for it. */
+    .exp-header {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .exp-date {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    /* Service entries read better inline at this width. */
+    .service-item {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .service-separator {
+        display: inline;
+    }
+}
+
+/* ---------------------------------------------
+   Phone (<=600px)
+   --------------------------------------------- */
+@media (max-width: 600px) {
+    /* minmax(280px) overflows a 360px viewport once gutters are subtracted. */
+    .projects-grid,
+    .skills-grid,
+    .education-grid,
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Four stats in a row do not fit; two rows of two do. */
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem 1.25rem;
+    }
+
+    /* Full-width stacked buttons are easier to hit than a wrapped row, but
+       they make the hero taller — pad the bottom so the last button clears
+       the fixed HUD rather than sitting behind it. */
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero {
+        padding-bottom: 5rem;
+    }
+
+    .hero-actions .btn {
+        justify-content: center;
+    }
+
+    /* Publication link rows wrap into a tidy grid instead of a ragged flex. */
+    .pub-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .pub-links a {
+        justify-content: center;
+    }
+
+    .section-header {
+        gap: 0.6rem;
+    }
+
+    /* Tech chips get their own line rather than squeezing the title. */
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* ---------------------------------------------
+   Small phone (<=380px)
+   --------------------------------------------- */
+@media (max-width: 380px) {
+    /* One column for anything still paired at this width. */
+    .hero-stats,
+    .pub-links,
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: var(--text-xl);
+    }
+
+    .logo {
+        font-size: var(--text-sm);
+    }
+
+    .exp-tech span,
+    .project-tech span,
+    .skill-item {
+        font-size: var(--text-xs);
+    }
+}
+
+/* ---------------------------------------------
+   Short viewports (phone in landscape, split-screen)
+   --------------------------------------------- */
+@media (max-height: 600px) and (orientation: landscape) {
+    /* A 100vh hero leaves no room for content on a landscape phone. */
+    .hero {
+        min-height: auto;
+        padding-top: calc(var(--header-h) + var(--space-5));
+        padding-bottom: var(--space-6);
+    }
+
+    /* The HUD and terminal would cover the hero text. */
+    .control-panel,
+    .terminal-init {
+        display: none;
+    }
+
+    /* The drawer must scroll when it is taller than the viewport. */
+    .mobile-nav-inner {
+        overflow-y: auto;
+        max-height: 100vh;
+    }
+}
+
+/* ---------------------------------------------
+   Touch input
+   --------------------------------------------- */
+@media (hover: none) {
+    /* WCAG 2.5.8 asks for 24px minimum; 44px is the comfortable iOS target.
+       Icon-only links in card headers were well under both. */
+    /* Standalone controls. Links that sit inline inside a sentence (the
+       service venues, the citation count) are exempt under WCAG 2.5.8 and are
+       deliberately left in the text flow. */
+    .logo,
+    .btn,
+    .cv-btn,
+    .collab-btn,
+    .contact-email,
+    .project-links a,
+    .pub-links a,
+    .social-link,
+    .achievement-link,
+    .back-to-top,
+    .mobile-menu-btn,
+    header nav a,
+    .mobile-nav a {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn,
+    .project-links a,
+    .back-to-top,
+    .mobile-menu-btn {
+        justify-content: center;
+    }
+
+    /* Hover transforms either do nothing or stick after a tap. */
+    .project-card:hover,
+    .education-card:hover,
+    .achievement-card:hover,
+    .social-link:hover,
+    .timeline-item:hover {
+        transform: none;
+    }
+}
+
+/* ---------------------------------------------
+   Pointer-driven refinements
+   --------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+    /* The canvas tracks clientX, so it is only meaningful with a mouse. */
+    #flow-canvas {
+        cursor: crosshair;
+    }
+}
