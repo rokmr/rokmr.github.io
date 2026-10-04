@@ -15,6 +15,7 @@ a real `index.html` that hydrates into React.
 | `make build` / `npm run build` | Build + prerender into `dist/` |
 | `make serve` | Build, then serve `dist/` on :8000 — the real deployed output |
 | `make typecheck` | `tsc --noEmit` |
+| `make test` / `npm test` | Unit tests (Vitest) for `lib/flow` and the page data |
 | `make clean` | Remove build output and `.DS_Store` files |
 
 ## Layout
@@ -26,12 +27,19 @@ src/
   entry-server.tsx      renderAll() — used only at build time
   App.tsx               Route table (two routes, no router library)
   pages/                Home, Tacle
-  components/           Header, Footer, HeroCanvas, Icon, section components
-  hooks/                Canvas loop, mobile nav, reveal, typewriter, citations
-  lib/flowField.ts      Lorenz-attractor particle system (framework-agnostic)
+  components/           Header, Footer, HeroFigure, Icon, section components
+  hooks/                Flow figure binding, mobile nav, reveal, citations
+  lib/flow/             Hero "Figure 1": flow-matching particle figure (framework-agnostic)
+    controller.ts         Mounts on a canvas: loop, sizing, visibility, pointer input
+    render.ts             Static layer + per-frame drawing
+    geometry.ts           Layout (side by side / stacked), pointer → t
+    particles.ts          Noise/data pairs in a flat Float32Array
+    targets.ts            p_data: image stippling and 2-D toy distributions
+    timeline.ts           Autoplay schedule
   data/                 All page content as typed data
   seo/                  Per-route <head> and JSON-LD
-  styles/               tokens → base → viz → main → tacle → responsive
+  styles/               tokens → base (incl. .l-margin, .card-grid) → viz → main →
+                        components/ (meta, pill, tag, sections) → tacle → responsive
 scripts/prerender.mjs   Renders each route into dist/<route>/index.html
 public/                 Served verbatim: assets, CNAME, robots.txt, sitemap.xml, 404.html
 legacy/                 Pre-migration originals, kept for reference. Safe to delete.

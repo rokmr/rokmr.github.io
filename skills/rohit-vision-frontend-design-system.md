@@ -44,9 +44,9 @@
 | `--dim` (#888888) | Labels, dates, locations, muted metadata |
 | `--border` (#222222) | All default borders (cards, sections, header) |
 | `--border-hover` (#444444) | Hover states on borders |
-| `--accent` (#4ade80) | Section numbers, venue names, "currently reading" highlights, active timeline dots, skill category headings, achievement links, canvas arrows, progress bar |
+| `--accent` (#4ade80) | Section numbers, venue names, "currently reading" highlights, active timeline dots, skill category headings, achievement links, figure rays and time marker, slider |
 | `#fff` / `#000` | Primary buttons only (white bg / black text). Also used for hover-state text |
-| `rgba(74,222,128,α)` | Accent green with transparency (canvas vectors, overlays) |
+| `rgba(74,222,128,α)` | Accent green with transparency (figure rays, overlays) |
 
 ### Gradient (footer badge only)
 
@@ -86,7 +86,9 @@ font-family: 'Inter', sans-serif;
 | Element | Font | Weight | Size | Extra |
 |---|---|---|---|---|
 | **Body default** | Inter | 400 | — | `line-height: 1.6` |
-| **Hero H1** | Inter | 700 | `clamp(2rem, 3.5vw, 2.8rem)` | `line-height: 1.15`, `letter-spacing: -0.02em` |
+| **Hero title** | Inter | 700 | `clamp(2rem, 8cqi, 3.75rem)` — sized to its column (container query) | `line-height: 1.08`, `letter-spacing: -0.03em` |
+| **Hero dek** | Inter | 400 | `--text-lg` | Color: `--ink-secondary`, `max-width: var(--measure)` |
+| **Byline label** | JetBrains Mono | 400 | `--text-xs` | Uppercase, `--tracking-label`, color: `--ink-muted` |
 | **Section H2** | Inter | 700 (default) | `1.5rem` | — |
 | **Card title H3** | Inter | 600 | `1.1rem`–`1.2rem` | — |
 | **Body paragraphs** | Inter | 400 | `0.85rem`–`0.95rem` | `line-height: 1.6`–`1.7` |
@@ -97,20 +99,20 @@ font-family: 'Inter', sans-serif;
 | **Buttons** | JetBrains Mono | 400 | `0.6rem`–`0.75rem` | — |
 | **Dates/locations** | JetBrains Mono | 400 | `0.7rem` | Color: `--dim` |
 | **Tech tags/pills** | JetBrains Mono | 400 | `0.55rem` | Color: `--text-secondary` or `--dim` |
-| **Stats (hero)** | JetBrains Mono | 600 | `1.5rem` (value), `0.7rem` (label) | Value: `#fff`, Label: `--dim` uppercase |
 | **Achievement value** | JetBrains Mono | 600 | `1.5rem` | Color: `#fff` |
 | **Venue name** | JetBrains Mono | 400 | `0.75rem` | Color: `--accent` |
 | **Footer** | JetBrains Mono | 400 | `0.65rem` | Color: `--dim` |
-| **Terminal** | JetBrains Mono | 400 | `0.65rem` | Color: `--dim` |
+| **Figure caption** | Inter | 400 | `--text-sm` | Lead "Figure 1." in `--ink`, rest `--ink-secondary` |
+| **Sidenote** | JetBrains Mono label + Inter value | 400 | `--text-xs` / `--text-sm` | Label uppercase `--ink-muted` |
 | **"Currently reading"** | JetBrains Mono | 400 | `0.75rem` | Left border accent, `--bg-card` bg |
 
 ### Typography Principles
 
-1. **Monospace = technical.** Anything that feels "code-like" (nav, labels, stats, tags, dates, terminal) uses JetBrains Mono
+1. **Monospace = technical.** Anything that feels "code-like" (nav, labels, tags, dates, equations) uses JetBrains Mono
 2. **Sans-serif = narrative.** Story-telling paragraphs, headings, descriptions use Inter
 3. **Uppercase + letter-spacing** for all labels and navigation
 4. **No decorative fonts.** Two fonts only, strict separation of concerns
-5. **Sizes stay small.** Most text is sub-1rem; only hero H1 and contact H2 go large
+5. **Sizes stay small.** Most text is sub-1rem; only the hero title and contact H2 go large
 
 ---
 
@@ -156,8 +158,8 @@ gap: 4rem;
 grid-template-columns: repeat(2, 1fr);
 gap: 1rem;
 
-/* Hero: single column */
-grid-template-columns: 1fr;
+/* Abstract row: paragraph + sidenote column */
+grid-template-columns: minmax(0, 68ch) minmax(240px, 320px);
 ```
 
 ### Fixed Header
@@ -420,37 +422,72 @@ The `sepia(20%) hue-rotate(80deg)` gives a subtle green tint matching the accent
 
 ## 7. Animations & Interactions
 
-### 7.1 Canvas — Lorenz Attractor Particle System
+### 7.0 Layout System — the rules every section follows
 
-- **16,000 particles** in a `Float32Array` (performance-optimized, no GC)
-- Particles interpolate from **random noise** → **Lorenz butterfly shape**
-- Simulates a **diffusion denoising / flow matching** process
-- Green vector field arrows fade as denoising progresses
-- Grid background behind particles, axes slightly brighter
-- **Fades on scroll** — `opacity = max(0, 1 - scrollY / heroHeight)`
-- **Mouse interaction** — horizontal cursor position controls denoising `t`
-- **Auto-plays** on load: `t` goes from 0.8 → 1.0 over ~5 seconds, then loops
+Two layouts, both in `base.css`, and no component sets its own column widths:
 
-### 7.2 HUD Control Panel (bottom-center)
+- **`.l-margin`** — main column + margin column (`minmax(0, 1fr)
+  var(--margin-col)`, `var(--col-gap)` between; one column below 1024px).
+  Every text block uses it: hero, Figure 1's caption + legend, abstract,
+  experience, research, contact. Their margin columns are one column down the
+  page. Prose in the main column caps at `var(--measure)`.
+- **`.card-grid`** — galleries (projects, education, achievements). Cards wrap
+  at `--card-min` and grow to fill their row, so a short last row stretches
+  instead of leaving holes, at any count and width. Project previews use a
+  fixed height with `object-fit: contain` so stretched cards still line up.
 
-Fixed panel showing training-like stats:
+Three shared components (`src/styles/components/`):
 
-```
-[ STEP: 1/50 ] [ ████░░░░ ] [ t=0.80 ] [ NOISE: 0.20 ]
-```
+| Component | Used for | Never use instead |
+|---|---|---|
+| `.meta` (+ `__row`, `__label`, `__value`, `__sub`) | Everything in the margin column: byline, sidenotes, figure legend, when/where/stack, venue/citations, contact details | Ad-hoc label/value markup |
+| `.pill` / `.pill--primary` in a `.pill-row` | Every link-button: hero, publication links, contact | Boxed buttons, tiles |
+| `.tag` in a `.tag-row` | Every technology/topic label: stack, project tech, skills | Per-section chip styles |
 
-- Fades with canvas on scroll
-- Hidden on mobile (labels removed, only timestep + progress shown)
+Rows of entries (experience, research) are separated by a hairline across
+both columns. The experience rail sits in the page gutter
+(`left: calc(var(--gutter) / -2)`) so text keeps the page's left edge; it
+hides below 600px where the gutter is too narrow.
 
-### 7.3 Terminal Typewriter (bottom-left)
+### 7.1 Hero — Research-Paper Title Page
 
-```
-rohit@iisc:~$ python inference.py▋
-```
+The landing section is laid out like a distill.pub article header:
+two columns — title, one-line dek and the **pill link row** (first pill is
+the primary action, filled `--ink`) on the left; the **byline** (Author with
+avatar, Affiliation, Works on, Published) as label/value rows behind a
+hairline on the right, bottom-aligned — then **Figure 1** at full width.
+Below 1024px the byline drops under the links. Content lives in
+`src/data/hero.ts`; byline facts derive from `experience` and `publications`.
 
-- Rotates through ML-themed messages
-- Blinking green cursor (`animation: blink 1s step-end infinite`)
-- Hidden on mobile
+### 7.2 Figure 1 — Flow Matching, Live
+
+Code: `src/lib/flow/` (framework-agnostic), bound by `useFlowFigure`.
+
+- **Space-time layout** — noise `x₀ ~ N(0, I)` drawn on the left, the data
+  (`x₁ ~ p_data`, a stippled image) on the right; the cloud's position between
+  them *is* `t`. Phones stack them.
+- Both distributions stay visible as **ghosts**; 14 pairs are joined by their
+  **straight rays** (dashed ahead, solid accent behind, arrowhead at the head).
+- **One time axis** — a native range input laid over the plot's bottom strip,
+  styled as a hairline with an accent thumb, flanked by a round play/pause
+  button, `t=0` and `t=1`. On side-by-side layouts its ends are pinned under
+  the noise and data centres (`--axis-start` / `--axis-end`), so the thumb
+  sits under the cloud. The cloud can also be dragged with a mouse.
+- **Caption** — two sentences: what flow matching does, the one equation
+  (`x_t = (1 − t)·x₀ + t·x₁`), and what the data is. No live readouts.
+- **Autoplay** — 6 s forward, hold on data, smooth rewind, loop. Pauses when
+  scrolled away or the tab is hidden.
+- Static parts render once to an offscreen layer; the live cloud uses a
+  `Float32Array`, 32 brightness buckets and `fillRect`. Particle count scales
+  with plot area (6k–18k).
+- **Target** is swappable in `data/hero.ts`: any transparent PNG/WebP, or
+  `twoMoons` / `eightGaussians` / `checkerboard` / `lorenz`.
+
+### 7.3 About — Abstract With Sidenotes
+
+Three paragraphs, each paired with Tufte-style sidenotes (mono label + value
+on one line, left hairline) in a margin column. Below 1024px the notes drop
+under their paragraph.
 
 ### 7.4 Section Reveal on Scroll
 
@@ -493,8 +530,6 @@ transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 ```css
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    #flow-canvas { display: none; }
-    .control-panel, .terminal-init { display: none; }
     .section-reveal { opacity: 1; transform: none; transition: none; }
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -502,6 +537,9 @@ transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 }
 ```
+
+The hero figure is not hidden under reduced motion: it skips autoplay and
+opens on the finished picture (t = 1). Scrubbing still works.
 
 ---
 
@@ -516,18 +554,13 @@ transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 | **Nav** | Horizontal links | Hidden → hamburger menu |
 | **Header CTA** | Visible (Blog + Collaborate) | Hidden → inside mobile drawer |
 | **Mobile drawer** | N/A | Slide-in from right, 320px/85vw width |
-| **Hero H1** | `clamp(2rem, 3.5vw, 2.8rem)` | `1.6rem` |
-| **Hero story** | `0.95rem` | `0.85rem` |
-| **Stat values** | `1.5rem` | `1.2rem` |
-| **Buttons** | `0.75rem`, `0.8rem 1.5rem` | `0.65rem`, `0.6rem 1rem` |
-| **About grid** | `220px 1fr` | Single column |
-| **Profile photo** | `220px` | `160px`, centered |
 | **Projects grid** | Auto-fit multi-column | Single column |
 | **Contact grid** | `1fr 1fr` | Single column |
 | **Exp header** | Row (title + date) | Column (stacked) |
-| **Control panel** | Full (step/noise/progress/time) | Minimal (progress + time only) |
-| **Terminal** | Visible | `display: none` |
 | **Service items** | Row layout | Column, separator hidden |
+| **Hero byline** | Column beside the title | Under the links (≤1024px) |
+| **Figure 1 plot** | 3:1, side by side | 16:9 (≤1024px); 2:3 stacked (≤600px) |
+| **Abstract sidenotes** | Margin column | Under each paragraph (≤1024px) |
 
 ### Mobile Menu
 

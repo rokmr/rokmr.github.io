@@ -18,7 +18,6 @@
 - [ ] Armada AI bullets — latency %, queries/day, retrieval accuracy gain
 - [ ] Avataar AI bullets — images generated, PSNR gain, pipeline speedup
 - [ ] Project descriptions — accuracy numbers, scale, speed
-- [ ] Hero stats bar — consider "1 Publication" or HuggingFace downloads
 
 ### Content Gaps
 - [ ] Add 2–3 blog post teasers/previews on the main page (title + date + one-liner) — drives clicks to `/blogs/`
@@ -53,13 +52,13 @@
 
 **Visual** — Consistent 16:9 project thumbnails (SVG diagrams for proprietary projects) · OG image (1200×630) · Section fade-in (IntersectionObserver) · Mouse proximity denoising · Card hover micro-interactions
 
-**A11y & Perf** — Skip-to-content link · `loading="lazy"` on all images · Descriptive alt texts · `prefers-reduced-motion` (hides canvas, kills animations)
+**A11y & Perf** — Skip-to-content link · `loading="lazy"` on all images · Descriptive alt texts · `prefers-reduced-motion` (figure opens resolved with no autoplay, kills animations)
 
-**Mobile** — Minimal HUD (timestep+progress only) · Terminal hidden · Hamburger drawer nav
+**Mobile** — Figure 1 stacks noise above data · Hamburger drawer nav
 
 **SEO** — JSON-LD (Person, WebSite, Blog, ScholarlyArticle) · OG + Twitter Cards · Sitemap (/, /tacle/, /blogs/, 2 posts) · Meta+keywords include reviewer credentials
 
-**Design** — Dark #0a0a0a + green #4ade80 · Lorenz attractor + flow matching HUD · JetBrains Mono + Inter
+**Design** — Dark #0a0a0a + green #4ade80 · Paper title-page hero with live flow-matching Figure 1 (noise → gradi) · Abstract with sidenotes · JetBrains Mono + Inter
 
 **Citations** — Auto-fetch from Semantic Scholar API (arXiv:2407.08041) · Fallback to hardcoded Google Scholar count (`data-fallback`) · Only upgrades, never downgrades · Link → Google Scholar cites page · Badge hidden-safe if count is 0
 
@@ -77,7 +76,7 @@
 
 **Accessibility pass** — 42 decorative SVGs get `aria-hidden="true"` · 30 links get descriptive `aria-label` · `--dim` bumped from `#666` to `#888` (WCAG AA compliant ~5.5:1)
 
-**UX** — Back-to-top button (appears after hero, `scroll` listener with `{ passive: true }`) · `document.write` replaced with `textContent` on `#footer-year` · Hero grid fixed to single column · `.DS_Store` purged from tracked files
+**UX** — Back-to-top button (appears after hero, `scroll` listener with `{ passive: true }`) · `document.write` replaced with `textContent` on `#footer-year` · `.DS_Store` purged from tracked files
 
 **New assets** — `assets/images/profile.webp` (20KB), `assets/images/profile.png` (249KB fallback), `assets/images/tacle_intro.webp` (86KB), `assets/images/tacle_intro.png` (205KB fallback), `assets/images/vton_preview.webp` (24KB), `assets/images/cricket_shot_preview.webp` (43KB)
 
