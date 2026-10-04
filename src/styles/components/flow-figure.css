@@ -1,0 +1,215 @@
+/* ============================================================================
+   FLOW FIGURE — Figure 1 in the hero: flow matching, noise -> data.
+   The canvas is drawn by src/lib/flow; this styles the frame, the time axis
+   (a range input laid over the bottom strip of the plot), and the caption and
+   legend, which sit on the page grid (.l-margin) like every other block.
+   ========================================================================= */
+
+.flow-figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+/* Wide: noise and data side by side. Narrower screens get a taller plot,
+   and phones stack noise above data (the canvas picks its orientation from
+   the aspect ratio it is given). */
+.flow-figure__plot {
+  position: relative;
+  aspect-ratio: 3 / 1;
+  overflow: hidden;
+  background: var(--surface-inset);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* Absolutely placed so the backing store (sized in device pixels) never
+   feeds the layout's min-content width — in flow it widened the page past
+   a phone viewport. */
+.flow-figure__plot canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  /* Horizontal drags scrub t; vertical swipes still scroll the page. */
+  touch-action: pan-y;
+}
+
+.flow-figure__plot canvas:active {
+  cursor: grabbing;
+}
+
+/* ---- Time axis ----------------------------------------------------------
+   Three columns: [play, t=0] [slider] [t=1]. On a side-by-side layout the
+   hook sets --axis-start / --axis-end to the noise and data centres, so the
+   slider spans exactly the distance the cloud travels and its thumb sits
+   under the cloud. Stacked (phone) layouts fall back to auto columns. */
+
+.flow-figure__axis {
+  position: absolute;
+  right: 0;
+  bottom: var(--space-2);
+  left: 0;
+  display: grid;
+  grid-template-columns: var(--axis-start, auto) minmax(0, 1fr) var(--axis-end, auto);
+  align-items: center;
+  height: 44px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+}
+
+.flow-figure__plot[data-orientation='vertical'] .flow-figure__axis {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding-inline: var(--space-3);
+}
+
+.flow-figure__axis-start {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-2);
+  padding-inline: var(--space-3);
+}
+
+.flow-figure__axis-end {
+  padding-inline: var(--space-3);
+}
+
+.flow-figure__play {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--ink);
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-round);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.flow-figure__play:hover {
+  color: var(--ink-accent);
+  border-color: var(--ink-accent);
+}
+
+.flow-figure__play:focus-visible {
+  outline: 2px solid var(--ink-accent);
+  outline-offset: 2px;
+}
+
+/* The slider is drawn as the axis itself: a hairline track and an accent
+   thumb. Negative margins let the thumb's centre, not its edge, reach the
+   ends of the column. */
+.flow-figure__slider {
+  --thumb: 14px;
+  height: 32px;
+  margin: 0 calc(var(--thumb) / -2);
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.flow-figure__slider::-webkit-slider-runnable-track {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.flow-figure__slider::-moz-range-track {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.flow-figure__slider::-webkit-slider-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  margin-top: calc((var(--thumb) - 1px) / -2);
+  background: var(--ink-accent);
+  border: 2px solid var(--surface-inset);
+  border-radius: var(--radius-round);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.flow-figure__slider::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  box-sizing: border-box;
+  background: var(--ink-accent);
+  border: 2px solid var(--surface-inset);
+  border-radius: var(--radius-round);
+}
+
+.flow-figure__slider:focus {
+  outline: none;
+}
+
+.flow-figure__slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.4);
+}
+
+.flow-figure__slider:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.4);
+}
+
+/* ---- Caption + legend: one .l-margin row under the plot -------------- */
+
+.flow-figure__foot {
+  font-family: var(--font-sans); /* base.css sets figcaption in mono */
+}
+
+.flow-figure__caption {
+  max-width: var(--measure);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--ink-secondary);
+}
+
+.flow-figure__caption strong {
+  color: var(--ink);
+}
+
+.flow-figure__foot sub {
+  font-size: 0.75em;
+}
+
+.flow-figure__swatch {
+  display: inline-block;
+  margin-right: var(--space-2);
+  vertical-align: -1px;
+  color: var(--ink-muted);
+}
+
+/* ---- Breakpoints ------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .flow-figure__plot {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 600px) {
+  .flow-figure__plot {
+    aspect-ratio: 2 / 3;
+  }
+}
+
+@media (hover: none) {
+  .flow-figure__play {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* A bigger thumb and a full-height strip to catch the drag. */
+  .flow-figure__slider {
+    --thumb: 20px;
+    height: 44px;
+  }
+}
