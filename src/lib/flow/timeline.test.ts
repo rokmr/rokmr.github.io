@@ -1,37 +1,45 @@
 import { describe, expect, it } from 'vitest';
-import { CYCLE, FORWARD, phaseForT, tAtPhase } from './timeline';
+import { CYCLE, FORWARD, LEAD, frameAt, phaseForT } from './timeline';
 
-describe('tAtPhase', () => {
-  it('starts at noise and reaches data at the end of the forward pass', () => {
-    expect(tAtPhase(0)).toBe(0);
-    expect(tAtPhase(FORWARD / 2)).toBeCloseTo(0.5);
-    expect(tAtPhase(FORWARD)).toBe(1);
+describe('frameAt', () => {
+  it('fades fresh noise in, then holds on it before moving', () => {
+    expect(frameAt(0)).toEqual({ t: 0, opacity: 0 });
+    const lead = frameAt(0.4 + LEAD / 2);
+    expect(lead.t).toBe(0);
+    expect(lead.opacity).toBe(1);
   });
 
-  it('stays within [0, 1] and is continuous across a full cycle', () => {
-    let prev = tAtPhase(0);
-    for (let p = 0; p <= CYCLE * 2; p += 0.01) {
-      const t = tAtPhase(p);
-      expect(t).toBeGreaterThanOrEqual(0);
-      expect(t).toBeLessThanOrEqual(1);
-      // At 100 Hz sampling no step should jump more than the rewind's peak slope allows.
-      expect(Math.abs(t - prev)).toBeLessThan(0.02);
+  it('travels from noise to data, then rests on the picture', () => {
+    expect(frameAt(0.4 + LEAD + FORWARD / 2).t).toBeCloseTo(0.5);
+    expect(frameAt(0.4 + LEAD + FORWARD + 1)).toEqual({ t: 1, opacity: 1 });
+  });
+
+  it('ends the cycle by fading the picture out, not by rewinding it', () => {
+    expect(frameAt(CYCLE)).toEqual({ t: 1, opacity: 0 });
+    expect(frameAt(CYCLE - 0.3).t).toBe(1);
+  });
+
+  it('never runs time backwards within a cycle', () => {
+    let prev = frameAt(0).t;
+    for (let p = 0; p <= CYCLE; p += 0.01) {
+      const { t } = frameAt(p);
+      expect(t).toBeGreaterThanOrEqual(prev);
       prev = t;
     }
   });
 
-  it('wraps phases outside one cycle, including negative ones', () => {
-    expect(tAtPhase(CYCLE + 1)).toBeCloseTo(tAtPhase(1));
-    expect(tAtPhase(-CYCLE + 1)).toBeCloseTo(tAtPhase(1));
+  it('is invisible at the wrap, so swapping in new noise cannot be seen', () => {
+    expect(frameAt(CYCLE).opacity).toBe(0);
+    expect(frameAt(0).opacity).toBe(0);
   });
 });
 
 describe('phaseForT', () => {
-  it('resumes playback from the time shown', () => {
-    for (const t of [0, 0.25, 0.5, 0.99]) expect(tAtPhase(phaseForT(t))).toBeCloseTo(t);
+  it('resumes forward from the time shown', () => {
+    for (const t of [0, 0.25, 0.5, 0.99, 1]) expect(frameAt(phaseForT(t)).t).toBeCloseTo(t);
   });
 
-  it('restarts from noise when the data is already showing', () => {
-    expect(phaseForT(1)).toBe(0);
+  it('resumes fully visible, never mid-fade', () => {
+    for (const t of [0, 0.5, 1]) expect(frameAt(phaseForT(t)).opacity).toBe(1);
   });
 });

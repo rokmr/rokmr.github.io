@@ -1,10 +1,13 @@
 // Canvas drawing for the figure, split in two layers:
 //
-//   drawStatic  everything that does not move with t — both distributions as
-//               faint ghosts, the prior's σ contours, the full straight rays
-//               and the labels. Drawn once per resize.
-//   drawFrame   blits that layer, then the live cloud x_t and the travelled
-//               part of each ray. Drawn every animation frame.
+//   drawStatic  everything that does not move with t: the background and the
+//               prior's σ contours, which mark where the samples start. Drawn
+//               once per resize. Every dot on the canvas is a live sample —
+//               there are deliberately no faint copies of the start or end
+//               distributions, which read as samples left behind.
+//   drawFrame   blits that layer, then the live samples x_t with a velocity
+//               arrow on a spread of them, then the labels on top so passing
+//               samples never cover them. Drawn every animation frame.
 //
 // The time axis is not drawn here: the page lays its slider over the strip
 // the geometry reserves along the bottom.
@@ -18,7 +21,12 @@ import { BRIGHTNESS, NOISE_SIGMA, STRIDE, X0, X1, Y0, Y1, type Particles } from 
 const MONO = '"JetBrains Mono", ui-monospace, monospace';
 /** Grey levels the live cloud is quantised to; one fillStyle change per level. */
 const NBUCKETS = 32;
+/** Velocity arrow geometry, in CSS pixels. */
+const ARROW_TAIL = 5;
+const ARROW_AHEAD = 9;
+const ARROW_HEAD = 5;
 
+/** Two centred label lines on a dark backing, so samples passing under stay out of the way. */
 function label(
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -27,6 +35,16 @@ function label(
   notation: string,
   palette: Palette,
 ): void {
+  ctx.font = `500 12px ${MONO}`;
+  const wordW = ctx.measureText(word).width;
+  ctx.font = `400 11px ${MONO}`;
+  const notationW = ctx.measureText(notation).width;
+  const boxW = Math.max(wordW, notationW) + 12;
+  ctx.globalAlpha = 0.82;
+  ctx.fillStyle = palette.bg;
+  ctx.fillRect(x - boxW / 2, y - 29, boxW, 34);
+  ctx.globalAlpha = 1;
+
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
   ctx.font = `500 12px ${MONO}`;
@@ -37,16 +55,25 @@ function label(
   ctx.fillText(notation, x, y);
 }
 
-export function drawStatic(
-  ctx: CanvasRenderingContext2D,
-  g: Geometry,
-  particles: Particles | null,
-  palette: Palette,
-  targetLabel: string,
-): void {
-  const { w, h, ax, ay, bx, by, s, vertical } = g;
+/** Labels: a plain word for everyone, notation for people who know it. */
+function drawLabels(ctx: CanvasRenderingContext2D, g: Geometry, palette: Palette, targetLabel: string): void {
+  const { ax, ay, bx, by, s, vertical } = g;
   const { pad, labelH } = LAYOUT;
   const { p0Radius, p1HalfH } = EXTENT;
+  // Each sits just over its own shape rather than pinned to the top edge.
+  const minY = pad + labelH - 6;
+  if (!vertical) {
+    label(ctx, ax, Math.max(minY, ay - p0Radius * s - 6), 'noise', 'x₀ ~ N(0, I)', palette);
+    label(ctx, bx, Math.max(minY, ay - p1HalfH * s - 4), `data · ${targetLabel}`, 'x₁ ~ p_data', palette);
+  } else {
+    label(ctx, ax, ay - p0Radius * s - 8, 'noise', 'x₀ ~ N(0, I)', palette);
+    label(ctx, bx, by - p1HalfH * s - 4, `data · ${targetLabel}`, 'x₁ ~ p_data', palette);
+  }
+}
+
+export function drawStatic(ctx: CanvasRenderingContext2D, g: Geometry, palette: Palette): void {
+  const { w, h, ax, ay, s } = g;
+  const { p0Radius } = EXTENT;
 
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, w, h);
@@ -62,66 +89,21 @@ export function drawStatic(
   ctx.arc(ax, ay, p0Radius * s, 0, Math.PI * 2);
   ctx.stroke();
   ctx.restore();
-
-  if (particles) {
-    const { data, count, trails } = particles;
-
-    // Ghosts of both endpoint distributions; p1 denser so the picture reads.
-    ctx.fillStyle = 'rgba(255,255,255,0.15)';
-    for (let i = 0; i < count; i += 3) {
-      const off = i * STRIDE;
-      ctx.fillRect(ax + data[off + X0]! * s - 0.5, ay + data[off + Y0]! * s - 0.5, 1, 1);
-    }
-    ctx.fillStyle = 'rgba(255,255,255,0.17)';
-    for (let i = 1; i < count; i += 2) {
-      const off = i * STRIDE;
-      ctx.fillRect(bx + data[off + X1]! * s - 0.5, by + data[off + Y1]! * s - 0.5, 1, 1);
-    }
-
-    // Full rays x0 → x1: the straight paths the model is trained to follow.
-    const rays = new Path2D();
-    for (const i of trails) {
-      const off = i * STRIDE;
-      rays.moveTo(ax + data[off + X0]! * s, ay + data[off + Y0]! * s);
-      rays.lineTo(bx + data[off + X1]! * s, by + data[off + Y1]! * s);
-    }
-    ctx.save();
-    ctx.setLineDash([2, 4]);
-    ctx.strokeStyle = `rgba(${palette.accent},0.3)`;
-    ctx.lineWidth = 0.8;
-    ctx.stroke(rays);
-    ctx.restore();
-  }
-
-  // Labels: a plain word for everyone, notation for people who know it.
-  // Each sits just over its own shape rather than pinned to the top edge.
-  const minY = pad + labelH - 6;
-  if (!vertical) {
-    label(ctx, ax, Math.max(minY, ay - p0Radius * s - 6), 'noise', 'x₀ ~ N(0, I)', palette);
-    label(ctx, bx, Math.max(minY, ay - p1HalfH * s - 4), `data · ${targetLabel}`, 'x₁ ~ p_data', palette);
-  } else {
-    label(ctx, ax, ay - p0Radius * s - 8, 'noise', 'x₀ ~ N(0, I)', palette);
-    label(ctx, bx, by - p1HalfH * s - 4, `data · ${targetLabel}`, 'x₁ ~ p_data', palette);
-  }
 }
 
-export function drawFrame(
+function drawMoving(
   ctx: CanvasRenderingContext2D,
   g: Geometry,
-  layer: CanvasImageSource,
-  particles: Particles | null,
+  particles: Particles,
   t: number,
   palette: Palette,
 ): void {
-  const { w, h, ax, ay, bx, by, s } = g;
+  const { ax, ay, bx, by, s } = g;
   const accent = palette.accent;
   const cx = ax + (bx - ax) * t;
   const cy = ay + (by - ay) * t;
 
-  ctx.drawImage(layer, 0, 0, w, h);
-
-  if (!particles) return;
-  const { data, count, trails } = particles;
+  const { data, count, arrows } = particles;
   const u = 1 - t;
 
   // The live cloud: x_t = (1 − t)·x0 + t·x1, centred on lerp(A, B, t).
@@ -146,33 +128,63 @@ export function drawFrame(
     ctx.fillRect(x - 0.55, y - 0.55, 1.1, 1.1);
   }
 
-  // Travelled part of each ray, with an arrowhead pointing along x1 − x0.
-  const paths = new Path2D();
+  // Velocity arrows on a spread of samples. Each points along the sample's
+  // motion as drawn — its own x1 − x0 plus the A → B drift that stands in
+  // for time — so the arrows show exactly where the dots are heading. They
+  // fade out as the samples arrive.
+  const arrive = Math.min(1, Math.max(0, (t - 0.82) / 0.18));
+  const arrowAlpha = 0.9 * (1 - arrive * arrive * (3 - 2 * arrive));
+  if (arrowAlpha < 0.01) return;
+
+  const driftX = bx - ax;
+  const driftY = by - ay;
+  const shafts = new Path2D();
   const heads = new Path2D();
-  const hl = 7;
-  for (const i of trails) {
+  for (const i of arrows) {
     const off = i * STRIDE;
-    const x0 = ax + data[off + X0]! * s;
-    const y0 = ay + data[off + Y0]! * s;
-    const x1 = bx + data[off + X1]! * s;
-    const y1 = by + data[off + Y1]! * s;
-    const x = x0 + (x1 - x0) * t;
-    const y = y0 + (y1 - y0) * t;
-    paths.moveTo(x0, y0);
-    paths.lineTo(x, y);
-    const len = Math.hypot(x1 - x0, y1 - y0) || 1;
-    const nx = (x1 - x0) / len;
-    const ny = (y1 - y0) / len;
-    heads.moveTo(x + nx * 2, y + ny * 2);
-    heads.lineTo(x - nx * hl - ny * hl * 0.5, y - ny * hl + nx * hl * 0.5);
-    heads.lineTo(x - nx * hl + ny * hl * 0.5, y - ny * hl - nx * hl * 0.5);
+    const x = cx + (u * data[off + X0]! + t * data[off + X1]!) * s;
+    const y = cy + (u * data[off + Y0]! + t * data[off + Y1]!) * s;
+    const vx = driftX + (data[off + X1]! - data[off + X0]!) * s;
+    const vy = driftY + (data[off + Y1]! - data[off + Y0]!) * s;
+    const len = Math.hypot(vx, vy) || 1;
+    const nx = vx / len;
+    const ny = vy / len;
+    // The arrow sits on the sample: a short tail behind it, the tip ahead.
+    const tipX = x + nx * ARROW_AHEAD;
+    const tipY = y + ny * ARROW_AHEAD;
+    shafts.moveTo(x - nx * ARROW_TAIL, y - ny * ARROW_TAIL);
+    shafts.lineTo(tipX, tipY);
+    heads.moveTo(tipX + nx * 1.5, tipY + ny * 1.5);
+    heads.lineTo(tipX - nx * ARROW_HEAD - ny * ARROW_HEAD * 0.5, tipY - ny * ARROW_HEAD + nx * ARROW_HEAD * 0.5);
+    heads.lineTo(tipX - nx * ARROW_HEAD + ny * ARROW_HEAD * 0.5, tipY - ny * ARROW_HEAD - nx * ARROW_HEAD * 0.5);
     heads.closePath();
   }
-  // Rays and arrowheads give way to the picture once it has arrived.
-  const arrive = Math.min(1, Math.max(0, (t - 0.85) / 0.15));
-  ctx.lineWidth = 1.2;
-  ctx.strokeStyle = `rgba(${accent},${0.75 - arrive * 0.5})`;
-  ctx.stroke(paths);
-  ctx.fillStyle = `rgba(${accent},${1 - arrive * 0.7})`;
+  ctx.lineWidth = 1.1;
+  ctx.strokeStyle = `rgba(${accent},${arrowAlpha * 0.85})`;
+  ctx.stroke(shafts);
+  ctx.fillStyle = `rgba(${accent},${arrowAlpha})`;
   ctx.fill(heads);
+}
+
+/**
+ * One animation frame: the static layer, the moving samples at `opacity`
+ * (the loop fades them out and fresh noise in), then the labels on top.
+ */
+export function drawFrame(
+  ctx: CanvasRenderingContext2D,
+  g: Geometry,
+  layer: CanvasImageSource,
+  particles: Particles | null,
+  t: number,
+  opacity: number,
+  palette: Palette,
+  targetLabel: string,
+): void {
+  ctx.drawImage(layer, 0, 0, g.w, g.h);
+  if (particles && opacity > 0) {
+    ctx.globalAlpha = opacity;
+    drawMoving(ctx, g, particles, t, palette);
+    ctx.globalAlpha = 1;
+  }
+  drawLabels(ctx, g, palette, targetLabel);
 }

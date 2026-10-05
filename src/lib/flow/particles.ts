@@ -19,14 +19,19 @@ export const X1 = 2;
 export const Y1 = 3;
 export const BRIGHTNESS = 4;
 
-const TRAIL_COUNT = 14;
+/** About one sample in this many carries a velocity arrow, within bounds. */
+const ARROW_EVERY = 120;
+const ARROWS_MIN = 50;
+const ARROWS_MAX = 110;
+/** Only samples that start within 2σ carry arrows; outliers land on labels. */
+const ARROW_START_LIMIT = NOISE_SIGMA * 2;
 
 export type Particles = {
   /** Flat [x0, y0, x1, y1, b] per particle, sorted by b — cache-friendly, no GC churn. */
   readonly data: Float32Array;
   readonly count: number;
-  /** Distinct particles whose full x0 → x1 ray is drawn. */
-  readonly trails: Uint32Array;
+  /** Distinct particles that carry a velocity arrow while they travel. */
+  readonly arrows: Uint32Array;
 };
 
 export function createParticles(targets: readonly TargetPoint[]): Particles {
@@ -55,28 +60,42 @@ export function createParticles(targets: readonly TargetPoint[]): Particles {
     data.set(raw.subarray(src, src + STRIDE), i * STRIDE);
   }
 
-  return { data, count, trails: pickTrails(data, count) };
+  return { data, count, arrows: pickArrows(data, count) };
 }
 
 /**
- * Spreads the highlighted rays evenly through the array. Brightness order is
- * uncorrelated with position, so this spreads them across both distributions.
- * Noise samples beyond ~2σ are skipped: their rays would start off the figure.
+ * The same data with a fresh noise draw — what "generate again" means. Each
+ * sample keeps its target x1 (so the brightness sort still holds) and gets a
+ * new x0; arrows are re-picked because they depend on where samples start.
  */
-function pickTrails(data: Float32Array, count: number): Uint32Array {
-  const n = Math.min(TRAIL_COUNT, count);
-  const trails = new Uint32Array(n);
-  const used = new Set<number>();
-  const limit = NOISE_SIGMA * 1.8;
-
-  for (let k = 0; k < n; k++) {
-    let j = Math.floor(((k + 0.5) / n) * count);
-    for (let tries = 0; tries < count; tries++, j = (j + 1) % count) {
-      const off = j * STRIDE;
-      if (!used.has(j) && Math.hypot(data[off + X0]!, data[off + Y0]!) <= limit) break;
-    }
-    used.add(j);
-    trails[k] = j;
+export function resampleNoise(particles: Particles): Particles {
+  const data = particles.data.slice();
+  for (let i = 0; i < particles.count; i++) {
+    const off = i * STRIDE;
+    data[off + X0] = gauss(NOISE_SIGMA);
+    data[off + Y0] = gauss(NOISE_SIGMA);
   }
-  return trails;
+  return { data, count: particles.count, arrows: pickArrows(data, particles.count) };
+}
+
+/** How many samples carry a velocity arrow for a cloud of `count`. */
+export function arrowCount(count: number): number {
+  return Math.min(count, Math.max(ARROWS_MIN, Math.min(ARROWS_MAX, Math.round(count / ARROW_EVERY))));
+}
+
+/**
+ * Evenly spaced through the samples that start within 2σ. Particles are
+ * sorted by brightness, which is uncorrelated with position, so this spreads
+ * the arrows across the cloud without clumping.
+ */
+function pickArrows(data: Float32Array, count: number): Uint32Array {
+  const inside: number[] = [];
+  for (let i = 0; i < count; i++) {
+    const off = i * STRIDE;
+    if (Math.hypot(data[off + X0]!, data[off + Y0]!) <= ARROW_START_LIMIT) inside.push(i);
+  }
+  const n = Math.min(arrowCount(count), inside.length);
+  const arrows = new Uint32Array(n);
+  for (let k = 0; k < n; k++) arrows[k] = inside[Math.floor(((k + 0.5) / n) * inside.length)]!;
+  return arrows;
 }

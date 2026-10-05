@@ -4,10 +4,10 @@
 
 import { measureGeometry, particleBudget, tFromPoint, type Geometry } from './geometry';
 import { readPalette } from './palette';
-import { createParticles, type Particles } from './particles';
+import { createParticles, resampleNoise, type Particles } from './particles';
 import { drawFrame, drawStatic } from './render';
 import { sampleTarget, type TargetSpec } from './targets';
-import { CYCLE, phaseForT, tAtPhase } from './timeline';
+import { CYCLE, frameAt, phaseForT } from './timeline';
 
 export type FlowFigureOptions = {
   canvas: HTMLCanvasElement;
@@ -24,6 +24,7 @@ export type FlowFigureOptions = {
 };
 
 export type FlowFigure = {
+  /** Plays forward from the current t and keeps cycling, each cycle a new sample. */
   play(): void;
   pause(): void;
   /** Shows time `t` and pauses — the reader has taken over. */
@@ -53,6 +54,8 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
   let destroyed = false;
 
   let t = clamp01(opts.initialT);
+  /** Opacity of the moving samples; the loop fades between cycles. */
+  let opacity = 1;
   let phase = phaseForT(t);
   let playing = false;
   let onScreen = true;
@@ -63,7 +66,7 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
   // ---- drawing ------------------------------------------------------------
 
   const render = () => {
-    drawFrame(ctx, geo, layer, particles, t, palette);
+    drawFrame(ctx, geo, layer, particles, t, opacity, palette, label);
     opts.onFrame?.(t);
   };
 
@@ -71,7 +74,7 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
     layer.width = canvas.width;
     layer.height = canvas.height;
     layerCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    drawStatic(layerCtx, geo, particles, palette, label);
+    drawStatic(layerCtx, geo, palette);
     render();
   };
 
@@ -120,8 +123,14 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
     if (!canRun()) return;
     const dt = last ? Math.min(MAX_DT, (now - last) / 1000) : 0;
     last = now;
-    phase = (phase + dt) % CYCLE;
-    t = tAtPhase(phase);
+    phase += dt;
+    // A cycle ends with the picture faded out; while nothing is visible, draw
+    // fresh noise so the next cycle is a new sample, not a rerun.
+    if (phase >= CYCLE) {
+      phase -= CYCLE;
+      if (particles) particles = resampleNoise(particles);
+    }
+    ({ t, opacity } = frameAt(phase));
     render();
     frame = requestAnimationFrame(loop);
   };
@@ -148,6 +157,7 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
   const setT = (next: number) => {
     setPlaying(false);
     t = clamp01(next);
+    opacity = 1;
     render();
   };
 

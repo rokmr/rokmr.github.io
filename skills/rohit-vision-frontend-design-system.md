@@ -466,16 +466,31 @@ Code: `src/lib/flow/` (framework-agnostic), bound by `useFlowFigure`.
 - **Space-time layout** — noise `x₀ ~ N(0, I)` drawn on the left, the data
   (`x₁ ~ p_data`, a stippled image) on the right; the cloud's position between
   them *is* `t`. Phones stack them.
-- Both distributions stay visible as **ghosts**; 14 pairs are joined by their
-  **straight rays** (dashed ahead, solid accent behind, arrowhead at the head).
+- **Every dot is a live sample.** No faint copies of the start or end
+  distributions: they read as samples left behind and doubled the picture
+  near t = 1. The dashed σ rings mark where samples start; the labels name
+  both ends; the picture forms only as the samples arrive.
+- **Velocity arrows on the samples** — ~50–110 of them (only samples starting
+  within 2σ), each a short accent arrow on its dot pointing along its drawn
+  motion. They fade as the samples arrive at t → 1. No long rays: motion and
+  arrows already show the straight travel.
+- Labels are drawn on top of the samples on a dark backing, so passing
+  samples never cover them.
 - **One time axis** — a native range input laid over the plot's bottom strip,
   styled as a hairline with an accent thumb, flanked by a round play/pause
   button, `t=0` and `t=1`. On side-by-side layouts its ends are pinned under
   the noise and data centres (`--axis-start` / `--axis-end`), so the thumb
   sits under the cloud. The cloud can also be dragged with a mouse.
-- **Caption** — two sentences: what flow matching does, the one equation
-  (`x_t = (1 − t)·x₀ + t·x₁`), and what the data is. No live readouts.
-- **Autoplay** — 6 s forward, hold on data, smooth rewind, loop. Pauses when
+- **Caption + legend** — on the page grid under the plot. Caption: what
+  flow matching does, the one equation (`x_t = (1 − t)·x₀ + t·x₁`), and what
+  the data is. Legend (`.meta`, margin column): Samples, Arrows, Rings,
+  each with a swatch drawn like the mark. No live readouts.
+- **Playback — loops forward, never backwards.** Each ~10 s cycle is one
+  sample: fresh noise fades in, a 0.8 s beat with arrows visible, 6 s from
+  noise to data, 2.5 s resting on the picture, then the picture fades out
+  and new noise is drawn while nothing is visible. It never runs t
+  backwards: data → noise is diffusion's noising process, not sampling.
+  Scrub + play resumes forward from where the reader left it. Pauses when
   scrolled away or the tab is hidden.
 - Static parts render once to an offscreen layer; the live cloud uses a
   `Float32Array`, 32 brightness buckets and `fillRect`. Particle count scales
