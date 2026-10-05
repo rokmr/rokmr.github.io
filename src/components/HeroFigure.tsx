@@ -9,11 +9,14 @@ import type { TargetSpec } from '../lib/flow/targets';
  * the bottom of the plot is the time axis; the cloud can also be dragged.
  */
 export function HeroFigure({ target }: { target: TargetSpec }) {
-  const { canvasRef, sliderRef, playing, toggle } = useFlowFigure(target);
+  const { canvasRef, gpuCanvasRef, sliderRef, playing, toggle } = useFlowFigure(target);
 
   return (
     <figure className="flow-figure">
       <div className="flow-figure__plot">
+        {/* The samples render on the GPU underneath; rings, arrows, labels and
+            pointer input live on the canvas above. */}
+        <canvas ref={gpuCanvasRef} className="flow-figure__gpu" aria-hidden="true" />
         <canvas
           ref={canvasRef}
           role="img"
@@ -78,7 +81,7 @@ export function HeroFigure({ target }: { target: TargetSpec }) {
             <dt className="meta__label">Rings</dt>
             <dd className="meta__value">
               <Swatch kind="ring" />
-              Where the noise starts (1σ, 2σ)
+              Where samples start
             </dd>
           </div>
         </dl>

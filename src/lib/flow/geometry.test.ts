@@ -66,12 +66,18 @@ describe('tFromPoint', () => {
 });
 
 describe('particleBudget', () => {
-  it('never decreases as the plot grows', () => {
+  it.each([false, true])('never decreases as the plot grows (gpu: %s)', (gpu) => {
     let prev = 0;
     for (let side = 100; side <= 1400; side += 50) {
-      const n = particleBudget(side, side / 2);
+      const n = particleBudget(side, side / 2, gpu);
       expect(n).toBeGreaterThanOrEqual(prev);
       prev = n;
+    }
+  });
+
+  it('gives the GPU renderer several times the 2-D budget at every size', () => {
+    for (const [w, h] of [[300, 300], [560, 315], [1208, 403]] as const) {
+      expect(particleBudget(w, h, true)).toBeGreaterThanOrEqual(4 * particleBudget(w, h));
     }
   });
 });

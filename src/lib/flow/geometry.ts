@@ -80,9 +80,19 @@ export function tFromPoint(g: Geometry, x: number, y: number): number {
   return Math.min(1, Math.max(0, t));
 }
 
-/** Particle budget by figure area: same visual density, lighter cost when small. */
-export function particleBudget(w: number, h: number): number {
+/**
+ * Particle budget by figure area. The GPU renderer draws all samples in one
+ * call, so it carries several times what the 2-D fallback can, which is what
+ * keeps the picture sharp; both scale down on small plots.
+ */
+export function particleBudget(w: number, h: number, gpu = false): number {
   const area = w * h;
+  if (gpu) {
+    if (area < 120_000) return 30000;
+    if (area < 220_000) return 45000;
+    if (area < 450_000) return 70000;
+    return 100000;
+  }
   if (area < 120_000) return 6000;
   if (area < 220_000) return 9000;
   if (area < 450_000) return 12000;

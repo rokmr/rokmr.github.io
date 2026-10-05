@@ -1,18 +1,19 @@
-// Canvas drawing for the figure, split in two layers:
+// 2-D canvas drawing for the figure. Layers, bottom to top:
 //
-//   drawStatic  everything that does not move with t: the background and the
-//               prior's σ contours, which mark where the samples start. Drawn
-//               once per resize. Every dot on the canvas is a live sample —
-//               there are deliberately no faint copies of the start or end
-//               distributions, which read as samples left behind.
-//   drawFrame   blits that layer, then the live samples x_t with a velocity
-//               arrow on a spread of them, then the labels on top so passing
-//               samples never cover them. Drawn every animation frame.
+//   samples   the live cloud x_t. Drawn by gl.ts on a WebGL canvas underneath
+//             when available; drawSamples here is the fallback.
+//   static    the prior's σ contours, which mark where the samples start.
+//             Drawn once per resize into an offscreen layer (drawStatic).
+//   arrows    a velocity arrow on a spread of samples.
+//   labels    on a dark backing, so passing samples never cover them.
 //
-// The time axis is not drawn here: the page lays its slider over the strip
-// the geometry reserves along the bottom.
+// Every dot is a live sample: there are deliberately no faint copies of the
+// start or end distributions, which read as samples left behind. The plot's
+// background comes from CSS, so every canvas here is transparent. The time
+// axis is not drawn: the page lays its slider over the strip the geometry
+// reserves along the bottom.
 //
-// Both expect a context whose transform maps CSS pixels to device pixels.
+// All functions expect a context whose transform maps CSS px to device px.
 
 import { EXTENT, LAYOUT, type Geometry } from './geometry';
 import type { Palette } from './palette';
@@ -71,12 +72,11 @@ function drawLabels(ctx: CanvasRenderingContext2D, g: Geometry, palette: Palette
   }
 }
 
-export function drawStatic(ctx: CanvasRenderingContext2D, g: Geometry, palette: Palette): void {
+export function drawStatic(ctx: CanvasRenderingContext2D, g: Geometry): void {
   const { w, h, ax, ay, s } = g;
   const { p0Radius } = EXTENT;
 
-  ctx.fillStyle = palette.bg;
-  ctx.fillRect(0, 0, w, h);
+  ctx.clearRect(0, 0, w, h);
 
   // The prior's 1σ and 2σ contours.
   ctx.save();
@@ -91,19 +91,12 @@ export function drawStatic(ctx: CanvasRenderingContext2D, g: Geometry, palette: 
   ctx.restore();
 }
 
-function drawMoving(
-  ctx: CanvasRenderingContext2D,
-  g: Geometry,
-  particles: Particles,
-  t: number,
-  palette: Palette,
-): void {
+/** The live cloud on the 2-D canvas — the fallback when WebGL2 is unavailable. */
+function drawSamples(ctx: CanvasRenderingContext2D, g: Geometry, particles: Particles, t: number): void {
   const { ax, ay, bx, by, s } = g;
-  const accent = palette.accent;
   const cx = ax + (bx - ax) * t;
   const cy = ay + (by - ay) * t;
-
-  const { data, count, arrows } = particles;
+  const { data, count } = particles;
   const u = 1 - t;
 
   // The live cloud: x_t = (1 − t)·x0 + t·x1, centred on lerp(A, B, t).
@@ -127,6 +120,21 @@ function drawMoving(
     }
     ctx.fillRect(x - 0.55, y - 0.55, 1.1, 1.1);
   }
+}
+
+function drawArrows(
+  ctx: CanvasRenderingContext2D,
+  g: Geometry,
+  particles: Particles,
+  t: number,
+  palette: Palette,
+): void {
+  const { ax, ay, bx, by, s } = g;
+  const accent = palette.accent;
+  const cx = ax + (bx - ax) * t;
+  const cy = ay + (by - ay) * t;
+  const { data, arrows } = particles;
+  const u = 1 - t;
 
   // Velocity arrows on a spread of samples. Each points along the sample's
   // motion as drawn — its own x1 − x0 plus the A → B drift that stands in
@@ -167,8 +175,9 @@ function drawMoving(
 }
 
 /**
- * One animation frame: the static layer, the moving samples at `opacity`
- * (the loop fades them out and fresh noise in), then the labels on top.
+ * The 2-D part of one animation frame: the static layer, then (when there is
+ * no GPU layer underneath) the samples, then arrows — both at `opacity`, which
+ * the loop uses to fade one sample out and the next in — then the labels.
  */
 export function drawFrame(
   ctx: CanvasRenderingContext2D,
@@ -179,11 +188,14 @@ export function drawFrame(
   opacity: number,
   palette: Palette,
   targetLabel: string,
+  withSamples: boolean,
 ): void {
+  ctx.clearRect(0, 0, g.w, g.h);
   ctx.drawImage(layer, 0, 0, g.w, g.h);
   if (particles && opacity > 0) {
     ctx.globalAlpha = opacity;
-    drawMoving(ctx, g, particles, t, palette);
+    if (withSamples) drawSamples(ctx, g, particles, t);
+    drawArrows(ctx, g, particles, t, palette);
     ctx.globalAlpha = 1;
   }
   drawLabels(ctx, g, palette, targetLabel);

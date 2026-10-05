@@ -19,6 +19,7 @@ import type { TargetSpec } from '../lib/flow/targets';
  */
 export function useFlowFigure(target: TargetSpec) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const gpuCanvasRef = useRef<HTMLCanvasElement>(null);
   const sliderRef = useRef<HTMLInputElement>(null);
   const figureRef = useRef<FlowFigure | null>(null);
   // Prerendered markup shows the pause control; reduced-motion readers flip
@@ -38,6 +39,7 @@ export function useFlowFigure(target: TargetSpec) {
 
     const figure = mountFlowFigure({
       canvas,
+      gpuCanvas: gpuCanvasRef.current ?? undefined,
       target,
       autoplay: !reduced,
       initialT: reduced ? 1 : 0,
@@ -77,5 +79,5 @@ export function useFlowFigure(target: TargetSpec) {
     else figure.play();
   }, [playing]);
 
-  return { canvasRef, sliderRef, playing, toggle };
+  return { canvasRef, gpuCanvasRef, sliderRef, playing, toggle };
 }

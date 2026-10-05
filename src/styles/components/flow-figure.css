@@ -42,6 +42,11 @@
   cursor: grabbing;
 }
 
+/* The GPU sample layer sits under the 2-D overlay and never takes input. */
+.flow-figure__plot .flow-figure__gpu {
+  pointer-events: none;
+}
+
 /* ---- Time axis ----------------------------------------------------------
    Three columns: [play, t=0] [slider] [t=1]. On a side-by-side layout the
    hook sets --axis-start / --axis-end to the noise and data centres, so the
@@ -91,7 +96,7 @@
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-round);
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
 
 .flow-figure__play:hover {

@@ -3,6 +3,7 @@
 // destroy() on unmount.
 
 import { measureGeometry, particleBudget, tFromPoint, type Geometry } from './geometry';
+import { createPointRenderer } from './gl';
 import { readPalette } from './palette';
 import { createParticles, resampleNoise, type Particles } from './particles';
 import { drawFrame, drawStatic } from './render';
@@ -10,7 +11,10 @@ import { sampleTarget, type TargetSpec } from './targets';
 import { CYCLE, frameAt, phaseForT } from './timeline';
 
 export type FlowFigureOptions = {
+  /** Top canvas: rings, arrows, labels, pointer input (and samples if no GPU). */
   canvas: HTMLCanvasElement;
+  /** Canvas underneath for the WebGL2 sample layer; omitted or unsupported → 2-D only. */
+  gpuCanvas?: HTMLCanvasElement;
   target: TargetSpec;
   /** Start playing on mount. */
   autoplay: boolean;
@@ -45,12 +49,16 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
   if (!ctx || !layerCtx) return { play() {}, pause() {}, setT() {}, destroy() {} };
 
   const palette = readPalette(canvas);
+  const gpu = opts.gpuCanvas ? createPointRenderer(opts.gpuCanvas) : null;
+  let useGpu = gpu !== null;
+  if (!useGpu && opts.gpuCanvas) opts.gpuCanvas.hidden = true;
   let geo: Geometry = measureGeometry(1, 1);
   let dpr = 1;
   let particles: Particles | null = null;
   let label = target.label;
   let budget = 0;
   let loadId = 0;
+  let forceResize = false;
   let destroyed = false;
 
   let t = clamp01(opts.initialT);
@@ -66,15 +74,26 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
   // ---- drawing ------------------------------------------------------------
 
   const render = () => {
-    drawFrame(ctx, geo, layer, particles, t, opacity, palette, label);
+    if (useGpu && gpu?.lost) fallBackTo2d();
+    if (useGpu && gpu) gpu.draw(geo, t, opacity, dpr);
+    drawFrame(ctx, geo, layer, particles, t, opacity, palette, label, !useGpu);
     opts.onFrame?.(t);
+  };
+
+  /** The GPU context was lost: carry on with the 2-D renderer and its budget. */
+  const fallBackTo2d = () => {
+    useGpu = false;
+    if (opts.gpuCanvas) opts.gpuCanvas.hidden = true;
+    budget = 0;
+    forceResize = true;
+    resize();
   };
 
   const paintLayer = () => {
     layer.width = canvas.width;
     layer.height = canvas.height;
     layerCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    drawStatic(layerCtx, geo, palette);
+    drawStatic(layerCtx, geo);
     render();
   };
 
@@ -88,6 +107,7 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
     const result = await sampleTarget(target, count);
     if (destroyed || id !== loadId) return;
     particles = createParticles(result.points);
+    if (useGpu) gpu?.setParticles(particles);
     label = result.label;
     paintLayer();
   };
@@ -99,14 +119,16 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
     const width = Math.round(rect.width * dpr);
     const height = Math.round(rect.height * dpr);
     // Assigning canvas.width clears it even when unchanged; skip no-op resizes.
-    if (width === canvas.width && height === canvas.height && geo.w === rect.width) return;
+    if (!forceResize && width === canvas.width && height === canvas.height && geo.w === rect.width) return;
+    forceResize = false;
     canvas.width = width;
     canvas.height = height;
+    if (useGpu) gpu?.resize(width, height);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     geo = measureGeometry(rect.width, rect.height);
     opts.onLayout?.(geo);
 
-    const next = particleBudget(rect.width, rect.height);
+    const next = particleBudget(rect.width, rect.height, useGpu);
     if (next !== budget) {
       budget = next;
       void load(next);
@@ -128,7 +150,10 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
     // fresh noise so the next cycle is a new sample, not a rerun.
     if (phase >= CYCLE) {
       phase -= CYCLE;
-      if (particles) particles = resampleNoise(particles);
+      if (particles) {
+        particles = resampleNoise(particles);
+        if (useGpu) gpu?.setParticles(particles);
+      }
     }
     ({ t, opacity } = frameAt(phase));
     render();
@@ -218,6 +243,7 @@ export function mountFlowFigure(opts: FlowFigureOptions): FlowFigure {
     setT,
     destroy() {
       destroyed = true;
+      gpu?.destroy();
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
