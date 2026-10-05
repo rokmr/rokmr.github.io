@@ -3,16 +3,19 @@ import { Icon } from '../Icon';
 import { Picture } from '../Picture';
 import { ExternalLink } from '../ExternalLink';
 import { projects } from '../../data/projects';
+import { useNoiseReveal } from '../../hooks/useNoiseReveal';
 
 export function Projects() {
+  useNoiseReveal();
   return (
     <section id="projects" aria-label="AI and ML Projects">
       <SectionHeader id="projects" />
       <div className="card-grid">
         {projects.map((project) => (
           <article className="project-card" key={project.title}>
-            <div className="project-preview">
+            <div className="project-preview" data-noise-reveal="">
               <Picture preview={project.preview} />
+              <span className="noise-reveal__layer" aria-hidden="true" />
             </div>
             <div className="project-content">
               <div className="project-header">

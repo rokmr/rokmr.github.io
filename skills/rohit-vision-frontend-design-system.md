@@ -492,9 +492,12 @@ Code: `src/lib/flow/` (framework-agnostic), bound by `useFlowFigure`.
   backwards: data → noise is diffusion's noising process, not sampling.
   Scrub + play resumes forward from where the reader left it. Pauses when
   scrolled away or the tab is hidden.
-- Static parts render once to an offscreen layer; the live cloud uses a
-  `Float32Array`, 32 brightness buckets and `fillRect`. Particle count scales
-  with plot area (6k–18k).
+- **Rendering:** samples draw on the GPU (`lib/flow/gl.ts`, raw WebGL2, no
+  library): the particle buffer uploads once per sample and the vertex shader
+  computes x_t, so a frame is one draw call. 30k–100k soft round dots by plot
+  area. Rings, arrows and labels sit on a transparent 2-D canvas above.
+  Without WebGL2 (or on context loss) it falls back to the 2-D renderer
+  (`Float32Array`, 32 brightness buckets, `fillRect`, 6k–18k samples).
 - **Target** is swappable in `data/hero.ts`: any transparent PNG/WebP, or
   `twoMoons` / `eightGaussians` / `checkerboard` / `lorenz`.
 
@@ -503,6 +506,22 @@ Code: `src/lib/flow/` (framework-agnostic), bound by `useFlowFigure`.
 Three paragraphs, each paired with Tufte-style sidenotes (mono label + value
 on one line, left hairline) in a margin column. Below 1024px the notes drop
 under their paragraph.
+
+### 7.3a Page Polish — what makes it feel finished
+
+- **One motion language.** Every transition uses the tokens (`--dur-fast`,
+  `--dur`, `--dur-slow`, `--ease`; `--dur-enter`/`--ease-enter` only for
+  content entering). Never `all`, never a raw duration. Cards respond to
+  hover with an edge and surface change — no lift, no shadow.
+- **Header.** Clear over the hero; the scrim bar and hairline arrive once the
+  page scrolls (`data-scrolled`). The current section is marked in the nav
+  (`aria-current`, accent hairline). Header and drawer buttons are `.pill`.
+- **Project thumbnails generate in.** A fine, dark grain layer over each
+  preview fades out as it scrolls into view — x_t = (1 − t)·noise + t·image
+  per pixel, linear over `--dur-generate`. Once per card; never for cards
+  already on screen or under reduced motion.
+- **Fonts.** Only the weights in use are requested (Inter and JetBrains Mono
+  400/500/600/700), so nothing is browser-synthesised.
 
 ### 7.4 Section Reveal on Scroll
 

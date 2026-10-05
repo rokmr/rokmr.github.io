@@ -12,10 +12,12 @@ import { Education } from '../components/sections/Education';
 import { Contact } from '../components/sections/Contact';
 import { useMobileNav } from '../hooks/useMobileNav';
 import { useSectionReveal } from '../hooks/useSectionReveal';
+import { usePageScroll } from '../hooks/usePageScroll';
 
 export function Home({ buildYear }: { buildYear: number }) {
   const nav = useMobileNav();
   useSectionReveal();
+  const { scrolled, active } = usePageScroll();
 
   return (
     <>
@@ -26,7 +28,7 @@ export function Home({ buildYear }: { buildYear: number }) {
       <NoscriptProfile />
 
       <main className="content">
-        <Header nav={nav} />
+        <Header nav={nav} scrolled={scrolled} active={active} />
         <Hero onNavClick={nav.onNavClick} />
         <About />
         <Experience />

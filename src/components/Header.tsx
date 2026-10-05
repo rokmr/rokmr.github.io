@@ -1,17 +1,26 @@
 import { Icon } from './Icon';
-import { navLinks, site } from '../data/site';
+import { navLinks, site, type SectionId } from '../data/site';
 import type { MobileNavState } from '../hooks/useMobileNav';
 
-export function Header({ nav }: { nav: MobileNavState }) {
+type HeaderProps = {
+  nav: MobileNavState;
+  /** Past the top of the page: the header shows its bar and border. */
+  scrolled: boolean;
+  /** The section the reader is in, marked in the nav. */
+  active: SectionId | null;
+};
+
+export function Header({ nav, scrolled, active }: HeaderProps) {
+  const current = (href: string) => (active && href === `#${active}` ? 'true' : undefined);
   return (
     <>
-      <header role="banner">
+      <header role="banner" data-scrolled={scrolled ? '' : undefined}>
         <a href="#home" className="logo" aria-label="Rohit Kumar - Home">
           ROHIT KUMAR
         </a>
         <nav aria-label="Main navigation">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={nav.onNavClick}>
+            <a key={link.href} href={link.href} onClick={nav.onNavClick} aria-current={current(link.href)}>
               {link.label}
             </a>
           ))}
@@ -28,12 +37,12 @@ export function Header({ nav }: { nav: MobileNavState }) {
           <span />
         </button>
         <div className="header-cta">
-          <a href={site.blogUrl} className="cv-btn">
+          <a href={site.blogUrl} className="pill">
             <Icon name="blog" size={14} />
             Blog
           </a>
-          <a href={`mailto:${site.email}?subject=Collaboration`} className="collab-btn">
-            <Icon name="users" />
+          <a href={`mailto:${site.email}?subject=Collaboration`} className="pill pill--primary">
+            <Icon name="users" size={14} />
             Collaborate
           </a>
         </div>
@@ -51,17 +60,17 @@ export function Header({ nav }: { nav: MobileNavState }) {
       >
         <div className="mobile-nav-inner">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={nav.onNavClick}>
+            <a key={link.href} href={link.href} onClick={nav.onNavClick} aria-current={current(link.href)}>
               {link.label}
             </a>
           ))}
           <div className="mobile-nav-cta">
-            <a href={site.blogUrl} className="mobile-blog-btn">
+            <a href={site.blogUrl} className="pill">
               <Icon name="blog" size={14} />
               Blog
             </a>
-            <a href={`mailto:${site.email}?subject=Collaboration`} className="mobile-collab-btn">
-              <Icon name="users" />
+            <a href={`mailto:${site.email}?subject=Collaboration`} className="pill pill--primary">
+              <Icon name="users" size={14} />
               Collaborate
             </a>
           </div>

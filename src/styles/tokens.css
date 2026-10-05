@@ -351,14 +351,22 @@
 }
 
 /* ---------------------------------------------------------------------------
-   MOTION — short, linear-ish, no spring. Three durations, one easing.
+   MOTION — short, linear-ish, no spring. Three durations and one easing for
+   everything interactive; one slower, decelerating pair reserved for content
+   entering the page (section reveals). Every transition in the site uses
+   these — never `all`, never a raw duration.
    ------------------------------------------------------------------------ */
 :root {
   --ease:       cubic-bezier(0.4, 0, 0.2, 1);
   --dur-fast:   120ms;   /* colour, opacity                                */
   --dur:        200ms;   /* the default                                    */
-  --dur-slow:   320ms;   /* entrances, layout                              */
+  --dur-slow:   320ms;   /* drawers, overlays, layout                      */
   --transition: var(--dur) var(--ease);
+
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);   /* fast start, long settle */
+  --dur-enter:  700ms;
+  /* Noise → image on project thumbnails: linear in t, like Figure 1. */
+  --dur-generate: 1100ms;
 }
 
 /* ---------------------------------------------------------------------------

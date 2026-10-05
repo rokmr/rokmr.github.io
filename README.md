@@ -28,10 +28,12 @@ src/
   App.tsx               Route table (two routes, no router library)
   pages/                Home, Tacle
   components/           Header, Footer, HeroFigure, Icon, section components
-  hooks/                Flow figure binding, mobile nav, reveal, citations
+  hooks/                Flow figure binding, page scroll (header state, current section),
+                        noise reveal, mobile nav, section reveal, citations
   lib/flow/             Hero "Figure 1": flow-matching particle figure (framework-agnostic)
     controller.ts         Mounts on a canvas: loop, sizing, visibility, pointer input
-    render.ts             Static layer + per-frame drawing
+    gl.ts                 WebGL2 sample layer (one draw call; 2-D fallback in render.ts)
+    render.ts             2-D layers: rings, arrows, labels (and samples without WebGL2)
     geometry.ts           Layout (side by side / stacked), pointer → t
     particles.ts          Noise/data pairs in a flat Float32Array
     targets.ts            p_data: image stippling and 2-D toy distributions

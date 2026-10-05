@@ -59,14 +59,8 @@ table {
 
     /* Keep both CTA labels readable; reclaim the width from padding instead
        of hiding the text, which would leave two unlabelled icons. */
-    .header-cta {
-        gap: 0.5rem;
-    }
-
-    .header-cta .cv-btn,
-    .header-cta .collab-btn {
+    .header-cta .pill {
         padding-inline: 0.7rem;
-        font-size: var(--text-xs);
     }
 }
 
@@ -131,8 +125,6 @@ table {
        count, sidenote links) are exempt and stay in the text flow. Pills
        size themselves in components/pill.css. */
     .logo,
-    .cv-btn,
-    .collab-btn,
     .project-links a,
     .achievement-link,
     .back-to-top,

@@ -37,13 +37,15 @@ const sharedMeta: Meta[] = [
 ];
 
 const sharedLinks: Link[] = [
-  { rel: 'icon', href: '/assets/images/profile.webp', type: 'image/png' },
+  { rel: 'icon', href: '/assets/images/profile.webp', type: 'image/webp' },
   { rel: 'apple-touch-icon', href: '/assets/images/profile.png' },
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap',
+    // Exactly the weights the stylesheets use: fewer files, and no
+    // browser-synthesised bold for the 600-weight mono (logo, stat values).
+    href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap',
   },
 ];
 

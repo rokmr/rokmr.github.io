@@ -335,6 +335,27 @@ button { background: none; border: none; cursor: pointer; }
 }
 
 .stack > * + * { margin-top: var(--flow); }
+
+/* Noise reveal (useNoiseReveal): a grain layer over an element that fades
+   out as it scrolls into view — x_t = (1 − t)·noise + t·image per pixel.
+   Hidden unless the hook marks the element pending, so no-JS, reduced
+   motion and already-visible elements never show noise. */
+[data-noise-reveal] { position: relative; }
+
+.noise-reveal__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--noise-texture) center / cover;
+  opacity: 0;
+}
+
+[data-noise-reveal='pending'] .noise-reveal__layer { opacity: 1; }
+
+[data-noise-reveal='done'] .noise-reveal__layer {
+  opacity: 0;
+  transition: opacity var(--dur-generate) linear;   /* linear in t, like the figure */
+}
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;

@@ -22,7 +22,7 @@ html {
     text-decoration: none;
     border-radius: 0 0 4px 4px;
     z-index: 999;
-    transition: top 0.2s;
+    transition: top var(--dur) var(--ease);
 }
 
 .skip-to-content:focus {
@@ -51,10 +51,19 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    backdrop-filter: blur(12px);
-    background: rgba(10, 10, 10, 0.9);
-    border-bottom: 1px solid var(--border);
+    /* Clear over the hero; the bar and its hairline arrive once the page
+       scrolls (data-scrolled, set by usePageScroll). */
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color var(--dur-slow) var(--ease), border-color var(--dur-slow) var(--ease);
     z-index: 100;
+}
+
+header[data-scrolled] {
+    background: var(--scrim);
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .logo {
@@ -77,55 +86,41 @@ nav a {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: color 0.3s;
+    transition: color var(--dur-fast) var(--ease);
 }
 
 nav a:hover {
-    color: #fff;
+    color: var(--ink);
+}
+
+/* The section the reader is in: full ink and an accent hairline beneath. */
+nav a {
+    position: relative;
+}
+
+nav a[aria-current] {
+    color: var(--ink);
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -6px;
+    left: 0;
+    height: 1px;
+    background: var(--ink-accent);
+    transform: scaleX(0);
+    transition: transform var(--dur) var(--ease);
+}
+
+header nav a[aria-current]::after {
+    transform: scaleX(1);
 }
 
 .header-cta {
     display: flex;
-    gap: 0.75rem;
-}
-
-.collab-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    padding: 0.5rem 1rem;
-    background: #fff;
-    color: #000;
-    border: none;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.collab-btn:hover {
-    background: #e0e0e0;
-}
-
-/* Minimal CV Download Button */
-.cv-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    padding: 0.5rem 0.8rem;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--ink-secondary);
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.cv-btn:hover {
-    border-color: var(--ink);
-    color: var(--ink);
+    gap: var(--space-2);
 }
 
 @keyframes pulse {
@@ -183,13 +178,13 @@ section {
     border: 1px solid var(--border);
     border-radius: 4px;
     overflow: hidden;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 
+/* Hover is a quiet change of edge and surface — no lift, no shadow. */
 .project-card:hover {
     border-color: var(--border-strong);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: var(--surface-raised);
 }
 
 /* Fixed height, not an aspect ratio: .card-grid widens cards in a short last
@@ -221,7 +216,7 @@ section {
     object-position: center;
     background: var(--surface-raised);
     filter: grayscale(100%) sepia(20%) hue-rotate(80deg) brightness(0.9);
-    transition: filter 0.4s ease;
+    transition: filter var(--dur-slow) var(--ease);
 }
 
 .project-card:hover .project-preview img {
@@ -263,7 +258,7 @@ section {
 .project-links a {
     color: var(--ink-muted);
     font-size: var(--text-md);
-    transition: color 0.3s;
+    transition: color var(--dur-fast) var(--ease);
     display: inline-flex;
     align-items: center;
 }
@@ -286,13 +281,12 @@ section {
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 1.5rem;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 
 .achievement-card:hover {
     border-color: var(--border-strong);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: var(--surface-raised);
 }
 
 .achievement-icon {
@@ -327,7 +321,7 @@ section {
     color: var(--ink-accent);
     text-decoration: none;
     margin-top: 0.5rem;
-    transition: opacity 0.3s;
+    transition: opacity var(--dur-fast) var(--ease);
 }
 
 .achievement-link:hover {
@@ -341,13 +335,12 @@ section {
     background: var(--surface-card);
     border: 1px solid var(--border);
     border-radius: 4px;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 
 .education-card:hover {
     border-color: var(--border-strong);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: var(--surface-raised);
 }
 
 .edu-degree {
@@ -446,7 +439,7 @@ section {
     color: var(--ink-accent);
     text-decoration: none;
     font-weight: 600;
-    transition: opacity 0.3s;
+    transition: opacity var(--dur-fast) var(--ease);
 }
 
 .service-venue:hover {
@@ -530,7 +523,7 @@ footer p {
     height: 1.5px;
     background: var(--ink);
     border-radius: 1px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
     transform-origin: center;
 }
 
@@ -557,7 +550,7 @@ footer p {
     backdrop-filter: blur(4px);
     z-index: 149;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--dur-slow) var(--ease);
     /* At <=900px this element is display:block with opacity:0, which still
        captures pointer events — it covered the whole page and swallowed every
        tap (hamburger, hero buttons, links) while the menu was CLOSED.
@@ -584,7 +577,7 @@ footer p {
     border-left: 1px solid var(--border);
     z-index: 150;
     transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--dur-slow) var(--ease);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -612,7 +605,7 @@ footer p {
     letter-spacing: 1.5px;
     padding: 1rem 0.5rem;
     border-bottom: 1px solid var(--border);
-    transition: color 0.2s, padding-left 0.2s;
+    transition: color var(--dur-fast) var(--ease), padding-left var(--dur) var(--ease);
 }
 
 .mobile-nav a:last-child {
@@ -630,49 +623,35 @@ footer p {
     flex-direction: column;
     gap: 0.75rem;
     margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    /* The last nav link's hairline already separates the buttons. */
 }
 
-.mobile-nav-cta a {
-    display: flex;
-    align-items: center;
+/* Drawer CTAs are .pill; undo the drawer's link styling for them. */
+.mobile-nav-cta .pill {
     justify-content: center;
-    gap: 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
     padding: 0.8rem 1rem;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: all 0.2s;
-    border-bottom: none;
-}
-
-.mobile-nav-cta a:hover {
-    padding-left: 0;
-}
-
-.mobile-nav-cta .mobile-blog-btn {
-    border: 1px solid var(--border);
-    color: var(--ink-secondary);
+    font-size: var(--text-sm);
     text-transform: none;
     letter-spacing: 0;
+    border: var(--border-width) solid var(--border-strong);
 }
 
-.mobile-nav-cta .mobile-blog-btn:hover {
-    border-color: var(--ink);
+.mobile-nav-cta .pill {
     color: var(--ink);
 }
 
-.mobile-nav-cta .mobile-collab-btn {
-    background: #fff;
-    color: #000;
-    text-transform: none;
-    letter-spacing: 0;
+/* The drawer's link colour would otherwise win over the primary pill's. */
+.mobile-nav-cta .pill--primary {
+    color: var(--ink-inverse);
+    border-color: var(--ink);
 }
 
-.mobile-nav-cta .mobile-collab-btn:hover {
-    background: #e0e0e0;
+.mobile-nav-cta .pill--primary:hover {
+    color: var(--ink-on-accent);
+}
+
+.mobile-nav-cta .pill:hover {
+    padding-left: 1rem;
 }
 
 /* Prevent body scroll when menu is open */
@@ -704,8 +683,8 @@ body.menu-open {
 /* Section reveal animations */
 .section-reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(16px);
+    transition: opacity var(--dur-enter) var(--ease-enter), transform var(--dur-enter) var(--ease-enter);
 }
 
 .section-reveal.visible {
@@ -732,7 +711,7 @@ body.menu-open {
     z-index: 90;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease, color 0.3s, border-color 0.3s;
+    transition: opacity var(--dur) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
 
 .back-to-top.visible {
