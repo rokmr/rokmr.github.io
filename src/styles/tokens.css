@@ -322,7 +322,14 @@
      for metadata that annotates it (bylines, sidenotes). Every block laid
      out with .l-margin (base.css) shares these, so margin columns line up
      down the page. It drops under the main column below 1024px. */
-  --margin-col: 20rem;             /* 320px */
+  /* The main column stops at reading width; the margin column takes all the
+     width left over (never less than --margin-col), so annotations get room
+     to sit on one line instead of wrapping beside a half-empty main column. */
+  --main-col:   46rem;             /* 736px */
+  /* Minimum = hairline pad + label column + gap + the longest value
+     ("AttriStory, CVPR 2026 Workshop", ~220px at 14px), so no value wraps. */
+  --margin-col: 23rem;             /* 368px */
+  --meta-label: 7rem;              /* fits the longest label, "FIRST PAPER" */
   --col-gap:    var(--space-7);
 }
 

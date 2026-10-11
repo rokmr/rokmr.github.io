@@ -3,6 +3,7 @@ import { Icon } from '../Icon';
 import { Picture } from '../Picture';
 import { ExternalLink } from '../ExternalLink';
 import { projects } from '../../data/projects';
+import { keepHyphens } from '../../lib/text';
 import { useNoiseReveal } from '../../hooks/useNoiseReveal';
 
 export function Projects() {
@@ -34,7 +35,7 @@ export function Projects() {
                   ))}
                 </div>
               </div>
-              <p className="project-description">{project.description}</p>
+              <p className="project-description">{keepHyphens(project.description)}</p>
               <div className="tag-row">
                 {project.tech.map((tech) => (
                   <span className="tag" key={tech}>

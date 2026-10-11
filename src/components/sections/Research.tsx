@@ -2,6 +2,7 @@ import { SectionHeader } from '../SectionHeader';
 import { Icon } from '../Icon';
 import { ExternalLink } from '../ExternalLink';
 import { publications, venueDetail } from '../../data/publications';
+import { keepHyphens } from '../../lib/text';
 import { service } from '../../data/service';
 import { useCitationCount } from '../../hooks/useCitationCount';
 
@@ -71,7 +72,7 @@ export function Research() {
           <li className="pub l-margin" key={pub.title}>
             <div>
               <h3 className="pub-title">
-                {pub.title}
+                {keepHyphens(pub.title)}
                 {pub.isNew && <span className="tag pub-new">New</span>}
               </h3>
               <p className="pub-authors">{renderAuthors(pub.authors)}</p>

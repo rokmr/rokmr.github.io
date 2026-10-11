@@ -426,8 +426,15 @@ The `sepia(20%) hue-rotate(80deg)` gives a subtle green tint matching the accent
 
 Two layouts, both in `base.css`, and no component sets its own column widths:
 
-- **`.l-margin`** — main column + margin column (`minmax(0, 1fr)
-  var(--margin-col)`, `var(--col-gap)` between; one column below 1024px).
+- **`.l-margin`** — main column + margin column (`minmax(0, var(--main-col))
+  minmax(var(--margin-col), 1fr)`, `var(--col-gap)` between; one column
+  below 1024px). The main column stops at reading width and the margin
+  column takes the rest, so annotations never wrap mid-phrase.
+  `--margin-col` is derived from the longest value and `--meta-label` from
+  the longest label — change them if those change.
+- **Line breaking** — `text-wrap: pretty` on running text, `balance` on
+  headings; compound words in data strings go through `keepHyphens`
+  (`lib/text.ts`) so lines never break at a hyphen.
   Every text block uses it: hero, Figure 1's caption + legend, abstract,
   experience, research, contact. Their margin columns are one column down the
   page. Prose in the main column caps at `var(--measure)`.

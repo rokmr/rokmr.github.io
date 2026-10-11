@@ -311,7 +311,7 @@ button { background: none; border: none; cursor: pointer; }
    drops underneath instead. */
 .l-margin {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--margin-col);
+  grid-template-columns: minmax(0, var(--main-col)) minmax(var(--margin-col), 1fr);
   gap: var(--space-4) var(--col-gap);
 }
 
@@ -335,6 +335,10 @@ button { background: none; border: none; cursor: pointer; }
 }
 
 .stack > * + * { margin-top: var(--flow); }
+
+/* Line breaking: no lone last words in running text, balanced headings. */
+p, li, dd, figcaption { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
 
 /* Noise reveal (useNoiseReveal): a grain layer over an element that fades
    out as it scrolls into view — x_t = (1 − t)·noise + t·image per pixel.

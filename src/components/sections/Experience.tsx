@@ -1,5 +1,6 @@
 import { SectionHeader } from '../SectionHeader';
 import { experience } from '../../data/experience';
+import { keepHyphens } from '../../lib/text';
 
 /**
  * Work history on the page grid: what was done in the main column, when,
@@ -22,7 +23,7 @@ export function Experience() {
               <p className="exp-company">{job.company}</p>
               <ul className="exp-points">
                 {job.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
+                  <li key={bullet}>{keepHyphens(bullet)}</li>
                 ))}
               </ul>
             </div>

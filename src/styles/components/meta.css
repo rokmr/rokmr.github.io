@@ -22,7 +22,7 @@
 /* Label and value share a line, so a block of notes stays compact. */
 .meta__row {
   display: grid;
-  grid-template-columns: 11ch minmax(0, 1fr);
+  grid-template-columns: var(--meta-label) minmax(0, 1fr);
   align-items: baseline;
   gap: var(--space-3);
 }

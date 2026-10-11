@@ -24,7 +24,7 @@ const rows: { text: ReactNode; notes: Note[] }[] = [
       <>
         I'm an electrical engineer who ended up in AI. After clearing <strong>GATE</strong> and{' '}
         <strong>BARC</strong>, I chose research over a government job — which took me to{' '}
-        <strong>IISc Bangalore</strong> and my first paper, on exemplar-free continual learning.
+        <strong>IISc Bangalore</strong> and my first paper, on exemplar‑free continual learning.
       </>
     ),
     notes: [
@@ -59,8 +59,8 @@ const rows: { text: ReactNode; notes: Note[] }[] = [
     text: (
       <>
         The boundary between what machines see and what they understand keeps blurring. I build at
-        that edge, and I still publish — most recently on fine-grained attribute control in
-        diffusion-based visual storytelling.
+        that edge, and I still publish — most recently on fine‑grained attribute control in
+        diffusion‑based visual storytelling.
       </>
     ),
     notes: [
