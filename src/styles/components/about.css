@@ -1,0 +1,41 @@
+/* ============================================================================
+   ABOUT — the abstract under the title page. Each row is an .l-margin grid
+   (base.css): a paragraph in the main column, its sidenotes (.meta) in the
+   margin column shared with the hero byline. Nothing here sets a column
+   width; prose is held to the reading measure.
+   ========================================================================= */
+
+.abstract {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.abstract-row {
+  align-items: start;
+}
+
+.abstract-text {
+  max-width: var(--measure);
+  font-size: var(--text-md);
+  line-height: var(--leading-read);
+  color: var(--ink-secondary);
+}
+
+.abstract-text strong {
+  font-weight: var(--weight-semibold);
+  color: var(--ink);
+}
+
+/* The opening paragraph steps up in size and colour. */
+.abstract-lead {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .abstract-lead {
+    font-size: var(--text-md);
+  }
+}

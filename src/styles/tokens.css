@@ -307,8 +307,30 @@
 
   --flow:        var(--space-5);   /* gap between sibling blocks in prose   */
   --card-pad:    var(--space-5);   /* interior padding of any card          */
-  --section-gap: var(--space-8);   /* gap between page sections             */
+  /* Visible gap between two page sections. Fluid so it scales with the
+     viewport instead of jumping at a breakpoint; sections apply half of it as
+     padding on each side, so this value is the gap a reader actually sees.
+     80px on a phone, 144px on a wide desktop. */
+  --section-gap: clamp(5rem, 9vw, 9rem);
+
+  /* Width of the centred content column. Sections cap at this; the full-width
+     header and footer use it to line their contents up with the sections. */
+  --content-max: 1400px;
   --gutter:      var(--space-9);   /* page side padding (responsive below)  */
+
+  /* Margin column — the Distill/Tufte side column beside the main column,
+     for metadata that annotates it (bylines, sidenotes). Every block laid
+     out with .l-margin (base.css) shares these, so margin columns line up
+     down the page. It drops under the main column below 1024px. */
+  /* The main column stops at reading width; the margin column takes all the
+     width left over (never less than --margin-col), so annotations get room
+     to sit on one line instead of wrapping beside a half-empty main column. */
+  --main-col:   46rem;             /* 736px */
+  /* Minimum = hairline pad + label column + gap + the longest value
+     ("AttriStory, CVPR 2026 Workshop", ~220px at 14px), so no value wraps. */
+  --margin-col: 23rem;             /* 368px */
+  --meta-label: 7rem;              /* fits the longest label, "FIRST PAPER" */
+  --col-gap:    var(--space-7);
 }
 
 /* ---------------------------------------------------------------------------
@@ -336,14 +358,22 @@
 }
 
 /* ---------------------------------------------------------------------------
-   MOTION — short, linear-ish, no spring. Three durations, one easing.
+   MOTION — short, linear-ish, no spring. Three durations and one easing for
+   everything interactive; one slower, decelerating pair reserved for content
+   entering the page (section reveals). Every transition in the site uses
+   these — never `all`, never a raw duration.
    ------------------------------------------------------------------------ */
 :root {
   --ease:       cubic-bezier(0.4, 0, 0.2, 1);
   --dur-fast:   120ms;   /* colour, opacity                                */
   --dur:        200ms;   /* the default                                    */
-  --dur-slow:   320ms;   /* entrances, layout                              */
+  --dur-slow:   320ms;   /* drawers, overlays, layout                      */
   --transition: var(--dur) var(--ease);
+
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);   /* fast start, long settle */
+  --dur-enter:  700ms;
+  /* Noise → image on project thumbnails: linear in t, like Figure 1. */
+  --dur-generate: 1100ms;
 }
 
 /* ---------------------------------------------------------------------------

@@ -1,5 +1,11 @@
 # Migration
 
+> **Note (superseded paths).** This document was written before the site moved to
+> Vite + React. The stylesheets described here now live in `src/styles/` and are
+> imported via `src/styles/index.css` rather than linked from `index.html`. The
+> token work and the old → new mappings below still apply; only the file
+> locations changed. See `README.md` for the current layout.
+
 Both repos were verified byte-identical to what's served, so the line numbers below
 are real.
 

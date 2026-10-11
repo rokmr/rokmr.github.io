@@ -306,7 +306,60 @@ button { background: none; border: none; cursor: pointer; }
 .wrap--ultra { max-width: var(--max-ultra); }
 .wrap--read  { max-width: var(--max-content); }
 
+/* Main column + margin column. Children go in order: main, then margin.
+   Below 1024px the margin column would squeeze the main one, so its content
+   drops underneath instead. */
+.l-margin {
+  display: grid;
+  grid-template-columns: minmax(0, var(--main-col)) minmax(var(--margin-col), 1fr);
+  gap: var(--space-4) var(--col-gap);
+}
+
+@media (max-width: 1024px) {
+  .l-margin { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Card gallery that never leaves a hole. Cards wrap at --card-min and grow
+   to fill their row, so a short last row stretches instead of ending in
+   empty slots — whatever the number of cards, at every width. */
+.card-grid {
+  --card-min: 18rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.card-grid > * {
+  flex: 1 1 var(--card-min);
+  min-width: 0;
+}
+
 .stack > * + * { margin-top: var(--flow); }
+
+/* Line breaking: no lone last words in running text, balanced headings. */
+p, li, dd, figcaption { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+
+/* Noise reveal (useNoiseReveal): a grain layer over an element that fades
+   out as it scrolls into view — x_t = (1 − t)·noise + t·image per pixel.
+   Hidden unless the hook marks the element pending, so no-JS, reduced
+   motion and already-visible elements never show noise. */
+[data-noise-reveal] { position: relative; }
+
+.noise-reveal__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--noise-texture) center / cover;
+  opacity: 0;
+}
+
+[data-noise-reveal='pending'] .noise-reveal__layer { opacity: 1; }
+
+[data-noise-reveal='done'] .noise-reveal__layer {
+  opacity: 0;
+  transition: opacity var(--dur-generate) linear;   /* linear in t, like the figure */
+}
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;

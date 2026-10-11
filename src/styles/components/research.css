@@ -1,0 +1,54 @@
+/* ============================================================================
+   RESEARCH — each paper is an .l-margin row: title, authors and links
+   (.pill-row) in the main column, venue and citations (.meta) in the margin
+   column. Rows are divided by hairlines, as in Experience.
+   ========================================================================= */
+
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pub {
+  align-items: start;
+}
+
+.pub + .pub {
+  margin-top: var(--space-7);
+  padding-top: var(--space-7);
+  border-top: var(--border-width) solid var(--border);
+}
+
+.pub-title {
+  max-width: var(--measure);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--ink);
+}
+
+.pub-new {
+  margin-left: var(--space-2);
+  vertical-align: 2px;
+  color: var(--ink-on-accent);
+  background: var(--ink-accent);
+  border-color: var(--ink-accent);
+}
+
+.pub-authors {
+  margin-top: var(--space-2);
+  font-size: var(--text-base);
+  color: var(--ink-secondary);
+}
+
+.pub-authors strong {
+  font-weight: var(--weight-semibold);
+  color: var(--ink);
+}
+
+.pub-links {
+  margin-top: var(--space-4);
+}

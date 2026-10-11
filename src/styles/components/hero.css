@@ -1,0 +1,89 @@
+/* ============================================================================
+   HERO — the landing section as a research-paper title page (after
+   distill.pub). Layout comes from .l-margin (base.css): title, dek and links
+   (.pill-row) in the main column, the byline (.meta) in the margin column, then Figure 1
+   across both. Nothing here sets a column width.
+   ========================================================================= */
+
+.hero {
+  /* .hero is a <section>, so it already has the content cap and auto
+     margins; the top padding clears the fixed header. */
+  padding: calc(var(--header-h) + var(--space-7)) var(--gutter) calc(var(--section-gap) / 2);
+}
+
+.paper-head {
+  margin-bottom: var(--space-6);
+}
+
+/* The title is sized by the column it sits in, not by the viewport, so it
+   keeps to two lines whatever the margin column leaves it. 8cqi keeps
+   "Bridging Computer Vision" (~12.5 em wide) inside the column. */
+.paper-main {
+  container-type: inline-size;
+}
+
+.paper-title {
+  font-size: clamp(2rem, 8cqi, 3.75rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.paper-dek {
+  max-width: var(--measure);
+  margin-top: var(--space-4);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  color: var(--ink-secondary);
+}
+
+/* Beside the title block, the byline sits on its baseline; stacked, it
+   simply follows. */
+.paper-byline {
+  align-self: end;
+}
+
+.paper-author {
+  align-items: center; /* the avatar is taller than a line of text */
+}
+
+.paper-author .meta__value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.paper-author img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-round);
+}
+
+/* ---- Link row: .pill-row (components/pill.css) ---------------------- */
+
+.paper-links {
+  margin-top: var(--space-6);
+}
+
+/* ---- Breakpoints ------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: calc(var(--header-h) + var(--space-6));
+  }
+
+  .paper-dek {
+    font-size: var(--text-md);
+  }
+}
+
+/* Landscape phones and split screens: keep the first screen for content. */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero {
+    padding-top: calc(var(--header-h) + var(--space-5));
+  }
+}

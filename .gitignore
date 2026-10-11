@@ -26,3 +26,6 @@ build/
 *.mov
 *.avi
 *.wmv
+
+# Vite SSR intermediate bundle
+dist-ssr/

@@ -1,0 +1,69 @@
+# Builds the site and publishes dist/ to GitHub Pages.
+#
+# One-time setup: in the repository's Settings → Pages, set
+# "Build and deployment → Source" to "GitHub Actions". Until that is changed,
+# Pages keeps serving the old branch contents and this workflow's deployments
+# will not go live.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it mid-publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build and prerender
+        run: npm run build
+
+      - name: Verify the prerendered pages are not empty shells
+        run: |
+          set -euo pipefail
+          for page in dist/index.html dist/tacle/index.html; do
+            test -s "$page" || { echo "missing $page"; exit 1; }
+            grep -q '<!--app-' "$page" && { echo "$page still has placeholders"; exit 1; }
+            echo "ok: $page ($(wc -c < "$page") bytes)"
+          done
+          # The custom domain is served from dist/, so CNAME must survive the build.
+          test -f dist/CNAME || { echo "dist/CNAME missing — custom domain would break"; exit 1; }
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

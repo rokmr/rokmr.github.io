@@ -1,0 +1,152 @@
+/* ============================================
+   Responsive layer
+   ============================================
+   Loaded last so it wins over main.css.
+
+   Most layout no longer needs breakpoints here: page blocks sit on .l-margin
+   (main + margin column, collapsing below 1024px) and galleries on
+   .card-grid (cards wrap at a minimum width and fill their row), both in
+   base.css. Component stylesheets keep their own breakpoints. What remains
+   is navigation, the header, and a few legacy blocks in main.css.
+
+   Navigation switches to the hamburger drawer at <=900px.
+*/
+
+/* ---------------------------------------------
+   Universal guards
+   --------------------------------------------- */
+
+/* No layout may introduce a horizontal scrollbar at any width. */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Media and embeds stay inside their column. */
+img,
+picture,
+svg,
+video,
+canvas,
+pre,
+table {
+    max-width: 100%;
+}
+
+/* Long URLs and identifiers must wrap rather than widen the page. */
+.exp-points li,
+.project-description,
+.pub-title,
+.pub-authors,
+.edu-courses,
+.service-desc {
+    overflow-wrap: break-word;
+}
+
+/* ---------------------------------------------
+   Tablet landscape / small laptop (901-1200px)
+   --------------------------------------------- */
+@media (min-width: 901px) and (max-width: 1200px) {
+    /* Seven nav links plus two CTA buttons are tight at this width. */
+    header nav {
+        gap: 1rem;
+    }
+
+    header nav a {
+        font-size: var(--text-sm);
+    }
+
+    /* Keep both CTA labels readable; reclaim the width from padding instead
+       of hiding the text, which would leave two unlabelled icons. */
+    .header-cta .pill {
+        padding-inline: 0.7rem;
+    }
+}
+
+/* ---------------------------------------------
+   Tablet portrait (601-900px)
+   --------------------------------------------- */
+@media (min-width: 601px) and (max-width: 900px) {
+    /* Service entries read better inline at this width. */
+    .service-item {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .service-separator {
+        display: inline;
+    }
+}
+
+/* ---------------------------------------------
+   Phone (<=600px)
+   --------------------------------------------- */
+@media (max-width: 600px) {
+    .section-header {
+        gap: 0.6rem;
+    }
+
+    /* The badge and links get their own line rather than squeezing the title. */
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* ---------------------------------------------
+   Small phone (<=380px)
+   --------------------------------------------- */
+@media (max-width: 380px) {
+    .logo {
+        font-size: var(--text-sm);
+    }
+}
+
+/* ---------------------------------------------
+   Short viewports (phone in landscape, split-screen)
+   --------------------------------------------- */
+@media (max-height: 600px) and (orientation: landscape) {
+    /* The drawer must scroll when it is taller than the viewport. */
+    .mobile-nav-inner {
+        overflow-y: auto;
+        max-height: 100vh;
+    }
+}
+
+/* ---------------------------------------------
+   Touch input
+   --------------------------------------------- */
+@media (hover: none) {
+    /* WCAG 2.5.8 asks for 24px minimum; 44px is the comfortable iOS target.
+       Links inside a sentence or a .meta value (service venues, citation
+       count, sidenote links) are exempt and stay in the text flow. Pills
+       size themselves in components/pill.css. */
+    .logo,
+    .project-links a,
+    .achievement-link,
+    .back-to-top,
+    .mobile-menu-btn,
+    header nav a,
+    .mobile-nav a {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .project-links a,
+    .back-to-top,
+    .mobile-menu-btn {
+        justify-content: center;
+    }
+
+    /* Hover transforms either do nothing or stick after a tap. */
+    .project-card:hover,
+    .education-card:hover,
+    .achievement-card:hover {
+        transform: none;
+    }
+}
