@@ -29,3 +29,6 @@ build/
 
 # Vite SSR intermediate bundle
 dist-ssr/
+
+# Vite dependency cache
+.vite/
