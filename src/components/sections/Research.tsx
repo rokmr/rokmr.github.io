@@ -36,16 +36,28 @@ function renderAuthors(authors: (typeof publications)[number]['authors']) {
   return out;
 }
 
-function CitationCount({
+/**
+ * The "Cited by" sidenote. Renders nothing while the count is zero — a row
+ * reading "0" says less than no row — and appears on its own once the live
+ * count from Semantic Scholar rises above zero.
+ */
+function CitedBy({
   arxivId,
   fallback,
-  scholarUrl,
+  citedByUrl,
 }: NonNullable<(typeof publications)[number]['citations']>) {
   const count = useCitationCount(arxivId, fallback);
+  if (count <= 0) return null;
+  const text = `${count} ${count === 1 ? 'citation' : 'citations'}`;
   return (
-    <ExternalLink href={scholarUrl} aria-label={`Cited by ${count} on Google Scholar`}>
-      {count} on Scholar
-    </ExternalLink>
+    <div className="meta__row">
+      <dt className="meta__label">Cited by</dt>
+      <dd className="meta__value">
+        <ExternalLink href={citedByUrl} aria-label={`${text}: see citing papers`}>
+          {text}
+        </ExternalLink>
+      </dd>
+    </div>
   );
 }
 
@@ -98,14 +110,7 @@ export function Research() {
                   {venueDetail(pub) && <span className="meta__sub">{venueDetail(pub)}</span>}
                 </dd>
               </div>
-              {pub.citations && (
-                <div className="meta__row">
-                  <dt className="meta__label">Cited by</dt>
-                  <dd className="meta__value">
-                    <CitationCount {...pub.citations} />
-                  </dd>
-                </div>
-              )}
+              {pub.citations && <CitedBy {...pub.citations} />}
             </dl>
           </li>
         ))}

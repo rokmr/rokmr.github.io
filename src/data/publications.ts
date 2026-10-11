@@ -13,9 +13,10 @@ export type Publication = {
   isNew?: boolean;
   /**
    * Live citation count, refreshed client-side from Semantic Scholar.
-   * `fallback` is what ships in the prerendered HTML.
+   * `fallback` is what ships in the prerendered HTML; `citedByUrl` is where
+   * the count links (Google Scholar's "cited by" list when it exists).
    */
-  citations?: { arxivId: string; fallback: number; scholarUrl: string };
+  citations?: { arxivId: string; fallback: number; citedByUrl: string };
   links: { href: string; label: string; icon: IconName; ariaLabel: string }[];
 };
 
@@ -31,6 +32,15 @@ export const publications: Publication[] = [
     venue: 'CVPR 2026 Workshop on Generative AI for Storytelling (AISTORY)',
     venueShort: 'CVPR 2026 Workshop',
     isNew: true,
+    citations: {
+      arxivId: '2605.20777',
+      // Semantic Scholar has not indexed the citing paper yet; the live
+      // count only ever raises this, never lowers it.
+      fallback: 1,
+      // No Google Scholar "cited by" list yet; Semantic Scholar's citing papers.
+      citedByUrl:
+        'https://www.semanticscholar.org/paper/7d14da101fd6b4977083d7f0fb3bd2266264181c#citing-papers',
+    },
     links: [
       {
         href: 'https://openaccess.thecvf.com/content/CVPR2026W/AISTORY/papers/Sreenivas_AttriStory_Fine-Grained_Attribute_Realization_for_Visual_Storytelling_with_Diffusion_Models_CVPRW_2026_paper.pdf',
@@ -71,7 +81,7 @@ export const publications: Publication[] = [
     citations: {
       arxivId: '2407.08041',
       fallback: 1,
-      scholarUrl:
+      citedByUrl:
         'https://scholar.google.com/scholar?cites=620960889489791150&as_sdt=2005&sciodt=0,5&hl=en',
     },
     links: [
