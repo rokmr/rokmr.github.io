@@ -6,7 +6,7 @@ export type Publication = {
    * Authors in order. `self` bolds the name; `suffix` carries markers such as
    * the equal-contribution asterisk, which sits outside the bold.
    */
-  authors: { name: string; self?: boolean; suffix?: string }[];
+  authors: { name: string; self?: boolean; suffix?: string; equalContribution?: boolean }[];
   venue: string;
   /** Compact venue for bylines and sidenotes, e.g. "WACV 2025". */
   venueShort: string;
@@ -28,8 +28,8 @@ export const publications: Publication[] = [
     title:
       'AttriStory: Fine-Grained Attribute Realization for Visual Storytelling with Diffusion Models',
     authors: [
-      { name: 'Manogna Sreenivas' },
-      { name: 'Rohit Kumar', self: true },
+      { name: 'Manogna Sreenivas', equalContribution: true },
+      { name: 'Rohit Kumar', self: true, equalContribution: true },
       { name: 'Soma Biswas' },
     ],
     venue: 'CVPR 2026 Workshop on Generative AI for Storytelling (AISTORY)',
@@ -152,3 +152,9 @@ export function venueDetail(pub: Publication): string {
 /** Newest first, as listed. */
 export const latestPublication = publications[0]!;
 export const firstPublication = publications[publications.length - 1]!;
+
+/** Shared display convention, including Rohit's confirmed co-first authorship.
+ * Original author-marker metadata above remains unchanged. */
+export function publicationDisplayAuthors(pub: Publication) {
+  return pub.authors.map(author => ({ ...author, suffix: author.suffix === '*' || author.equalContribution ? '*' : '' }));
+}

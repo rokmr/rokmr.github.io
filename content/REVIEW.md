@@ -25,7 +25,7 @@ combined result. The initial source review is supplemented by the browser and PD
 ## Verification
 
 - TypeScript passes.
-- 72 tests pass: 64 Vitest and 8 content-boundary tests.
+- 73 tests pass: 65 Vitest and 8 content-boundary tests.
 - Static production build prerenders the homepage, résumé, work index, all case
   studies, and TACLE; sitemap derives from those routes.
 - Master/public consistency checks and private-field exclusion checks pass.
@@ -56,3 +56,25 @@ combined result. The initial source review is supplemented by the browser and PD
 
 These are Chromium checks, not a claim of testing every browser or assistive
 technology. Unconfirmed metrics and internal report material remain unpublished.
+
+## Cross-page content audit — 26 October 2026
+
+- Homepage introduction includes both product imagery and novel-view work.
+- Shared publication-display data supplies equal-contribution markers to the
+  homepage and résumé; no author-name parsing from narrative notes.
+- All work includes published projects without a case study through their
+  existing resource links. Virtual Try-On and its report are now discoverable;
+  its description distinguishes the three-stage and single-stage approaches
+  supplied in the original notes.
+- Project names agree between the legacy catalog and case-study records.
+- Almanac's short ownership line names its engineering scope.
+- Lifestyle copy describes the pipeline built, without an unconfirmed production
+  shipment or a measured improvement claim.
+- Inference deployment wording avoids repeating the same claim across paragraphs.
+- Master/public projection checks, 73 tests, TypeScript and production build pass.
+- 336 responsive states pass; keyboard/menu/copy checks pass. Twelve local pages
+  crawled, with 35 internal link/asset destinations checked successfully.
+
+The homepage remains a selection, while All work exposes the broader public
+collection. Private notes and unapproved metrics remain excluded. Some detailed
+copy still lives in typed modules during the documented master-data migration.

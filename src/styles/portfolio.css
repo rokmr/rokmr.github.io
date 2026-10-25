@@ -26,7 +26,8 @@ body:has(.portfolio-page){background:var(--page-paper);color:var(--page-ink);ove
 .portfolio-page h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:3.25rem;line-height:1.1;letter-spacing:-.04em}
 .portfolio-page .opening-lead{font-size:1.25rem;line-height:1.5;max-width:34ch;margin-top:20px;text-wrap:balance}
 .portfolio-page .opening-detail{font-size:0.875rem;color:var(--page-muted);margin-top:12px;max-width:54ch}
-.portrait{display:block;width:112px;height:134px;object-fit:cover;object-position:50% 0;background:var(--page-wash);border-radius:3px}
+/* A small editorial portrait: same paper, rule and corner treatment as the page. */
+.portrait{display:block;box-sizing:border-box;width:112px;height:134px;padding:clamp(3px,.35cqi,5px);padding-bottom:0;object-fit:cover;object-position:50% 0;background:var(--page-wash);border:1px solid var(--page-line);border-radius:2px;filter:grayscale(1)}
 .opening-links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;margin-top:22px}
 .opening-actions,.opening-profiles{display:flex;align-items:center;gap:18px;flex-wrap:nowrap}
 .opening-links a{min-width:44px;display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:0.8125rem;white-space:nowrap}

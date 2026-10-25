@@ -13,7 +13,7 @@ specialism supported by real work and publications.
 | Selected work | What has he built? | A curated set of three examples with problem, personal contribution, outcome and inspectable evidence. |
 | Experience | What responsibilities has he held? | Roles, dates, scope and additional outcomes. Capabilities support this chapter. |
 | Background | How did he arrive here? | Short personal path, education, secondary achievements. No second employer summary. |
-| Contact | How could we work together? | Explicit roles/collaboration/project invitation and direct contact. |
+| Contact | How could we work together? | Direct email and a quiet copy action. |
 
 `src/data/site.ts` owns the section order and numbering. `Home.tsx` maps that
 registry to components. `#skills` and `#education` remain valid anchors within
@@ -68,5 +68,16 @@ should improve that chapter without duplicating another chapter's job.
 identity to website adapters. Detailed work descriptions remain in legacy typed
 files while migration continues. The local master has initial contribution
 records with metric context and ownership distinctions. Website, SEO and résumé
-projections are not yet fully unified. No LaTeX renderer or new project routes
-have been introduced in this composition pass.
+projections are not yet fully unified. Case-study routes and the two-page
+LaTeX résumé renderer now exist; the public projection guards the approved
+record summaries while typed modules still carry detailed presentation copy.
+
+## Review rule for new content
+
+Check where a contribution belongs before adding copy. Separate substantive
+projects (for example, lifestyle imagery and novel-view synthesis); keep
+implementation details within their parent project. The homepage is curated,
+but All work must include every published engineering project or a useful
+resource link. Shared authorship formatting and professional positioning must
+remain consistent across the homepage and résumé. Preserve the distinction
+between built, deployed, measured and still under evaluation.

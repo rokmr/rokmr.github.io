@@ -66,7 +66,7 @@ export const projects: Project[] = [
     problem: 'Retrieve and evaluate information across multiple knowledge sources.',
     contribution: 'Designed the shared CRAG and controllable ReAct architecture, retrieval evaluation, and an online-learning BM25 index.',
     outcome: 'Removed redundant query reformulation and embedding calls by sharing work across retrieval branches.',
-    title: 'Agentic RAG System',
+    title: 'Support RAG Agent',
     preview: {
       src: 'assets/images/agentic_rag_preview.svg',
       alt: 'Agentic RAG pipeline: multi-agent LangGraph system with planner, router, retriever, evaluator, and generator stages',
@@ -83,8 +83,8 @@ export const projects: Project[] = [
     roleId: 'avataar',
     problem: 'Generate realistic product imagery while preserving the product itself.',
     contribution: 'Built the Flux and ControlNet pipeline and modified diffusion sampling with intrinsic decomposition.',
-    outcome: 'Shipped a product-image generation pipeline with improved object reconstruction and relighting.',
-    title: 'Lifestyle Image Generation',
+    outcome: 'Built a product-image generation pipeline combining diffusion sampling changes with intrinsic decomposition for reconstruction and relighting.',
+    title: 'Diffusion-based product imagery',
     preview: {
       src: 'assets/images/lifestyle_gen_preview.svg',
       alt: 'Lifestyle image generation pipeline: Input, Segment (SAM+YOLO), Condition (ControlNet), Denoise (Flux), Output',
@@ -115,8 +115,8 @@ export const projects: Project[] = [
       },
     ],
     description:
-      'Three-stage Virtual Try-On pipeline combining Florence2 and IDM-VTON for automated garment transfer.',
-    tech: ['Florence2', 'IDM-VTON', 'FLUX', 'Diffusion'],
+      'Virtual try-on using Florence2 and IDM-VTON, with a three-stage CAT-TryOff pipeline and a single-stage Any2Any-Tryon/FLUX approach.',
+    tech: ['Florence2', 'IDM-VTON', 'CAT-TryOff', 'Any2Any-Tryon', 'FLUX', 'Diffusion'],
   },
   {
     id: 'cricket-shot',

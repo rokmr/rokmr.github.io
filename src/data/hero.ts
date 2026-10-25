@@ -1,9 +1,9 @@
+import { professionalFocus } from './positioning';
 import type { TargetSpec } from '../lib/flow/targets';
 import { socialLinks } from './site';
 
 // Homepage overview. Employment and publication metadata stay derived.
-export const heroDek =
-  'I build computer vision and agentic AI systems, with a focus on image generation, retrieval, and evaluation.';
+export const heroDek = professionalFocus;
 
 const HERO_PROFILES = ['github', 'scholar', 'linkedin'] as const;
 export const heroLinks = HERO_PROFILES.map((key) => {

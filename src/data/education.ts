@@ -21,7 +21,7 @@ export const education: Education[] = [
     degree: 'B.Tech in Electrical Engineering',
     school: 'Bhagalpur College of Engineering, Bhagalpur',
     details: '2018 - 2021 · CGPA: 8.75/10.0',
-    advisor: { name: 'Prof. Arjun Kumar', href: 'https://spnrecararia.ac.in/NoticeImages/Faculty%20Officers%20Contact%20detail%20of%20SPNREC-Araria.pdf' },
+    advisor: { name: 'Prof. Arjun Kumar', href: 'https://spnrecararia.ac.in/FacultyofElectricalEngg.aspx' },
   },
   {
     degree: 'Diploma in Electrical Engineering',

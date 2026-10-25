@@ -12,9 +12,9 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'agentic-rag', title: 'Support RAG Agent', organization: 'Armada AI',
     summary: 'A grounded question-answering system for Armada’s internal Customer Support team, searching runbooks, help-center content and vendor documentation.',
-    contribution: 'Sole owner, from initial support-team interviews and an empty repository through production integration.',
+    contribution: 'Sole owner, from discussions with the support team and an empty repository through production integration.',
     sections: [
-      { heading: 'Understanding the workflow', paragraphs: ['Met the internal Customer Support team before writing code and again after launch to understand how they searched documentation and used answers in their work.'] },
+      { heading: 'Understanding the workflow', paragraphs: ['Met with the internal Customer Support team before writing code and caught up again after launch to understand their workflows, documentation search habits and pain points.'] },
       { heading: 'Problem', paragraphs: ['Customer Support searched manually across internal runbooks, help-center content and vendor documentation. The system needed to retrieve relevant evidence, understand organizational vocabulary and produce answers grounded in those sources.'] },
       { heading: 'My contribution', paragraphs: ['Designed a CRAG and controllable ReAct workflow in LangGraph, with retrieval evaluation before answer generation. Shared query reformulation and embedding generation across branches to remove redundant calls.', 'Built a custom BM25 index with incremental updates and removal. Combined sparse and dense retrieval over Qdrant to address organizational vocabulary that dense retrieval missed.'] },
       { heading: 'Evaluation', paragraphs: ['Built two levels of evaluation: retrieval-confidence and CRAG-score gating within the agent, and RAGAS-based response evaluation against curated ground truth. These assess different failure points: finding relevant evidence and producing a grounded answer.'] },
@@ -26,7 +26,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'almanac', title: 'Almanac: air-gapped document Q&A', organization: 'Armada AI',
     summary: 'An on-device RAG application designed for document question answering on Armada edge hardware without internet access.',
-    contribution: 'Sole engineering owner. Product management owns the product requirements.',
+    contribution: 'Sole engineering owner across document ingestion, local model serving, retrieval and cited question answering.',
     technologies: ['SFT', 'LoRA', 'QLoRA', 'Ray', 'Local model serving', 'Document processing', 'Hybrid retrieval', 'RBAC'],
     sections: [
       { heading: 'Purpose', paragraphs: ['Built as a proof of capability and sales-enablement application for edge hardware, with a default documentation corpus and support for a prospect’s own documents. Answers cite their sources, and low-confidence retrieval is handled explicitly.'] },
@@ -43,7 +43,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       { heading: 'Decisions', paragraphs: ['Compares GPU and configuration choices for a selected model and workload: weight quantization, KV-cache quantization, tensor parallelism, eager execution and automatic prefix caching. Quantization work includes AWQ, GPTQ and weight/activation precision configurations (WxAy). The planner recommends settings; I carry out deployment afterward. It does not automatically deploy workloads.'] },
       { heading: 'Predictions', paragraphs: ['Models KV-cache requirements, time to first token (TTFT), time per output token (TPOT) and token throughput before downloading a model or running a trial GPU deployment. Covers dense, mixture-of-experts and hybrid model families, including mixed attention patterns and attention/state-space architectures.'] },
-      { heading: 'Deployment', paragraphs: ['After planning, I deploy inference workloads using the selected hardware and serving configurations. This extends my work from predicting resource needs and comparing configurations to deploying the planned workloads.'] },
+      { heading: 'Deployment', paragraphs: ['Deployed inference workloads after using the planner to select hardware and serving configurations.'] },
       { heading: 'Estimated economics', paragraphs: ['Estimates prefill and decode costs per million tokens from the user-supplied hourly GPU cost and predicted throughput. These are planning estimates, distinct from measured serving costs.'] },
     ],
   },
@@ -66,8 +66,18 @@ export const caseStudies: CaseStudy[] = [
     sections: [
       { heading: 'Problem', paragraphs: ['Generated lifestyle imagery needs to preserve the product itself. A plausible scene is insufficient if the object changes or its lighting is inconsistent with its surroundings.'] },
       { heading: 'My contribution', paragraphs: ['Built an end-to-end image-generation pipeline using Flux and ControlNets. Modified diffusion sampling to improve object reconstruction, followed by intrinsic decomposition for product relighting.', 'Worked on segmentation with BiRefNet and SAM with YOLO-world, and on classification in low-data settings using CLIP, BLIP2 and Qwen2.5.'] },
-      { heading: 'Novel-view synthesis', paragraphs: ['Continued an existing sparse-view-conditioned diffusion project during roughly the first two months at Avataar AI. A senior engineer had established the initial setup.', 'Fine-tuned a Stable Diffusion model in a Zero123-like setting for novel-view synthesis, worked on image-conditioning changes, and handled distributed training and SLURM job submission on an HPC cluster. Used the full 32-H100 training cluster for a few days.'] },
-      { heading: 'Outcome', paragraphs: ['Delivered a product-image generation pipeline with improved reconstruction and relighting.'] },
+      { heading: 'Pipeline', paragraphs: ['Combined product-image generation, modified diffusion sampling and intrinsic decomposition in an end-to-end pipeline for product reconstruction and relighting.'] },
+    ],
+  },
+  {
+    id: 'novel-view-synthesis', title: "3D reconstruction & novel-view synthesis", organization: 'Avataar AI',
+    summary: "Sparse-image-conditioned novel-view synthesis for 3D reconstruction at Avataar AI.",
+    contribution: "Fine-tuned sparse-image-conditioned diffusion models and worked on conditioning, distributed training and SLURM, building on a senior engineer’s initial setup.",
+    technologies: ['Stable Diffusion', 'Image conditioning', 'Distributed training', 'SLURM', 'HPC'],
+    sections: [
+      { heading: 'Scope', paragraphs: ['Worked on sparse-view-conditioned novel-view synthesis during roughly the first two months at Avataar AI, continuing an existing project whose initial setup had been established by a senior engineer.'] },
+      { heading: 'Model work', paragraphs: ['Fine-tuned a Stable Diffusion model in a Zero123-like setting to generate novel views conditioned on sparse input images. Worked on changes to how images condition the diffusion model.'] },
+      { heading: 'Training infrastructure', paragraphs: ['Handled distributed training and SLURM job submission on the HPC cluster. Used its full 4 × 8 H100 capacity (32 GPUs) for a few days.'] },
     ],
   },
   {

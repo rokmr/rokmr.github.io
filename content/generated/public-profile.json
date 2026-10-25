@@ -197,7 +197,7 @@
       "content": {
         "summary": "A grounded question-answering system for Armada’s internal Customer Support team, searching runbooks, help-center content and vendor documentation.",
         "problem": "Customer Support searched manually across vendor documentation, internal runbooks, and the help center, with grounding and access-isolation requirements.",
-        "contribution": "Sole owner, from initial support-team interviews and an empty repository through production integration.",
+        "contribution": "Sole owner, from discussions with the support team and an empty repository through production integration.",
         "outcome": "Reduced cost per query/run to approximately one-third of the initial graph, comparing similar workloads.\nThe shared graph node removes repeated reformulation and embedding work. Incremental sparse indexing and the common ingestion representation make knowledge-base changes easier to maintain."
       },
       "technologies": [],
@@ -225,7 +225,7 @@
       "content": {
         "summary": "An on-device RAG application designed for document question answering on Armada edge hardware without internet access.",
         "problem": "Provide local, air-gapped, cited document Q&A on edge hardware.",
-        "contribution": "Sole engineering owner. Product management owns the product requirements.",
+        "contribution": "Sole engineering owner across document ingestion, local model serving, retrieval and cited question answering.",
         "outcome": "Document ingestion, question answering, evaluation tooling and inference planning work in an isolated VM. A fresh installation with the internet disconnected has not yet been tested. Retrieval and generated-answer quality evaluation is underway; completed answer-quality results are not yet reported."
       },
       "technologies": [
@@ -327,7 +327,7 @@
     {
       "id": "avataar-lrm-training",
       "kind": "contribution",
-      "title": "Sparse-view-conditioned diffusion for novel-view synthesis",
+      "title": "3D reconstruction & novel-view synthesis",
       "organization": "Avataar AI",
       "parentId": "avataar",
       "relatedIds": [],
@@ -338,9 +338,9 @@
       "status": "completed",
       "ownership": "contributor",
       "content": {
-        "summary": "Continued an existing diffusion project for novel-view synthesis at Avataar AI.",
+        "summary": "Sparse-image-conditioned novel-view synthesis for 3D reconstruction at Avataar AI.",
         "problem": "Generate novel views conditioned on sparse input images.",
-        "contribution": "Fine-tuned a Stable Diffusion model in a Zero123-like setting, worked on image-conditioning changes, and handled distributed training and SLURM job submission. Initial setup was established by a senior engineer. Used the full 32-H100 training cluster for a few days.",
+        "contribution": "Fine-tuned sparse-image-conditioned diffusion models and worked on conditioning, distributed training and SLURM, building on a senior engineer’s initial setup.",
         "outcome": null
       },
       "technologies": [
@@ -350,7 +350,12 @@
         "SLURM",
         "HPC"
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/novel-view-synthesis/"
+        }
+      ],
       "metrics": []
     },
     {
@@ -520,7 +525,7 @@
         "summary": "A lifestyle-image generation pipeline that preserves the product while adapting its appearance to a new scene.",
         "problem": null,
         "contribution": "Built the Flux and ControlNet pipeline and modified sampling for product reconstruction and relighting.",
-        "outcome": "Delivered a product-image generation pipeline with improved reconstruction and relighting."
+        "outcome": "Combined product-image generation, modified diffusion sampling and intrinsic decomposition in an end-to-end pipeline for product reconstruction and relighting."
       },
       "technologies": [],
       "links": [

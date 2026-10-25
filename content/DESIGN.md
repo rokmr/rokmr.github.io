@@ -238,3 +238,11 @@ slot, while managers and advisors remain secondary lines. Browser print uses
 the full page measure instead of inheriting the website paragraph-width cap.
 Whitespace is reserved between sections and at page edges, rather than created
 by undersized body text. Do not add content solely to fill the page.
+
+## Portrait treatment — 26 October 2026
+
+The website portrait uses the existing photo with CSS grayscale, a one-pixel
+page-rule border, two-pixel corners and a small inset. The crop stays aligned
+with the introduction at each breakpoint. No motion or hover effect is added
+to a non-interactive image. Light/dark themes and doubled text were checked at
+320, 390, 768, 801, 1280 and 1440px, with no image/text overlap.

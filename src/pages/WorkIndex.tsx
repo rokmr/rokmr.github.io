@@ -1,4 +1,9 @@
 import { caseStudies } from '../data/caseStudies';
+import { projects } from '../data/projects';
+
+const detailedIds = new Set(caseStudies.map(study => study.id));
+// Research has its own chapter; other published projects remain discoverable.
+const otherProjects = projects.filter(project => project.id !== 'tacle' && !detailedIds.has(project.id));
 
 export function WorkIndex() {
   return (
@@ -18,6 +23,13 @@ export function WorkIndex() {
             ))}
           </section>
         ))}
+        {otherProjects.length > 0 && <section className="document-block">
+          <h2>Additional projects</h2>
+          {otherProjects.map(project => <article className="work-record" key={project.id}>
+            <h3>{project.title}</h3><p>{project.description}</p>
+            <div className="resource-links">{project.links?.map(link => <a key={link.href} href={link.href.startsWith('assets/') ? '/' + link.href : link.href} aria-label={link.ariaLabel}>{link.title}</a>)}</div>
+          </article>)}
+        </section>}
       </main>
     </div>
   );

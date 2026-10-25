@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { WorkIndex } from '../pages/WorkIndex';
+import { projects } from './projects';
 import { Home } from '../pages/Home';
 import { sections } from './site';
 import { featuredProjectIds, featuredProjects } from './projects';
@@ -28,4 +30,11 @@ describe('portfolio composition', () => {
       if (project.roleId) expect(roles.has(project.roleId)).toBe(true);
     }
   });
+  it('keeps every published engineering project discoverable in All work', () => {
+    const html = renderToStaticMarkup(createElement(WorkIndex));
+    for (const project of projects.filter(project => project.id !== 'tacle')) {
+      expect(html).toContain(project.title.replace(/&/g, '&amp;'));
+    }
+  });
+
 });

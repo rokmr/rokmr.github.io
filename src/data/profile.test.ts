@@ -9,6 +9,7 @@ const caseRecordIds: Record<string, string> = {
   'inference-planner': 'armada-inference-planner', 'ai-assistant': 'armada-assistant',
   'lifestyle-generation': 'avataar-lifestyle', 'cricket-shot': 'cricket-shot',
   'model-evaluation': 'model-selection-evaluation-pipeline',
+  'novel-view-synthesis': 'avataar-lrm-training',
 };
 
 describe('public profile consistency', () => {
