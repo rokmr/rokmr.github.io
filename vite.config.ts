@@ -1,4 +1,5 @@
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig } from 'vitest/config';
+import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
 /**
@@ -29,6 +30,7 @@ function devHead(): Plugin {
 
 export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), devHead()],
+  test: { include: ['src/**/*.test.{ts,tsx}'] },
   server: {
     // /tacle/ must serve the same SPA shell in dev as it does when prerendered.
     port: 8000,

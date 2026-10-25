@@ -1,0 +1,22 @@
+/* One quiet entrance per group, rather than individually animating letters. */
+@keyframes portfolio-enter {
+  from { opacity: 0; transform: translateY(var(--space-2)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero.section-reveal.visible .portfolio-identity {
+    animation: portfolio-enter var(--dur-slow) var(--ease-enter) both;
+  }
+  .portfolio-note[open] .portfolio-note-body,
+  .flow-figure__notes[open] > p {
+    animation: portfolio-enter var(--dur-slow) var(--ease-enter) both;
+  }
+}
+
+/* Avoid persistent hover movement on touch, and honour reduced motion. */
+@media (hover: none) {
+  .portfolio-experience:hover > svg { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-experience > svg { transform: none !important; }
+}

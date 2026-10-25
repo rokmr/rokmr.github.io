@@ -65,7 +65,6 @@ const person = {
     'YOLO',
     'Flux',
     'ControlNet',
-    'Reinforcement Learning',
   ],
   hasCredential: [
     {
@@ -85,7 +84,7 @@ const person = {
     programName: 'Invited Reviewer',
     hostingOrganization: { '@type': 'Organization', name },
   })),
-  worksFor: { '@type': 'Organization', name: 'Armada AI', url: 'https://armada-ai.com' },
+  worksFor: { '@type': 'Organization', name: 'Armada AI', url: 'https://www.armada.ai/' },
   nationality: { '@type': 'Country', name: 'India' },
 };
 
@@ -93,8 +92,6 @@ export const homeStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
-    dateCreated: '2024-12-01',
-    dateModified: '2025-07-18',
     mainEntity: person,
   },
   {
@@ -106,11 +103,6 @@ export const homeStructuredData = [
       'Portfolio of Rohit Kumar, AI Engineer specializing in Computer Vision, LLMs, and Agentic AI systems. Published at WACV 2025 and CVPR 2026 Workshop.',
     author: { '@id': PERSON_ID },
     inLanguage: 'en-US',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${site.origin}/?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   },
   {
     '@context': 'https://schema.org',
@@ -211,7 +203,7 @@ export const tacleStructuredData = [
     url: `${site.origin}/tacle/`,
     sameAs: 'https://arxiv.org/abs/2407.08041',
     description:
-      'We propose TACLE, a novel framework for exemplar-free semi-supervised class incremental learning using task-adaptive thresholds and class-aware weighted cross-entropy loss.',
+      'Exemplar-free semi-supervised class-incremental learning with task-adaptive thresholds, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data.',
   },
   {
     '@context': 'https://schema.org',

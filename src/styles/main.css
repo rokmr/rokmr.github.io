@@ -171,109 +171,6 @@ section {
     background: var(--border);
 }
 
-/* Projects */
-
-.project-card {
-    background: var(--surface-card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
-}
-
-/* Hover is a quiet change of edge and surface — no lift, no shadow. */
-.project-card:hover {
-    border-color: var(--border-strong);
-    background: var(--surface-raised);
-}
-
-/* Fixed height, not an aspect ratio: .card-grid widens cards in a short last
-   row, and every preview in the gallery should still line up. `contain`
-   keeps diagram labels whole at any card width. */
-.project-preview {
-    height: 13.5rem;
-    background: var(--surface-raised);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink-muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-sm);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-}
-
-.project-preview picture {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.project-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    background: var(--surface-raised);
-    filter: grayscale(100%) sepia(20%) hue-rotate(80deg) brightness(0.9);
-    transition: filter var(--dur-slow) var(--ease);
-}
-
-.project-card:hover .project-preview img {
-    filter: grayscale(0%) sepia(0%) hue-rotate(0deg) brightness(1);
-}
-
-.project-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: var(--text-xs);
-    padding: 0.2rem 0.5rem;
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--ink-accent);
-    white-space: nowrap;
-}
-
-.project-content {
-    padding: 1.5rem;
-}
-
-.project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-}
-
-.project-title {
-    font-size: var(--text-lg);
-    font-weight: 600;
-}
-
-.project-links {
-    display: flex;
-    gap: 0.75rem;
-}
-
-.project-links a {
-    color: var(--ink-muted);
-    font-size: var(--text-md);
-    transition: color var(--dur-fast) var(--ease);
-    display: inline-flex;
-    align-items: center;
-}
-
-.project-links a:hover {
-    color: #fff;
-}
-
-.project-description {
-    color: var(--ink-secondary);
-    font-size: var(--text-base);
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
 /* Achievements — cards in a .card-grid (base.css). */
 
 .achievement-card {
@@ -383,23 +280,6 @@ section {
     border-top: 1px solid var(--border);
 }
 
-/* Skills */
-.skills-grid {
-    display: grid;
-    /* min() keeps a track from ever being wider than a phone's column. */
-    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
-    gap: 2rem;
-}
-
-.skill-category h3 {
-    font-size: var(--text-sm);
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--ink-accent);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-}
-
 /* Academic Service - Compact */
 .service-list {
     display: flex;
@@ -481,20 +361,7 @@ footer p {
     color: var(--ink-muted);
 }
 
-.ai-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: linear-gradient(90deg, var(--ink-accent), #60a5fa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 500;
-}
 
-.ai-badge svg {
-    stroke: var(--ink-accent);
-}
 
 /* ========================================
    Mobile Hamburger Menu
@@ -660,8 +527,8 @@ body.menu-open {
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-    /* Hide desktop nav, show hamburger */
+@media (max-width: 1100px) {
+    /* Switch before seven links and the CTAs crowd the identity. */
     nav {
         display: none;
     }

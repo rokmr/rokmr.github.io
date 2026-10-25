@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { byline, heroLinks, heroTarget } from './hero';
+import { heroLinks, heroTarget } from './hero';
 import { currentRole, experience, previousRole } from './experience';
 import { firstPublication, latestPublication, paperName, publications, venueDetail } from './publications';
 
@@ -22,8 +22,7 @@ describe('hero + about data', () => {
     expect(venueDetail(firstPublication)).toBe('');
   });
 
-  it('has a non-empty byline and links', () => {
-    for (const cell of byline) for (const line of cell.lines) expect(line.text).not.toBe('');
+  it('links the overview to external profiles', () => {
     for (const link of heroLinks) expect(link.href).toMatch(/^(https?:|mailto:)/);
   });
 

@@ -91,3 +91,10 @@ layouts.
 
 The custom domain comes from `public/CNAME`, which the build copies into `dist/`;
 the workflow fails if it is missing.
+
+## Master career content
+
+The [content foundation](content/README.md) separates a local detailed master,
+reviewed public content, and future website/SEO/résumé outputs. Start there when
+adding career facts or new Armada contributions. This is a staged migration;
+`src/data/` still supplies the live portfolio until its adapters are migrated.

@@ -1,0 +1,179 @@
+/* One shell governs page width, navigation, and section rhythm. */
+.portfolio-shell {
+  --content-max: 1100px;
+  --gutter: clamp(var(--space-4), 3vw, var(--space-7));
+  --section-gap: clamp(var(--space-8), 6vw, var(--space-9));
+}
+.portfolio-body {
+  container-type: inline-size;
+}
+.portfolio-body .section-header {
+  margin-bottom: var(--space-6);
+}
+.portfolio-body .contact {
+  align-items: start;
+}
+.portfolio-body .l-margin {
+  grid-template-columns: minmax(0, 1fr);
+}
+.site-header .logo {
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+.sidebar-description {
+  display: none;
+}
+.site-header .desktop-nav a::after {
+  display: none;
+}
+.site-header .desktop-nav a {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+}
+.sidebar-blog {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-touch);
+  color: var(--ink-secondary);
+  font-size: var(--text-sm);
+}
+.sidebar-blog svg {
+  flex: none;
+}
+.sidebar-blog:hover {
+  color: var(--ink);
+}
+.mobile-nav[hidden] {
+  display: none;
+}
+.mobile-nav a {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.mobile-nav a[aria-current] {
+  color: var(--ink-accent);
+}
+
+@media (min-width: 1101px) {
+  html:has(.portfolio-shell) {
+    scroll-padding-top: var(--space-6);
+  }
+  .portfolio-body {
+    margin-left: var(--portfolio-rail);
+  }
+  .site-header, .site-header[data-scrolled] {
+    inset: 0 auto 0 0;
+    width: var(--portfolio-rail);
+    padding: var(--space-7) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 0;
+    border-right: var(--border-width) solid var(--border);
+    backdrop-filter: none;
+  }
+  .sidebar-description {
+    display: block;
+    margin-top: var(--space-2);
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+  }
+  .site-header .desktop-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-block: var(--space-7);
+  }
+  .site-header .desktop-nav a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--control-touch);
+    color: var(--ink-secondary);
+  }
+  .site-header .desktop-nav a:hover, .site-header .desktop-nav a[aria-current] {
+    color: var(--ink);
+  }
+  .nav-position {
+    width: var(--space-1);
+    height: var(--space-4);
+    background: var(--ink-accent);
+    opacity: 0;
+    flex: none;
+    transition: opacity var(--dur) var(--ease);
+  }
+  .site-header .desktop-nav a[aria-current] .nav-position {
+    opacity: 1;
+  }
+  .site-header .header-cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: auto;
+    padding-top: var(--space-5);
+  }
+  .site-header .header-cta .pill {
+    justify-content: center;
+    min-height: var(--control-touch);
+    padding-inline: var(--space-3);
+  }
+  .site-header .sidebar-blog {
+    justify-content: center;
+  }
+  .portfolio-body .hero {
+    padding-top: var(--space-8);
+  }
+}
+
+@container (min-width: 960px) {
+  .portfolio-body .l-margin {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.48fr);
+    gap: var(--space-6);
+  }
+}
+@container (max-width: 960px) {
+  .portfolio-intro {
+    display: block;
+    max-width: var(--measure);
+  }
+  .portfolio-bio {
+    margin-top: var(--space-5);
+    font-size: var(--text-md);
+  }
+  .portfolio-background, .portfolio-contact-context, .portfolio-profiles {
+    margin-top: var(--space-3);
+  }
+  .portfolio-actions {
+    margin-top: var(--space-5);
+  }
+  .selected-work-entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+@media (max-width: 1100px) {
+  .site-header {
+    padding: var(--space-3) var(--gutter);
+    min-height: var(--header-h);
+  }
+  .site-header .desktop-nav, .site-header .header-cta {
+    display: none;
+  }
+}
+
+.site-header:has(.mobile-menu-btn[aria-expanded="true"]) {
+  z-index: var(--z-overlay);
+}

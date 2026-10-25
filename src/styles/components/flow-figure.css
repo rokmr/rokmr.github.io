@@ -17,11 +17,11 @@
    the aspect ratio it is given). */
 .flow-figure__plot {
   position: relative;
-  aspect-ratio: 3 / 1;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--surface-inset);
   border: var(--border-width) solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-tight);
 }
 
 /* Absolutely placed so the backing store (sized in device pixels) never
@@ -164,7 +164,8 @@
   box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.4);
 }
 
-/* ---- Caption + legend: one .l-margin row under the plot -------------- */
+/* A short caption leaves the explanation available without dominating
+   the introduction. Native details works with keyboard input and no JS. */
 
 .flow-figure__foot {
   font-family: var(--font-sans); /* base.css sets figcaption in mono */
@@ -185,25 +186,49 @@
   font-size: 0.75em;
 }
 
-.flow-figure__swatch {
-  display: inline-block;
-  margin-right: var(--space-2);
-  vertical-align: -1px;
-  color: var(--ink-muted);
+.flow-figure__heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border-width) solid var(--border-strong);
 }
 
-/* ---- Breakpoints ------------------------------------------------------- */
+.flow-figure__heading .label {
+  font-size: var(--text-xs);
+  text-transform: none;
+  letter-spacing: 0;
+}
 
-@media (max-width: 1024px) {
-  .flow-figure__plot {
-    aspect-ratio: 16 / 9;
-  }
+.flow-figure__hint {
+  color: var(--ink-muted);
+  font-size: var(--text-xs);
+}
+
+.flow-figure__notes { margin-top: var(--space-3); }
+.flow-figure__notes summary {
+  width: fit-content;
+  padding-block: var(--space-2);
+  color: var(--ink-secondary);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+.flow-figure__notes summary:hover { color: var(--ink); }
+.flow-figure__notes p {
+  margin-top: var(--space-2);
+  color: var(--ink-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+@media (max-width: 800px) {
+  .flow-figure__plot { aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 600px) {
-  .flow-figure__plot {
-    aspect-ratio: 2 / 3;
-  }
+  .flow-figure__plot { aspect-ratio: 4 / 3; }
 }
 
 @media (hover: none) {

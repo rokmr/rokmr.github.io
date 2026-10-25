@@ -1,54 +1,145 @@
-/* ============================================================================
-   RESEARCH — each paper is an .l-margin row: title, authors and links
-   (.pill-row) in the main column, venue and citations (.meta) in the margin
-   column. Rows are divided by hairlines, as in Experience.
-   ========================================================================= */
-
+/* Publication index: compact metadata rail and one coherent reading column.
+   The rail moves above the paper on smaller screens without reordering links. */
 .pub-list {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
   list-style: none;
+  border-top: var(--border-width) solid var(--border-strong);
 }
 
 .pub {
+  display: grid;
+  grid-template-columns: var(--pub-rail) minmax(0, 1fr);
   align-items: start;
+  gap: var(--space-7);
+  padding-block: var(--space-6);
+  border-bottom: var(--border-width) solid var(--border);
 }
 
-.pub + .pub {
-  margin-top: var(--space-7);
-  padding-top: var(--space-7);
-  border-top: var(--border-width) solid var(--border);
+.pub-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding-top: var(--space-1);
 }
 
+.pub-venue {
+  color: var(--ink);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+
+.pub-venue-detail {
+  max-width: 25ch;
+  color: var(--ink-secondary);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+}
+
+.pub-latest {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+}
+
+.pub-citations {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--space-6);
+  color: var(--ink-secondary);
+  font-size: var(--text-xs);
+}
+
+.pub-citations svg { flex: none; }
+.pub-citations span {
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: var(--space-1);
+}
+.pub-citations:is(:hover, :focus-visible) { color: var(--ink); }
+
+.pub-body { min-width: 0; }
 .pub-title {
   max-width: var(--measure);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
   line-height: var(--leading-snug);
-  color: var(--ink);
+  text-wrap: initial;
 }
-
-.pub-new {
-  margin-left: var(--space-2);
-  vertical-align: 2px;
-  color: var(--ink-on-accent);
-  background: var(--ink-accent);
-  border-color: var(--ink-accent);
-}
+.pub-title a { color: var(--ink); }
+.pub-title a:is(:hover, :focus-visible) { color: var(--ink-accent); }
 
 .pub-authors {
   margin-top: var(--space-2);
-  font-size: var(--text-base);
   color: var(--ink-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+.pub-authors strong { font-weight: var(--weight-medium); color: var(--ink); }
+
+.pub-summary {
+  max-width: var(--measure);
+  margin-top: var(--space-3);
+  color: var(--ink-secondary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
 }
 
-.pub-authors strong {
-  font-weight: var(--weight-semibold);
-  color: var(--ink);
-}
-
-.pub-links {
+.pub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
   margin-top: var(--space-4);
+}
+.pub-actions .pill {
+  min-height: var(--control-touch);
+  padding-inline: var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+}
+.pub-actions .profile-link {
+  font-size: var(--text-sm);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+#research .service-item {
+  display: grid;
+  grid-template-columns: var(--pub-rail) minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--space-3) var(--space-7);
+  align-items: baseline;
+}
+#research .service-role { min-width: 0; }
+#research .service-venue { font-size: var(--text-base); }
+
+@media (max-width: 1000px) {
+  .pub { column-gap: var(--space-6); }
+  #research .service-item { column-gap: var(--space-6); }
+}
+
+@media (max-width: 700px) {
+  .pub {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    padding-block: var(--space-5);
+  }
+  .pub-meta {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-4);
+    padding-top: 0;
+  }
+  .pub-venue-detail { flex-basis: 100%; max-width: none; order: 1; }
+  .pub-citations { min-height: 0; }
+  .pub-title { font-size: var(--text-lg); }
+  .pub-actions { column-gap: var(--space-4); margin-top: var(--space-3); }
+  #research .service-item { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
+}
+
+@media (hover: none) {
+  .pub-citations { min-height: var(--control-touch); }
 }

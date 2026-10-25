@@ -17,6 +17,9 @@ build/
 # Env / secrets
 .env
 
+# Local career master and tailored resume drafts may contain internal material.
+/content/private/
+
 # Source maps
 *.css.map
 *.js.map
@@ -32,3 +35,7 @@ dist-ssr/
 
 # Vite dependency cache
 .vite/
+
+# Local verification and generated resume intermediates
+/output/
+/tmp/

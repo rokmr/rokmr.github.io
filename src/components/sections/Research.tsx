@@ -1,7 +1,8 @@
+import { ResearchExperiment } from '../ResearchExperiment';
 import { SectionHeader } from '../SectionHeader';
 import { Icon } from '../Icon';
 import { ExternalLink } from '../ExternalLink';
-import { publications, venueDetail } from '../../data/publications';
+import { publications, venueDetail, paperName } from '../../data/publications';
 import { keepHyphens } from '../../lib/text';
 import { service } from '../../data/service';
 import { useCitationCount } from '../../hooks/useCitationCount';
@@ -50,14 +51,10 @@ function CitedBy({
   if (count <= 0) return null;
   const text = `${count} ${count === 1 ? 'citation' : 'citations'}`;
   return (
-    <div className="meta__row">
-      <dt className="meta__label">Cited by</dt>
-      <dd className="meta__value">
-        <ExternalLink href={citedByUrl} aria-label={`${text}: see citing papers`}>
-          {text}
-        </ExternalLink>
-      </dd>
-    </div>
+    <ExternalLink href={citedByUrl} className="pub-citations" aria-label={`${text}: see citing papers`}>
+      <Icon name="barChart" size={14} />
+      <span>{text}</span>
+    </ExternalLink>
   );
 }
 
@@ -77,43 +74,44 @@ export function Research() {
 
       <SectionHeader id="research" />
 
-      {/* Each paper is a page-grid row: title, authors and links in the main
-          column; venue and citations in the margin column. */}
       <ol className="pub-list">
-        {publications.map((pub) => (
-          <li className="pub l-margin" key={pub.title}>
-            <div>
-              <h3 className="pub-title">
-                {keepHyphens(pub.title)}
-                {pub.isNew && <span className="tag pub-new">New</span>}
-              </h3>
-              <p className="pub-authors">{renderAuthors(pub.authors)}</p>
-              <div className="pill-row pub-links">
-                {pub.links.map((link) => (
-                  <ExternalLink
-                    key={link.href}
-                    href={link.href}
-                    className="pill"
-                    aria-label={link.ariaLabel}
-                  >
-                    <Icon name={link.icon} size={14} round={false} />
-                    {link.label}
-                  </ExternalLink>
-                ))}
+        {publications.map((pub) => {
+          const paperLink = pub.links.find((link) => link.label === 'Paper');
+          const titleId = `publication-${paperName(pub).toLowerCase()}`;
+          return (
+            <li className="pub" key={pub.title} aria-labelledby={titleId}>
+              <div className="pub-meta">
+                <p className="pub-venue">{pub.venueShort}</p>
+                {venueDetail(pub) && <p className="pub-venue-detail">{venueDetail(pub)}</p>}
+                {pub.isNew && <span className="pub-latest">Latest publication</span>}
+                {pub.citations && <CitedBy {...pub.citations} />}
               </div>
-            </div>
-            <dl className="meta">
-              <div className="meta__row">
-                <dt className="meta__label">Venue</dt>
-                <dd className="meta__value">
-                  {pub.venueShort}
-                  {venueDetail(pub) && <span className="meta__sub">{venueDetail(pub)}</span>}
-                </dd>
+
+              <div className="pub-body">
+                <h3 className="pub-title" id={titleId}>
+                  {paperLink ? (
+                    <ExternalLink href={paperLink.href}>{keepHyphens(pub.title)}</ExternalLink>
+                  ) : keepHyphens(pub.title)}
+                </h3>
+                <p className="pub-authors">{renderAuthors(pub.authors)}</p>
+                <p className="pub-summary">{pub.summary}</p>
+                <div className="pub-actions" aria-label={`${paperName(pub)} resources`}>
+                  {pub.links.map((link) => (
+                    <ExternalLink
+                      key={link.href}
+                      href={link.href}
+                      className={link.label === 'Paper' ? 'pill pill--primary' : 'profile-link'}
+                      aria-label={link.ariaLabel}
+                    >
+                      <Icon name={link.icon} size={16} />
+                      <span>{link.label === 'Paper' ? 'Read paper' : link.label}</span>
+                    </ExternalLink>
+                  ))}
+                </div>
               </div>
-              {pub.citations && <CitedBy {...pub.citations} />}
-            </dl>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ol>
 
       <h3 className="subsection-title" id="service">
@@ -123,7 +121,6 @@ export function Research() {
         {service.map((entry) => (
           <div className="service-item" key={entry.venue}>
             <span className="service-role">{entry.role}</span>
-            <span className="service-separator">—</span>
             <ExternalLink href={entry.venueUrl} className="service-venue">
               {entry.venue}
             </ExternalLink>
@@ -131,6 +128,7 @@ export function Research() {
           </div>
         ))}
       </div>
+      <ResearchExperiment />
     </section>
   );
 }

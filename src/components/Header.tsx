@@ -2,77 +2,40 @@ import { Icon } from './Icon';
 import { navLinks, site, type SectionId } from '../data/site';
 import type { MobileNavState } from '../hooks/useMobileNav';
 
-type HeaderProps = {
-  nav: MobileNavState;
-  /** Past the top of the page: the header shows its bar and border. */
-  scrolled: boolean;
-  /** The section the reader is in, marked in the nav. */
-  active: SectionId | null;
-};
+type HeaderProps = { nav: MobileNavState; scrolled: boolean; active: SectionId | null };
 
+/** One navigation model: persistent rail on desktop, compact drawer below. */
 export function Header({ nav, scrolled, active }: HeaderProps) {
-  const current = (href: string) => (active && href === `#${active}` ? 'true' : undefined);
+  const links = [{ href: '#home', label: 'Overview' }, ...navLinks];
+  const current = (href: string) => href === (active ? `#${active}` : '#home') ? 'location' as const : undefined;
+
   return (
     <>
-      <header role="banner" data-scrolled={scrolled ? '' : undefined}>
-        <a href="#home" className="logo" aria-label="Rohit Kumar - Home">
-          ROHIT KUMAR
-        </a>
-        <nav aria-label="Main navigation">
-          {navLinks.map((link) => (
+      <header className="site-header" data-scrolled={scrolled ? '' : undefined}>
+        <a href="#home" className="logo" aria-label="Rohit Kumar - Home" onClick={nav.onNavClick}>{site.name}</a>
+        <p className="sidebar-description">AI engineer & researcher</p>
+        <nav className="desktop-nav" aria-label="Portfolio sections">
+          {links.map((link) => (
             <a key={link.href} href={link.href} onClick={nav.onNavClick} aria-current={current(link.href)}>
-              {link.label}
+              <span className="nav-position" aria-hidden="true" /><span>{link.label}</span>
             </a>
           ))}
         </nav>
-        <button
-          className={`mobile-menu-btn${nav.open ? ' active' : ''}`}
-          aria-label={nav.open ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={nav.open}
-          aria-controls="mobile-nav"
-          onClick={nav.toggle}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
         <div className="header-cta">
-          <a href={site.blogUrl} className="pill">
-            <Icon name="blog" size={14} />
-            Blog
-          </a>
-          <a href={`mailto:${site.email}?subject=Collaboration`} className="pill pill--primary">
-            <Icon name="users" size={14} />
-            Collaborate
-          </a>
+          <a href={`mailto:${site.email}?subject=Opportunity%20or%20collaboration`} className="pill pill--primary"><Icon name="mail" size={16} />Get in touch</a>
+          <a href={site.blogUrl} className="sidebar-blog"><Icon name="blog" size={16} />Writing</a>
         </div>
+        <button className={`mobile-menu-btn${nav.open ? ' active' : ''}`} aria-label={nav.open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={nav.open} aria-controls="mobile-nav" onClick={nav.toggle}>
+          <span /><span /><span />
+        </button>
       </header>
-
-      <div
-        className={`mobile-nav-overlay${nav.open ? ' active' : ''}`}
-        aria-hidden="true"
-        onClick={nav.close}
-      />
-      <nav
-        id="mobile-nav"
-        className={`mobile-nav${nav.open ? ' active' : ''}`}
-        aria-label="Mobile navigation"
-      >
+      <div className={`mobile-nav-overlay${nav.open ? ' active' : ''}`} aria-hidden="true" onClick={nav.close} />
+      <nav id="mobile-nav" className={`mobile-nav${nav.open ? ' active' : ''}`} hidden={!nav.open} aria-label="Portfolio sections">
         <div className="mobile-nav-inner">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={nav.onNavClick} aria-current={current(link.href)}>
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) => <a key={link.href} href={link.href} onClick={nav.onNavClick} aria-current={current(link.href)}>{link.label}</a>)}
           <div className="mobile-nav-cta">
-            <a href={site.blogUrl} className="pill">
-              <Icon name="blog" size={14} />
-              Blog
-            </a>
-            <a href={`mailto:${site.email}?subject=Collaboration`} className="pill pill--primary">
-              <Icon name="users" size={14} />
-              Collaborate
-            </a>
+            <a href={`mailto:${site.email}`} className="pill pill--primary"><Icon name="mail" />Get in touch</a>
+            <a href={site.blogUrl} className="pill"><Icon name="blog" />Writing</a>
           </div>
         </div>
       </nav>

@@ -11,6 +11,9 @@ export type Publication = {
   /** Compact venue for bylines and sidenotes, e.g. "WACV 2025". */
   venueShort: string;
   isNew?: boolean;
+  summary: string;
+  /** User-confirmed authorship credit; not necessarily marked in the paper. */
+  authorshipNote?: string;
   /**
    * Live citation count, refreshed client-side from Semantic Scholar.
    * `fallback` is what ships in the prerendered HTML; `citedByUrl` is where
@@ -32,12 +35,13 @@ export const publications: Publication[] = [
     venue: 'CVPR 2026 Workshop on Generative AI for Storytelling (AISTORY)',
     venueShort: 'CVPR 2026 Workshop',
     isNew: true,
+    authorshipNote: 'Co-first authors: Manogna Sreenivas and Rohit Kumar',
+    summary: 'AttriStory pairs a benchmark of 200 five-scene stories across 10 artistic styles with AttriLoss, an inference-time method for binding requested attributes to the correct objects. It refines latent codes to align attribute–object attention during early diffusion steps, integrating with SDXL, ConsiStory and StoryDiffusion without retraining.',
     citations: {
       arxivId: '2605.20777',
-      // Semantic Scholar has not indexed the citing paper yet; the live
-      // count only ever raises this, never lowers it.
+      // Historical fallback from the supplied portfolio, not a live verification.
       fallback: 1,
-      // No Google Scholar "cited by" list yet; Semantic Scholar's citing papers.
+      // Link to the citing-paper record supplied with the portfolio.
       citedByUrl:
         'https://www.semanticscholar.org/paper/7d14da101fd6b4977083d7f0fb3bd2266264181c#citing-papers',
     },
@@ -78,6 +82,7 @@ export const publications: Publication[] = [
     ],
     venue: 'WACV 2025',
     venueShort: 'WACV 2025',
+    summary: 'TACLE learns new classes from few labels and current-task unlabeled data without retaining earlier examples. It combines task-adaptive pseudo-label selection, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data. Evaluated on CIFAR-10, CIFAR-100 and ImageNet-Subset100, including one-shot and imbalanced settings.',
     citations: {
       arxivId: '2407.08041',
       fallback: 1,

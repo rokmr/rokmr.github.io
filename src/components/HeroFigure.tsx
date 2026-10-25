@@ -13,6 +13,10 @@ export function HeroFigure({ target }: { target: TargetSpec }) {
 
   return (
     <figure className="flow-figure">
+      <div className="flow-figure__heading">
+        <span className="label">Interactive / Flow matching</span>
+        <span className="flow-figure__hint">Drag to explore</span>
+      </div>
       <div className="flow-figure__plot">
         {/* The samples render on the GPU underneath; rings, arrows, labels and
             pointer input live on the canvas above. */}
@@ -52,65 +56,21 @@ export function HeroFigure({ target }: { target: TargetSpec }) {
         </div>
       </div>
 
-      {/* One <figcaption> (it must be the figure's last child) laid out on the
-          page grid: the caption in the main column, a legend for the marks in
-          the margin column. */}
-      <figcaption className="flow-figure__foot l-margin">
+      <figcaption className="flow-figure__foot">
         <p className="flow-figure__caption">
-          <strong>Figure 1.</strong> Flow matching trains a network to give every sample a
-          velocity that carries it from noise to the data in a straight line, x<sub>t</sub> = (1 −
-          t)·x<sub>0</sub> + t·x<sub>1</sub>. Generating is just following the arrows from t = 0 to
-          1. Here the data is a stippled portrait of {target.label}.
+          Noise → image. Each point follows a straight path from a random starting
+          position to a portrait of {target.label}. A small illustration of flow matching.
         </p>
-        <dl className="meta">
-          <div className="meta__row">
-            <dt className="meta__label">Samples</dt>
-            <dd className="meta__value">
-              <Swatch kind="sample" />
-              Each sample at time t
-            </dd>
-          </div>
-          <div className="meta__row">
-            <dt className="meta__label">Arrows</dt>
-            <dd className="meta__value">
-              <Swatch kind="arrow" />
-              Where each one is heading
-            </dd>
-          </div>
-          <div className="meta__row">
-            <dt className="meta__label">Rings</dt>
-            <dd className="meta__value">
-              <Swatch kind="ring" />
-              Where samples start
-            </dd>
-          </div>
-        </dl>
+        <details className="flow-figure__notes">
+          <summary>About this illustration</summary>
+          <p>
+            Flow matching learns a velocity field that transports noise toward data.
+            Here, paired starting and ending points illustrate the interpolation:
+            x<sub>t</sub> = (1 − t)x<sub>0</sub> + tx<sub>1</sub>.
+            The arrows show travel direction; the dashed rings mark starting positions.
+          </p>
+        </details>
       </figcaption>
     </figure>
-  );
-}
-
-/** Legend glyphs drawn to match the canvas marks. */
-function Swatch({ kind }: { kind: 'sample' | 'arrow' | 'ring' }) {
-  return (
-    <svg className="flow-figure__swatch" viewBox="0 0 18 10" width="18" height="10" aria-hidden="true">
-      {kind === 'sample' && (
-        <g fill="#fff" fillOpacity="0.95">
-          <rect x="3" y="3" width="2" height="2" />
-          <rect x="8" y="6" width="2" height="2" />
-          <rect x="12" y="2" width="2" height="2" />
-          <rect x="15" y="6.5" width="2" height="2" />
-        </g>
-      )}
-      {kind === 'arrow' && (
-        <>
-          <line x1="3" y1="5" x2="12" y2="5" stroke="var(--ink-accent)" strokeWidth="1.2" />
-          <path d="M17 5l-6-3.5v7z" fill="var(--ink-accent)" />
-        </>
-      )}
-      {kind === 'ring' && (
-        <circle cx="9" cy="5" r="4" fill="none" stroke="currentColor" strokeDasharray="2 2" />
-      )}
-    </svg>
   );
 }

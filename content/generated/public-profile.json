@@ -1,0 +1,959 @@
+{
+  "schemaVersion": 1,
+  "person": {
+    "id": "rohit-kumar",
+    "name": "Rohit Kumar",
+    "email": "rohitkumar.iisc@gmail.com",
+    "siteUrl": "https://rohit.vision",
+    "profiles": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/rokmr"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/in/rohitronie"
+      },
+      {
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/citations?user=7N8THZgAAAAJ"
+      },
+      {
+        "label": "Hugging Face",
+        "url": "https://huggingface.co/rokmr"
+      },
+      {
+        "label": "Blog",
+        "url": "https://blogs.rohit.vision"
+      },
+      {
+        "label": "X",
+        "url": "https://x.com/rohitronie"
+      }
+    ]
+  },
+  "featuredWorkIds": [
+    "armada-support",
+    "avataar-lifestyle",
+    "cricket-shot"
+  ],
+  "records": [
+    {
+      "id": "armada",
+      "kind": "employment",
+      "title": "AI Engineer",
+      "organization": "Armada AI",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": "2025-06",
+        "end": null
+      },
+      "status": "ongoing",
+      "ownership": "unknown",
+      "content": {
+        "summary": "AI Engineer at Armada AI, Trivandrum, India.",
+        "problem": null,
+        "contribution": "Built and deployed the Support RAG Agent for Armada’s internal Customer Support team (sole owner). Sole engineering owner of Almanac, an ongoing application designed for air-gapped document Q&A\nDesigned the Support Agent’s CRAG + controllable ReAct workflow; shared reformulation and embedding across branches reduced cost per query/run to approximately one-third of the initial graph on similar workloads\nFine-tuned models for Almanac using SFT, LoRA and QLoRA\nWorked on model quantization using AWQ, GPTQ and WxAy weight/activation precision configurations\nBuilt Support Agent evaluation at two levels: retrieval-confidence and CRAG-score gating before generation, and RAGAS-based response evaluation against curated ground truth\nBuilt an online-learning BM25 index with incremental update and unlearn, addressing organizational-vocabulary gaps that dense retrieval missed\nReplaced single-pass image captioning with a two-stage classify-then-caption pipeline for document images, including flowcharts and screenshots\nReplaced per-format ingestion pipelines with a normalized-Markdown intermediate representation shared across file formats",
+        "outcome": null
+      },
+      "technologies": [
+        "LangGraph",
+        "CRAG",
+        "BM25",
+        "RAGAS",
+        "Qdrant",
+        "Langfuse",
+        "Kubernetes",
+        "Ray",
+        "Docker"
+      ],
+      "links": [
+        {
+          "label": "Organization",
+          "url": "https://www.armada.ai/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "avataar",
+      "kind": "employment",
+      "title": "Research Engineer",
+      "organization": "Avataar AI",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": "2024-07",
+        "end": "2025-04"
+      },
+      "status": "completed",
+      "ownership": "unknown",
+      "content": {
+        "summary": "Research Engineer at Avataar AI, Bangalore, India.",
+        "problem": null,
+        "contribution": "Built a Flux and ControlNet pipeline for lifestyle product imagery; modified diffusion sampling followed by intrinsic decomposition for product reconstruction and relighting\nContinued an existing sparse-view-conditioned diffusion project, fine-tuning a Stable Diffusion model for novel-view synthesis with distributed training and SLURM\nBuilt classification for low-data scenarios with CLIP, BLIP2, and Qwen2.5\nWorked on segmentation using BiRefNet and SAM with YOLO-world",
+        "outcome": null
+      },
+      "technologies": [
+        "Flux",
+        "ControlNet",
+        "Diffusion",
+        "Distributed training",
+        "SLURM",
+        "CLIP",
+        "SAM",
+        "YOLO"
+      ],
+      "links": [
+        {
+          "label": "Organization",
+          "url": "https://www.avataar.ai/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "iisc-ta",
+      "kind": "employment",
+      "title": "Teaching Assistant",
+      "organization": "IISc Bangalore",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": "2023-08",
+        "end": "2024-04"
+      },
+      "status": "completed",
+      "ownership": "unknown",
+      "content": {
+        "summary": "Teaching Assistant at IISc Bangalore, Bangalore, India.",
+        "problem": null,
+        "contribution": "Teaching assistant for Digital Image Processing and Signal System in Practice\nWorked on continual learning (L2P, DualPrompt), self-supervised learning (MoCo, SimCLR), frequency-domain filtering and image features",
+        "outcome": null
+      },
+      "technologies": [
+        "L2P",
+        "DualPrompt",
+        "MoCo",
+        "SimCLR",
+        "PyTorch",
+        "OpenCV"
+      ],
+      "links": [
+        {
+          "label": "Organization",
+          "url": "https://iisc.ac.in/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "armada-assistant",
+      "kind": "project",
+      "title": "AI Assistant retrieval improvements",
+      "organization": "Armada AI",
+      "parentId": "armada",
+      "relatedIds": [],
+      "dates": {
+        "start": "2025-07",
+        "end": "2025-10"
+      },
+      "status": "completed",
+      "ownership": "contributor",
+      "content": {
+        "summary": "Contributions to an inherited RAG application, distinct from the Support Agent I later owned.",
+        "problem": null,
+        "contribution": "Contributor. Redesigned the LangGraph workflow and improved context preparation, retrieval and metadata handling.",
+        "outcome": "The workflow changes were adopted and deployed. Embedding-service work was completed but not deployed."
+      },
+      "technologies": [
+        "LangGraph",
+        "Qdrant",
+        "Hybrid retrieval",
+        "Query decomposition"
+      ],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/ai-assistant/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "armada-support",
+      "kind": "project",
+      "title": "Support RAG Agent",
+      "organization": "Armada AI",
+      "parentId": "armada",
+      "relatedIds": [],
+      "dates": {
+        "start": "2025-10",
+        "end": null
+      },
+      "status": "ongoing",
+      "ownership": "end-to-end-owner",
+      "content": {
+        "summary": "A grounded question-answering system for Armada’s internal Customer Support team, searching runbooks, help-center content and vendor documentation.",
+        "problem": "Customer Support searched manually across vendor documentation, internal runbooks, and the help center, with grounding and access-isolation requirements.",
+        "contribution": "Sole owner, from initial support-team interviews and an empty repository through production integration.",
+        "outcome": "Reduced cost per query/run to approximately one-third of the initial graph, comparing similar workloads.\nThe shared graph node removes repeated reformulation and embedding work. Incremental sparse indexing and the common ingestion representation make knowledge-base changes easier to maintain."
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/agentic-rag/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "armada-almanac",
+      "kind": "project",
+      "title": "Almanac: air-gapped document Q&A",
+      "organization": "Armada AI",
+      "parentId": "armada",
+      "relatedIds": [],
+      "dates": {
+        "start": "2026-04",
+        "end": null
+      },
+      "status": "ongoing",
+      "ownership": "sole-engineering-owner",
+      "content": {
+        "summary": "An on-device RAG application designed for document question answering on Armada edge hardware without internet access.",
+        "problem": "Provide local, air-gapped, cited document Q&A on edge hardware.",
+        "contribution": "Sole engineering owner. Product management owns the product requirements.",
+        "outcome": "Document ingestion, question answering, evaluation tooling and inference planning work in an isolated VM. A fresh installation with the internet disconnected has not yet been tested. Retrieval and generated-answer quality evaluation is underway; completed answer-quality results are not yet reported."
+      },
+      "technologies": [
+        "SFT",
+        "LoRA",
+        "QLoRA",
+        "Ray",
+        "Local model serving",
+        "Document processing",
+        "Hybrid retrieval",
+        "RBAC"
+      ],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/almanac/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "support-agent-architecture",
+      "kind": "contribution",
+      "title": "CRAG and controllable ReAct architecture",
+      "organization": "Armada AI",
+      "parentId": "armada-support",
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "end-to-end-owner",
+      "content": {
+        "summary": "Shared reformulation and embedding work across retrieval branches.",
+        "problem": null,
+        "contribution": "Designed shared query-processing nodes in the support workflow.",
+        "outcome": "Cost per query/run reduced to approximately one-third of the initial graph on similar workloads."
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": [
+        {
+          "id": "support-cost-fraction",
+          "label": "Cost per query/run relative to initial graph",
+          "value": 0.3333333333333333,
+          "unit": "fraction",
+          "baseline": "Initial multi-level graph",
+          "sample": "Similar workloads; exact query set and sample size unspecified.",
+          "asOf": null,
+          "context": "Approximate cost per query/run after sharing reformulation and embedding work, compared with the initial graph on similar workloads.",
+          "limitations": [
+            "Similar workloads, not a confirmed identical-workload controlled benchmark.",
+            "Measurement period and supporting record remain unspecified."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attristory",
+      "kind": "publication",
+      "title": "AttriStory: Fine-Grained Attribute Realization for Visual Storytelling with Diffusion Models",
+      "organization": "Indian Institute of Science, Bangalore",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "equal-contributor",
+      "content": {
+        "summary": "AttriStory pairs a benchmark of 200 five-scene stories across 10 artistic styles with AttriLoss, an inference-time method for binding requested attributes to the correct objects. It refines latent codes to align attribute–object attention during early diffusion steps, integrating with SDXL, ConsiStory and StoryDiffusion without retraining.",
+        "problem": null,
+        "contribution": "Manogna Sreenivas, Rohit Kumar, Soma Biswas. Co-first authors: Manogna Sreenivas and Rohit Kumar",
+        "outcome": "CVPR 2026 Workshop"
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://openaccess.thecvf.com/content/CVPR2026W/AISTORY/papers/Sreenivas_AttriStory_Fine-Grained_Attribute_Realization_for_Visual_Storytelling_with_Diffusion_Models_CVPRW_2026_paper.pdf"
+        },
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/2605.20777"
+        },
+        {
+          "label": "Website",
+          "url": "https://manogna-s.github.io/attristory/"
+        },
+        {
+          "label": "Poster",
+          "url": "https://rohit.vision/assets/AttriStory-Poster.pdf"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "avataar-lrm-training",
+      "kind": "contribution",
+      "title": "Sparse-view-conditioned diffusion for novel-view synthesis",
+      "organization": "Avataar AI",
+      "parentId": "avataar",
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "contributor",
+      "content": {
+        "summary": "Continued an existing diffusion project for novel-view synthesis at Avataar AI.",
+        "problem": "Generate novel views conditioned on sparse input images.",
+        "contribution": "Fine-tuned a Stable Diffusion model in a Zero123-like setting, worked on image-conditioning changes, and handled distributed training and SLURM job submission. Initial setup was established by a senior engineer. Used the full 32-H100 training cluster for a few days.",
+        "outcome": null
+      },
+      "technologies": [
+        "Stable Diffusion",
+        "Image conditioning",
+        "Distributed training",
+        "SLURM",
+        "HPC"
+      ],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "tacle",
+      "kind": "publication",
+      "title": "TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning",
+      "organization": "Indian Institute of Science, Bangalore",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": "2025",
+        "end": "2025"
+      },
+      "status": "completed",
+      "ownership": "equal-contributor",
+      "content": {
+        "summary": "TACLE learns new classes from few labels and current-task unlabeled data without retaining earlier examples. It combines task-adaptive pseudo-label selection, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data. Evaluated on CIFAR-10, CIFAR-100 and ImageNet-Subset100, including one-shot and imbalanced settings.",
+        "problem": "Learn new classes with few labels and current-task unlabeled data without retaining previous-class examples.",
+        "contribution": "Jayateja Kalla*, Rohit Kumar*, Soma Biswas",
+        "outcome": "WACV 2025"
+      },
+      "technologies": [
+        "PyTorch",
+        "ViT-B/16",
+        "Continual learning",
+        "Semi-supervised learning"
+      ],
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://openaccess.thecvf.com/content/WACV2025/papers/Kalla_TACLE_Task_and_Class-Aware_Exemplar-Free_Semi-Supervised_Class_Incremental_Learning_WACV_2025_paper.pdf"
+        },
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/pdf/2407.08041"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/rokmr/TACLE"
+        },
+        {
+          "label": "Website",
+          "url": "https://rohit.vision/tacle/"
+        },
+        {
+          "label": "Poster",
+          "url": "https://rohit.vision/tacle/assets/wacv25-0789.pdf"
+        },
+        {
+          "label": "Supplementary",
+          "url": "https://openaccess.thecvf.com/content/WACV2025/supplemental/Kalla_TACLE_Task_and_WACV_2025_supplemental.pdf"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "armada-inference-planner",
+      "kind": "project",
+      "title": "LLM Inference Planning & Optimization",
+      "organization": "Armada AI",
+      "parentId": "armada",
+      "relatedIds": [
+        "armada-almanac"
+      ],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "ongoing",
+      "ownership": "unknown",
+      "content": {
+        "summary": "LLM inference planning, deployment and optimization, supported by predictions of memory, latency, throughput and cost.",
+        "problem": "Estimate resource requirements and inference performance for a workload before trial deployment.",
+        "contribution": "Built capacity, performance and cost modeling that grew out of Almanac into a more independent planning tool; carried out inference deployment after selecting hardware and serving configurations.",
+        "outcome": null
+      },
+      "technologies": [
+        "KV-cache modeling",
+        "LLM inference",
+        "Quantization",
+        "Tensor parallelism",
+        "Automatic prefix caching"
+      ],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/inference-planner/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "fine-tuning-context-pending",
+      "kind": "contribution",
+      "title": "Professional SFT, LoRA and QLoRA fine-tuning",
+      "organization": "Armada AI",
+      "parentId": "armada-almanac",
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "contributor",
+      "content": {
+        "summary": "Fine-tuned models using SFT, LoRA and QLoRA for Almanac at Armada AI.",
+        "problem": null,
+        "contribution": "Fine-tuned models using SFT, LoRA and QLoRA for Almanac at Armada AI.",
+        "outcome": null
+      },
+      "technologies": [
+        "SFT",
+        "LoRA",
+        "QLoRA"
+      ],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "model-selection-evaluation-pipeline",
+      "kind": "contribution",
+      "title": "Document-model evaluation pipeline",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "contributor",
+      "content": {
+        "summary": "A pipeline for comparing and substituting document-processing and retrieval models to select suitable components.",
+        "problem": null,
+        "contribution": "Evaluated table-structure models, OCR models, layout detectors and embedding models, and built a pipeline that supports switching between candidates.",
+        "outcome": null
+      },
+      "technologies": [
+        "Table structure recognition",
+        "OCR",
+        "Layout detection",
+        "Embedding models",
+        "Model evaluation"
+      ],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/model-evaluation/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "avataar-lifestyle",
+      "kind": "project",
+      "title": "Diffusion-based product imagery",
+      "organization": "Avataar AI",
+      "parentId": "avataar",
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "contributor",
+      "content": {
+        "summary": "A lifestyle-image generation pipeline that preserves the product while adapting its appearance to a new scene.",
+        "problem": null,
+        "contribution": "Built the Flux and ControlNet pipeline and modified sampling for product reconstruction and relighting.",
+        "outcome": "Delivered a product-image generation pipeline with improved reconstruction and relighting."
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/lifestyle-generation/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "cricket-shot",
+      "kind": "project",
+      "title": "Cricket-Shot Predictor",
+      "organization": "Independent project",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "contributor",
+      "content": {
+        "summary": "Video classification for cricket shots, from frame extraction to a runnable prediction demo.",
+        "problem": null,
+        "contribution": "Built embedding-based video classifiers and fine-tuned VideoMAE.",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Case study",
+          "url": "https://rohit.vision/work/cricket-shot/"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "education-iisc",
+      "kind": "education",
+      "title": "M.Tech in Artificial Intelligence",
+      "organization": "Indian Institute of Science (IISc), Bangalore",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "2022 - 2024 · CGPA: 8.0/10.0",
+        "problem": null,
+        "contribution": "Pattern Recognition & Neural Networks, Computer Vision, Digital Image Processing, Deep Learning for NLP, LLMs for Practical NLP, Stochastic Models, Optimization",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "education-btech",
+      "kind": "education",
+      "title": "B.Tech in Electrical Engineering",
+      "organization": "Bhagalpur College of Engineering, Bhagalpur",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "2018 - 2021 · CGPA: 8.75/10.0",
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "education-diploma",
+      "kind": "education",
+      "title": "Diploma in Electrical Engineering",
+      "organization": "Government Polytechnic Muzaffarpur, Muzaffarpur",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "2015 - 2018 · 77.73%",
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "gate-ee-2022",
+      "kind": "achievement",
+      "title": "GATE EE 2022",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "AIR 221",
+        "problem": null,
+        "contribution": "Score: 803 | Marks: 73/100",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Certificate",
+          "url": "https://rohit.vision/assets/certificates/GATE_EE_2022.pdf"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "gate-in-2022",
+      "kind": "achievement",
+      "title": "GATE IN 2022",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "AIR 227",
+        "problem": null,
+        "contribution": "Score: 670 | Marks: 67.33/100",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Certificate",
+          "url": "https://rohit.vision/assets/certificates/GATE_IN_2022.pdf"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "bcece-le-2018",
+      "kind": "achievement",
+      "title": "BCECE LE 2018",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "Rank 1",
+        "problem": null,
+        "contribution": "State Lateral Entry Exam",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "hf-agents-course",
+      "kind": "achievement",
+      "title": "HuggingFace",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "Agents Course",
+        "problem": null,
+        "contribution": "AI Agents Development",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Certificate",
+          "url": "https://rohit.vision/assets/certificates/HF_Agents_Course.jpeg"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "minicon-ai-infra",
+      "kind": "achievement",
+      "title": "Marktechpost",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "miniCON AI Infra",
+        "problem": null,
+        "contribution": "AI Infrastructure",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Certificate",
+          "url": "https://credsverse.com/credentials/6adc8979-a5be-4dd7-ad48-b5549379960a"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "opencv-bootcamp",
+      "kind": "achievement",
+      "title": "OpenCV University",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "OpenCV Bootcamp",
+        "problem": null,
+        "contribution": "Computer Vision",
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [
+        {
+          "label": "Certificate",
+          "url": "https://courses.opencv.org/certificates/96b14b2e0a6e4ea390aebb15125cd218"
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "id": "skills-ai-ml",
+      "kind": "skill",
+      "title": "AI/ML",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "LLMs · RAG · CRAG · Agentic AI · Computer Vision · Novel-view Synthesis · Diffusion Models · NLP · Supervised fine-tuning (SFT) · LoRA · QLoRA · Hybrid Search · BM25 · Evals (RAGAS) · Document-model evaluation · Model quantization (AWQ, GPTQ; WxAy precision)",
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [
+        "LLMs",
+        "RAG",
+        "CRAG",
+        "Agentic AI",
+        "Computer Vision",
+        "Novel-view Synthesis",
+        "Diffusion Models",
+        "NLP",
+        "Supervised fine-tuning (SFT)",
+        "LoRA",
+        "QLoRA",
+        "Hybrid Search",
+        "BM25",
+        "Evals (RAGAS)",
+        "Document-model evaluation",
+        "Model quantization (AWQ, GPTQ; WxAy precision)"
+      ],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "skills-frameworks",
+      "kind": "skill",
+      "title": "Frameworks & Tools",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "ONNX · PyTorch · LangGraph · LangChain · HuggingFace · FastAPI · Chainlit · Playwright · Docling",
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [
+        "ONNX",
+        "PyTorch",
+        "LangGraph",
+        "LangChain",
+        "HuggingFace",
+        "FastAPI",
+        "Chainlit",
+        "Playwright",
+        "Docling"
+      ],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "skills-infrastructure",
+      "kind": "skill",
+      "title": "Infrastructure",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "Kubernetes · Ray · vLLM · Keycloak · Distributed training · SLURM · Docker · Helm · AWS · PostgreSQL · Qdrant · Langfuse · SSO/RBAC",
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [
+        "Kubernetes",
+        "Ray",
+        "vLLM",
+        "Keycloak",
+        "Distributed training",
+        "SLURM",
+        "Docker",
+        "Helm",
+        "AWS",
+        "PostgreSQL",
+        "Qdrant",
+        "Langfuse",
+        "SSO/RBAC"
+      ],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "quantization-methods",
+      "kind": "contribution",
+      "title": "Model quantization",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "contributor",
+      "content": {
+        "summary": "Hands-on work with AWQ, GPTQ and weight/activation precision configurations (WxAy).",
+        "problem": null,
+        "contribution": "Worked on quantization methods and precision configurations.",
+        "outcome": null
+      },
+      "technologies": [
+        "AWQ",
+        "GPTQ",
+        "Weight/activation precision"
+      ],
+      "links": [],
+      "metrics": []
+    },
+    {
+      "id": "skills-languages",
+      "kind": "skill",
+      "title": "Languages",
+      "organization": null,
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "status": "completed",
+      "ownership": "not-applicable",
+      "content": {
+        "summary": "Python · SQL · MATLAB",
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [
+        "Python",
+        "SQL",
+        "MATLAB"
+      ],
+      "links": [],
+      "metrics": []
+    }
+  ]
+}

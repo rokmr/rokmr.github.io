@@ -9,14 +9,21 @@
     "preview": "vite preview",
     "serve": "npm run build && npx --yes serve dist -l 8000",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest run && npm run content:test",
+    "test:watch": "vitest",
+    "content:init": "node scripts/content.mjs init",
+    "content:check": "node scripts/content.mjs check",
+    "content:export": "node scripts/content.mjs export",
+    "content:test": "node --test scripts/content.test.mjs",
+    "resume:pdf": "node scripts/build-resume.mjs",
+    "test:browser": "node scripts/check-browser.mjs && node scripts/check-interactions.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",

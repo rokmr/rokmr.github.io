@@ -4,7 +4,7 @@ export type MobileNavState = {
   open: boolean;
   toggle: () => void;
   close: () => void;
-  /** Smooth-scrolls in-page anchors and closes the drawer. */
+  /** Close the drawer; native anchors preserve URL history and motion preferences. */
   onNavClick: (e: MouseEvent<HTMLAnchorElement>) => void;
 };
 
@@ -24,19 +24,29 @@ export function useMobileNav(): MobileNavState {
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') {
+        close();
+        document.querySelector<HTMLButtonElement>('[aria-controls="mobile-nav"]')?.focus();
+      }
     };
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [open, close]);
 
+  // Keep the scroll lock from surviving a resize into desktop navigation.
+  // Matches the header breakpoint in main.css.
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1101px)');
+    const onDesktop = () => { if (desktop.matches) close(); };
+    desktop.addEventListener('change', onDesktop);
+    return () => desktop.removeEventListener('change', onDesktop);
+  }, [close]);
+
   const onNavClick = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
       const href = e.currentTarget.getAttribute('href');
       if (!href?.startsWith('#')) return;
-      e.preventDefault();
       close();
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     },
     [close],
   );

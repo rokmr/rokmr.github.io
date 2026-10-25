@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "person": {
+    "id": "rohit-kumar",
+    "name": "Rohit Kumar",
+    "email": "rohitkumar.iisc@gmail.com",
+    "siteUrl": "https://rohit.vision",
+    "profiles": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/rokmr"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/in/rohitronie"
+      },
+      {
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/citations?user=7N8THZgAAAAJ&hl=en"
+      }
+    ],
+    "private": {
+      "alternateEmails": [],
+      "targetRoles": [],
+      "locationPreferences": [],
+      "notes": []
+    }
+  },
+  "records": [
+    {
+      "id": "armada",
+      "kind": "employment",
+      "title": "AI Engineer",
+      "organization": "Armada AI",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": "2025-06",
+        "end": null
+      },
+      "status": "ongoing",
+      "ownership": "unknown",
+      "visibility": "public",
+      "publicContent": {
+        "summary": null,
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": [],
+      "sources": [],
+      "privateNotes": []
+    },
+    {
+      "id": "avataar",
+      "kind": "employment",
+      "title": "Research Engineer",
+      "organization": "Avataar AI",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": "2024-07",
+        "end": "2025-04"
+      },
+      "status": "completed",
+      "ownership": "unknown",
+      "visibility": "public",
+      "publicContent": {
+        "summary": null,
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": [],
+      "sources": [],
+      "privateNotes": []
+    },
+    {
+      "id": "iisc-ta",
+      "kind": "employment",
+      "title": "Teaching Assistant",
+      "organization": "IISc Bangalore",
+      "parentId": null,
+      "relatedIds": [],
+      "dates": {
+        "start": "2023-08",
+        "end": "2024-04"
+      },
+      "status": "completed",
+      "ownership": "unknown",
+      "visibility": "public",
+      "publicContent": {
+        "summary": null,
+        "problem": null,
+        "contribution": null,
+        "outcome": null
+      },
+      "technologies": [],
+      "links": [],
+      "metrics": [],
+      "sources": [],
+      "privateNotes": []
+    }
+  ],
+  "views": {
+    "website": {
+      "featuredWorkIds": [],
+      "recordIds": [
+        "armada",
+        "avataar",
+        "iisc-ta"
+      ]
+    },
+    "resumes": [
+      {
+        "id": "applied-ai",
+        "title": "Applied AI / LLM and Agentic Engineering",
+        "recordIds": []
+      },
+      {
+        "id": "computer-vision",
+        "title": "Computer Vision / Diffusion Engineering",
+        "recordIds": []
+      }
+    ]
+  },
+  "inbox": [],
+  "$schema": "./master.schema.json"
+}

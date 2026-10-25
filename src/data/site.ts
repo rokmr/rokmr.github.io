@@ -1,11 +1,12 @@
+import { publicProfile } from './profile';
 // Single source of truth for identity, URLs and the nav. Referenced by both the
 // rendered page and the per-route <head> builders in src/seo.
 export const site = {
-  origin: 'https://rohit.vision',
-  email: 'contact@rohit.vision',
+  origin: publicProfile.person.siteUrl,
+  email: publicProfile.person.email,
   blogUrl: 'https://blogs.rohit.vision/',
-  name: 'Rohit Kumar',
-  themeColor: '#0a0a0a',
+  name: publicProfile.person.name,
+  themeColor: '#f6f5f1',
   twitterHandle: '@rohitronie',
 } as const;
 
@@ -24,12 +25,10 @@ export const socialUrls = {
  * everything instead of leaving the prefixes to drift out of sync by hand.
  */
 export const sections = [
-  { id: 'about', title: 'Abstract', nav: 'About' },
-  { id: 'experience', title: 'Work Experience', nav: 'Experience' },
   { id: 'research', title: 'Research', nav: 'Research' },
-  { id: 'projects', title: 'Projects', nav: 'Projects' },
-  { id: 'skills', title: 'Skills', nav: 'Skills' },
-  { id: 'education', title: 'Education', nav: 'Education' },
+  { id: 'projects', title: 'Engineering', nav: 'Work' },
+  { id: 'experience', title: 'Experience', nav: 'Experience' },
+  { id: 'about', title: 'Background', nav: 'Background' },
   { id: 'contact', title: 'Contact', nav: 'Contact' },
 ] as const;
 

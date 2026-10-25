@@ -13,8 +13,7 @@ export function Footer({ buildYear }: { buildYear: number }) {
     <footer>
       <p>
         © <span>{year}</span>
-        {' Rohit Kumar · Handcrafted with '}
-        <span className="ai-badge">PyTorch-level</span> attention to detail
+        {' Rohit Kumar'}
       </p>
     </footer>
   );

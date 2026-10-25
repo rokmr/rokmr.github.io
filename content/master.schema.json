@@ -1,0 +1,474 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Rohit Kumar master content",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "person",
+    "records",
+    "views",
+    "inbox"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "person": {
+      "$ref": "#/$defs/person"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    },
+    "views": {
+      "$ref": "#/$defs/views"
+    },
+    "inbox": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "url"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "existing-portfolio",
+            "user-notes",
+            "public-link"
+          ]
+        },
+        "reference": {
+          "type": "string"
+        },
+        "asOf": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}(-(?:0[1-9]|1[0-2])(-(?:0[1-9]|[12]\\d|3[01]))?)?$"
+        }
+      },
+      "required": [
+        "type",
+        "reference",
+        "asOf"
+      ]
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "baseline": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sample": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "asOf": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}(-(?:0[1-9]|1[0-2])(-(?:0[1-9]|[12]\\d|3[01]))?)?$"
+        },
+        "context": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "needs-review",
+            "private"
+          ]
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "value",
+        "unit",
+        "baseline",
+        "sample",
+        "asOf",
+        "context",
+        "limitations",
+        "visibility",
+        "sources"
+      ]
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "siteUrl": {
+          "type": "string"
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        },
+        "private": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "alternateEmails": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "targetRoles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "locationPreferences": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "alternateEmails",
+            "targetRoles",
+            "locationPreferences",
+            "notes"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "siteUrl",
+        "profiles",
+        "private"
+      ]
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "kind": {
+          "enum": [
+            "employment",
+            "project",
+            "contribution",
+            "publication",
+            "education",
+            "achievement",
+            "service",
+            "skill",
+            "writing"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "organization": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parentId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "relatedIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dates": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\d{4}(-(?:0[1-9]|1[0-2])(-(?:0[1-9]|[12]\\d|3[01]))?)?$"
+            },
+            "end": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\d{4}(-(?:0[1-9]|1[0-2])(-(?:0[1-9]|[12]\\d|3[01]))?)?$"
+            }
+          },
+          "required": [
+            "start",
+            "end"
+          ]
+        },
+        "status": {
+          "enum": [
+            "ongoing",
+            "completed",
+            "paused",
+            "exploratory"
+          ]
+        },
+        "ownership": {
+          "enum": [
+            "sole-engineering-owner",
+            "end-to-end-owner",
+            "contributor",
+            "coauthor",
+            "equal-contributor",
+            "sole-author",
+            "not-applicable",
+            "unknown"
+          ]
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "needs-review",
+            "private"
+          ]
+        },
+        "publicContent": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "summary": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "problem": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "contribution": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "outcome": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "summary",
+            "problem",
+            "contribution",
+            "outcome"
+          ]
+        },
+        "technologies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/metric"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "privateNotes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "organization",
+        "parentId",
+        "relatedIds",
+        "dates",
+        "status",
+        "ownership",
+        "visibility",
+        "publicContent",
+        "technologies",
+        "links",
+        "metrics",
+        "sources",
+        "privateNotes"
+      ]
+    },
+    "resumeView": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "recordIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "recordIds"
+      ]
+    },
+    "views": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "website": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "featuredWorkIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "recordIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "featuredWorkIds",
+            "recordIds"
+          ]
+        },
+        "resumes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resumeView"
+          }
+        }
+      },
+      "required": [
+        "website",
+        "resumes"
+      ]
+    }
+  }
+}

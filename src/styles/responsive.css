@@ -9,7 +9,7 @@
    base.css. Component stylesheets keep their own breakpoints. What remains
    is navigation, the header, and a few legacy blocks in main.css.
 
-   Navigation switches to the hamburger drawer at <=900px.
+   Navigation switches to the hamburger drawer at <=1100px.
 */
 
 /* ---------------------------------------------
@@ -36,7 +36,6 @@ table {
 
 /* Long URLs and identifiers must wrap rather than widen the page. */
 .exp-points li,
-.project-description,
 .pub-title,
 .pub-authors,
 .edu-courses,
@@ -47,7 +46,7 @@ table {
 /* ---------------------------------------------
    Tablet landscape / small laptop (901-1200px)
    --------------------------------------------- */
-@media (min-width: 901px) and (max-width: 1200px) {
+@media (min-width: 1101px) and (max-width: 1200px) {
     /* Seven nav links plus two CTA buttons are tight at this width. */
     header nav {
         gap: 1rem;
@@ -88,12 +87,6 @@ table {
         gap: 0.6rem;
     }
 
-    /* The badge and links get their own line rather than squeezing the title. */
-    .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
 }
 
 /* ---------------------------------------------
@@ -125,7 +118,6 @@ table {
        count, sidenote links) are exempt and stay in the text flow. Pills
        size themselves in components/pill.css. */
     .logo,
-    .project-links a,
     .achievement-link,
     .back-to-top,
     .mobile-menu-btn,
@@ -137,14 +129,12 @@ table {
         align-items: center;
     }
 
-    .project-links a,
     .back-to-top,
     .mobile-menu-btn {
         justify-content: center;
     }
 
     /* Hover transforms either do nothing or stick after a tap. */
-    .project-card:hover,
     .education-card:hover,
     .achievement-card:hover {
         transform: none;

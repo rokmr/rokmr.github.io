@@ -1,3 +1,4 @@
+import { Skills } from './Skills';
 import { SectionHeader } from '../SectionHeader';
 import { experience } from '../../data/experience';
 import { keepHyphens } from '../../lib/text';
@@ -15,7 +16,8 @@ export function Experience() {
       <ol className="timeline">
         {experience.map((job) => (
           <li
-            key={`${job.company}-${job.title}-${job.date}`}
+            key={job.id}
+            id={`experience-${job.id}`}
             className={`timeline-item l-margin${job.current ? ' current' : ''}`}
           >
             <div>
@@ -50,6 +52,7 @@ export function Experience() {
           </li>
         ))}
       </ol>
+      <Skills />
     </section>
   );
 }

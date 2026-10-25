@@ -1,4 +1,5 @@
 import type { Route } from '../App';
+import { caseStudies } from '../data/caseStudies';
 import { site } from '../data/site';
 import { homeStructuredData, tacleStructuredData } from './structuredData';
 
@@ -45,7 +46,7 @@ const sharedLinks: Link[] = [
     rel: 'stylesheet',
     // Exactly the weights the stylesheets use: fewer files, and no
     // browser-synthesised bold for the 600-weight mono (logo, stat values).
-    href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
   },
 ];
 
@@ -129,7 +130,7 @@ const tacle: HeadSpec = {
     {
       name: 'description',
       content:
-        'TACLE proposes a novel task-adaptive threshold framework for exemplar-free semi-supervised class incremental learning, achieving SOTA on CIFAR-10, CIFAR-100 & ImageNet-100. Published at WACV 2025 by Jayateja Kalla, Rohit Kumar, and Soma Biswas from IISc Bangalore.',
+        'TACLE combines task-adaptive thresholds, class-aware losses and classifier alignment for exemplar-free semi-supervised class-incremental learning. WACV 2025, IISc Bangalore; equal contribution by Jayateja Kalla and Rohit Kumar.',
     },
     {
       name: 'keywords',
@@ -141,7 +142,7 @@ const tacle: HeadSpec = {
     {
       property: 'og:description',
       content:
-        'Novel framework for exemplar-free semi-supervised class incremental learning achieving SOTA on CIFAR-10, CIFAR-100 & ImageNet-100. Published at WACV 2025.',
+        'Learning new classes from few labels without retaining earlier examples. Task-adaptive thresholds, class-aware losses and classifier alignment. WACV 2025.',
     },
     { property: 'og:type', content: 'article' },
     { property: 'og:url', content: `${site.origin}/tacle/` },
@@ -153,7 +154,6 @@ const tacle: HeadSpec = {
       property: 'og:image:alt',
       content: 'TACLE overview: comparison of CIL, SS-CIL, and EFSS-CIL learning settings',
     },
-    { property: 'article:published_time', content: '2025-01-01' },
     { property: 'article:author', content: `${site.origin}/` },
     { property: 'article:section', content: 'Computer Vision' },
     { property: 'article:tag', content: 'Continual Learning' },
@@ -167,7 +167,7 @@ const tacle: HeadSpec = {
     {
       name: 'twitter:description',
       content:
-        'SOTA results on CIFAR-10, CIFAR-100 & ImageNet-100 without storing previous examples. Published at WACV 2025 from IISc Bangalore.',
+        'Class-incremental learning from limited labels without retaining previous-class examples. Published at WACV 2025 from IISc Bangalore.',
     },
     { name: 'twitter:image', content: `${site.origin}/assets/images/tacle_intro.webp` },
     { name: 'twitter:image:alt', content: 'TACLE method overview diagram' },
@@ -194,7 +194,19 @@ const tacle: HeadSpec = {
   ],
 };
 
-const specs: Record<Route, HeadSpec> = { '/': home, '/tacle/': tacle };
+function documentHead(path: string, title: string, description: string): HeadSpec {
+  return { title: `${title} | Rohit Kumar`, bodyClass: 'portfolio-route',
+    meta: [...sharedMeta, { name: 'description', content: description }, { property: 'og:title', content: `${title} | Rohit Kumar` }, { property: 'og:description', content: description }, { property: 'og:url', content: `${site.origin}${path}` }, { property: 'og:type', content: 'article' }],
+    links: [...sharedLinks, { rel: 'canonical', href: `${site.origin}${path}` }],
+    jsonLd: { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description, url: `${site.origin}${path}` },
+  };
+}
+const specs: Record<Route, HeadSpec> = {
+  '/': { ...home, bodyClass: 'portfolio-route' }, '/tacle/': tacle,
+  '/work/': documentHead('/work/', 'Engineering work', 'Rohit Kumar’s engineering work in RAG, local inference, diffusion models and computer vision, with project scope and personal contributions.'),
+  '/resume/': documentHead('/resume/', 'Résumé', 'Rohit Kumar — AI Engineer at Armada AI, previously Research Engineer at Avataar AI. Experience, publications, education and skills.'),
+  ...Object.fromEntries(caseStudies.map(study => [`/work/${study.id}/`, documentHead(`/work/${study.id}/`, study.title, study.summary)])),
+} as Record<Route, HeadSpec>;
 
 export function bodyClassFor(route: Route): string {
   return specs[route].bodyClass ?? '';

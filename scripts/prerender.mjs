@@ -43,5 +43,13 @@ for (const page of pages) {
   console.log(`prerendered ${page.route} → dist/${page.file}`);
 }
 
+// Build the sitemap from the same route set as the emitted HTML.
+const canonicalUrls = pages.map(page => {
+  const match = page.head.match(/<link rel="canonical" href="([^"]+)"/);
+  if (!match) throw new Error(`Missing canonical URL for ${page.route}`);
+  return match[1];
+});
+await writeFile(join(distDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${canonicalUrls.map(url => `  <url><loc>${url}</loc></url>`).join('\n')}\n</urlset>\n`, 'utf8');
+
 // The SSR bundle is a build artefact, not something to deploy.
 await rm(ssrDir, { recursive: true, force: true });

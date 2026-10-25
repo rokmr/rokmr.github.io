@@ -1,6 +1,7 @@
 export type SkillCategory = { name: string; items: string[] };
 
 export const skills: SkillCategory[] = [
+  { name: 'Languages', items: ['Python', 'SQL', 'MATLAB'] },
   {
     name: 'AI/ML',
     items: [
@@ -9,17 +10,23 @@ export const skills: SkillCategory[] = [
       'CRAG',
       'Agentic AI',
       'Computer Vision',
+      'Novel-view Synthesis',
       'Diffusion Models',
       'NLP',
+      'Supervised fine-tuning (SFT)',
+      'LoRA',
+      'QLoRA',
       'Hybrid Search',
       'BM25',
       'Evals (RAGAS)',
+      'Document-model evaluation',
+      'Model quantization (AWQ, GPTQ; WxAy precision)',
     ],
   },
   {
     name: 'Frameworks & Tools',
     items: [
-      'Python',
+      'ONNX',
       'PyTorch',
       'LangGraph',
       'LangChain',
@@ -32,6 +39,6 @@ export const skills: SkillCategory[] = [
   },
   {
     name: 'Infrastructure',
-    items: ['Docker', 'Helm', 'AWS', 'PostgreSQL', 'Qdrant', 'Langfuse', 'SSO/RBAC'],
+    items: ['Kubernetes', 'Ray', 'vLLM', 'Keycloak', 'Distributed training', 'SLURM', 'Docker', 'Helm', 'AWS', 'PostgreSQL', 'Qdrant', 'Langfuse', 'SSO/RBAC'],
   },
 ];

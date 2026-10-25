@@ -259,6 +259,15 @@
   --text-4xl:   2.25rem;    /* 36px — post hero                            */
   --text-5xl:   2.5rem;     /* 40px — display                              */
   --text-code:  0.9375em;   /* relative to parent — inline code            */
+  --hero-display: 3rem;
+  --hero-portrait: 80px;
+  --portfolio-rail: 13rem;
+  --education-meta-width: 10rem;
+  --pub-rail: 12rem;
+  --work-label: 4.5rem;
+  --work-preview-max: 22rem;
+  --control-touch: 44px;
+  --research-scene-h: 6rem;
 
   /* Leading — by job. Prose gets the loose one. */
   --leading-none:   1;

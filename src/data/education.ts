@@ -5,6 +5,7 @@ export type Education = {
   school: string;
   details: string;
   courses?: string;
+  advisor?: { name: string; href: string; label?: string };
 };
 
 export const education: Education[] = [
@@ -12,6 +13,7 @@ export const education: Education[] = [
     degree: 'M.Tech in Artificial Intelligence',
     school: 'Indian Institute of Science (IISc), Bangalore',
     details: '2022 - 2024 · CGPA: 8.0/10.0',
+    advisor: { label: 'Thesis advisor', name: 'Prof. Soma Biswas', href: 'https://www.linkedin.com/in/soma-biswas-b58749b' },
     courses:
       'Pattern Recognition & Neural Networks, Computer Vision, Digital Image Processing, Deep Learning for NLP, LLMs for Practical NLP, Stochastic Models, Optimization',
   },
@@ -19,6 +21,7 @@ export const education: Education[] = [
     degree: 'B.Tech in Electrical Engineering',
     school: 'Bhagalpur College of Engineering, Bhagalpur',
     details: '2018 - 2021 · CGPA: 8.75/10.0',
+    advisor: { name: 'Prof. Arjun Kumar', href: 'https://spnrecararia.ac.in/NoticeImages/Faculty%20Officers%20Contact%20detail%20of%20SPNREC-Araria.pdf' },
   },
   {
     degree: 'Diploma in Electrical Engineering',

@@ -95,3 +95,10 @@
     display: none;
   }
 }
+
+.capability-list { display: flex; flex-direction: column; gap: var(--space-4); }
+.capability-list > div { display: grid; grid-template-columns: var(--pub-rail) minmax(0, 1fr); gap: var(--space-5); }
+.capability-list dt { color: var(--ink); font-size: var(--text-sm); }
+.capability-list dd { color: var(--ink-secondary); font-size: var(--text-sm); line-height: var(--leading-read); }
+
+@media (max-width: 700px) { .capability-list > div { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); } }

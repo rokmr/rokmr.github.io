@@ -1,45 +1,43 @@
-import { SectionHeader } from '../SectionHeader';
 import { Icon } from '../Icon';
 import { ExternalLink } from '../ExternalLink';
 import { achievements, education } from '../../data/education';
 
 export function Education() {
   return (
-    <section id="education" aria-label="Education and Achievements">
-      <SectionHeader id="education" />
-      <div className="card-grid">
-        {education.map((entry) => (
-          <div className="education-card" key={entry.degree}>
-            <h3 className="edu-degree">{entry.degree}</h3>
-            <p className="edu-school">{entry.school}</p>
-            <p className="edu-details">{entry.details}</p>
-            {entry.courses && <p className="edu-courses">{entry.courses}</p>}
-          </div>
-        ))}
-      </div>
-
-      <h3 className="edu-subsection-title">Achievements &amp; Certifications</h3>
-      <div className="card-grid">
-        {achievements.map((item) => (
-          <div className="achievement-card" key={`${item.title}-${item.value}`}>
-            <div className="achievement-icon">
-              <Icon name={item.icon} size={24} />
-            </div>
-            <div className="achievement-value">{item.value}</div>
-            <div className="achievement-title">{item.title}</div>
-            <div className="achievement-subtitle">{item.subtitle}</div>
-            {item.link && (
-              <ExternalLink
-                href={item.link.href}
-                className="achievement-link"
-                aria-label={item.link.ariaLabel}
-              >
-                <Icon name="externalLink" size={12} /> View Certificate
-              </ExternalLink>
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
+    <div id="education" className="background-education">
+      <h3 className="subsection-title">Education</h3>
+      <ol className="education-list">
+        {education.map((entry) => {
+          const [period, result] = entry.details.split(' · ');
+          return (
+            <li className="education-record" key={entry.degree}>
+              <div className="education-main">
+                <h4>{entry.degree}</h4>
+                <p>{entry.school}</p>
+                {entry.courses && (
+                  <details className="education-coursework">
+                    <summary>Coursework <Icon name="chevronDown" size={14} /></summary>
+                    <p>{entry.courses}</p>
+                  </details>
+                )}
+              </div>
+              <div className="education-meta"><p>{period}</p><p>{result}</p></div>
+            </li>
+          );
+        })}
+      </ol>
+      <details className="background-achievements">
+        <summary>Achievements & certifications <Icon name="chevronDown" /></summary>
+        <ul className="achievement-list">
+          {achievements.map((item) => (
+            <li key={`${item.title}-${item.value}`}>
+              <Icon name={item.icon} size={16} />
+              <div><p><strong>{item.value}</strong><span> · {item.title}</span></p><p className="achievement-note">{item.subtitle}</p></div>
+              {item.link && <ExternalLink href={item.link.href} className="profile-link" aria-label={item.link.ariaLabel}><span>Certificate</span><Icon name="arrowUpRight" size={14} /></ExternalLink>}
+            </li>
+          ))}
+        </ul>
+      </details>
+    </div>
   );
 }

@@ -1,24 +1,13 @@
-import { SectionHeader } from '../SectionHeader';
 import { skills } from '../../data/skills';
 
+/** Supporting information within Experience, rather than a separate tag wall. */
 export function Skills() {
   return (
-    <section id="skills" aria-label="Technical Skills">
-      <SectionHeader id="skills" />
-      <div className="skills-grid">
-        {skills.map((category) => (
-          <div className="skill-category" key={category.name}>
-            <h3>{category.name}</h3>
-            <div className="tag-row">
-              {category.items.map((item) => (
-                <span className="tag" key={item}>
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+    <div id="skills" className="experience-capabilities">
+      <h3 className="subsection-title">Tools & capabilities</h3>
+      <dl className="capability-list">
+        {skills.map((category) => <div key={category.name}><dt>{category.name}</dt><dd>{category.items.join(' · ')}</dd></div>)}
+      </dl>
+    </div>
   );
 }

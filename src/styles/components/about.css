@@ -1,41 +1,142 @@
-/* ============================================================================
-   ABOUT — the abstract under the title page. Each row is an .l-margin grid
-   (base.css): a paragraph in the main column, its sidenotes (.meta) in the
-   margin column shared with the hero byline. Nothing here sets a column
-   width; prose is held to the reading measure.
-   ========================================================================= */
-
-.abstract {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+/* Background uses a reading width; dates and grades share a compact rail. */
+.background-story, .background-education {
+  max-width: var(--measure-wide);
 }
-
-.abstract-row {
-  align-items: start;
-}
-
-.abstract-text {
-  max-width: var(--measure);
+.background-story {
+  color: var(--ink-secondary);
   font-size: var(--text-md);
   line-height: var(--leading-read);
+}
+.background-story p + p {
+  margin-top: var(--space-4);
+}
+.background-story strong {
+  color: var(--ink);
+  font-weight: var(--weight-medium);
+}
+.education-list {
+  list-style: none;
+  border-top: var(--border-width) solid var(--border);
+}
+.education-record {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--education-meta-width);
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+  border-bottom: var(--border-width) solid var(--border);
+}
+.education-main h4 {
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+.education-main > p {
+  margin-top: var(--space-1);
+  color: var(--ink-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+.education-meta {
+  text-align: right;
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-read);
+}
+.education-meta p + p {
+  margin-top: var(--space-1);
+}
+.education-coursework {
+  margin-top: var(--space-2);
+}
+.education-coursework summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-touch);
+  color: var(--ink-secondary);
+  font-size: var(--text-xs);
+  list-style: none;
+  cursor: pointer;
+}
+.education-coursework summary::-webkit-details-marker, .background-achievements > summary::-webkit-details-marker {
+  display: none;
+}
+.education-coursework summary svg, .background-achievements > summary svg {
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+.education-coursework[open] summary svg, .background-achievements[open] > summary svg {
+  transform: rotate(180deg);
+}
+.education-coursework p {
+  color: var(--ink-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-read);
+}
+.background-achievements {
+  margin-top: var(--space-4);
+}
+.background-achievements > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--control-touch);
+  color: var(--ink-secondary);
+  font-size: var(--text-sm);
+  list-style: none;
+  cursor: pointer;
+}
+.achievement-list {
+  list-style: none;
+  margin-top: var(--space-3);
+}
+.achievement-list > li {
+  display: grid;
+  grid-template-columns: var(--space-4) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  border-bottom: var(--border-width) solid var(--border);
+  font-size: var(--text-sm);
+}
+.achievement-list > li > svg {
+  color: var(--ink-muted);
+}
+.achievement-list strong {
+  color: var(--ink);
+  font-weight: var(--weight-medium);
+}
+.achievement-list span, .achievement-note {
   color: var(--ink-secondary);
 }
-
-.abstract-text strong {
-  font-weight: var(--weight-semibold);
-  color: var(--ink);
+.achievement-note {
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
 }
-
-/* The opening paragraph steps up in size and colour. */
-.abstract-lead {
-  font-size: var(--text-lg);
-  line-height: 1.65;
-  color: var(--ink);
+.achievement-list .profile-link {
+  font-size: var(--text-xs);
 }
-
 @media (max-width: 600px) {
-  .abstract-lead {
-    font-size: var(--text-md);
+  .education-record {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+    padding-block: var(--space-4);
+  }
+  .education-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    text-align: left;
+  }
+  .education-meta p + p {
+    margin-top: 0;
+  }
+  .achievement-list > li {
+    grid-template-columns: var(--space-4) minmax(0, 1fr);
+  }
+  .achievement-list .profile-link {
+    grid-column: 2;
   }
 }

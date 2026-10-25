@@ -23,7 +23,7 @@
   white-space: nowrap;
   background: var(--surface-card);
   border: var(--border-width) solid var(--border-strong);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius);
   transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
 }
 
@@ -53,9 +53,47 @@
   outline-offset: 2px;
 }
 
+/* Primary contact actions use the same size and type in every section. */
+.pill--action {
+  min-height: var(--control-touch);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+}
+
+.pill--primary:focus-visible {
+  color: var(--ink-on-accent);
+  background: var(--ink-accent);
+  border-color: var(--ink-accent);
+}
+
 /* WCAG 2.5.8: comfortable touch targets. */
 @media (hover: none) {
   .pill {
     min-height: 44px;
   }
 }
+
+/* Secondary profiles and resources share one quiet link treatment. */
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-touch);
+  color: var(--ink-secondary);
+  font-size: var(--text-sm);
+}
+.profile-link:hover {
+  color: var(--ink);
+}
+.profile-link svg {
+  flex: none;
+}
+
+.profile-link span {
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: var(--space-1);
+}
+.profile-link:is(:hover, :focus-visible) { color: var(--ink); }

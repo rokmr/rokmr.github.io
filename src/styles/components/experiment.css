@@ -1,0 +1,56 @@
+/* Optional experiment belongs to Research; keep its layout self-contained. */
+.portfolio-note {
+  margin-top: var(--space-7);
+  border-block: var(--border-width) solid var(--border);
+}
+.portfolio-note > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--control-touch);
+  padding-block: var(--space-3);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  list-style: none;
+}
+.portfolio-note > summary::-webkit-details-marker {
+  display: none;
+}
+.portfolio-note > summary > svg {
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+.portfolio-note > summary:hover {
+  color: var(--ink);
+}
+.portfolio-note[open] > summary > svg {
+  transform: rotate(180deg);
+}
+.portfolio-note-description {
+  color: var(--ink-muted);
+}
+.portfolio-note-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.portfolio-note-label > svg {
+  flex: none;
+}
+.portfolio-note-body {
+  padding-block: var(--space-4) var(--space-5);
+}
+.portfolio-note .flow-figure__plot {
+  aspect-ratio: 3 / 1;
+}
+@media (max-width: 900px) { .portfolio-note .flow-figure__plot {
+   aspect-ratio: 2 / 1;
+ } }
+@media (max-width: 600px) { .portfolio-note .flow-figure__plot {
+   aspect-ratio: 4 / 5;
+ } }
+@media (max-height: 500px) and (orientation: landscape) { .portfolio-note .flow-figure__plot {
+   aspect-ratio: 3 / 1;
+ } }

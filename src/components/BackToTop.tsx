@@ -10,7 +10,7 @@ export function BackToTop() {
       aria-label="Back to top"
       // Hidden from the tab order until it is actually on screen.
       tabIndex={visible ? 0 : -1}
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}
     >
       <Icon name="chevronUp" size={18} strokeWidth={2} />
     </button>

@@ -95,7 +95,7 @@ export function Tacle() {
 
       <div className="section">
         <h2 className="section-title">Introduction</h2>
-        <img src={`/${A}/intro.png`} alt="Method Overview" />
+        <img src={`/${A}/intro.png`} alt="Comparison of class-incremental, semi-supervised and exemplar-free learning settings" />
         <p className="caption">
           Difference between Class Incremental Learning (CIL), Semi-Supervised CIL (SS-CIL), and
           Exemplar-Free Semi-Supervised CIL (EFSS-CIL) settings.
@@ -108,11 +108,12 @@ export function Tacle() {
           Two stages of training are used in TACLE. In the first stage, the model is trained on both
           the labeled data and high-confidence unlabeled data (selected using task-adaptive
           thresholding) of the current task using a class-aware weighted cross-entropy loss. In the
-          second stage, the model is fine-tuned on the unlabeled data of the current task using a
-          task-adaptive thresholding strategy.
+          second stage, labeled and confident pseudo-labeled samples improve estimates of class
+          means and covariances. Features sampled from the stored class distributions are then
+          used to align classifiers across all classes seen so far.
         </p>
 
-        <img src={`/${A}/stage1.png`} alt="Stage 1" />
+        <img src={`/${A}/stage1.png`} alt="Task-adaptive pseudo-label selection and class-aware weighting during feature learning" />
         <p className="caption">
           <i>
             Stage 1: Training on labeled and high-confidence unlabeled data using class-aware
@@ -120,9 +121,9 @@ export function Tacle() {
           </i>
         </p>
 
-        <img src={`/${A}/stage2.png`} alt="Stage 2" />
+        <img src={`/${A}/stage2.png`} alt="Classifier alignment using class statistics estimated from labeled and confident pseudo-labeled data" />
         <p className="caption">
-          <i>Stage 2: Fine-tuning on unlabeled data using task-adaptive thresholding</i>
+          <i>Stage 2: Classifier alignment using sampled class-distribution features</i>
         </p>
       </div>
 
@@ -131,7 +132,7 @@ export function Tacle() {
         <div className="results-container">
           <div className="result-item">
             <h3>CIFAR Results</h3>
-            <img src={`/${A}/CIFAR_Results.png`} alt="CIFARResults" />
+            <img src={`/${A}/CIFAR_Results.png`} alt="Average incremental accuracy comparisons on CIFAR-10 and CIFAR-100 across label budgets" />
             <p className="caption">
               <i>
                 {`Average incremental accuracy on CIFAR10 after 5 tasks and CIFAR100 after 10 tasks for SS-CIL. The number in brackets indicates the number of exemplars; our approach does not use any exemplars. Here, \\(\\star\\): models trained from scratch, †: models initialized with MoCo v3 pretrained weights, and ‡: models initialized with ImageNet pretrained weights; RN18: ResNet18 architecture, FT: fixed threshold, i.e. FixMatch.`}
@@ -143,7 +144,7 @@ export function Tacle() {
         <div className="results-container">
           <div className="result-item">
             <h3>ImageNet-100 Results</h3>
-            <img src={`/${A}/ImageNet100_Results.png`} alt="ImageNet-100 Results" />
+            <img src={`/${A}/ImageNet100_Results.png`} alt="Average incremental accuracy comparisons on ImageNet-Subset100 after 20 tasks" />
             <p className="caption">
               <i>
                 {`Comparison of average incremental accuracy on ImageNet-Subset100 after 20 tasks for SS-CIL. The number in brackets: buffer size; \\(\\star\\): models trained from scratch and †: model initialized with MoCo v3 pretrained weights.`}
@@ -155,7 +156,7 @@ export function Tacle() {
         <div className="results-container">
           <div className="result-item">
             <h3>Ablation Study</h3>
-            <img src={`/${A}/Ablation_Results.png`} alt="Ablation Study Results" />
+            <img src={`/${A}/Ablation_Results.png`} alt="CIFAR-100 ablation comparing adaptive thresholds, class-aware loss and classifier alignment" />
             <p className="caption">
               <i>
                 {`Ablation study on CIFAR100 dataset with \\(0.8\\%\\) labeled data. The average incremental accuracy is reported at the end of 10 tasks. The proposed components are denoted as C1: task-wise dynamic threshold, C2: class-aware CE loss, C3: exploiting unlabeled data in stage 2.`}
@@ -166,13 +167,24 @@ export function Tacle() {
       </div>
 
       <div className="section">
+        <h2 className="section-title">Scope and limitations</h2>
+        <p>
+          Exemplar-free means that earlier training images are not retained; the method still stores
+          class means and covariances for classifier alignment. The evaluation assumes unlabeled
+          samples belong to the current task’s classes. Results depend on the pretrained backbone
+          and label budget, with the strongest gains in low-supervision settings.
+        </p>
+      </div>
+
+      <div className="section">
         <h2 className="section-title">Citation</h2>
-        <pre>{`@article{kalla2024tacle,
+        <pre>{`@inproceedings{kalla2025tacle,
     title={TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning},
     author={Kalla, Jayateja and Kumar, Rohit and Biswas, Soma},
-    journal={arXiv preprint arXiv:2407.08041},
-    year={2024}
-    }`}</pre>
+    booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    year={2025},
+    url={https://openaccess.thecvf.com/content/WACV2025/html/Kalla_TACLE_Task_and_Class-Aware_Exemplar-Free_Semi-Supervised_Class_Incremental_Learning_WACV_2025_paper.html}
+}`}</pre>
       </div>
 
       <div className="section">

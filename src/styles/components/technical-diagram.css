@@ -1,0 +1,49 @@
+/* Shared diagram primitives. Reuse portfolio semantics; no separate color palette. */
+.technical-diagram {
+  --diagram-border: var(--page-line);
+  --diagram-connector: var(--page-muted);
+  --diagram-gap: 28px;
+  --diagram-radius: 3px;
+  --diagram-stroke: 1px;
+  container-type: inline-size;
+  margin: 32px 0 0;
+  padding: 24px 0;
+  border-block: var(--diagram-stroke) solid var(--diagram-border);
+  min-width: 0;
+  break-inside: avoid;
+}
+.portfolio-page .diagram-heading { display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px }
+.portfolio-page .diagram-heading h3 { font-size:1rem;font-weight:500;line-height:1.5;letter-spacing:0;text-wrap:pretty }
+.diagram-heading>span { font-size:.6875rem;color:var(--page-muted);white-space:nowrap }
+.diagram-lanes { display:grid;gap:24px }
+.portfolio-page .diagram-lane-label { font-size:.75rem;font-weight:500;color:var(--page-muted);margin:0 0 10px }
+.diagram-flow { display:grid;grid-template-columns:repeat(var(--diagram-columns),minmax(0,1fr));gap:var(--diagram-gap);list-style:none;padding:0 }
+.diagram-stage { position:relative;min-width:0;padding:12px;border:var(--diagram-stroke) solid var(--diagram-border);border-radius:var(--diagram-radius);background:var(--page-paper) }
+.diagram-stage--check { border-color:var(--page-accent) }
+.diagram-stage--output { background:var(--page-wash) }
+.diagram-stage--store { border-top:3px double var(--page-muted);padding-top:10px }
+.diagram-stage-kind { display:block;font-size:.625rem;line-height:1.5;color:var(--page-muted);margin-bottom:6px }
+.portfolio-page .diagram-stage-title { margin:0;font-size:.8125rem;line-height:1.4;font-weight:600;color:var(--page-ink);text-wrap:pretty }
+.portfolio-page .diagram-stage-detail { margin:6px 0 0;font-size:.75rem;line-height:1.5;color:var(--page-muted) }
+.diagram-connector { position:absolute;left:calc(100% + 4px);top:calc(50% - 8px);color:var(--diagram-connector);pointer-events:none }
+.technical-diagram figcaption { margin-top:16px;font-size:.75rem;line-height:1.65;color:var(--page-muted);max-width:72ch }
+/* Never snake a sequence around a second row: preserve its reading direction. */
+@container(max-width:46.25rem) {
+  .diagram-flow--long { grid-template-columns:minmax(0,1fr);gap:24px }
+  .diagram-flow--long .diagram-stage { display:grid;grid-template-columns:5rem minmax(0,1fr);column-gap:12px;align-items:baseline }
+  .diagram-flow--long .diagram-stage-kind { grid-row:1/span 2;margin:0 }
+  .diagram-flow--long .diagram-stage-detail { grid-column:2 }
+  .diagram-flow--long .diagram-connector { left:calc(50% - 10px);top:calc(100% + 4px);transform:rotate(90deg) }
+}
+@container(max-width:37.5rem) {
+  .diagram-flow { grid-template-columns:minmax(0,1fr);gap:24px }
+  .diagram-stage { display:grid;grid-template-columns:4rem minmax(0,1fr);column-gap:10px;align-items:baseline }
+  .diagram-stage-kind { grid-row:1/span 2;margin:0 }
+  .portfolio-page .diagram-stage-detail { grid-column:2;margin-top:4px }
+  .diagram-connector { left:calc(50% - 10px);top:calc(100% + 4px);transform:rotate(90deg) }
+  .diagram-flow--long .diagram-stage { grid-template-columns:4rem minmax(0,1fr);column-gap:10px }
+}
+@media print { .technical-diagram { --diagram-border:#bbb;--diagram-connector:#444;break-inside:auto }.diagram-stage{break-inside:avoid} }
+
+/* Prose-list spacing must not offset stages in a diagram grid. */
+.portfolio-page .diagram-flow > .diagram-stage { margin:0 }

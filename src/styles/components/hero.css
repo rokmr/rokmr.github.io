@@ -1,89 +1,161 @@
-/* ============================================================================
-   HERO — the landing section as a research-paper title page (after
-   distill.pub). Layout comes from .l-margin (base.css): title, dek and links
-   (.pill-row) in the main column, the byline (.meta) in the margin column, then Figure 1
-   across both. Nothing here sets a column width.
-   ========================================================================= */
-
+/* Introduction is one chapter; project evidence starts in Selected Work. */
 .hero {
-  /* .hero is a <section>, so it already has the content cap and auto
-     margins; the top padding clears the fixed header. */
-  padding: calc(var(--header-h) + var(--space-7)) var(--gutter) calc(var(--section-gap) / 2);
+  padding-top: calc(var(--header-h) + var(--space-8));
+  padding-bottom: var(--space-6);
 }
-
-.paper-head {
-  margin-bottom: var(--space-6);
+.portfolio-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-areas: 'identity bio' 'background actions' 'profiles context';
+  gap: var(--space-4) var(--space-9);
+  align-items: start;
 }
-
-/* The title is sized by the column it sits in, not by the viewport, so it
-   keeps to two lines whatever the margin column leaves it. 8cqi keeps
-   "Bridging Computer Vision" (~12.5 em wide) inside the column. */
-.paper-main {
-  container-type: inline-size;
-}
-
-.paper-title {
-  font-size: clamp(2rem, 8cqi, 3.75rem);
-  font-weight: var(--weight-bold);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-
-.paper-dek {
-  max-width: var(--measure);
-  margin-top: var(--space-4);
-  font-size: var(--text-lg);
-  line-height: 1.55;
-  color: var(--ink-secondary);
-}
-
-/* Beside the title block, the byline sits on its baseline; stacked, it
-   simply follows. */
-.paper-byline {
-  align-self: end;
-}
-
-.paper-author {
-  align-items: center; /* the avatar is taller than a line of text */
-}
-
-.paper-author .meta__value {
+.portfolio-identity {
+  grid-area: identity;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-5);
 }
-
-.paper-author img {
+.portfolio-identity picture {
+  flex: none;
+}
+.portfolio-identity img {
   display: block;
-  width: 28px;
-  height: 28px;
+  width: var(--hero-portrait);
+  height: var(--hero-portrait);
   object-fit: cover;
   border: var(--border-width) solid var(--border-strong);
-  border-radius: var(--radius-round);
+  border-radius: var(--radius);
+  background: var(--surface-card);
+}
+.portfolio-identity h1 {
+  font-size: clamp(var(--text-3xl), 3.4vw, var(--hero-display));
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+}
+.portfolio-role {
+  margin-top: var(--space-2);
+  color: var(--ink-secondary);
+  font-size: var(--text-base);
+}
+.portfolio-bio {
+  grid-area: bio;
+  max-width: 52ch;
+  color: var(--ink);
+  font-size: var(--text-lg);
+  line-height: var(--leading-read);
+}
+.portfolio-background {
+  grid-area: background;
+  color: var(--ink-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-read);
+}
+.portfolio-actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+.portfolio-experience {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-touch);
+  font-size: var(--text-base);
+  color: var(--ink);
+}
+.portfolio-experience span {
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: var(--space-1);
+}
+.portfolio-experience > svg {
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+.portfolio-experience:is(:hover, :focus-visible) > svg {
+  transform: translateY(var(--space-1));
+}
+.portfolio-actions svg {
+  display: block;
+  flex: none;
+}
+.portfolio-contact-context {
+  grid-area: context;
+  color: var(--ink-secondary);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+}
+.portfolio-profiles {
+  grid-area: profiles;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
 }
 
-/* ---- Link row: .pill-row (components/pill.css) ---------------------- */
-
-.paper-links {
-  margin-top: var(--space-6);
+@media (max-width: 1100px) {
+  .portfolio-intro {
+    column-gap: var(--space-7);
+  }
+  .portfolio-identity {
+    gap: var(--space-4);
+  }
 }
-
-/* ---- Breakpoints ------------------------------------------------------- */
-
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .hero {
     padding-top: calc(var(--header-h) + var(--space-6));
   }
-
-  .paper-dek {
+  .portfolio-intro {
+    display: block;
+    max-width: var(--measure);
+  }
+  .portfolio-identity h1 {
+    font-size: var(--text-4xl);
+  }
+  .portfolio-bio {
+    margin-top: var(--space-5);
+    max-width: none;
     font-size: var(--text-md);
   }
+  .portfolio-background {
+    margin-top: var(--space-3);
+  }
+  .portfolio-actions {
+    margin-top: var(--space-5);
+  }
+  .portfolio-contact-context {
+    margin-top: var(--space-3);
+  }
+  .portfolio-profiles {
+    margin-top: var(--space-3);
+  }
 }
-
-/* Landscape phones and split screens: keep the first screen for content. */
-@media (max-height: 600px) and (orientation: landscape) {
+@media (max-width: 600px) {
   .hero {
     padding-top: calc(var(--header-h) + var(--space-5));
+  }
+  .portfolio-identity img {
+    width: var(--space-8);
+    height: var(--space-8);
+  }
+  .portfolio-identity h1 {
+    font-size: var(--text-2xl);
+  }
+  .portfolio-role {
+    font-size: var(--text-sm);
+  }
+}
+@media (max-width: 360px) {
+  .portfolio-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+  .portfolio-experience {
+    justify-content: start;
   }
 }
