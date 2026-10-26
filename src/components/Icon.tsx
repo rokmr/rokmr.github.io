@@ -118,6 +118,7 @@ const paths = {
   plus: <path d="M12 5v14M5 12h14" />,
   info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7h.01" /></>,
   chevronDown: <path d="m6 9 6 6 6-6" />,
+  arrowRight: <path d="M3 12h18m-6-6 6 6-6 6" />,
   arrowDown: <path d="M12 4v16m-6-6 6 6 6-6" />,
   arrowUpRight: <path d="M5 19 19 5M5 5h14v14" />,
   chevronUp: <polyline points="18 15 12 9 6 15" />,
@@ -129,14 +130,16 @@ export type IconName = keyof typeof paths;
 type IconProps = {
   name: IconName;
   size?: number;
+  className?: string;
   strokeWidth?: number;
   /** The original markup set round caps on most but not all icons. */
   round?: boolean;
 };
 
-export function Icon({ name, size = 16, strokeWidth = 1.5, round = true }: IconProps) {
+export function Icon({ name, className, size = 16, strokeWidth = 1.5, round = true }: IconProps) {
   return (
     <svg
+      className={className}
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -146,6 +149,7 @@ export function Icon({ name, size = 16, strokeWidth = 1.5, round = true }: IconP
       strokeLinecap={round ? 'round' : undefined}
       strokeLinejoin={round ? 'round' : undefined}
       aria-hidden="true"
+      focusable="false"
     >
       {paths[name]}
     </svg>

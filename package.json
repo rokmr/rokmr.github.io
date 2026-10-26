@@ -16,7 +16,8 @@
     "content:export": "node scripts/content.mjs export",
     "content:test": "node --test scripts/content.test.mjs",
     "resume:pdf": "node scripts/build-resume.mjs",
-    "test:browser": "node scripts/check-browser.mjs && node scripts/check-interactions.mjs"
+    "test:browser": "node scripts/check-browser.mjs && node scripts/check-interactions.mjs",
+    "test:design": "node scripts/check-design-system.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

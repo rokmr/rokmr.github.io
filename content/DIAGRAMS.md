@@ -7,12 +7,12 @@ They are not project thumbnails, deployment guarantees, or decoration.
 
 - `src/data/diagrams.ts`: typed, public diagram content and case-study placement.
 - `src/components/TechnicalDiagram.tsx`: semantic figure, named lanes, ordered
-  stages, direction connectors and caption. Reusable instances get distinct IDs.
+  stages, shared SVG direction connectors, explicit inter-lane relationships and caption. Reusable instances get distinct IDs.
 - `src/styles/components/technical-diagram.css`: tokens and responsive composition.
 - `CaseStudy.tsx`: inserts a diagram after its explicitly named supporting section.
 
 The first patterns explain Support Agent question answering, Almanac document
-and question paths, and inference-planning decisions. They use already approved
+and question paths, and inference-planning decisions followed by hands-on deployment. They use already approved
 public scope. No internal addresses, hardware topology or new metrics are added.
 
 ## Grammar
@@ -26,6 +26,7 @@ public scope. No internal addresses, hardware topology or new metrics are added.
 | Output | The flow's described result | Subtle neutral fill and Output label |
 | Arrow | Information moves to the next stage | One forward arrow per adjacent pair |
 | Lane | A named sequence | Caption above an ordered list |
+| Relationship | One lane supplies another, or work changes ownership | Named source and destination connected by a shared arrow, with a relationship label |
 | Figure caption | Scope and omitted relationships | Always visible under the diagram |
 
 Labels carry meaning without color. Green is not used to imply that ongoing
@@ -34,9 +35,10 @@ quality work has passed. Node role is independent of the technologies used.
 ## Visual rules
 
 - Inherit portfolio ink, paper, muted text, accent, wash and rule colors.
-- Diagram-local tokens govern gap (28px), radius (3px), border (1px), connector
-  ink and border ink. Stage padding is 12px. Keep a single visual weight.
-- Figure title 1rem; stage title .8125rem; description .75rem; role .625rem.
+- Shared tokens govern gap (1.75rem), radius, border weight and palette. Stage
+  padding uses the shared spacing scale. Keep a single visual weight.
+- Figure title 1rem; stage title .875rem; description and caption .8125rem;
+  role .75rem. Captions use the same sans-serif family as body copy.
   Titles describe operations or artifacts. Descriptions add context rather than
   repeating the title or listing every dependency.
 - Connectors use a 1.5-unit stroke and an open arrowhead, centered between stages.
@@ -53,9 +55,11 @@ sequences make this transition earlier, at 46.25rem. Rem-based thresholds respon
 to larger browser font preferences as well as a smaller window.
 
 Sequences never snake across wrapped rows: that creates an ambiguous reading
-order. Multiple lanes remain separate sequences in both orientations. Almanac's
-caption explains the index-to-retrieval relationship; it is not silently omitted
-or represented as an invented cross-lane production connection.
+order. Multiple lanes retain their reading order in both orientations. Almanac's
+explicit relationship names the knowledge index and the retrieval stage it
+supplies. Inference planning has a separate engineering lane connected by an
+explicit handoff. Neither connection implies an automatic deployment API or
+a network topology. Connections reference existing lane/stage IDs in data.
 
 ## Accessibility and behavior
 
@@ -65,9 +69,11 @@ are decorative and excluded from the accessibility tree. No hover-only details,
 canvas text, diagram-specific keyboard controls, animations, or JavaScript
 measurement are needed. Server rendering and no-JavaScript reading work.
 
-Print uses neutral rules; text and captions remain available. Full browser and
-print visual verification is still required; source and structural tests are
-not a visual sign-off.
+Print uses neutral rules; text and captions remain available. Browser captures
+are reviewed in both themes. `npm run test:design` checks 96 diagram states for
+connector placement, text clipping, 12px minimum labels, caption family, role
+shading and text contrast. This complements visual review; it does not establish
+every browser or assistive-technology configuration.
 
 ## Adding a diagram
 
@@ -76,7 +82,28 @@ and an exact `afterSection` heading. Give each lane/stage a stable ID. Use a
 caption that says what was simplified. A diagram should answer a question its
 neighboring prose raises, not repeat a technology list.
 
-Use the current component for ordered flows and named parallel flows. Branches,
-feedback loops and deployment boundaries need an explicit new pattern with
+Use the current component for ordered flows and explicitly linked lanes.
+Branches, feedback loops and physical deployment boundaries need a pattern with
 validated relationships; do not draw them by improvising arrows around a
 sequence. Prefer a smaller, truthful explanation over a speculative system map.
+
+## Streamline icon vocabulary
+
+Stage symbols use a selected subset of Streamline Core Line, from Streamline's
+official `webalys-hq/streamline-vectors` repository (CC BY 4.0). Each stage names
+its icon explicitly: questions, documents, editing, search, filtering, layers,
+storage, compute, configuration and deployment. Do not use generic sparkle
+icons to stand in for all AI operations.
+
+`DiagramIcon.tsx` references the locally hosted symbol sprite at
+`public/assets/icons/streamline-core.svg`. The 14-unit originals are scaled to
+a 24-unit viewBox with matching outline weight and currentColor. Text remains
+primary; symbols are decorative, non-focusable and do not introduce new claims.
+
+License, source-file links and adaptation notes are in
+`public/assets/icons/STREAMLINE-LICENSE.md`. Diagram pages show Streamline and
+CC BY credits in their footer; print retains these credits. No icon font, remote
+rendering service or full icon-library dependency is loaded.
+
+`npm run test:design` verifies that each referenced symbol actually renders.
+Unit tests check symbol availability and visible case-study attribution.

@@ -25,7 +25,7 @@ combined result. The initial source review is supplemented by the browser and PD
 ## Verification
 
 - TypeScript passes.
-- 73 tests pass: 65 Vitest and 8 content-boundary tests.
+- 75 tests pass: 67 Vitest and 8 content-boundary tests.
 - Static production build prerenders the homepage, résumé, work index, all case
   studies, and TACLE; sitemap derives from those routes.
 - Master/public consistency checks and private-field exclusion checks pass.
@@ -78,3 +78,33 @@ technology. Unconfirmed metrics and internal report material remain unpublished.
 The homepage remains a selection, while All work exposes the broader public
 collection. Private notes and unapproved metrics remain excluded. Some detailed
 copy still lives in typed modules during the documented master-data migration.
+
+## Visual-system and diagram review — 26 October 2026
+
+Shared tokens now own the editorial palette, body/display typography, spacing,
+rules, icon geometry, control borders, popup shadow and diagram geometry.
+Print styling is consolidated. Diagram captions use the body sans-serif family,
+visible role labels no longer fall below 12px, and portfolio focus controls do
+not retain the former neon shadow.
+
+Almanac explicitly connects its knowledge index to retrieval. Inference planning
+shows the recommendation-to-deployment handoff in two named lanes. Both use
+typed references to real stage IDs, verified in unit tests. A cascade regression
+that suppressed output fill, comparison borders and store rules was corrected
+and is covered by browser assertions.
+
+Verification: 74 unit/content tests, TypeScript and production build pass;
+336 responsive states and keyboard/menu/clipboard checks pass. The new
+`npm run test:design` passes 96 diagram states with centered, non-overlapping
+connectors, unclipped labels, consistent captions/role styling and at least
+4.5:1 computed text contrast against both diagram surfaces. UI icon sizes and
+minimum labels are also checked on the home, work and résumé pages.
+Light/dark diagram captures, desktop/mobile home composition and both browser
+print pages were visually inspected. Browser résumé print remains two pages.
+The separate downloadable PDF's content and layout were not changed by this pass.
+
+Streamline diagram icons added 26 October 2026: locally hosted Core Line subset,
+normalized to the common stroke/color treatment. Explicit per-stage meanings
+and captions remain readable without icons. Source/license notes and visible
+case-study credits accompany the assets. Unit checks cover symbols/attribution;
+96 diagram states verify actual SVG rendering and visual constraints.

@@ -1,49 +1,100 @@
-/* Shared diagram primitives. Reuse portfolio semantics; no separate color palette. */
+/* Diagram grammar shares the portfolio's type, surfaces, rules and icons. */
 .technical-diagram {
-  --diagram-border: var(--page-line);
-  --diagram-connector: var(--page-muted);
-  --diagram-gap: 28px;
-  --diagram-radius: 3px;
-  --diagram-stroke: 1px;
   container-type: inline-size;
-  margin: 32px 0 0;
-  padding: 24px 0;
-  border-block: var(--diagram-stroke) solid var(--diagram-border);
+  margin: var(--space-6) 0 0;
+  padding-block: var(--space-5);
+  border-block: var(--page-rule) solid var(--page-line);
   min-width: 0;
   break-inside: avoid;
 }
-.portfolio-page .diagram-heading { display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px }
-.portfolio-page .diagram-heading h3 { font-size:1rem;font-weight:500;line-height:1.5;letter-spacing:0;text-wrap:pretty }
-.diagram-heading>span { font-size:.6875rem;color:var(--page-muted);white-space:nowrap }
-.diagram-lanes { display:grid;gap:24px }
-.portfolio-page .diagram-lane-label { font-size:.75rem;font-weight:500;color:var(--page-muted);margin:0 0 10px }
-.diagram-flow { display:grid;grid-template-columns:repeat(var(--diagram-columns),minmax(0,1fr));gap:var(--diagram-gap);list-style:none;padding:0 }
-.diagram-stage { position:relative;min-width:0;padding:12px;border:var(--diagram-stroke) solid var(--diagram-border);border-radius:var(--diagram-radius);background:var(--page-paper) }
-.diagram-stage--check { border-color:var(--page-accent) }
-.diagram-stage--output { background:var(--page-wash) }
-.diagram-stage--store { border-top:3px double var(--page-muted);padding-top:10px }
-.diagram-stage-kind { display:block;font-size:.625rem;line-height:1.5;color:var(--page-muted);margin-bottom:6px }
-.portfolio-page .diagram-stage-title { margin:0;font-size:.8125rem;line-height:1.4;font-weight:600;color:var(--page-ink);text-wrap:pretty }
-.portfolio-page .diagram-stage-detail { margin:6px 0 0;font-size:.75rem;line-height:1.5;color:var(--page-muted) }
-.diagram-connector { position:absolute;left:calc(100% + 4px);top:calc(50% - 8px);color:var(--diagram-connector);pointer-events:none }
-.technical-diagram figcaption { margin-top:16px;font-size:.75rem;line-height:1.65;color:var(--page-muted);max-width:72ch }
-/* Never snake a sequence around a second row: preserve its reading direction. */
-@container(max-width:46.25rem) {
-  .diagram-flow--long { grid-template-columns:minmax(0,1fr);gap:24px }
-  .diagram-flow--long .diagram-stage { display:grid;grid-template-columns:5rem minmax(0,1fr);column-gap:12px;align-items:baseline }
-  .diagram-flow--long .diagram-stage-kind { grid-row:1/span 2;margin:0 }
-  .diagram-flow--long .diagram-stage-detail { grid-column:2 }
-  .diagram-flow--long .diagram-connector { left:calc(50% - 10px);top:calc(100% + 4px);transform:rotate(90deg) }
+.portfolio-page .diagram-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
 }
-@container(max-width:37.5rem) {
-  .diagram-flow { grid-template-columns:minmax(0,1fr);gap:24px }
-  .diagram-stage { display:grid;grid-template-columns:4rem minmax(0,1fr);column-gap:10px;align-items:baseline }
-  .diagram-stage-kind { grid-row:1/span 2;margin:0 }
-  .portfolio-page .diagram-stage-detail { grid-column:2;margin-top:4px }
-  .diagram-connector { left:calc(50% - 10px);top:calc(100% + 4px);transform:rotate(90deg) }
-  .diagram-flow--long .diagram-stage { grid-template-columns:4rem minmax(0,1fr);column-gap:10px }
+.portfolio-page .diagram-heading h3 {
+  font-size: 1rem;
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  text-wrap: pretty;
 }
-@media print { .technical-diagram { --diagram-border:#bbb;--diagram-connector:#444;break-inside:auto }.diagram-stage{break-inside:avoid} }
+.diagram-heading > span { font-size: var(--text-xs); color: var(--page-muted); }
+.diagram-lanes { display: grid; gap: var(--space-5); }
+.portfolio-page .diagram-lane-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--page-muted);
+  margin-bottom: var(--space-3);
+}
+.diagram-flow {
+  display: grid;
+  grid-template-columns: repeat(var(--diagram-columns), minmax(0, 1fr));
+  gap: var(--diagram-gap);
+  list-style: none;
+  padding: 0;
+}
+.portfolio-page .diagram-flow > .diagram-stage {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-3);
+  border: var(--page-rule) solid var(--page-line);
+  border-radius: var(--page-radius);
+  background: var(--page-paper);
+}
+.portfolio-page .diagram-flow > .diagram-stage--check { border-color: var(--page-accent); }
+.portfolio-page .diagram-flow > .diagram-stage--output { background: var(--page-wash); }
+.portfolio-page .diagram-flow > .diagram-stage--store { border-top: var(--page-store-rule) double var(--page-muted); padding-top: calc(var(--space-3) - var(--page-rule-strong)); }
+.diagram-stage-kind { display: block; font-size: var(--text-xs); line-height: var(--leading-snug); color: var(--page-muted); margin-bottom: var(--space-2); }
+.portfolio-page .diagram-stage-title { margin: 0; font-size: var(--text-base); line-height: var(--leading-snug); font-weight: var(--weight-semibold); color: var(--page-ink); text-wrap: pretty; }
+.portfolio-page .diagram-stage-detail { margin: var(--space-2) 0 0; font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--page-muted); }
+.diagram-connector {
+  position: absolute;
+  width: var(--diagram-connector-width);
+  height: var(--diagram-connector-height);
+  left: calc(100% + (var(--diagram-gap) - var(--diagram-connector-width)) / 2);
+  top: calc(50% - var(--diagram-connector-height) / 2);
+  color: var(--page-muted);
+  stroke-width: var(--page-icon-stroke);
+  pointer-events: none;
+}
+.diagram-relationship { padding-inline-start: var(--space-3); border-inline-start: var(--page-rule-strong) solid var(--page-line); }
+.portfolio-page .diagram-relationship-label { font-size: var(--text-xs); color: var(--page-muted); margin: 0 0 var(--space-1); }
+.portfolio-page .diagram-relationship-path { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--page-ink); margin: 0; max-width: none; }
+.diagram-relationship-path > span { min-width: 0; }
+.technical-diagram figcaption { font-family: var(--page-font-body); margin-top: var(--space-4); font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--page-muted); max-width: var(--measure); }
+/* Change direction as a whole: never snake stages into an ambiguous second row. */
+@container (max-width: 46.25rem) {
+  .diagram-flow--long { grid-template-columns: minmax(0, 1fr); gap: var(--diagram-vertical-gap); }
+  .diagram-flow--long .diagram-stage { display: grid; grid-template-columns: 4rem minmax(0, 1fr); column-gap: var(--space-3); align-items: baseline; }
+  .diagram-flow--long .diagram-stage-kind { grid-row: 1 / span 2; margin: 0; }
+  .diagram-flow--long .diagram-stage-detail { grid-column: 2; }
+  .diagram-flow--long .diagram-connector { left: calc(50% - var(--diagram-connector-width) / 2); top: calc(100% + (var(--diagram-vertical-gap) - var(--diagram-connector-height)) / 2); transform: rotate(90deg); }
+}
+@container (max-width: 37.5rem) {
+  .diagram-flow { grid-template-columns: minmax(0, 1fr); gap: var(--diagram-vertical-gap); }
+  .diagram-stage { display: grid; grid-template-columns: 4rem minmax(0, 1fr); column-gap: var(--space-3); align-items: baseline; }
+  .diagram-stage-kind { grid-row: 1 / span 2; margin: 0; }
+  .portfolio-page .diagram-stage-detail { grid-column: 2; margin-top: var(--space-1); }
+  .diagram-connector { left: calc(50% - var(--diagram-connector-width) / 2); top: calc(100% + (var(--diagram-vertical-gap) - var(--diagram-connector-height)) / 2); transform: rotate(90deg); }
+}
+@media print {
+  .technical-diagram { break-inside: auto; }
+  .diagram-stage, .diagram-relationship { break-inside: avoid; }
+}
 
-/* Prose-list spacing must not offset stages in a diagram grid. */
-.portfolio-page .diagram-flow > .diagram-stage { margin:0 }
+/* One small semantic symbol per stage; text remains the primary explanation. */
+.diagram-stage-kind { display:flex;align-items:center;gap:var(--space-2) }
+.diagram-stage-symbol { flex:none;color:var(--page-muted) }
+.diagram-icon-credit { font-size:var(--text-xs);color:var(--page-muted) }
+@container(max-width:46.25rem){.diagram-flow--long .diagram-stage-kind{flex-direction:column;align-items:flex-start;gap:var(--space-1)}}
+@container(max-width:37.5rem){.diagram-stage-kind{flex-direction:column;align-items:flex-start;gap:var(--space-1)}}
+
+/* Printed case studies retain the icon attribution even when navigation hides. */
+@media print{
+ .portfolio-page .page-footer:has(.diagram-icon-credit){display:flex!important;border:0;margin-top:var(--space-5)}
+ .page-footer:has(.diagram-icon-credit)>:not(.diagram-icon-credit){display:none}
+}

@@ -538,3 +538,61 @@
   --section-margin-bottom:   var(--space-7);
   --footer-margin-top:       var(--space-9);
 }
+
+/* Editorial portfolio semantics: shared by the home, documents and diagrams. */
+
+:root {
+  --page-paper: #f6f5f1;
+  --page-ink: #242720;
+  --page-muted: #62665d;
+  --page-line: #d9dbd2;
+  --page-accent: #45634e;
+  --page-wash: #eeefe8;
+}
+
+:root {
+  --page-font-body: var(--font-sans);
+  --page-font-display: Georgia,'Times New Roman',serif;
+  --page-type-body: .9375rem;
+  --page-type-section: 1.5rem;
+  --page-type-hero: 3.25rem;
+  --page-type-hero-compact: 2.75rem;
+  --page-leading-body: 1.65;
+  --page-space-5: 1.25rem;
+  --page-space-7: 1.75rem;
+  --page-space-9: 2.25rem;
+  --page-space-10: 2.5rem;
+  --page-section-gap: 3.25rem;
+  --page-section-gap-compact: 2.75rem;
+  --page-width: 80rem;
+  --page-document-width: 51.25rem;
+  --page-radius: 3px;
+  --page-rule: 1px;
+  --page-rule-strong: 2px;
+  --page-store-rule: 3px;
+  --page-print-muted: #333;
+  --page-print-line: #bbb;
+  --page-icon-size: 1rem;
+  --page-icon-stroke: 1.5;
+  --page-control-line: #7c8578;
+  --page-selection: #dce5d6;
+  --page-shadow-menu: 0 12px 24px #0000000d;
+  --diagram-gap: 1.75rem;
+  --diagram-vertical-gap: 1.5rem;
+  --diagram-connector-width: 1.25rem;
+  --diagram-connector-height: 1rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  :root {
+    --page-paper: #1b1d1a;
+    --page-ink: #edeee7;
+    --page-muted: #a9aea2;
+    --page-line: #383d34;
+    --page-accent: #b7c8a5;
+    --page-wash: #262a23;
+    --page-control-line: #7b8373;
+    --page-selection: #394334;
+    --page-shadow-menu: 0 12px 24px #00000033;
+  }
+}

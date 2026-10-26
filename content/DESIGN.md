@@ -246,3 +246,30 @@ page-rule border, two-pixel corners and a small inset. The crop stays aligned
 with the introduction at each breakpoint. No motion or hover effect is added
 to a non-interactive image. Light/dark themes and doubled text were checked at
 320, 390, 768, 801, 1280 and 1440px, with no image/text overlap.
+
+## Shared visual system consolidation — 26 October 2026
+
+`src/styles/tokens.css` owns the editorial palette, type roles, font families,
+spacing aliases, radius, rule weights, icon geometry, menu elevation and diagram
+geometry. Portfolio and document styles consume these roles; print overrides
+are grouped into one block. The TACLE publication page keeps its white-paper
+palette while sharing the body font family. Historic unused section styles
+remain separate from the active portfolio surface.
+
+- Typography: serif for page/chapter headings; shared sans for prose, metadata,
+  captions and diagram labels. Visible labels have a 12px floor.
+- Color: paper, wash, ink, muted ink, rule, control rule and accent have separate
+  jobs. Output nodes use wash; comparison nodes use an accent border; indexed
+  stores use a double rule. No gradient or success color is added for decoration.
+- Icons: one outline treatment, 1rem UI size and 1.5-unit stroke. Direction arrows
+  share that component; text-size preferences scale icons with their labels.
+- States: one outline focus treatment replaces the inherited neon box shadow.
+  Hover, selection and popup elevation use the editorial palette.
+- Geometry: controls retain 44px targets; corner radius, rules and reading
+  measures are shared. Responsive queries preserve the same content order.
+- Diagram relationships: Almanac's shared index feeds retrieval visibly; planner
+  recommendations hand off to Rohit's deployment lane. These are conceptual
+  flows and responsibilities, not unverified deployment topology.
+
+Validate with `npm run test:browser` and `npm run test:design`; inspect generated
+light/dark screenshots and the browser résumé print output after layout changes.
