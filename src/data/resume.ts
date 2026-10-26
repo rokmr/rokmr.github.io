@@ -3,9 +3,9 @@ import { experience } from './experience';
 
 // Select for breadth and demonstrated work, rather than the order of new notes.
 const selections = [
-  { name: 'Retrieval & evaluation', items: ['LangGraph', 'Hybrid Search', 'BM25', 'Evals (RAGAS)', 'Qdrant'] },
+  { name: 'Retrieval & evaluation', items: ['LangGraph', 'Hybrid Search', 'BM25', 'Evals (RAGAS)', 'Qdrant', 'Langfuse'] },
   { name: 'Training & fine-tuning', items: ['Python', 'PyTorch', 'Supervised fine-tuning (SFT)', 'LoRA', 'QLoRA'] },
-  { name: 'Serving & infrastructure', items: ['FastAPI', 'vLLM', 'Ray', 'Kubernetes', 'Docker', 'SLURM'] },
+  { name: 'Serving & infrastructure', items: ['vLLM', 'Ray', 'Kubernetes', 'Docker', 'SLURM', 'AWQ', 'GPTQ'] },
   { name: 'Vision & generative', items: ['Flux', 'ControlNet', 'CLIP', 'Novel-view Synthesis'] },
 ];
 const verifiedSkills = new Set([...skills.flatMap(group => group.items), ...experience.flatMap(job => job.tech)]);

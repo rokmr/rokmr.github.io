@@ -18,7 +18,7 @@ export function WorkIndex() {
               <article className="work-record" key={study.id}>
                 <h3><a href={`/work/${study.id}/`}>{study.title}</a></h3>
                 <p>{study.summary}</p>
-                <p className="contribution">{study.contribution}</p>
+                <p className="contribution">{study.contribution}</p>{study.evidence && <p className="work-evidence">{study.evidence}</p>}
               </article>
             ))}
           </section>

@@ -200,3 +200,15 @@ public data, website copy and both PDFs.
   and retired validation figures are absent.
 - TypeScript, 77 tests and production build pass. AI-readable resources and
   permissive robots rules enable discovery; indexing/ranking is not asserted.
+
+## Homepage/résumé visibility alignment — 26 October 2026
+
+- Homepage employer line intentionally states the actual AI Engineer role;
+  research résumé headline states research positioning. Experience titles agree.
+- Added Almanac to reviewed homepage selection, with sole engineering ownership.
+- Dense TTFT/batched TPOT figures, n and the partly-in-sample caveat are now
+  visible in homepage and work-index planner entries, not just the case study.
+- Résumé includes verified AWQ/GPTQ and Langfuse. Broader website skills remain
+  distinct from the focused résumé selection.
+- Both PDF variants rebuilt and visually inspected (two pages/one page).
+  TypeScript, 77 tests, build, 336 responsive states and interactions pass.

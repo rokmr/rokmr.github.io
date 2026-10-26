@@ -20,7 +20,9 @@ export const skills: SkillCategory[] = [
       'BM25',
       'Evals (RAGAS)',
       'Document-model evaluation',
-      'Model quantization (AWQ, GPTQ; WxAy precision)',
+      'AWQ',
+      'GPTQ',
+      'Weight/activation quantization (WxAy)',
     ],
   },
   {

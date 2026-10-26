@@ -8,6 +8,8 @@ export type CaseStudy = {
   summary: string;
   contribution: string;
   technologies?: string[];
+  /** Short evidence with its qualifications, visible in work overviews. */
+  evidence?: string;
   sections: { heading: string; paragraphs: string[] }[];
 };
 export const caseStudies: CaseStudy[] = [
@@ -39,6 +41,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     id: 'inference-planner', title: 'LLM Inference Planning & Optimization', organization: 'Armada AI',
+    evidence: 'With brief GPU profiling, dense mean error falls from 15.9% to 3.6% for TTFT (n=174) and 13.8% to 5.2% for batched TPOT (n=242). Errors are mean absolute percentages; profiled results are partly in-sample.',
     summary: 'Engine-independent predictions of KV-cache capacity, latency, throughput and serving cost from spec sheets, with optional GPU-profile calibration.',
     contribution: 'Built the planner and used its predictions to choose serving configurations, then deployed them. Spec-sheet KV-cache capacity predictions were exact on 25/25 dense and MoE configurations.',
     technologies: ['KV-cache modeling', 'LLM inference', 'Quantization', 'Tensor parallelism', 'Automatic prefix caching'],
