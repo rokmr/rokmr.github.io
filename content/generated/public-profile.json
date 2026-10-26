@@ -460,7 +460,7 @@
         "summary": "Engine-independent predictions of KV-cache capacity, latency, throughput and serving cost from spec sheets, with optional GPU-profile calibration.",
         "problem": "Estimate resource requirements and inference performance for a workload before trial deployment.",
         "contribution": "Built the planner and used its predictions to choose serving configurations, then deployed them. Spec-sheet KV-cache capacity predictions were exact on 25/25 dense and MoE configurations.",
-        "outcome": "KV-cache capacity exact on 25/25 dense/MoE configurations without profile data. Dense TTFT MAPE 15.9% to 3.6% (n=174), batched TPOT 13.8% to 5.2% (n=242) after GPU profiling; profiled errors partly in-sample, not held-out."
+        "outcome": "KV-cache capacity exact on 25/25 dense/MoE configurations without profile data. Dense TTFT MAPE 15.9% to 3.6% (n=174), batched TPOT 13.8% to 5.2% (n=242) after GPU profiling; profiled errors partly in-sample, not held-out. Throughput prediction is the weakest measured area; the 256-user evaluation has only 3 to 6 samples per architecture family. Serving-cost estimates inherit throughput uncertainty."
       },
       "technologies": [
         "KV-cache modeling",

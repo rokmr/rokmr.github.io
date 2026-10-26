@@ -38,7 +38,7 @@ export const agentProfileMarkdown = [
     publicOutcome(study.id),
     // Include the calibration caveat beside the planner's public error figures.
     ...(study.id === 'inference-planner'
-      ? study.sections.filter(section => section.heading === 'Validation against measured GPU runs')
+      ? study.sections.filter(section => ['Validation against measured GPU runs', 'Current limitations'].includes(section.heading))
         .flatMap(section => section.paragraphs)
       : []),
   ].filter(Boolean).join('\n\n')),
