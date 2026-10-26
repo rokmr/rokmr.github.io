@@ -1,4 +1,4 @@
-import { portfolioDescription } from '../data/positioning';
+import { portfolioDescription, professionalHeadline } from '../data/positioning';
 import type { Route } from '../App';
 import { caseStudies } from '../data/caseStudies';
 import { site } from '../data/site';
@@ -52,7 +52,7 @@ const sharedLinks: Link[] = [
   },
 ];
 
-const HOME_TITLE = 'Rohit Kumar | LLMs, Inference Systems & Computer Vision';
+const HOME_TITLE = `Rohit Kumar | ${professionalHeadline}`;
 const HOME_DESC = portfolioDescription;
 
 const home: HeadSpec = {

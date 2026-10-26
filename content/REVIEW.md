@@ -212,3 +212,18 @@ public data, website copy and both PDFs.
   distinct from the focused résumé selection.
 - Both PDF variants rebuilt and visually inspected (two pages/one page).
   TypeScript, 77 tests, build, 336 responsive states and interactions pass.
+
+## Live cross-check and shared headline — 26 October 2026
+
+- Direct HTTP requests returned 200 for homepage, work index, planner and
+  Almanac. Current live HTML includes latency figures/caveats on homepage,
+  work index and planner, and Almanac on homepage/work index/its own page.
+- Latest GitHub Pages workflow for 0bea64f completed successfully. A web-reader
+  snapshot returned older content; direct live fetches were used to verify.
+- Supersedes earlier deliberate-headline divergence: homepage, research résumé
+  and homepage SEO title now derive from the same professionalHeadline.
+  Actual Armada title remains AI Engineer in biography and employment records.
+- Removed the former eyebrow and aligned the compact name/portrait row.
+  Narrow menu/actions/profile links wrap under enlarged text rather than overflow.
+- 77 tests, production build, eight focused headline states, 336 responsive
+  checks and browser interactions pass. Local headline changes not yet deployed.

@@ -687,13 +687,13 @@ body:has(.portfolio-page) {
   }
   .opening h1 {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 1;
     font-size: var(--text-4xl);
     align-self: start;
   }
   .portrait {
     grid-column: 2;
-    grid-row: 1/span 2;
+    grid-row: 1;
     width: 76px;
     height: 92px;
   }
@@ -725,6 +725,9 @@ body:has(.portfolio-page) {
 }
 
 @container (max-width:22.5rem) {
+  .page-index { flex-wrap: wrap; }
+  .compact-menu { margin-left: auto !important; }
+  .opening-actions,.opening-profiles { flex-wrap: wrap; }
   .page-grid {
     padding-inline: var(--space-4);
   }
@@ -894,7 +897,15 @@ body:has(.portfolio-page) {
 
 /* Portfolio defaults supersede legacy focus and media styling. */
 
+/* Section jumps move semantic focus without framing the whole chapter. */
+.portfolio-page :is(.chapter,.opening,#main-content):focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .portfolio-page :is(a,button,summary):focus-visible {
+  outline: 2px solid var(--page-ink);
+  outline-offset: 3px;
   box-shadow: none;
   border-radius: var(--page-radius);
 }

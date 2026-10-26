@@ -5,7 +5,7 @@ import { usePageScroll } from '../hooks/usePageScroll';
 import { site, sections, socialUrls, type SectionId } from '../data/site';
 import { publications, paperName, publicationDisplayAuthors } from '../data/publications';
 import { experience, currentRole } from '../data/experience';
-import { professionalFocus } from '../data/positioning';
+import { professionalHeadline } from '../data/positioning';
 import { education, achievements } from '../data/education';
 import { projects, additionalProjects } from '../data/projects';
 import { featuredCaseStudies } from '../data/caseStudies';
@@ -58,7 +58,7 @@ export function Home({ buildYear }: { buildYear: number }) {
       <aside className="page-index"><a href="#home" className="index-identity" onClick={event => navigate(event, 'home')}>{site.name}</a><nav className="page-links" aria-label="Page sections">{links()}</nav><details ref={menu} className="compact-menu"><summary>Menu <Icon name="chevronDown" /></summary><nav aria-label="Mobile sections">{links()}</nav></details></aside>
       <main id="main-content" tabIndex={-1}>
         <section id="home" className="opening" tabIndex={-1} aria-label="Introduction">
-          <div className="opening-copy"><p className="eyebrow">{currentRole.title} at {currentRole.company}</p><h1>{site.name}</h1><p className="opening-lead">{professionalFocus}</p><p className="opening-detail">At Armada AI, I build grounded LLM systems and inference-planning tools. Previously at Avataar AI, I worked on product-image generation and novel-view synthesis. M.Tech in AI, IISc Bangalore. My research explores visual storytelling and learning from limited data.</p><div className="opening-links"><div className="opening-actions"><a className="email-action" href={`mailto:${site.email}`}><Icon name="mail" />Email me</a><a href="/resume/">Résumé</a></div><nav className="opening-profiles" aria-label="Professional profiles"><a href={socialUrls.scholar}>Scholar</a><a href={socialUrls.github} rel="me">GitHub</a><a href={socialUrls.linkedin} rel="me">LinkedIn</a></nav></div></div>
+          <div className="opening-copy"><h1>{site.name}</h1><p className="opening-lead">{professionalHeadline}</p><p className="opening-detail">Currently an {currentRole.title} at {currentRole.company}, I build grounded LLM systems and inference-planning tools. Previously at Avataar AI, I worked on product-image generation and novel-view synthesis. M.Tech in AI, IISc Bangalore. My research explores visual storytelling and learning from limited data.</p><div className="opening-links"><div className="opening-actions"><a className="email-action" href={`mailto:${site.email}`}><Icon name="mail" />Email me</a><a href="/resume/">Résumé</a></div><nav className="opening-profiles" aria-label="Professional profiles"><a href={socialUrls.scholar}>Scholar</a><a href={socialUrls.github} rel="me">GitHub</a><a href={socialUrls.linkedin} rel="me">LinkedIn</a></nav></div></div>
           <img className="portrait" src="/assets/images/profile.webp" alt="Rohit Kumar" width={112} height={134} decoding="async" />
         </section>
         <Chapter id="research" note="Selected publications"><span id="publications" />

@@ -11,7 +11,7 @@ const selections = [
 const verifiedSkills = new Set([...skills.flatMap(group => group.items), ...experience.flatMap(job => job.tech)]);
 export const resumeSkills = selections.map(group => ({ ...group, items: group.items.filter(item => verifiedSkills.has(item)) }));
 // Research-facing positioning; employment entries retain the actual job titles.
-export const resumeHeadline = 'Research Engineer · LLMs & Generative Models';
+export { professionalHeadline as resumeHeadline } from './positioning';
 export const resumeSummary = 'I work on controllable and reliable generation, and on predicting inference performance and serving cost. At Armada AI, I am the sole owner of the Support RAG Agent and sole engineering owner of Almanac. M.Tech in AI, IISc Bangalore; co-first-author work on visual storytelling and learning from limited labels (CVPR 2026 Workshop, WACV 2025).';
 export const resumeProjects = [
   { title: 'LLM Inference Planning & Optimization', href: '/work/inference-planner/', summary: 'Engine-independent prediction of KV-cache capacity, latency, throughput and cost for dense, MoE and hybrid architectures. KV-cache capacity exact on 25/25 dense and MoE configurations. Spec-sheet-only predictions need no GPU access. With brief GPU profiling, dense mean error falls from 15.9% to 3.6% for TTFT (n=174) and 13.8% to 5.2% for batched TPOT (n=242). Errors are mean absolute percentages; profiled results are partly in-sample.' },
