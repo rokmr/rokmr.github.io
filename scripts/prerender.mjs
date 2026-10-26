@@ -15,7 +15,7 @@ const distDir = join(root, 'dist');
 const ssrDir = join(root, 'dist-ssr');
 const shellPath = join(distDir, 'index.html');
 
-const { renderAll } = await import(pathToFileURL(join(ssrDir, 'entry-server.js')).href);
+const { renderAll, agentProfileMarkdown, publicAgentProfile } = await import(pathToFileURL(join(ssrDir, 'entry-server.js')).href);
 
 const shell = await readFile(shellPath, 'utf8');
 
@@ -50,6 +50,10 @@ const canonicalUrls = pages.map(page => {
   return match[1];
 });
 await writeFile(join(distDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${canonicalUrls.map(url => `  <url><loc>${url}</loc></url>`).join('\n')}\n</urlset>\n`, 'utf8');
+
+// Agent discovery is generated from reviewed public content only.
+await writeFile(join(distDir, 'llms.txt'), agentProfileMarkdown, 'utf8');
+await writeFile(join(distDir, 'profile.json'), JSON.stringify(publicAgentProfile, null, 2) + '\n', 'utf8');
 
 // The SSR bundle is a build artefact, not something to deploy.
 await rm(ssrDir, { recursive: true, force: true });

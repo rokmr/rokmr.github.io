@@ -1,3 +1,5 @@
+import { portfolioDescription } from '../data/positioning';
+import { publications } from '../data/publications';
 import { site, socialUrls } from '../data/site';
 
 const PERSON_ID = `${site.origin}/#person`;
@@ -9,8 +11,7 @@ const person = {
   givenName: 'Rohit',
   familyName: 'Kumar',
   jobTitle: ['AI Engineer', 'Research Engineer', 'Machine Learning Engineer'],
-  description:
-    'AI Engineer and Research Engineer specializing in Computer Vision, Large Language Models, Agentic AI, and Diffusion Models. Building production ML systems at Armada AI. IISc Bangalore M.Tech alumnus, GATE AIR 221. Published at WACV 2025 and CVPR 2026 Workshop (AISTORY). Invited reviewer for NeurIPS 2026, CVPR 2026, and ECCV 2026.',
+  description: portfolioDescription,
   url: `${site.origin}/`,
   email: site.email,
   image: {
@@ -40,6 +41,9 @@ const person = {
     'Computer Vision',
     'Large Language Models',
     'LLM Engineering',
+    'LLM Inference Planning',
+    'Inference Performance Modeling',
+    'KV-cache Capacity',
     'Agentic AI',
     'Diffusion Models',
     'Deep Learning',
@@ -97,10 +101,9 @@ export const homeStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Rohit Kumar - AI Engineer Portfolio',
+    name: 'Rohit Kumar - AI Research and Engineering',
     url: `${site.origin}/`,
-    description:
-      'Portfolio of Rohit Kumar, AI Engineer specializing in Computer Vision, LLMs, and Agentic AI systems. Published at WACV 2025 and CVPR 2026 Workshop.',
+    description: portfolioDescription,
     author: { '@id': PERSON_ID },
     inLanguage: 'en-US',
   },
@@ -130,6 +133,7 @@ export const homeStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'ScholarlyArticle',
+    description: publications.find(pub => pub.title.startsWith('TACLE:'))!.summary,
     headline:
       'TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning',
     author: [
@@ -147,6 +151,7 @@ export const homeStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'ScholarlyArticle',
+    description: publications.find(pub => pub.title.startsWith('AttriStory:'))!.summary,
     headline:
       'AttriStory: Fine-Grained Attribute Realization for Visual Storytelling with Diffusion Models',
     author: [
@@ -190,6 +195,7 @@ export const tacleStructuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'ScholarlyArticle',
+    description: publications.find(pub => pub.title.startsWith('TACLE:'))!.summary,
     headline:
       'TACLE: Task and Class-aware Exemplar-free Semi-supervised Class Incremental Learning',
     author: [
@@ -202,8 +208,6 @@ export const tacleStructuredData = [
     isPartOf: { '@type': 'PublicationEvent', name: 'WACV 2025' },
     url: `${site.origin}/tacle/`,
     sameAs: 'https://arxiv.org/abs/2407.08041',
-    description:
-      'Exemplar-free semi-supervised class-incremental learning with task-adaptive thresholds, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data.',
   },
   {
     '@context': 'https://schema.org',

@@ -142,3 +142,20 @@ does not delete anything from the master record or replace the public default.
 Historical planner figures must retain their version and hardware qualification.
 New validation results require a separate evidence record; the old figures must
 not be relabeled as accuracy for an expanded model/workload scope.
+
+## Search and agent discovery
+
+`npm run build` generates `dist/sitemap.xml` from the same canonical route set
+as the prerendered HTML. There is no manually maintained public sitemap or
+invented last-modified date. `robots.txt` advertises that sitemap.
+
+The build also emits `/llms.txt` (a Markdown public profile with links and
+benchmark qualifications) and `/profile.json` (the reviewed public projection).
+These use public records only; private master notes, sources, and the portable
+agent briefing never enter the artifacts. `llms.txt` is an optional discovery
+resource, not a guarantee that any crawler will read or rank the site.
+
+Homepage search/social descriptions, Person/WebSite structured descriptions,
+and the public agent summary share `portfolioDescription`. Case-study metadata
+continues to derive from its visible summary. Research descriptions derive from
+publication records, including the qualified results.

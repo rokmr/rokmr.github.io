@@ -1,6 +1,7 @@
 # robots.txt for rohit.vision
 # Rohit Kumar - AI Engineer Portfolio
-# Last updated: 2025-07-18
+# Public agent-readable profile: https://rohit.vision/llms.txt
+# Machine-readable public records: https://rohit.vision/profile.json
 
 User-agent: *
 Allow: /

@@ -186,3 +186,17 @@ public data, website copy and both PDFs.
 - TypeScript, 75 tests, content validation, production build, 336 responsive
   states and browser interactions pass. Desktop homepage and mobile planner
   screenshot inspections completed; downloadable résumé regenerated/inspected.
+
+## Search and agent discovery audit — 26 October 2026
+
+- Verified the generated sitemap against all 12 emitted canonical HTML routes.
+  Removed the obsolete manually maintained sitemap from public/.
+- Search/social and Person/WebSite descriptions share current portfolio copy;
+  publication descriptions use current paper summaries and qualified results.
+- Build generates llms.txt and profile.json from reviewed public content only.
+  The Markdown profile links project pages and includes calibration caveats.
+- All generated JSON-LD parses; local agent-profile links resolve to emitted
+  files. Public JSON equals the reviewed export; private notes/report material
+  and retired validation figures are absent.
+- TypeScript, 77 tests and production build pass. AI-readable resources and
+  permissive robots rules enable discovery; indexing/ranking is not asserted.

@@ -1,3 +1,4 @@
+import { portfolioDescription } from '../data/positioning';
 import type { Route } from '../App';
 import { caseStudies } from '../data/caseStudies';
 import { site } from '../data/site';
@@ -38,6 +39,7 @@ const sharedMeta: Meta[] = [
 ];
 
 const sharedLinks: Link[] = [
+  { rel: 'alternate', href: `${site.origin}/llms.txt`, type: 'text/markdown' },
   { rel: 'icon', href: '/assets/images/profile.webp', type: 'image/webp' },
   { rel: 'apple-touch-icon', href: '/assets/images/profile.png' },
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -50,9 +52,8 @@ const sharedLinks: Link[] = [
   },
 ];
 
-const HOME_TITLE = 'Rohit Kumar | AI Engineer - Computer Vision, LLMs & Agentic AI';
-const HOME_DESC =
-  'Rohit Kumar - AI Engineer & Research Engineer specializing in Computer Vision, LLMs, and Agentic AI systems. IISc Bangalore M.Tech alumnus building production ML at Armada AI. Published at WACV 2025 & CVPR 2026 Workshop (AISTORY). Invited reviewer for NeurIPS 2026, CVPR 2026 & ECCV 2026. GATE AIR 221.';
+const HOME_TITLE = 'Rohit Kumar | LLMs, Inference Systems & Computer Vision';
+const HOME_DESC = portfolioDescription;
 
 const home: HeadSpec = {
   title: HOME_TITLE,
@@ -62,7 +63,7 @@ const home: HeadSpec = {
     {
       name: 'keywords',
       content:
-        'AI Engineer, Research Engineer, LLM Engineer, Machine Learning Engineer, Computer Vision Engineer, Agentic AI, Artificial Intelligence, Deep Learning, Diffusion Models, RAG, LangGraph, PyTorch, IISc Bangalore, Rohit Kumar, ML Engineer, NLP Engineer, Generative AI, WACV 2025, CVPR 2026 Workshop AISTORY, AttriStory, Visual Storytelling, NeurIPS 2026 Reviewer, CVPR 2026 Reviewer, ECCV 2026 Reviewer, Continual Learning, Flux, ControlNet, CLIP, SAM, Qdrant, LangChain, Hybrid Search, rohit.vision',
+        'AI Engineer, Research Engineer, LLM Engineer, Machine Learning Engineer, Computer Vision Engineer, Agentic AI, LLM Inference Planning, Inference Performance Modeling, Artificial Intelligence, Deep Learning, Diffusion Models, RAG, LangGraph, PyTorch, IISc Bangalore, Rohit Kumar, ML Engineer, NLP Engineer, Generative AI, WACV 2025, CVPR 2026 Workshop AISTORY, AttriStory, Visual Storytelling, NeurIPS 2026 Reviewer, CVPR 2026 Reviewer, ECCV 2026 Reviewer, Continual Learning, Flux, ControlNet, CLIP, SAM, Qdrant, LangChain, Hybrid Search, rohit.vision',
     },
     {
       name: 'robots',
@@ -77,7 +78,7 @@ const home: HeadSpec = {
     {
       property: 'og:description',
       content:
-        'AI Engineer building production ML systems at Armada AI. Published at WACV 2025 & CVPR 2026 Workshop (AISTORY). Invited reviewer for NeurIPS, CVPR & ECCV 2026. IISc Bangalore M.Tech, GATE AIR 221.',
+        HOME_DESC,
     },
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: `${site.origin}/` },
@@ -91,11 +92,11 @@ const home: HeadSpec = {
     },
     { property: 'og:locale', content: 'en_US' },
     { property: 'og:site_name', content: 'Rohit Kumar - AI Engineer Portfolio' },
-    { name: 'twitter:title', content: 'Rohit Kumar | AI Engineer - CV, LLMs & Agentic AI' },
+    { name: 'twitter:title', content: HOME_TITLE },
     {
       name: 'twitter:description',
       content:
-        'AI Engineer at Armada AI. Published at WACV 2025 & CVPR 2026 Workshop. Invited reviewer for NeurIPS, CVPR & ECCV 2026. IISc Bangalore M.Tech, GATE AIR 221.',
+        HOME_DESC,
     },
     { name: 'twitter:image', content: `${site.origin}/assets/og-image.png` },
     {

@@ -26,3 +26,5 @@ export function renderAll(): RenderResult[] {
 }
 
 export { routes };
+
+export { agentProfileMarkdown, publicAgentProfile } from './seo/agentProfile';
