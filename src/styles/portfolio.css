@@ -519,6 +519,12 @@ body:has(.portfolio-page) {
   color: var(--page-muted);
 }
 
+.page-footer a {
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .page-footer>span {
   margin-right: auto;
 }
@@ -1013,4 +1019,27 @@ body:has(.portfolio-page) {
   .resume-project-heading>a,.resume-page .document-block .manager-line,.resume-page .document-block .publication-credit {
     font-size: 9pt;
   }
+}
+
+.resume-page .publication-highlight{margin-top:var(--space-1)}
+@media print{.resume-page .document-block .publication-highlight{font-size:10pt;line-height:1.25}}
+
+/* Match the downloadable résumé's serif reading text and sans-serif labels. */
+@media print {
+  .resume-page { font-family:var(--page-font-display) }
+  .resume-page h1 { font-family:var(--page-font-body);font-size:26pt;font-weight:var(--weight-semibold) }
+  .resume-page .document-intro { font-family:var(--page-font-body);font-size:10pt }
+  .resume-page .document-block h2,.resume-page h3,.resume-page .document-block>p>strong { font-family:var(--page-font-body) }
+  .resume-page .document-block h2 { font-weight:var(--weight-semibold) }
+  .resume-page .resume-publication>p { font-size:10pt }
+}
+
+/* Keep the research résumé's first role with its publication context in print. */
+@media print {
+  .resume-page { line-height: 1.2; }
+  .resume-page .document-block { margin-top: 10px; }
+  .resume-page .document-block h2 { margin-bottom: 6px; }
+  .resume-page .document-block p + p { margin-top: 3px; }
+  .resume-page .resume-job { margin-top: 8px; }
+  .resume-page li + li { margin-top: 3px; }
 }

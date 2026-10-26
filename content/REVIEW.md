@@ -108,3 +108,81 @@ normalized to the common stroke/color treatment. Explicit per-stage meanings
 and captions remain readable without icons. Source/license notes and visible
 case-study credits accompany the assets. Unit checks cover symbols/attribution;
 96 diagram states verify actual SVG rendering and visual constraints.
+
+## External résumé review response — 26 October 2026
+
+Accepted: outcome-first wording, inference evidence in Armada highlights, direct
+Avataar contribution verbs, grouped skills and method lines beneath papers.
+Avoided: invented before/after quality metrics, inflated ownership, an unapproved
+public link to the internal capacity-planning report, and generic claims about
+what every top lab requires. Compute size and senior-setup context remain in the
+detailed case study rather than consuming a repeated résumé project entry.
+
+Rohit explicitly approved historical H100 SXM/vLLM 0.26 results: all seven checks
+within about 12%, including five within 5%. Master metrics record the hardware,
+reference measurements, seven-check sample, historical scope and unrecorded
+measurement date. Current expanded-planner accuracy remains unconfirmed.
+
+A one-page applied-AI draft leads with Armada/inference work and trims TA, diploma
+and BCECE content. The public two-page document retains Rohit's publication-first
+preference and manager/advisor links. Paper highlights describe joint methods;
+person-specific task allocations and unverified SOTA margins are not inferred.
+
+Evidence still needed before stronger claims: Support Agent quality/latency and
+adoption on a defined workload; organization-vocabulary retrieval comparisons;
+Almanac fine-tuning datasets, baselines and completed evaluations; expanded
+planner accuracy across defined models/workloads. Public release of internal
+tooling is a separate decision. An early venture plan is not listed as a business.
+
+## Research résumé refinement — 26 October 2026
+
+- Research-facing headline separated from actual employment titles.
+- Current planner described as engine-independent; historical H100 validation
+  scoped to the baseline implementation and seven checks, not configurations.
+  vLLM 0.26 was reconfirmed and retained privately in benchmark provenance;
+  the public version number is omitted at Rohit's request.
+- Avataar sampling/relighting outcomes are user-confirmed qualitative observations.
+  Novel-view improvements remain unclaimed: no confirmed comparison exists.
+- Removed the classification bullet from résumé selections, diploma percentage
+  and BCECE rank; retained complete source records.
+- Common font ligatures disabled; both PDF text extractions contain no Unicode
+  ligature characters. This is not a comprehensive ATS compatibility guarantee.
+- Both LaTeX PDFs visually inspected: research two pages, applied one page.
+  Public download matches the generated research PDF byte for byte.
+- Sixteen focused responsive states pass on résumé/planner pages (320, 390,
+  768 and 1440px; normal/doubled text). Narrow diagram columns now stack and
+  footer email can wrap. Browser résumé print inspected at two pages.
+- TypeScript, 75 tests, content validation and final production build pass.
+
+## Latest planner validation — 26 October 2026
+
+Supersedes the historical seven-check H100 accuracy claims recorded earlier
+in this audit. Those metrics remain private provenance and are removed from
+public data, website copy and both PDFs.
+
+- KV-cache capacity exact on 25/25 dense/MoE configurations; hybrid N_max
+  within 2% on 22/24, independent of GPU-profile calibration.
+- Dense TTFT/batched TPOT/single-user TPOT statistics are MAPE against measured
+  runs with individual sample counts, not worst-case error bounds.
+- Profiled results are partly in-sample because calibration reused some
+  evaluation runs. This caveat accompanies public profiled figures.
+- Latest hardware inventory is unspecified; no inherited H100 attribution.
+- No headline throughput results, tiny-sample percentages, universal profiling
+  improvement claim or claimed held-out generalization.
+- Research PDF remains two pages; applied draft one. Pages visually inspected;
+  evidence/text-extraction assertions, TypeScript, 75 tests and build pass.
+
+## Website content synchronization — 26 October 2026
+
+- Homepage introduces current Armada systems work and now features the planner
+  immediately after Support RAG, alongside existing vision and demo projects.
+- Reviewed master featuredWorkIds drives homepage case-study selection.
+- Planner overview/work index distinguish GPU-free spec-sheet predictions,
+  optional calibration and Rohit's subsequent deployment work. The current
+  25/25 KV-cache result is visible without making profiled MAPE a headline.
+- Avataar overview and legacy catalog now include both confirmed production
+  adoptions; source records and résumé deployment wording stay synchronized.
+- Diagram input/caption explicitly make GPU profiling optional.
+- TypeScript, 75 tests, content validation, production build, 336 responsive
+  states and browser interactions pass. Desktop homepage and mobile planner
+  screenshot inspections completed; downloadable résumé regenerated/inspected.

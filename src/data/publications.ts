@@ -36,7 +36,7 @@ export const publications: Publication[] = [
     venueShort: 'CVPR 2026 Workshop',
     isNew: true,
     authorshipNote: 'Co-first authors: Manogna Sreenivas and Rohit Kumar',
-    summary: 'AttriStory pairs a benchmark of 200 five-scene stories across 10 artistic styles with AttriLoss, an inference-time method for binding requested attributes to the correct objects. It refines latent codes to align attribute–object attention during early diffusion steps, integrating with SDXL, ConsiStory and StoryDiffusion without retraining.',
+    summary: 'AttriStory pairs a benchmark of 200 five-scene stories across 10 artistic styles with AttriLoss, an inference-time method for binding requested attributes to the correct objects. It refines latent codes to align attribute–object attention during early diffusion steps, integrating with SDXL, ConsiStory and StoryDiffusion without retraining. With AttriLoss, StoryDiffusion VQAScore increased from 0.8363 to 0.8636 on the AttriStory benchmark (Table 1).',
     citations: {
       arxivId: '2605.20777',
       // Historical fallback from the supplied portfolio, not a live verification.
@@ -82,7 +82,7 @@ export const publications: Publication[] = [
     ],
     venue: 'WACV 2025',
     venueShort: 'WACV 2025',
-    summary: 'TACLE learns new classes from few labels and current-task unlabeled data without retaining earlier examples. It combines task-adaptive pseudo-label selection, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data. Evaluated on CIFAR-10, CIFAR-100 and ImageNet-Subset100, including one-shot and imbalanced settings.',
+    summary: 'TACLE learns new classes from few labels and current-task unlabeled data without retaining earlier examples. It combines task-adaptive pseudo-label selection, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data. Evaluated on CIFAR-10, CIFAR-100 and ImageNet-Subset100, including one-shot and imbalanced settings. On CIFAR-100 with 0.8% labels over 10 tasks, TACLE reached 92.35% average incremental accuracy versus 88.23% for SLCA+FT (+4.12 percentage points; same ImageNet-pretrained ViT, Table 1).',
     citations: {
       arxivId: '2407.08041',
       fallback: 1,

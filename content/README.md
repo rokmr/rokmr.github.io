@@ -128,3 +128,17 @@ Experience, Projects, Education, Achievements. Publications appear on page one
 alongside the current Armada role. The résumé uses asterisks on both confirmed
 equal-contributor author pairs and one shared explanation. This résumé display
 convention does not change the published papers' author-marker metadata.
+
+## Targeted résumé generation
+
+- `npm run resume:pdf`: two-page, publication-first public résumé; copies the
+  verified artifact into `public/assets/Rohit-Kumar-Resume.pdf`.
+- `npm run resume:pdf:applied`: one-page applied-AI draft, experience first,
+  generated only under ignored `output/pdf/Rohit-Kumar-Applied-AI.pdf`.
+
+Both read reviewed public data and share the same role facts, paper summaries
+and historical evidence. The applied draft selects fewer roles/credentials; it
+does not delete anything from the master record or replace the public default.
+Historical planner figures must retain their version and hardware qualification.
+New validation results require a separate evidence record; the old figures must
+not be relabeled as accuracy for an expanded model/workload scope.

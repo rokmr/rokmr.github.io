@@ -56,10 +56,10 @@ export const technicalDiagrams: TechnicalDiagramSpec[] = [
   {
     id: 'inference-planning-flow', caseStudyId: 'inference-planner', afterSection: 'Predictions',
     title: 'From inference planning to deployment',
-    caption: 'The planner recommends a configuration using predicted performance and the supplied GPU cost per hour. I select the configuration and carry out deployment afterward.',
+    caption: 'Spec-sheet predictions need no GPU access; a GPU profile can optionally calibrate predictions. The planner recommends settings using the supplied GPU cost per hour. I choose the serving configuration and deploy it afterward.',
     connections: [{ fromLane: 'planning', fromStage: 'recommend', toLane: 'deployment', toStage: 'configuration', label: 'Engineering handoff' }],
     lanes: [{ id: 'planning', label: 'Planning tool', stages: [
-      { id: 'inputs', icon: 'input-box', kind: 'input', title: 'Specify inputs', detail: 'Model, GPU, workload and GPU cost/hour' },
+      { id: 'inputs', icon: 'input-box', kind: 'input', title: 'Specify inputs', detail: 'Model, GPU, workload, GPU cost/hour; optional GPU profile' },
       { id: 'predict', icon: 'computer-chip-1', kind: 'process', title: 'Predict', detail: 'KV cache, TTFT, TPOT and throughput' },
       { id: 'compare', icon: 'filter-2', kind: 'check', title: 'Compare choices', detail: 'Hardware and inference settings' },
       { id: 'recommend', icon: 'cog', kind: 'output', title: 'Recommend', detail: 'Configuration choices and estimated token costs' },

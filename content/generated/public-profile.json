@@ -34,6 +34,7 @@
   },
   "featuredWorkIds": [
     "armada-support",
+    "armada-inference-planner",
     "avataar-lifestyle",
     "cricket-shot"
   ],
@@ -54,7 +55,7 @@
       "content": {
         "summary": "AI Engineer at Armada AI, Trivandrum, India.",
         "problem": null,
-        "contribution": "Built and deployed the Support RAG Agent for Armada’s internal Customer Support team (sole owner). Sole engineering owner of Almanac, an ongoing application designed for air-gapped document Q&A\nDesigned the Support Agent’s CRAG + controllable ReAct workflow; shared reformulation and embedding across branches reduced cost per query/run to approximately one-third of the initial graph on similar workloads\nFine-tuned models for Almanac using SFT, LoRA and QLoRA\nWorked on model quantization using AWQ, GPTQ and WxAy weight/activation precision configurations\nBuilt Support Agent evaluation at two levels: retrieval-confidence and CRAG-score gating before generation, and RAGAS-based response evaluation against curated ground truth\nBuilt an online-learning BM25 index with incremental update and unlearn, addressing organizational-vocabulary gaps that dense retrieval missed\nReplaced single-pass image captioning with a two-stage classify-then-caption pipeline for document images, including flowcharts and screenshots\nReplaced per-format ingestion pipelines with a normalized-Markdown intermediate representation shared across file formats",
+        "contribution": "Sole owner of the Support RAG Agent, built from an empty repository and deployed for Armada’s internal Customer Support team\nReduced Support Agent cost per query/run to approximately one-third of the initial graph on similar workloads by sharing reformulation and embedding across retrieval branches\nFine-tuned models for Almanac using SFT, LoRA and QLoRA\nWorked on model quantization using AWQ, GPTQ and WxAy weight/activation precision configurations\nEstablished retrieval-stage CRAG gating and end-to-end RAGAS evaluation against curated ground truth\nEnabled incremental sparse-index updates and removal with online-learning BM25, addressing organizational vocabulary without full re-indexing\nReplaced single-pass image captioning with a two-stage classify-then-caption pipeline for document images, including flowcharts and screenshots\nReplaced per-format ingestion pipelines with a normalized-Markdown intermediate representation shared across file formats\nSole engineering owner of Almanac’s local document-Q&A application, including model serving, ingestion, retrieval and SFT/LoRA/QLoRA fine-tuning\nBuilt an LLM inference planner with spec-sheet predictions and optional GPU-profile calibration; used its predictions to choose serving configurations, then deployed them",
         "outcome": null
       },
       "technologies": [
@@ -92,7 +93,7 @@
       "content": {
         "summary": "Research Engineer at Avataar AI, Bangalore, India.",
         "problem": null,
-        "contribution": "Built a Flux and ControlNet pipeline for lifestyle product imagery; modified diffusion sampling followed by intrinsic decomposition for product reconstruction and relighting\nContinued an existing sparse-view-conditioned diffusion project, fine-tuning a Stable Diffusion model for novel-view synthesis with distributed training and SLURM\nBuilt classification for low-data scenarios with CLIP, BLIP2, and Qwen2.5\nWorked on segmentation using BiRefNet and SAM with YOLO-world",
+        "contribution": "Developed diffusion-sampling changes for product shape and consistency and intrinsic-decomposition-based relighting for lighting consistency; both adopted into Avataar’s production pipeline\nFine-tuned sparse-view-conditioned Stable Diffusion models for novel-view synthesis, modifying image conditioning and running distributed training with SLURM\nBuilt classification for low-data scenarios with CLIP, BLIP2, and Qwen2.5\nWorked on segmentation using BiRefNet and SAM with YOLO-world",
         "outcome": null
       },
       "technologies": [
@@ -298,7 +299,7 @@
       "status": "completed",
       "ownership": "equal-contributor",
       "content": {
-        "summary": "AttriStory pairs a benchmark of 200 five-scene stories across 10 artistic styles with AttriLoss, an inference-time method for binding requested attributes to the correct objects. It refines latent codes to align attribute–object attention during early diffusion steps, integrating with SDXL, ConsiStory and StoryDiffusion without retraining.",
+        "summary": "AttriStory pairs a benchmark of 200 five-scene stories across 10 artistic styles with AttriLoss, an inference-time method for binding requested attributes to the correct objects. It refines latent codes to align attribute–object attention during early diffusion steps, integrating with SDXL, ConsiStory and StoryDiffusion without retraining. With AttriLoss, StoryDiffusion VQAScore increased from 0.8363 to 0.8636 on the AttriStory benchmark (Table 1).",
         "problem": null,
         "contribution": "Manogna Sreenivas, Rohit Kumar, Soma Biswas. Co-first authors: Manogna Sreenivas and Rohit Kumar",
         "outcome": "CVPR 2026 Workshop"
@@ -322,7 +323,21 @@
           "url": "https://rohit.vision/assets/AttriStory-Poster.pdf"
         }
       ],
-      "metrics": []
+      "metrics": [
+        {
+          "id": "attristory-table1-result",
+          "label": "Published Table 1 benchmark result",
+          "value": 0.8636,
+          "unit": "VQAScore",
+          "baseline": "StoryDiffusion without AttriLoss: 0.8363.",
+          "sample": "AttriStory benchmark: 200 five-scene stories across 10 artistic styles.",
+          "asOf": null,
+          "context": "Same StoryDiffusion baseline with and without inference-time AttriLoss; absolute score increase 0.0273.",
+          "limitations": [
+            "Selected VQAScore result, not a claim that every metric improved."
+          ]
+        }
+      ]
     },
     {
       "id": "avataar-lrm-training",
@@ -372,7 +387,7 @@
       "status": "completed",
       "ownership": "equal-contributor",
       "content": {
-        "summary": "TACLE learns new classes from few labels and current-task unlabeled data without retaining earlier examples. It combines task-adaptive pseudo-label selection, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data. Evaluated on CIFAR-10, CIFAR-100 and ImageNet-Subset100, including one-shot and imbalanced settings.",
+        "summary": "TACLE learns new classes from few labels and current-task unlabeled data without retaining earlier examples. It combines task-adaptive pseudo-label selection, class-aware weighted losses and classifier alignment using labeled and confident pseudo-labeled data. Evaluated on CIFAR-10, CIFAR-100 and ImageNet-Subset100, including one-shot and imbalanced settings. On CIFAR-100 with 0.8% labels over 10 tasks, TACLE reached 92.35% average incremental accuracy versus 88.23% for SLCA+FT (+4.12 percentage points; same ImageNet-pretrained ViT, Table 1).",
         "problem": "Learn new classes with few labels and current-task unlabeled data without retaining previous-class examples.",
         "contribution": "Jayateja Kalla*, Rohit Kumar*, Soma Biswas",
         "outcome": "WACV 2025"
@@ -409,7 +424,21 @@
           "url": "https://openaccess.thecvf.com/content/WACV2025/supplemental/Kalla_TACLE_Task_and_WACV_2025_supplemental.pdf"
         }
       ],
-      "metrics": []
+      "metrics": [
+        {
+          "id": "tacle-table1-result",
+          "label": "Published Table 1 benchmark result",
+          "value": 92.35,
+          "unit": "percent average incremental accuracy",
+          "baseline": "SLCA+FT: 88.23%, same ImageNet-pretrained ViT and label budget.",
+          "sample": "CIFAR-100, 0.8% labeled data, 10 tasks; mean over 3 seeds.",
+          "asOf": null,
+          "context": "Exemplar-free setting; 4.12 percentage-point gain over the strongest matched-pretraining baseline in this Table 1 setting.",
+          "limitations": [
+            "Selected low-label benchmark setting, not a universal gain across datasets or label budgets."
+          ]
+        }
+      ]
     },
     {
       "id": "armada-inference-planner",
@@ -427,10 +456,10 @@
       "status": "ongoing",
       "ownership": "unknown",
       "content": {
-        "summary": "LLM inference planning, deployment and optimization, supported by predictions of memory, latency, throughput and cost.",
+        "summary": "Engine-independent predictions of KV-cache capacity, latency, throughput and serving cost from spec sheets, with optional GPU-profile calibration.",
         "problem": "Estimate resource requirements and inference performance for a workload before trial deployment.",
-        "contribution": "Built capacity, performance and cost modeling that grew out of Almanac into a more independent planning tool; carried out inference deployment after selecting hardware and serving configurations.",
-        "outcome": null
+        "contribution": "Built the planner and used its predictions to choose serving configurations, then deployed them. Spec-sheet KV-cache capacity predictions were exact on 25/25 dense and MoE configurations.",
+        "outcome": "KV-cache capacity exact on 25/25 dense/MoE configurations without profile data. Dense TTFT MAPE 15.9% to 3.6% (n=174), batched TPOT 13.8% to 5.2% (n=242) after GPU profiling; profiled errors partly in-sample, not held-out."
       },
       "technologies": [
         "KV-cache modeling",
@@ -445,7 +474,140 @@
           "url": "https://rohit.vision/work/inference-planner/"
         }
       ],
-      "metrics": []
+      "metrics": [
+        {
+          "id": "latest-kv-dense",
+          "label": "Exact spec-sheet KV-cache predictions: dense",
+          "value": 15,
+          "unit": "exact configurations",
+          "baseline": "Measured GPU runs",
+          "sample": "15/15 configurations",
+          "asOf": null,
+          "context": "KV-cache capacity exact; no GPU-profile data used.",
+          "limitations": [
+            "Exact agreement in these tested configurations only; not a guarantee for every model."
+          ]
+        },
+        {
+          "id": "latest-kv-moe",
+          "label": "Exact spec-sheet KV-cache predictions: moe",
+          "value": 10,
+          "unit": "exact configurations",
+          "baseline": "Measured GPU runs",
+          "sample": "10/10 configurations",
+          "asOf": null,
+          "context": "KV-cache capacity exact; no GPU-profile data used.",
+          "limitations": [
+            "Exact agreement in these tested configurations only; not a guarantee for every model."
+          ]
+        },
+        {
+          "id": "latest-hybrid-nmax",
+          "label": "Hybrid maximum-concurrency predictions within 2%",
+          "value": 22,
+          "unit": "configurations",
+          "baseline": "Measured maximum concurrency",
+          "sample": "22/24 hybrid configurations",
+          "asOf": null,
+          "context": "Spec-sheet N_max within 2% on 22 of 24 hybrid configurations; no profile data used.",
+          "limitations": [
+            "This is a configuration-count accuracy criterion, not a MAPE value."
+          ]
+        },
+        {
+          "id": "latest-ttft-spec-only",
+          "label": "Dense TTFT spec-only MAPE",
+          "value": 15.9,
+          "unit": "percent MAPE",
+          "baseline": "Measured GPU runs",
+          "sample": "n=174",
+          "asOf": null,
+          "context": "Dense TTFT: spec-sheet-only MAPE 15.9%; after profiling 3.6%. Spec-only needs no GPU access; profiled results partly in-sample.",
+          "limitations": [
+            "Mean absolute percentage error, not a worst-case bound; individual samples may exceed the mean.",
+            "Latest benchmark hardware/model inventory and measurement dates are not supplied; do not transfer the older H100 hardware/version attribution to this table.",
+            "Spec-sheet-only predictions do not use GPU-profile calibration."
+          ]
+        },
+        {
+          "id": "latest-ttft-profiled",
+          "label": "Dense TTFT profiled MAPE",
+          "value": 3.6,
+          "unit": "percent MAPE",
+          "baseline": "Measured GPU runs",
+          "sample": "n=174",
+          "asOf": null,
+          "context": "Dense TTFT: spec-sheet-only MAPE 15.9%; after profiling 3.6%. Spec-only needs no GPU access; profiled results partly in-sample.",
+          "limitations": [
+            "Mean absolute percentage error, not a worst-case bound; individual samples may exceed the mean.",
+            "Profiled errors are partly in-sample: some evaluation runs also calibrated the GPU profile. No held-out generalization claim.",
+            "Profiling time is roughly a few minutes, not a precisely timed benchmark.",
+            "Latest benchmark hardware/model inventory and measurement dates are not supplied; do not transfer the older H100 hardware/version attribution to this table."
+          ]
+        },
+        {
+          "id": "latest-batch-tpot-spec-only",
+          "label": "Dense batched TPOT spec-only MAPE",
+          "value": 13.8,
+          "unit": "percent MAPE",
+          "baseline": "Measured GPU runs",
+          "sample": "n=242",
+          "asOf": null,
+          "context": "Dense batched TPOT: spec-sheet-only MAPE 13.8%; after profiling 5.2%. Spec-only needs no GPU access; profiled results partly in-sample.",
+          "limitations": [
+            "Mean absolute percentage error, not a worst-case bound; individual samples may exceed the mean.",
+            "Latest benchmark hardware/model inventory and measurement dates are not supplied; do not transfer the older H100 hardware/version attribution to this table.",
+            "Spec-sheet-only predictions do not use GPU-profile calibration."
+          ]
+        },
+        {
+          "id": "latest-batch-tpot-profiled",
+          "label": "Dense batched TPOT profiled MAPE",
+          "value": 5.2,
+          "unit": "percent MAPE",
+          "baseline": "Measured GPU runs",
+          "sample": "n=242",
+          "asOf": null,
+          "context": "Dense batched TPOT: spec-sheet-only MAPE 13.8%; after profiling 5.2%. Spec-only needs no GPU access; profiled results partly in-sample.",
+          "limitations": [
+            "Mean absolute percentage error, not a worst-case bound; individual samples may exceed the mean.",
+            "Profiled errors are partly in-sample: some evaluation runs also calibrated the GPU profile. No held-out generalization claim.",
+            "Profiling time is roughly a few minutes, not a precisely timed benchmark.",
+            "Latest benchmark hardware/model inventory and measurement dates are not supplied; do not transfer the older H100 hardware/version attribution to this table."
+          ]
+        },
+        {
+          "id": "latest-single-tpot-spec-only",
+          "label": "Dense single-user TPOT spec-only MAPE",
+          "value": 7.2,
+          "unit": "percent MAPE",
+          "baseline": "Measured GPU runs",
+          "sample": "n=134",
+          "asOf": null,
+          "context": "Dense single-user TPOT: spec-sheet-only MAPE 7.2%; after profiling 4.4%. Spec-only needs no GPU access; profiled results partly in-sample.",
+          "limitations": [
+            "Mean absolute percentage error, not a worst-case bound; individual samples may exceed the mean.",
+            "Latest benchmark hardware/model inventory and measurement dates are not supplied; do not transfer the older H100 hardware/version attribution to this table.",
+            "Spec-sheet-only predictions do not use GPU-profile calibration."
+          ]
+        },
+        {
+          "id": "latest-single-tpot-profiled",
+          "label": "Dense single-user TPOT profiled MAPE",
+          "value": 4.4,
+          "unit": "percent MAPE",
+          "baseline": "Measured GPU runs",
+          "sample": "n=134",
+          "asOf": null,
+          "context": "Dense single-user TPOT: spec-sheet-only MAPE 7.2%; after profiling 4.4%. Spec-only needs no GPU access; profiled results partly in-sample.",
+          "limitations": [
+            "Mean absolute percentage error, not a worst-case bound; individual samples may exceed the mean.",
+            "Profiled errors are partly in-sample: some evaluation runs also calibrated the GPU profile. No held-out generalization claim.",
+            "Profiling time is roughly a few minutes, not a precisely timed benchmark.",
+            "Latest benchmark hardware/model inventory and measurement dates are not supplied; do not transfer the older H100 hardware/version attribution to this table."
+          ]
+        }
+      ]
     },
     {
       "id": "fine-tuning-context-pending",
@@ -524,8 +686,8 @@
       "content": {
         "summary": "A lifestyle-image generation pipeline that preserves the product while adapting its appearance to a new scene.",
         "problem": null,
-        "contribution": "Built the Flux and ControlNet pipeline and modified sampling for product reconstruction and relighting.",
-        "outcome": "Combined product-image generation, modified diffusion sampling and intrinsic decomposition in an end-to-end pipeline for product reconstruction and relighting."
+        "contribution": "Built the Flux and ControlNet pipeline; modified diffusion sampling and product-relighting work were both adopted into Avataar’s production pipeline.",
+        "outcome": "Modified diffusion-sampling work and product-relighting work both adopted into Avataar’s production pipeline. Qualitatively improved product shape/consistency and lighting consistency; no standardized metric supplied."
       },
       "technologies": [],
       "links": [

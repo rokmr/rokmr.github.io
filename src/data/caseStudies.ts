@@ -1,3 +1,5 @@
+import { publicProfile } from './profile';
+
 /** Public case studies. Add records here; homepage selection stays separately curated. */
 export type CaseStudy = {
   id: string;
@@ -37,13 +39,14 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     id: 'inference-planner', title: 'LLM Inference Planning & Optimization', organization: 'Armada AI',
-    summary: 'LLM inference planning, deployment and optimization, supported by predictions of memory, latency, throughput and cost.',
-    contribution: 'Built capacity, performance and cost modeling that grew out of Almanac into a more independent planning tool; carried out inference deployment after selecting hardware and serving configurations.',
+    summary: 'Engine-independent predictions of KV-cache capacity, latency, throughput and serving cost from spec sheets, with optional GPU-profile calibration.',
+    contribution: 'Built the planner and used its predictions to choose serving configurations, then deployed them. Spec-sheet KV-cache capacity predictions were exact on 25/25 dense and MoE configurations.',
     technologies: ['KV-cache modeling', 'LLM inference', 'Quantization', 'Tensor parallelism', 'Automatic prefix caching'],
     sections: [
       { heading: 'Decisions', paragraphs: ['Compares GPU and configuration choices for a selected model and workload: weight quantization, KV-cache quantization, tensor parallelism, eager execution and automatic prefix caching. Quantization work includes AWQ, GPTQ and weight/activation precision configurations (WxAy). The planner recommends settings; I carry out deployment afterward. It does not automatically deploy workloads.'] },
-      { heading: 'Predictions', paragraphs: ['Models KV-cache requirements, time to first token (TTFT), time per output token (TPOT) and token throughput before downloading a model or running a trial GPU deployment. Covers dense, mixture-of-experts and hybrid model families, including mixed attention patterns and attention/state-space architectures.'] },
-      { heading: 'Deployment', paragraphs: ['Deployed inference workloads after using the planner to select hardware and serving configurations.'] },
+      { heading: 'Predictions', paragraphs: ['The planner is engine-independent. Models KV-cache requirements, time to first token (TTFT), time per output token (TPOT) and token throughput before downloading a model or running a trial GPU deployment. Covers dense, mixture-of-experts and hybrid model families, including mixed attention patterns and attention/state-space architectures.'] },
+      { heading: 'Validation against measured GPU runs', paragraphs: ['KV-cache capacity predictions from spec sheets were exact on 25/25 dense and MoE configurations (15 dense, 10 MoE). For hybrid architectures, maximum concurrency (N_max) was within 2% on 22 of 24 configurations. Neither result uses GPU-profile calibration.', 'For dense models, spec-sheet-only versus GPU-profiled mean absolute percentage error (MAPE) was 15.9% versus 3.6% for time to first token (TTFT; n=174), 13.8% versus 5.2% for batched time per output token (TPOT; n=242), and 7.2% versus 4.4% for single-user TPOT (n=134). Spec-sheet-only predictions require no GPU access.', 'Profiling takes roughly a few minutes on the target GPU and measures the gap between spec-sheet and actual hardware behavior. Some evaluation runs were also used to calibrate the GPU profile, so profiled errors are partly in-sample. They do not establish held-out generalization. MAPE is an average, not a worst-case bound; individual errors can exceed it. Profiling does not improve every metric or architecture.'] },
+      { heading: 'Deployment', paragraphs: ['I used the planner’s predictions to choose serving configurations, then deployed those configurations. Deployment is my engineering work; the planner itself recommends settings.'] },
       { heading: 'Estimated economics', paragraphs: ['Estimates prefill and decode costs per million tokens from the user-supplied hourly GPU cost and predicted throughput. These are planning estimates, distinct from measured serving costs.'] },
     ],
   },
@@ -62,10 +65,11 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'lifestyle-generation', title: 'Diffusion-based product imagery', organization: 'Avataar AI',
     summary: 'A lifestyle-image generation pipeline that preserves the product while adapting its appearance to a new scene.',
-    contribution: 'Built the Flux and ControlNet pipeline and modified sampling for product reconstruction and relighting.',
+    contribution: 'Built the Flux and ControlNet pipeline; modified diffusion sampling and product-relighting work were both adopted into Avataar’s production pipeline.',
     sections: [
       { heading: 'Problem', paragraphs: ['Generated lifestyle imagery needs to preserve the product itself. A plausible scene is insufficient if the object changes or its lighting is inconsistent with its surroundings.'] },
       { heading: 'My contribution', paragraphs: ['Built an end-to-end image-generation pipeline using Flux and ControlNets. Modified diffusion sampling to improve object reconstruction, followed by intrinsic decomposition for product relighting.', 'Worked on segmentation with BiRefNet and SAM with YOLO-world, and on classification in low-data settings using CLIP, BLIP2 and Qwen2.5.'] },
+      { heading: 'Observed outcome', paragraphs: ['Both the modified diffusion-sampling work and the product-relighting work were adopted into Avataar’s production pipeline. Sampling improved product shape and consistency; relighting improved lighting consistency. These quality improvements are qualitative observations, without a standardized before/after metric.'] },
       { heading: 'Pipeline', paragraphs: ['Combined product-image generation, modified diffusion sampling and intrinsic decomposition in an end-to-end pipeline for product reconstruction and relighting.'] },
     ],
   },
@@ -102,3 +106,11 @@ export const caseStudies: CaseStudy[] = [
 
 ];
 export function caseStudyFor(id: string) { return caseStudies.find(study => study.id === id); }
+
+/** Homepage curation comes from the reviewed master record, not project recency. */
+export const featuredCaseStudies = publicProfile.featuredWorkIds.map(id => {
+  const record = publicProfile.records.find(record => record.id === id);
+  const study = caseStudies.find(study => record?.links.some(link => link.url.endsWith(`/work/${study.id}/`)));
+  if (!study) throw new Error(`Missing featured case study for ${id}`);
+  return study;
+});

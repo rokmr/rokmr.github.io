@@ -1,8 +1,8 @@
 import { site, socialUrls } from '../data/site';
 import { experience } from '../data/experience';
-import { education, achievements } from '../data/education';
+import { education } from '../data/education';
 import { publications } from '../data/publications';
-import { resumeSkills, resumeHeadline, resumeSummary, resumeProjects, resumePublicationAuthors } from '../data/resume';
+import { resumeSkills, resumeHeadline, resumeSummary, resumeProjects, resumePublicationAuthors, resumePublicationHighlight } from '../data/resume';
 
 const publicHref = (href: string) => href.startsWith('assets/') ? '/' + href : href;
 
@@ -33,6 +33,7 @@ export function Resume() {
             <article className="resume-job resume-publication" key={pub.title}>
               <h3>{pub.title}</h3>
               <p>{resumePublicationAuthors(pub).map((author, index) => <span key={author.name}>{index > 0 && ', '}{author.self ? <strong>{author.name}</strong> : author.name}{author.suffix}</span>)} · {pub.venueShort}</p>
+              <p className="publication-highlight">{resumePublicationHighlight(pub.title)}</p>
               <div className="publication-resources">{pub.links.filter(link => ['Paper','Code','Website'].includes(link.label)).map(link => <a key={link.href} href={publicHref(link.href)} aria-label={link.ariaLabel}>{link.label === 'Website' ? 'Project page' : link.label}</a>)}</div>
             </article>
           ))}
@@ -47,7 +48,7 @@ export function Resume() {
               <p>{job.location}</p>
               {job.managers && <p className="manager-line">{job.managers.length === 1 ? 'Manager' : 'Managers'}: {job.managers.map((manager, index) => <span key={manager.href}>{index > 0 && ', '}<a href={manager.href}>{manager.name}</a></span>)}</p>}
               <ul>{(job.resumeBulletIndexes ?? job.bullets.map((_, index) => index)).map(index => job.bullets[index]).filter((bullet): bullet is string => Boolean(bullet)).map(bullet => <li key={bullet}>{bullet}</li>)}</ul>
-              {job.id === 'armada' && <p><a href="/work/agentic-rag/">[Support Agent]</a> <a href="/work/almanac/">[Almanac]</a></p>}
+              {job.id === 'armada' && <p><a href="/work/agentic-rag/">[Support Agent]</a> <a href="/work/almanac/">[Almanac]</a> <a href="/work/inference-planner/">[Inference planning]</a></p>}
             </article>
           ))}
         </section>
@@ -59,12 +60,12 @@ export function Resume() {
           <h2>Education</h2>
           {education.map(entry => {
             const [period, result] = entry.details.split(' · ');
-            return <div className="resume-job" key={entry.degree}><div className="record-top"><h3>{entry.degree}</h3><span>{period}</span></div><p>{entry.school} · {result}</p>{entry.advisor && <p className="manager-line">{entry.advisor.label ?? 'Advisor'}: <a href={entry.advisor.href}>{entry.advisor.name}</a></p>}</div>;
+            return <div className="resume-job" key={entry.degree}><div className="record-top"><h3>{entry.degree}</h3><span>{period}</span></div><p>{entry.school}{!entry.degree.startsWith('Diploma') && ` · ${result}`}</p>{entry.advisor && <p className="manager-line">{entry.advisor.label ?? 'Advisor'}: <a href={entry.advisor.href}>{entry.advisor.name}</a></p>}</div>;
           })}
         </section>
         <section className="document-block">
           <h2>Achievements</h2>
-          <p>{achievements.slice(0,3).map(item => `${item.value} · ${item.title}`).join('; ')}.</p>
+          <p>GATE 2022: AIR 221 (Electrical), AIR 227 (Instrumentation).</p>
         </section>
       </main>
     </div>

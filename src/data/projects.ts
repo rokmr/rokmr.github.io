@@ -83,7 +83,7 @@ export const projects: Project[] = [
     roleId: 'avataar',
     problem: 'Generate realistic product imagery while preserving the product itself.',
     contribution: 'Built the Flux and ControlNet pipeline and modified diffusion sampling with intrinsic decomposition.',
-    outcome: 'Built a product-image generation pipeline combining diffusion sampling changes with intrinsic decomposition for reconstruction and relighting.',
+    outcome: 'Modified diffusion sampling and product relighting were both adopted into Avataar’s production pipeline.',
     title: 'Diffusion-based product imagery',
     preview: {
       src: 'assets/images/lifestyle_gen_preview.svg',
